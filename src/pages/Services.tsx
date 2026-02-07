@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { MessageSquare, Palette, Layers, Package, Sparkles, Truck, Search, Lightbulb, Box, CheckCircle, Factory } from "lucide-react";
 import { Link } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
+import SEO from "@/components/SEO";
 
 const Services = () => {
   const consultationServices = [
@@ -38,6 +39,11 @@ const Services = () => {
 
   return (
     <main className="min-h-screen">
+      <SEO 
+        title="Our Process & Services | Design to Delivery | InTheBox"
+        description="Comprehensive packaging services from consultation and design to manufacturing and delivery. Your end-to-end partner for premium packaging."
+        keywords="packaging design services, custom packaging manufacturer, packaging consultation, 3d packaging design, packaging delivery india"
+      />
       <Navbar />
       <section className="pt-32 pb-16 px-6 lg:px-12 bg-gradient-to-b from-light-purple/20 to-ivory">
         <div className="max-w-7xl mx-auto text-center">

@@ -4,6 +4,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Award, Users, Factory, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
+import SEO from "@/components/SEO";
 
 const About = () => {
   const teamMembers = [
@@ -50,6 +51,11 @@ const About = () => {
 
   return (
     <main className="min-h-screen bg-background">
+      <SEO 
+        title="Our Story & Team | InTheBox Packaging"
+        description="Meet the team behind InTheBox. We have been crafting premium, sustainable packaging solutions since 2010. Born from passion, built on excellence."
+        keywords="packaging team, inthebox story, packaging manufacturers india, luxury packaging team"
+      />
       <Navbar />
       
       {/* Hero Section */}

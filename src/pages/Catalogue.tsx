@@ -4,6 +4,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Download } from "lucide-react";
+import SEO from "@/components/SEO";
 
 const Catalogue = () => {
   const [filter, setFilter] = useState("all");
@@ -22,6 +23,11 @@ const Catalogue = () => {
 
   return (
     <main className="min-h-screen">
+      <SEO 
+        title="Product Catalogue | Custom Boxes & Packaging Solutions"
+        description="Browse our extensive catalogue of custom packaging solutions. From rigid luxury boxes to eco-friendly kraft mailers, find the perfect fit for your brand."
+        keywords="packaging catalogue, custom boxes, rigid boxes, kraft mailers, eco-friendly packaging, wholesale packaging"
+      />
       <Navbar />
       <section className="pt-32 pb-20 px-6 lg:px-12 bg-gradient-to-b from-light-purple/20 to-background">
         <div className="max-w-7xl mx-auto text-center">
