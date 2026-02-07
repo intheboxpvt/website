@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { MapPin, Phone, Mail, Instagram, Facebook, Linkedin } from "lucide-react";
-import logo from "@/assets/logo.png";
+import { MapPin, Phone, Mail, Instagram, MessageCircle, Linkedin } from "lucide-react";
 
 const Footer = () => {
   const quickLinks = [
@@ -13,9 +12,9 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: Instagram, href: "#", label: "Instagram" },
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
+    { icon: Instagram, href: "https://www.instagram.com/inthebox.co.in/", label: "Instagram" },
+    { icon: MessageCircle, href: "https://wa.me/917087778689", label: "WhatsApp" },
+    { icon: Linkedin, href: "https://www.linkedin.com/company/intheboxpvt/", label: "LinkedIn" },
   ];
 
   return (
@@ -29,9 +28,9 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <Link to="/" className="inline-flex items-center gap-3 mb-6">
               <img 
-                src={logo} 
+                src="/assets/logo.png" 
                 alt="InTheBox Logo" 
-                className="h-12 w-auto brightness-0 invert"
+                className="h-24 w-auto brightness-0 invert"
               />
             </Link>
             

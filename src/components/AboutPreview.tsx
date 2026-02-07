@@ -12,19 +12,16 @@ const AboutPreview = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Image Side */}
           <ScrollReveal direction="left">
-            <div className="relative">
-              <div className="aspect-[4/5] bg-gradient-to-br from-ivory to-light-purple/30 rounded-3xl overflow-hidden shadow-elevated border border-royal-purple/10">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-32 h-32 bg-gold-metallic/20 rounded-full flex items-center justify-center mb-4">
-                      <span className="text-5xl">✨</span>
-                    </div>
-                    <p className="font-serif text-xl text-royal-purple">Crafting Stories</p>
-                  </div>
-                </div>
+            <div className="relative group">
+              <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-elevated border border-royal-purple/10">
+                <img 
+                  src="/products/creating-stories.jpg" 
+                  alt="Every Box Tells a Story" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
               </div>
               {/* Accent element */}
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gold-metallic/20 rounded-2xl -z-10"></div>
+              <div className="absolute -bottom-6 -right-6 w-full h-full border-2 border-gold-metallic/30 rounded-3xl -z-10 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2"></div>
             </div>
           </ScrollReveal>
 

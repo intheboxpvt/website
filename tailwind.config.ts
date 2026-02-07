@@ -74,8 +74,8 @@ export default {
         },
       },
       fontFamily: {
-        serif: ["'Playfair Display'", "Georgia", "serif"],
-        sans: ["'Inter'", "system-ui", "sans-serif"],
+        serif: ["'ABCFavoritVariable'", "Roboto", "Arial", "sans-serif", "serif"],
+        sans: ["'ABCFavoritVariable'", "Roboto", "Arial", "sans-serif", "serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
