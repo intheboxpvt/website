@@ -5,6 +5,7 @@ import { Leaf, Recycle, TreePine, Droplets, TrendingDown, Users } from "lucide-r
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import SEO from "@/components/SEO";
 
 const Sustainability = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -30,6 +31,11 @@ const Sustainability = () => {
 
   return (
     <main className="min-h-screen bg-background">
+      <SEO 
+        title="Eco-Friendly & Sustainable Packaging | InTheBox"
+        description="Sustainable packaging solutions made from agri-waste. 100% recyclable, compostable, and carbon-negative options to reduce your environmental footprint."
+        keywords="sustainable packaging, eco-friendly boxes, biodegradable packaging, agri-waste packaging, green packaging india"
+      />
       <Navbar />
       
       {/* Hero Section with Parallax */}

@@ -4,6 +4,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import { useState } from "react";
+import SEO from "@/components/SEO";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
@@ -15,6 +16,11 @@ const Contact = () => {
 
   return (
     <main className="min-h-screen">
+      <SEO 
+        title="Contact Us | Get a Quote for Custom Packaging"
+        description="Get in touch with InTheBox for premium custom packaging solutions. located in Mohali. Call, email, or visit us to start your project."
+        keywords="contact inthebox, packaging quote, packaging manufacturer contact, mohali packaging company client support"
+      />
       <Navbar />
       <section className="pt-32 pb-20 px-6 lg:px-12 bg-gradient-to-b from-light-purple/20 to-background">
         <div className="max-w-7xl mx-auto text-center">
