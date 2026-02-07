@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,9 +28,9 @@ const Navbar = () => {
           {/* Logo - Enlarged */}
           <Link to="/" className="flex items-center gap-3 group">
             <img 
-              src={logo} 
+              src="/assets/logo.png" 
               alt="InTheBox Logo" 
-              className="h-12 lg:h-14 w-auto"
+              className="h-22 lg:h-24 w-auto"
             />
           </Link>
 

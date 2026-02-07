@@ -109,39 +109,12 @@ const Hero = () => {
           >
             {/* Main Visual Container */}
             <div className="relative">
-              {/* Spotlight effect */}
-              <div className="absolute -inset-10 bg-gradient-to-br from-gold-metallic/10 via-transparent to-transparent rounded-full blur-3xl"></div>
-              
-              {/* Main packaging display */}
-              <div className="relative bg-ivory/5 backdrop-blur-sm border border-ivory/10 rounded-2xl p-8 md:p-12">
-                <div className="aspect-[4/5] bg-gradient-to-br from-ivory/10 to-deep-plum/30 rounded-xl flex items-center justify-center overflow-hidden">
-                  {/* Packaging mockup */}
-                  <div className="text-center p-8">
-                    <div className="w-48 h-48 mx-auto mb-6 bg-gradient-to-br from-gold-metallic/30 to-gold-dark/20 rounded-xl flex items-center justify-center shadow-2xl transform hover:scale-105 transition-transform duration-500 border border-gold-metallic/20">
-                      <span className="text-7xl">📦</span>
-                    </div>
-                    <p className="font-serif text-xl text-ivory font-semibold">Premium Packaging</p>
-                    <p className="font-sans text-sm text-ivory/60 mt-2">Crafted with Excellence</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating accent cards */}
-              <div 
-                className="absolute -top-4 -right-4 bg-gold-metallic text-royal-purple rounded-xl p-4 shadow-lg transform -rotate-3 hover:rotate-0 transition-transform duration-500 animate-float"
-                style={{ animationDelay: "0.6s" }}
-              >
-                <p className="font-sans text-sm font-bold">Design-Led</p>
-                <p className="font-sans text-xs opacity-70">Custom Solutions</p>
-              </div>
-
-              <div 
-                className="absolute -bottom-4 -left-4 bg-ivory text-royal-purple rounded-xl p-4 shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-500 animate-float"
-                style={{ animationDelay: "0.8s" }}
-              >
-                <p className="font-sans text-sm font-bold">Low MOQ</p>
-                <p className="font-sans text-xs opacity-70">Starting 100 units</p>
-              </div>
+              <div className="absolute -inset-4 bg-gradient-to-br from-gold-metallic/20 via-transparent to-transparent rounded-3xl blur-2xl"></div>
+              <img 
+                src="/products/landing-page.jpg" 
+                alt="Premium Packaging Solutions" 
+                className="relative rounded-2xl shadow-2xl w-full h-auto object-cover border border-ivory/10 transform hover:scale-[1.02] transition-transform duration-500"
+              />
             </div>
           </div>
         </div>

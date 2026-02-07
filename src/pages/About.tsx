@@ -8,29 +8,23 @@ import { Link } from "react-router-dom";
 const About = () => {
   const teamMembers = [
     {
-      name: "Rajesh Sharma",
+      name: "Liv Arpit",
       role: "Founder & CEO",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
-      bio: "20+ years in packaging industry"
+      image: "/team/LivArpit.jpeg",
+      // bio: "Transforming ideas into reality"
     },
     {
-      name: "Priya Patel",
-      role: "Creative Director",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
-      bio: "Award-winning design expertise"
+      name: "Aashvi Chalwa",
+      role: "MD, COO",
+      image: "/team/AashviChalwa.jpeg",
+      // bio: "Visionary leader driving innovation"
     },
     {
-      name: "Amit Kumar",
-      role: "Head of Production",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-      bio: "Manufacturing excellence leader"
-    },
-    {
-      name: "Sneha Reddy",
-      role: "Client Relations",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
-      bio: "Building lasting partnerships"
-    },
+      name: "Ishan Kumar",
+      role: "Co-founder, CMO",
+      image: "/team/Ishan.jpeg",
+      // bio: "Crafting digital excellence"
+    }
   ];
 
   const testimonials = [
@@ -172,9 +166,9 @@ const About = () => {
               The passionate people behind every exceptional package
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="flex flex-wrap justify-center gap-8">
             {teamMembers.map((member, index) => (
-              <div key={index} className="group">
+              <div key={index} className="group w-full max-w-xs">
                 <div className="relative aspect-square rounded-xl overflow-hidden mb-6">
                   <img 
                     src={member.image} 

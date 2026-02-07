@@ -111,12 +111,12 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'ABCFavoritVariable', Roboto, Arial, sans-serif;
     font-weight: 400;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'ABCFavoritVariable', Roboto, Arial, sans-serif;
     font-weight: 700;
     color: hsl(var(--foreground));
   }
@@ -257,11 +257,11 @@
 
 @layer utilities {
   .font-serif {
-    font-family: 'Playfair Display', serif;
+    font-family: 'ABCFavoritVariable', Roboto, Arial, sans-serif;
   }
 
   .font-sans {
-    font-family: 'Inter', sans-serif;
+    font-family: 'ABCFavoritVariable', Roboto, Arial, sans-serif;
   }
 
   /* Custom animation delays */
