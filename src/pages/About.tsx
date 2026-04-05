@@ -15,9 +15,9 @@ const About = () => {
       // bio: "Transforming ideas into reality"
     },
     {
-      name: "Aashvi Chalwa",
+      name: "Aashvi Chawla",
       role: "MD, COO",
-      image: "/team/AashviChalwa.jpeg",
+      image: "/team/AashviChawla.jpeg",
       // bio: "Visionary leader driving innovation"
     },
     {
@@ -184,8 +184,7 @@ const About = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-royal-purple/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
                 <h3 className="font-serif text-xl text-royal-purple">{member.name}</h3>
-                <p className="font-sans text-gold-metallic font-medium mb-1">{member.role}</p>
-                <p className="font-sans text-sm text-soft-purple">{member.bio}</p>
+                <p className="font-sans text-gold-metallic font-medium">{member.role}</p>
               </div>
             ))}
           </div>
