@@ -30,7 +30,7 @@ const Navbar = () => {
             <img 
               src="/assets/logo.png" 
               alt="InTheBox Logo" 
-              className="h-22 lg:h-24 w-auto"
+              className="h-16 sm:h-[4.5rem] md:h-16 lg:h-20 w-auto max-w-none lg:max-w-[320px] object-contain"
             />
           </Link>
 
