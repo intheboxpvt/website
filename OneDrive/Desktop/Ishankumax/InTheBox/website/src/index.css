@@ -1,0 +1,283 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* InTheBox - Royal Vistara-Inspired Design System */
+
+@layer base {
+  :root {
+    /* Royal Color Palette - Vistara Inspired */
+    --royal-purple: 270 40% 15%;
+    --aubergine: 280 45% 12%;
+    --deep-plum: 275 35% 22%;
+    --wine-purple: 280 30% 28%;
+    --soft-purple: 270 25% 40%;
+    --light-purple: 270 30% 90%;
+    --ivory: 45 30% 96%;
+    --off-white: 40 20% 98%;
+    --warm-ivory: 42 35% 93%;
+    --gold-metallic: 42 70% 50%;
+    --gold-light: 45 60% 60%;
+    --gold-dark: 40 75% 40%;
+    --emerald: 160 50% 35%;
+    --forest-green: 150 40% 30%;
+    
+    /* Semantic Tokens */
+    --background: 45 30% 96%;
+    --foreground: 270 40% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 270 40% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 270 40% 15%;
+
+    --primary: 270 40% 15%;
+    --primary-foreground: 45 30% 96%;
+
+    --secondary: 42 35% 93%;
+    --secondary-foreground: 270 40% 15%;
+
+    --muted: 40 20% 92%;
+    --muted-foreground: 270 25% 40%;
+
+    --accent: 42 70% 50%;
+    --accent-foreground: 270 40% 15%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 270 15% 85%;
+    --input: 270 15% 85%;
+    --ring: 42 70% 50%;
+
+    --radius: 0.5rem;
+
+    /* Premium Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(270 40% 15% / 0.1);
+    --shadow-elevated: 0 16px 48px -12px hsl(270 40% 15% / 0.2);
+    --shadow-gold: 0 8px 32px -8px hsl(42 70% 50% / 0.35);
+    --shadow-card: 0 8px 30px -10px hsl(270 40% 15% / 0.12);
+
+    /* Gradients */
+    --gradient-royal: linear-gradient(135deg, hsl(280 45% 12%) 0%, hsl(270 40% 15%) 50%, hsl(275 35% 22%) 100%);
+    --gradient-hero: linear-gradient(160deg, hsl(280 45% 12%) 0%, hsl(270 40% 15%) 40%, hsl(275 35% 22%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(40 75% 40%) 0%, hsl(42 70% 50%) 50%, hsl(45 60% 60%) 100%);
+    --gradient-ivory: linear-gradient(180deg, hsl(45 30% 96%) 0%, hsl(42 35% 93%) 100%);
+
+    /* Sidebar */
+    --sidebar-background: 45 30% 96%;
+    --sidebar-foreground: 270 40% 15%;
+    --sidebar-primary: 270 40% 15%;
+    --sidebar-primary-foreground: 45 30% 96%;
+    --sidebar-accent: 42 35% 93%;
+    --sidebar-accent-foreground: 270 40% 15%;
+    --sidebar-border: 270 15% 85%;
+    --sidebar-ring: 42 70% 50%;
+  }
+
+  .dark {
+    --background: 270 40% 8%;
+    --foreground: 45 30% 96%;
+
+    --card: 270 35% 12%;
+    --card-foreground: 45 30% 96%;
+
+    --popover: 270 35% 12%;
+    --popover-foreground: 45 30% 96%;
+
+    --primary: 45 30% 96%;
+    --primary-foreground: 270 40% 15%;
+
+    --secondary: 270 30% 20%;
+    --secondary-foreground: 45 30% 96%;
+
+    --muted: 270 25% 18%;
+    --muted-foreground: 270 15% 60%;
+
+    --accent: 42 70% 50%;
+    --accent-foreground: 270 40% 15%;
+
+    --border: 270 25% 20%;
+    --input: 270 25% 20%;
+    --ring: 42 70% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'ABCFavoritVariable', Roboto, Arial, sans-serif;
+    font-weight: 400;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'ABCFavoritVariable', Roboto, Arial, sans-serif;
+    font-weight: 700;
+    color: hsl(var(--foreground));
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+    line-height: 1.1;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+}
+
+@layer components {
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-gold);
+  }
+
+  .gold-underline {
+    @apply relative inline-block;
+  }
+
+  .gold-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-[2px];
+    background: hsl(var(--gold-metallic));
+  }
+
+  .card-royal {
+    @apply bg-card rounded-lg border border-border/50;
+    box-shadow: var(--shadow-card);
+  }
+
+  .card-elevated {
+    @apply bg-card rounded-lg;
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .section-padding {
+    @apply py-20 md:py-28 px-6 md:px-12 lg:px-20;
+  }
+
+  .section-royal {
+    background: var(--gradient-royal);
+    @apply text-primary-foreground;
+  }
+
+  .section-ivory {
+    background: var(--gradient-ivory);
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .royal-gradient {
+    background: var(--gradient-royal);
+  }
+
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+
+  .gold-gradient {
+    background: var(--gradient-gold);
+  }
+
+  /* Scroll reveal animations */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Premium button glow */
+  .btn-glow {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-glow::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, hsl(42 70% 50% / 0.4), transparent, hsl(42 70% 50% / 0.4));
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+
+  .btn-glow:hover::before {
+    opacity: 1;
+  }
+
+  /* Footer dark */
+  .footer-royal {
+    background: hsl(var(--aubergine));
+  }
+
+  /* Green sustainability accents */
+  .eco-accent {
+    color: hsl(var(--emerald));
+  }
+
+  .eco-bg {
+    background: hsl(var(--emerald) / 0.1);
+  }
+
+  .eco-border {
+    border-color: hsl(var(--emerald) / 0.3);
+  }
+}
+
+@layer utilities {
+  .font-serif {
+    font-family: 'ABCFavoritVariable', Roboto, Arial, sans-serif;
+  }
+
+  .font-sans {
+    font-family: 'ABCFavoritVariable', Roboto, Arial, sans-serif;
+  }
+
+  /* Custom animation delays */
+  .animation-delay-100 { animation-delay: 0.1s; }
+  .animation-delay-200 { animation-delay: 0.2s; }
+  .animation-delay-300 { animation-delay: 0.3s; }
+  .animation-delay-400 { animation-delay: 0.4s; }
+  .animation-delay-500 { animation-delay: 0.5s; }
+  .animation-delay-600 { animation-delay: 0.6s; }
+
+  /* High contrast text utilities */
+  .text-on-dark {
+    color: hsl(var(--ivory));
+  }
+
+  .text-on-light {
+    color: hsl(var(--royal-purple));
+  }
+}
