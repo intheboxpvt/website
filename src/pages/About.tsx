@@ -17,7 +17,7 @@ const About = () => {
     {
       name: "Aashvi Chawla",
       role: "MD, COO",
-      image: "/team/AashviChawla.jpeg",
+      image: "/team/AashviChalwa.jpeg",
       // bio: "Visionary leader driving innovation"
     },
     {
