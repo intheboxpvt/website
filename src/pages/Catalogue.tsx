@@ -17,6 +17,9 @@ const Catalogue = () => {
     { name: "Eco Board Box", category: "sustainable", moq: "200-800", desc: "Agri-waste hybrid board packaging." },
     { name: "Drawer Box", category: "rigid", moq: "100-400", desc: "Sliding drawer style rigid boxes." },
     { name: "Kraft Paper Bag", category: "kraft", moq: "500-2000", desc: "Custom printed kraft bags." },
+    { name: "Corrugated Shipper", category: "kraft", moq: "500-2000", desc: "Durable custom shipping boxes." },
+    { name: "Cosmetic Glass Jar Box", category: "luxury", moq: "100-500", desc: "Premium retail boxes for cosmetics." },
+    { name: "Apparel Sleeve", category: "sustainable", moq: "200-1000", desc: "Eco-friendly sleeves for clothing packaging." },
   ];
 
   const filtered = filter === "all" ? products : products.filter(p => p.category === filter);
@@ -51,8 +54,12 @@ const Catalogue = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filtered.map((p) => (
               <div key={p.name} className="card-elevated overflow-hidden hover-lift group">
-                <div className="aspect-[4/3] bg-gradient-to-br from-warm-beige to-light-purple/20 flex items-center justify-center">
-                  <span className="text-6xl group-hover:scale-110 transition-transform">📦</span>
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img 
+                    src={`/products/${p.name.toLowerCase().replace(/ /g, "_")}.png`} 
+                    alt={p.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
                 </div>
                 <div className="p-6">
                   <span className="font-display text-xs uppercase tracking-wide text-accent font-medium">{p.category}</span>

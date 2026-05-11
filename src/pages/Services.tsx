@@ -118,8 +118,12 @@ const Services = () => {
               <Link to="/contact"><Button variant="gold" size="lg" className="mt-8">Get a Quote</Button></Link>
             </ScrollReveal>
             <ScrollReveal delay={200} direction="right">
-              <div className="aspect-square bg-gradient-to-br from-light-purple/30 to-gold-metallic/10 rounded-3xl flex items-center justify-center border border-royal-purple/10">
-                <span className="text-8xl">📦</span>
+              <div className="aspect-square rounded-3xl overflow-hidden border border-royal-purple/10 shadow-2xl">
+                <img 
+                  src="/about/manufacturing.png" 
+                  alt="Packaging Manufacturing Process" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </ScrollReveal>
           </div>

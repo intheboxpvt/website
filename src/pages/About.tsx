@@ -107,18 +107,17 @@ const About = () => {
               </div>
             </div>
             <div className="relative">
-              <div className="aspect-[4/3] royal-gradient rounded-xl overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-gold-metallic/20 to-transparent"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center text-ivory">
-                    <p className="font-serif text-7xl font-bold mb-2">14+</p>
-                    <p className="font-sans text-xl">Years of Excellence</p>
-                  </div>
-                </div>
+              <div className="aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+                <img 
+                  src="/about/who_we_are.png" 
+                  alt="InTheBox Team Studio"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-royal-purple/40 to-transparent"></div>
               </div>
-              <div className="absolute -bottom-6 -right-6 bg-gold-metallic rounded-xl p-6 shadow-lg">
-                <p className="font-serif text-3xl font-bold text-royal-purple">500+</p>
-                <p className="font-sans text-royal-purple/80">Happy Clients</p>
+              <div className="absolute -bottom-6 -right-6 bg-gold-metallic rounded-xl p-6 shadow-lg z-10">
+                <p className="font-serif text-3xl font-bold text-royal-purple">14+</p>
+                <p className="font-sans text-royal-purple/80">Years of Excellence</p>
               </div>
             </div>
           </div>
@@ -179,7 +178,7 @@ const About = () => {
                   <img 
                     src={member.image} 
                     alt={member.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-royal-purple/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
