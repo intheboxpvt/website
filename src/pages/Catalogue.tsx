@@ -4,6 +4,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Download } from "lucide-react";
+import { Link } from "react-router-dom";
 import FoldedCard3D from "@/components/FoldedCard3D";
 import SEO from "@/components/SEO";
 
@@ -93,7 +94,9 @@ const Catalogue = () => {
                     placeholder="Type your brand story..."
                   />
                 </div>
-                <Button variant="gold" size="lg" className="w-full">Save & Request Sample</Button>
+                <Link to="/studio">
+                  <Button variant="gold" size="lg" className="w-full">Explore 3D Customizer</Button>
+                </Link>
               </div>
 
               <div className="mt-8 grid grid-cols-3 gap-4">
