@@ -4,13 +4,19 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Download } from "lucide-react";
+import { Link } from "react-router-dom";
+import FoldedCard3D from "@/components/FoldedCard3D";
 import SEO from "@/components/SEO";
 
 const Catalogue = () => {
   const [filter, setFilter] = useState("all");
-  const categories = ["all", "rigid", "kraft", "luxury", "sustainable"];
+  const [frontText, setFrontText] = useState("Your Brand Here");
+  const [insideText, setInsideText] = useState("Tell your brand story and thank your customers in style. This interior space is yours to design.");
+  
+  const categories = ["all", "rigid", "kraft", "luxury", "sustainable", "stationery"];
   
   const products = [
+    { name: "Premium Thank You Card", category: "stationery", moq: "100-500", desc: "Folded luxury cards with gold foil stamping." },
     { name: "Classic Rigid Box", category: "rigid", moq: "100-500", desc: "Premium rigid boxes with magnetic closure." },
     { name: "Kraft Mailer", category: "kraft", moq: "250-1000", desc: "Eco-friendly kraft mailers for shipping." },
     { name: "Luxury Gift Box", category: "luxury", moq: "50-200", desc: "High-end gift boxes with ribbon closure." },
@@ -38,6 +44,77 @@ const Catalogue = () => {
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary mt-4">Explore Our Collection</h1>
           <p className="font-display text-lg text-muted-foreground mt-6 max-w-2xl mx-auto font-normal">Browse our range of premium packaging solutions.</p>
           <Button variant="gold" size="lg" className="mt-8"><Download className="w-4 h-4 mr-2" />Download Full PDF Catalogue</Button>
+        </div>
+      </section>
+
+      {/* Featured 3D Section */}
+      <section className="py-12 px-6 lg:px-12 bg-white/50 backdrop-blur-sm border-y border-royal-purple/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="order-2 lg:order-1 flex flex-col items-center py-10">
+              <FoldedCard3D 
+                frontImage="/products/premium_thank_you_card.png" 
+                insideImage="/products/thank_you_card_texture.png"
+                frontText={frontText}
+                insideText={insideText}
+                className="w-[320px] h-[220px] md:w-[400px] md:h-[280px]"
+              />
+              <div className="mt-8 p-4 bg-gold-metallic/5 rounded-lg border border-gold-metallic/10 max-w-sm text-center">
+                <p className="text-xs font-sans text-soft-purple italic">
+                  "Replication precision: This interactive mode simulates a real 300GSM bi-fold card with gold foil stamping."
+                </p>
+              </div>
+            </div>
+            <div className="order-1 lg:order-2">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="px-3 py-1 rounded-full bg-gold-metallic/10 border border-gold-metallic/20">
+                  <span className="text-[10px] font-sans font-bold text-gold-metallic uppercase tracking-wider">Functional Preview</span>
+                </div>
+                <span className="text-xs font-sans text-soft-purple font-medium uppercase tracking-widest">3D Customizer</span>
+              </div>
+              <h2 className="font-serif text-3xl md:text-4xl text-royal-purple mb-6">Experience Interactive Replication</h2>
+              
+              <div className="space-y-6 bg-ivory/50 p-6 rounded-2xl border border-royal-purple/5 shadow-sm">
+                <div>
+                  <label className="block text-xs font-sans font-bold text-royal-purple uppercase tracking-widest mb-2">Front Branding (Gold Foil)</label>
+                  <input 
+                    type="text" 
+                    value={frontText} 
+                    onChange={(e) => setFrontText(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl border border-royal-purple/10 bg-white font-sans text-sm focus:outline-none focus:ring-2 focus:ring-gold-metallic/50"
+                    placeholder="Enter brand name..."
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-sans font-bold text-royal-purple uppercase tracking-widest mb-2">Interior Message</label>
+                  <textarea 
+                    value={insideText} 
+                    onChange={(e) => setInsideText(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl border border-royal-purple/10 bg-white font-sans text-sm focus:outline-none focus:ring-2 focus:ring-gold-metallic/50 h-32 resize-none"
+                    placeholder="Type your brand story..."
+                  />
+                </div>
+                <Link to="/studio">
+                  <Button variant="gold" size="lg" className="w-full">Explore 3D Customizer</Button>
+                </Link>
+              </div>
+
+              <div className="mt-8 grid grid-cols-3 gap-4">
+                <div className="text-center">
+                  <p className="text-[10px] font-sans font-bold text-gold-metallic uppercase">Paper</p>
+                  <p className="text-xs text-soft-purple">300GSM Matte</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-[10px] font-sans font-bold text-gold-metallic uppercase">Finish</p>
+                  <p className="text-xs text-soft-purple">Gold Foil</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-[10px] font-sans font-bold text-gold-metallic uppercase">MOQ</p>
+                  <p className="text-xs text-soft-purple">100 Units</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
