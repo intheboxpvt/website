@@ -38,7 +38,7 @@ const Hero = () => {
             <div className="flex items-center gap-3 mb-6 opacity-0 animate-fade-up" style={{ animationDelay: "0.1s" }}>
               <div className="w-12 h-[2px] bg-gold-metallic"></div>
               <span className="font-sans text-sm tracking-widest uppercase text-gold-light font-medium">
-                Premium Packaging Studio
+                Premium Packaging Studio Platform
               </span>
             </div>
 
