@@ -10,8 +10,8 @@ interface CardSceneProps {
 const CardScene = ({ settings }: CardSceneProps) => {
   return (
     <div className="w-full h-full">
-      <Canvas shadows dpr={[1, 2]} alpha>
-        <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={35} />
+      <Canvas shadows dpr={[1, 2]} >
+        <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={35} setLens={undefined} />
         
         {/* Cinematic Lighting */}
         <ambientLight intensity={0.7} />
@@ -30,7 +30,6 @@ const CardScene = ({ settings }: CardSceneProps) => {
             speed={2} 
             rotationIntensity={0.5} 
             floatIntensity={0.5} 
-            floatingRange={[0.1, 0.3]}
           >
             <FoldedCard settings={settings} />
           </Float>
