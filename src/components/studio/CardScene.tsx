@@ -51,16 +51,8 @@ const CardScene = ({ settings }: CardSceneProps) => {
   }
 
   return (
-    <div className="w-full h-full outline-none cursor-grab active:cursor-grabbing">
-      <Canvas 
-        shadows 
-        dpr={[1, 2]} 
-        gl={{ 
-          antialias: true,
-          alpha: true,
-          powerPreference: "high-performance"
-        }}
-      >
+    <div className="w-full h-full">
+      <Canvas shadows dpr={[1, 2]} alpha>
         <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={35} />
         
         <OrbitControls 
@@ -79,9 +71,10 @@ const CardScene = ({ settings }: CardSceneProps) => {
         <Suspense fallback={null}>
           <Environment preset="city" />
           <Float
-            speed={1.5} 
-            rotationIntensity={0.3} 
-            floatIntensity={0.4} 
+            speed={2} 
+            rotationIntensity={0.5} 
+            floatIntensity={0.5} 
+            floatingRange={[0.1, 0.3]}
           >
             <UniversalModel settings={settings} type={settings.type} />
           </Float>
