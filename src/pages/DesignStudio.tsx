@@ -1,18 +1,24 @@
 import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import EditorSidebar from "@/components/studio/EditorSidebar";
 import CardScene from "@/components/studio/CardScene";
 import Navbar from "@/components/Navbar";
 import SEO from "@/components/SEO";
 
 const DesignStudio = () => {
+  const [searchParams] = useSearchParams();
   const [customization, setCustomization] = useState({
-    frontText: "Thank You",
-    insideText: "Your kindness is greatly appreciated. We are honored to be part of your journey.",
-    bgColor: "#4c1d95", // Royal Purple
-    textColor: "#fbbf24", // Gold
+    bgColor: "#" + (searchParams.get("color") || "D4AF37"),
+    textColor: "#1e1e1e",
+    frontText: "InTheBox",
+    insideText: "Memorable unboxing experiences start here.",
     fontSize: 24,
-    isOpen: 0.2, // 0 to 1
+    isOpen: 0.1,
     foilEffect: true,
+    autoRotate: true,
+    type: searchParams.get("type") || "card",
+    side: "outside",
+    interiorColor: "#fafafa"
   });
 
   return (

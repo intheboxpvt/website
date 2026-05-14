@@ -77,10 +77,22 @@ const EditorSidebar = ({ settings, onChange }: EditorSidebarProps) => {
       <section className="space-y-6">
         <div className="flex items-center gap-2 text-royal-purple mb-4">
           <Palette className="w-4 h-4" />
-          <h2 className="font-sans text-xs font-bold uppercase tracking-widest">Finishes</h2>
+          <h2 className="font-sans text-xs font-bold uppercase tracking-widest">Finishes & Branding</h2>
         </div>
 
         <div className="space-y-4">
+          {/* Unboxing Experience Toggle */}
+          <div className="flex items-center justify-between p-4 bg-gold-metallic/5 rounded-xl border border-gold-metallic/10">
+            <div className="space-y-0.5">
+              <Label className="text-sm font-semibold">Interior Branding</Label>
+              <p className="text-[10px] text-soft-purple">Customize the unboxing feel</p>
+            </div>
+            <Switch 
+              checked={settings.side === "inside"} 
+              onCheckedChange={(v) => update("side", v ? "inside" : "outside")} 
+            />
+          </div>
+
           <div className="flex items-center justify-between p-4 bg-ivory/30 rounded-xl border border-black/5">
             <div className="flex items-center gap-3">
               <Sparkles className="w-4 h-4 text-gold-metallic" />
@@ -92,9 +104,9 @@ const EditorSidebar = ({ settings, onChange }: EditorSidebarProps) => {
             />
           </div>
           
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
              <div className="space-y-2">
-                <Label className="text-[10px] uppercase">Base Color</Label>
+                <Label className="text-[10px] uppercase font-bold text-soft-purple">Exterior</Label>
                 <input 
                   type="color" 
                   value={settings.bgColor}
@@ -103,7 +115,16 @@ const EditorSidebar = ({ settings, onChange }: EditorSidebarProps) => {
                 />
              </div>
              <div className="space-y-2">
-                <Label className="text-[10px] uppercase">Print Color</Label>
+                <Label className="text-[10px] uppercase font-bold text-soft-purple">Interior</Label>
+                <input 
+                  type="color" 
+                  value={settings.interiorColor || "#fafafa"}
+                  onChange={(e) => update("interiorColor", e.target.value)}
+                  className="w-full h-10 rounded-lg cursor-pointer border-none p-0 bg-transparent"
+                />
+             </div>
+             <div className="space-y-2">
+                <Label className="text-[10px] uppercase font-bold text-soft-purple">Prints</Label>
                 <input 
                   type="color" 
                   value={settings.textColor}
