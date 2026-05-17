@@ -30,21 +30,21 @@ const About = () => {
 
   const testimonials = [
     {
-      quote: "InTheBox transformed our brand perception completely. The packaging quality exceeded our expectations and our customers love the unboxing experience.",
-      author: "Meera Joshi",
-      company: "Luxe Cosmetics",
+      quote: "InTheBox’s agri-waste hybrid boards elevated our unboxing experience while helping us reduce our carbon footprint by 30%. Their prototyping speed and manufacturing reliability are unmatched.",
+      author: "Sarah Jenkins",
+      company: "Supply Chain Director, Eleva Wellness",
       image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop&crop=face"
     },
     {
-      quote: "Working with InTheBox has been a game-changer. Their attention to detail and commitment to sustainability aligns perfectly with our brand values.",
-      author: "Vikram Singh",
-      company: "Organic Earth",
+      quote: "Scaling from 500 to 10,000 units was seamless. InTheBox provided end-to-end support—from structural engineering to final delivery—maintaining exacting quality standards across every batch.",
+      author: "David Chen",
+      company: "Head of Operations, Aura Cosmetics",
       image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face"
     },
     {
-      quote: "The team understood our vision from day one. They delivered premium packaging that truly represents our luxury brand positioning.",
-      author: "Ananya Gupta",
-      company: "Heritage Jewels",
+      quote: "Their technical expertise in premium finishes and low-MOQ flexibility allowed us to launch our flagship collection flawlessly. They are true manufacturing partners, not just vendors.",
+      author: "Emily Roberts",
+      company: "Founder, Lumière Home",
       image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face"
     },
   ];
@@ -85,24 +85,17 @@ const About = () => {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="font-serif text-3xl md:text-4xl text-royal-purple mb-8">
-                Born from Passion, Built on Excellence
+                Engineering Premium Packaging Experiences
               </h2>
               <div className="space-y-6 font-sans text-lg text-soft-purple leading-relaxed">
                 <p>
-                  InTheBox began in 2010 with a simple belief: every product deserves packaging 
-                  that tells its story. What started as a small family-run workshop in Mohali 
-                  has grown into one of India's most trusted premium packaging manufacturers.
+                  Founded on a legacy of manufacturing excellence, InTheBox has evolved into a premier B2B packaging partner. We combine cutting-edge structural design with robust production capabilities to deliver packaging that not only protects but elevates your brand.
                 </p>
                 <p>
-                  Our founder recognized that small and medium businesses 
-                  were struggling to access the same quality packaging that luxury brands enjoyed. 
-                  He set out to change that, making premium packaging accessible without 
-                  compromising on quality or craftsmanship.
+                  We understand that your packaging is the physical handshake between your product and your customer. By operating our own manufacturing infrastructure, we maintain uncompromising control over quality, timelines, and material sourcing—ensuring every unit meets exacting standards.
                 </p>
                 <p>
-                  Today, we serve over 500 brands across India and beyond, from emerging 
-                  startups to established luxury houses. Our commitment remains unchanged: 
-                  delivering packaging that makes brands impossible to ignore.
+                  From sustainable agri-waste innovations to luxury rigid boxes, our team of structural engineers, designers, and production specialists works as an extension of your brand to scale your packaging operations seamlessly.
                 </p>
               </div>
             </div>
@@ -117,7 +110,7 @@ const About = () => {
               </div>
               <div className="absolute -bottom-6 -right-6 bg-gold-metallic rounded-xl p-6 shadow-lg z-10">
                 <p className="font-serif text-3xl font-bold text-royal-purple">14+</p>
-                <p className="font-sans text-royal-purple/80">Years of Excellence</p>
+                <p className="font-sans text-royal-purple/80">Years of Experience</p>
               </div>
             </div>
           </div>

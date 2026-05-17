@@ -38,7 +38,7 @@ const Hero = () => {
             <div className="flex items-center gap-3 mb-6 opacity-0 animate-fade-up" style={{ animationDelay: "0.1s" }}>
               <div className="w-12 h-[2px] bg-gold-metallic"></div>
               <span className="font-sans text-sm tracking-widest uppercase text-gold-light font-medium">
-                Premium Packaging Studio Platforn
+                Premium Packaging Studio Platform
               </span>
             </div>
 
@@ -85,18 +85,18 @@ const Hero = () => {
             >
               <div className="flex items-center gap-10">
                 <div className="text-center">
-                  <p className="font-serif text-3xl font-bold text-gold-metallic">500+</p>
-                  <p className="font-sans text-sm text-ivory/70 mt-1">Brands Served</p>
+                  <p className="font-serif text-3xl font-bold text-gold-metallic">200+</p>
+                  <p className="font-sans text-sm text-ivory/70 mt-1">Premium Materials</p>
                 </div>
                 <div className="w-[1px] h-12 bg-ivory/20"></div>
                 <div className="text-center">
-                  <p className="font-serif text-3xl font-bold text-gold-metallic">50K+</p>
-                  <p className="font-sans text-sm text-ivory/70 mt-1">Orders Delivered</p>
+                  <p className="font-serif text-3xl font-bold text-gold-metallic">10M+</p>
+                  <p className="font-sans text-sm text-ivory/70 mt-1">Monthly Capacity</p>
                 </div>
                 <div className="w-[1px] h-12 bg-ivory/20 hidden sm:block"></div>
                 <div className="text-center hidden sm:block">
-                  <p className="font-serif text-3xl font-bold text-gold-metallic">98%</p>
-                  <p className="font-sans text-sm text-ivory/70 mt-1">Satisfaction</p>
+                  <p className="font-serif text-3xl font-bold text-gold-metallic">100%</p>
+                  <p className="font-sans text-sm text-ivory/70 mt-1">In-House Production</p>
                 </div>
               </div>
             </div>
