@@ -43,7 +43,9 @@ const Catalogue = () => {
           <span className="font-display text-sm tracking-widest uppercase text-accent font-medium">Catalogue</span>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary mt-4">Explore Our Collection</h1>
           <p className="font-display text-lg text-muted-foreground mt-6 max-w-2xl mx-auto font-normal">Browse our range of premium packaging solutions.</p>
-          <Button variant="gold" size="lg" className="mt-8"><Download className="w-4 h-4 mr-2" />Download Full PDF Catalogue</Button>
+          <a href="/inthebox_catalogue.pdf" download="InTheBox_Catalogue.pdf" target="_blank" rel="noopener noreferrer">
+            <Button variant="gold" size="lg" className="mt-8"><Download className="w-4 h-4 mr-2" />Download Full PDF Catalogue</Button>
+          </a>
         </div>
       </section>
 

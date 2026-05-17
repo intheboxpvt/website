@@ -1,8 +1,14 @@
 import React, { Suspense, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Environment, ContactShadows, PerspectiveCamera, Float, OrbitControls } from "@react-three/drei";
+import { Environment, ContactShadows, PerspectiveCamera, Float, OrbitControls, Html, useProgress } from "@react-three/drei";
 import UniversalModel from "./UniversalModel";
 import FoldedCard3D from "../FoldedCard3D";
+import ErrorBoundary from "../ErrorBoundary";
+
+function Loader() {
+  const { progress } = useProgress();
+  return <Html center><div className="text-royal-purple font-sans font-medium text-sm w-32 text-center bg-ivory/80 backdrop-blur-md py-2 px-4 rounded-full border border-royal-purple/10 shadow-sm">{progress.toFixed(0)}% Loaded</div></Html>;
+}
 
 interface CardSceneProps {
   settings: any;
@@ -22,11 +28,10 @@ const CardScene = ({ settings }: CardSceneProps) => {
   }, []);
 
   // Show a loading state while checking WebGL
-  if (hasWebGL === null) return <div className="w-full h-full bg-muted/10 animate-pulse" />;
+  if (hasWebGL === null) return <div className="w-full h-full bg-muted/10 animate-pulse flex items-center justify-center"><p className="text-soft-purple font-sans animate-pulse">Initializing Studio Engine...</p></div>;
 
-  if (!hasWebGL) {
-    return (
-      <div className="w-full h-full flex flex-col items-center justify-center bg-muted/20 p-8 text-center">
+  const FallbackUI = (
+    <div className="w-full h-full flex flex-col items-center justify-center bg-muted/20 p-8 text-center">
         <div className="relative mb-12">
           <FoldedCard3D 
             frontText={settings.frontText}
@@ -47,12 +52,21 @@ const CardScene = ({ settings }: CardSceneProps) => {
           </p>
         </div>
       </div>
-    );
+  );
+
+  if (!hasWebGL) {
+    return FallbackUI;
   }
 
   return (
     <div className="w-full h-full">
-      <Canvas shadows dpr={[1, 2]} alpha>
+      <ErrorBoundary fallback={FallbackUI}>
+      <Canvas 
+        shadows 
+        dpr={[1, 1.5]} 
+        alpha 
+        gl={{ powerPreference: "high-performance", antialias: false, preserveDrawingBuffer: true, alpha: true }}
+      >
         <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={35} />
         
         <OrbitControls 
@@ -68,7 +82,7 @@ const CardScene = ({ settings }: CardSceneProps) => {
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
         <pointLight position={[-10, -10, -10]} intensity={0.5} />
         
-        <Suspense fallback={null}>
+        <Suspense fallback={<Loader />}>
           <Environment preset="city" />
           <Float
             speed={2} 
@@ -86,8 +100,10 @@ const CardScene = ({ settings }: CardSceneProps) => {
           scale={15} 
           blur={2.5} 
           far={4} 
+          frames={1} // Optimize performance by only rendering shadow once
         />
       </Canvas>
+      </ErrorBoundary>
     </div>
   );
 };

@@ -2,16 +2,53 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
-import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import { useState } from "react";
 import SEO from "@/components/SEO";
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "", botField: "" });
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // IMPORTANT: Replace this URL with your deployed Google Apps Script Web App URL
+  const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_URL";
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you! We'll get back to you soon.");
+    setStatus("submitting");
+    setErrorMessage("");
+
+    try {
+      // If no URL is set, simulate backend success for demonstration
+      if (GOOGLE_SCRIPT_URL === "YOUR_GOOGLE_SCRIPT_URL") {
+        setTimeout(() => {
+          setStatus("success");
+          setForm({ name: "", email: "", phone: "", message: "", botField: "" });
+        }, 1500);
+        return;
+      }
+
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...form,
+          source: "Website Contact Form"
+        }),
+      });
+
+      // no-cors mode won't return a readable response body, assuming success if no throw
+      setStatus("success");
+      setForm({ name: "", email: "", phone: "", message: "", botField: "" });
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setStatus("error");
+      setErrorMessage("Something went wrong. Please try again or contact us directly via WhatsApp.");
+    }
   };
 
   return (
@@ -35,11 +72,45 @@ const Contact = () => {
           <div>
             <h2 className="font-display text-2xl font-semibold text-primary mb-8">Get in Touch</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
-              <input type="text" placeholder="Your Name" value={form.name} onChange={(e) => setForm({...form, name: e.target.value})} required className="w-full px-4 py-3 rounded-xl border border-border bg-card font-display focus:outline-none focus:ring-2 focus:ring-accent" />
-              <input type="email" placeholder="Email Address" value={form.email} onChange={(e) => setForm({...form, email: e.target.value})} required className="w-full px-4 py-3 rounded-xl border border-border bg-card font-display focus:outline-none focus:ring-2 focus:ring-accent" />
-              <input type="tel" placeholder="Phone Number" value={form.phone} onChange={(e) => setForm({...form, phone: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-border bg-card font-display focus:outline-none focus:ring-2 focus:ring-accent" />
-              <textarea placeholder="Tell us about your project..." value={form.message} onChange={(e) => setForm({...form, message: e.target.value})} rows={4} required className="w-full px-4 py-3 rounded-xl border border-border bg-card font-display focus:outline-none focus:ring-2 focus:ring-accent resize-none"></textarea>
-              <Button type="submit" variant="hero" size="lg" className="w-full">Send Message</Button>
+              {/* Honeypot field for spam prevention - hidden from real users */}
+              <div className="hidden" aria-hidden="true">
+                <input type="text" name="botField" tabIndex={-1} value={form.botField} onChange={(e) => setForm({...form, botField: e.target.value})} />
+              </div>
+
+              <input type="text" placeholder="Your Name" value={form.name} onChange={(e) => setForm({...form, name: e.target.value})} required className="w-full px-4 py-3 rounded-xl border border-border bg-card font-sans focus:outline-none focus:ring-2 focus:ring-gold-metallic/50" disabled={status === "submitting"} />
+              <input type="email" placeholder="Email Address" value={form.email} onChange={(e) => setForm({...form, email: e.target.value})} required className="w-full px-4 py-3 rounded-xl border border-border bg-card font-sans focus:outline-none focus:ring-2 focus:ring-gold-metallic/50" disabled={status === "submitting"} />
+              <input type="tel" placeholder="Phone Number" value={form.phone} onChange={(e) => setForm({...form, phone: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-border bg-card font-sans focus:outline-none focus:ring-2 focus:ring-gold-metallic/50" disabled={status === "submitting"} />
+              <textarea placeholder="Tell us about your project..." value={form.message} onChange={(e) => setForm({...form, message: e.target.value})} rows={4} required className="w-full px-4 py-3 rounded-xl border border-border bg-card font-sans focus:outline-none focus:ring-2 focus:ring-gold-metallic/50 resize-none" disabled={status === "submitting"}></textarea>
+              
+              {status === "success" && (
+                <div className="p-4 rounded-xl bg-emerald/10 border border-emerald/20 flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-emerald mt-0.5" />
+                  <div>
+                    <p className="font-serif font-semibold text-emerald">Message Sent Successfully</p>
+                    <p className="text-sm font-sans text-emerald/80 mt-1">Thank you for reaching out. Our packaging specialists will contact you shortly.</p>
+                  </div>
+                </div>
+              )}
+
+              {status === "error" && (
+                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-start gap-3">
+                  <AlertCircle className="w-5 h-5 text-red-500 mt-0.5" />
+                  <div>
+                    <p className="font-serif font-semibold text-red-500">Submission Failed</p>
+                    <p className="text-sm font-sans text-red-500/80 mt-1">{errorMessage}</p>
+                  </div>
+                </div>
+              )}
+
+              <Button type="submit" variant="hero" size="lg" className="w-full group" disabled={status === "submitting" || status === "success"}>
+                {status === "submitting" ? (
+                  <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Sending...</>
+                ) : status === "success" ? (
+                  <><CheckCircle className="w-5 h-5 mr-2" /> Sent successfully</>
+                ) : (
+                  "Send Message"
+                )}
+              </Button>
             </form>
           </div>
 
