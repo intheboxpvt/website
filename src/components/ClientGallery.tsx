@@ -4,21 +4,21 @@ import ScrollReveal from "./ScrollReveal";
 const ClientGallery = () => {
   const testimonials = [
     {
-      quote: "InTheBox transformed our unboxing experience. Our customers now share their deliveries on social media without us even asking!",
-      author: "Priya Sharma",
-      role: "Founder, Bloom Cosmetics",
+      quote: "InTheBox’s agri-waste hybrid boards elevated our unboxing experience while helping us reduce our carbon footprint by 30%. Their prototyping speed and manufacturing reliability are unmatched.",
+      author: "Sarah Jenkins",
+      role: "Supply Chain Director, Eleva Wellness",
       rating: 5,
     },
     {
-      quote: "The sustainable packaging option aligned perfectly with our brand values. Quality exceeded expectations.",
-      author: "Rahul Mehta",
-      role: "CEO, GreenLeaf Foods",
+      quote: "Scaling from 500 to 10,000 units was seamless. InTheBox provided end-to-end support—from structural engineering to final delivery—maintaining exacting quality standards across every batch.",
+      author: "David Chen",
+      role: "Head of Operations, Aura Cosmetics",
       rating: 5,
     },
     {
-      quote: "From concept to delivery, the team was incredibly professional. Our premium boxes now match our premium product.",
-      author: "Ananya Kapoor",
-      role: "Creative Director, Luxe Jewelry",
+      quote: "Their technical expertise in premium finishes and low-MOQ flexibility allowed us to launch our flagship collection flawlessly. They are true manufacturing partners, not just vendors.",
+      author: "Emily Roberts",
+      role: "Founder, Lumière Home",
       rating: 5,
     },
   ];

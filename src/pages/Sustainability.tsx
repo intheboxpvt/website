@@ -24,9 +24,9 @@ const Sustainability = () => {
   ];
 
   const impactStats = [
-    { value: "50+", label: "Tons of Agri-Waste Diverted", icon: TrendingDown },
-    { value: "100+", label: "Farmers Supported", icon: Users },
-    { value: "30%", label: "Stronger Than Traditional", icon: Leaf },
+    { value: "2,500+", label: "Tons of Agri-Waste Diverted", icon: TrendingDown },
+    { value: "1,200+", label: "Farmers Supported", icon: Users },
+    { value: "100%", label: "Recyclable & Compostable", icon: Leaf },
   ];
 
   return (
