@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Palette, Layers, Package, Sparkles, Truck, Search, Lightbulb, Box, CheckCircle, Factory, ArrowRight } from "lucide-react";
+import { MessageSquare, Palette, Layers, Package, Sparkles, Truck, Search, Lightbulb, Box, CheckCircle, Factory, ArrowRight, Download } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import SEO from "@/components/SEO";
 
@@ -75,8 +75,8 @@ const Services = () => {
       />
       <Navbar />
       
-      {/* Page Header */}
-      <section className="pt-24 pb-8 px-6 lg:px-12 bg-black border-b border-white/5 relative overflow-hidden">
+      {/* Page Header (Increased padding to avoid navbar cutting) */}
+      <section className="pt-36 pb-8 px-6 lg:px-12 bg-black border-b border-white/5 relative overflow-hidden">
         {/* Subtle Watermark logo inside Header */}
         <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
           <img 
@@ -101,97 +101,94 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Consultation Section */}
-      <section className="py-24 px-6 lg:px-12 bg-[#050505]">
-        <div className="max-w-[1400px] mx-auto">
-          <ScrollReveal>
-            <div className="flex items-center gap-4 mb-12">
-              <MessageSquare className="w-5 h-5 text-[#38BDF8]" />
-              <h2 className="font-serif text-3xl font-light text-white">Packaging Consultation</h2>
-            </div>
-          </ScrollReveal>
-          
-          <div className="grid md:grid-cols-3 gap-6">
-            {consultationServices.map((s, i) => (
-              <ScrollReveal key={s.title} delay={i * 100}>
-                <div className="bg-black border border-white/10 p-8 rounded-none hover:border-white/30 transition-all duration-300 h-full">
-                  <h3 className="font-serif text-2xl font-light text-white mb-4">{s.title}</h3>
-                  <p className="font-sans text-sm text-white/55 leading-relaxed">{s.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Design Section */}
-      <section className="py-24 px-6 lg:px-12 bg-black border-y border-white/5">
+      {/* Combined Consultation & Design Maze Grid */}
+      <section className="py-24 px-6 lg:px-12 bg-[#050505] border-b border-white/5">
         <div className="max-w-[1400px] mx-auto">
           <ScrollReveal>
             <div className="flex items-center gap-4 mb-12">
               <Palette className="w-5 h-5 text-[#38BDF8]" />
-              <h2 className="font-serif text-3xl font-light text-white">Structural Design & Engineering</h2>
+              <h2 className="font-serif text-3xl font-light text-white">Consultation & Structural Design Maze</h2>
             </div>
           </ScrollReveal>
           
-          <div className="grid md:grid-cols-3 gap-6">
-            {designServices.map((s, i) => (
-              <ScrollReveal key={s.title} delay={i * 100}>
-                <div className="bg-[#050505] border border-white/10 p-8 rounded-none hover:border-[#38BDF8]/40 transition-all duration-300 h-full">
-                  <s.icon className="w-6 h-6 text-[#38BDF8] mb-6" />
-                  <h3 className="font-serif text-2xl font-light text-white mb-4">{s.title}</h3>
-                  <p className="font-sans text-sm text-white/55 leading-relaxed">{s.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Manufacturing Section */}
-      <section className="py-24 px-6 lg:px-12 bg-[#050505]">
-        <div className="max-w-[1400px] mx-auto">
-          <ScrollReveal>
-            <div className="flex items-center gap-4 mb-12">
-              <Package className="w-5 h-5 text-[#38BDF8]" />
-              <h2 className="font-serif text-3xl font-light text-white">Manufacturing & Finishes</h2>
-            </div>
-          </ScrollReveal>
-          
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <ScrollReveal className="space-y-8">
-              <ul className="space-y-4">
-                {manufacturingFeatures.map((f, idx) => (
-                  <li key={idx} className="flex items-start gap-4 font-sans text-sm text-white/75 leading-relaxed">
-                    <Truck className="w-5 h-5 text-[#38BDF8] flex-shrink-0 mt-0.5" />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-              <Button 
-                onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
-                size="lg" 
-                className="rounded-full bg-white hover:bg-white/90 text-black font-sans text-sm font-semibold py-6 px-8 transition-all duration-300"
-              >
-                Request Consultation Brief
-              </Button>
-            </ScrollReveal>
-            <ScrollReveal delay={200} direction="right">
-              <div className="aspect-[4/3] rounded-none overflow-hidden border border-white/10 shadow-2xl relative">
-                <img 
-                  src="/about/manufacturing.png" 
-                  alt="Packaging Manufacturing Process" 
-                  className="w-full h-full object-cover opacity-80"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+          <div className="grid grid-cols-1 md:grid-cols-6 border border-white/10 bg-black divide-white/10 relative z-10">
+            {/* Cell 1: Starter Session */}
+            <div className="md:col-span-3 border-r border-b border-white/10 p-8 lg:p-12 hover:border-[#38BDF8]/40 transition-colors duration-300 flex flex-col justify-between group min-h-[200px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider">01 // Starter Session</span>
+                <MessageSquare className="w-5 h-5 text-white/20 group-hover:text-[#38BDF8] transition-colors" />
               </div>
-            </ScrollReveal>
+              <div>
+                <h3 className="font-serif text-2xl font-light text-white mb-2">{consultationServices[0].title}</h3>
+                <p className="font-sans text-xs text-white/55 leading-relaxed">{consultationServices[0].desc}</p>
+              </div>
+            </div>
+
+            {/* Cell 2: Deep Dive Workshop */}
+            <div className="md:col-span-3 border-b border-white/10 p-8 lg:p-12 hover:border-[#38BDF8]/40 transition-colors duration-300 flex flex-col justify-between group min-h-[200px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider">02 // Deep Dive</span>
+                <MessageSquare className="w-5 h-5 text-white/20 group-hover:text-[#38BDF8] transition-colors" />
+              </div>
+              <div>
+                <h3 className="font-serif text-2xl font-light text-white mb-2">{consultationServices[1].title}</h3>
+                <p className="font-sans text-xs text-white/55 leading-relaxed">{consultationServices[1].desc}</p>
+              </div>
+            </div>
+
+            {/* Cell 3: Advisory Pipeline */}
+            <div className="md:col-span-2 border-r border-b md:border-b-0 border-white/10 p-8 lg:p-12 hover:border-[#38BDF8]/40 transition-colors duration-300 flex flex-col justify-between group min-h-[200px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider">03 // Advisory</span>
+                <MessageSquare className="w-5 h-5 text-white/20 group-hover:text-[#38BDF8] transition-colors" />
+              </div>
+              <div>
+                <h3 className="font-serif text-2xl font-light text-white mb-2">{consultationServices[2].title}</h3>
+                <p className="font-sans text-xs text-white/55 leading-relaxed">{consultationServices[2].desc}</p>
+              </div>
+            </div>
+
+            {/* Cell 4: Concept Development */}
+            <div className="md:col-span-4 border-b md:border-b-0 border-white/10 p-8 lg:p-12 hover:border-[#38BDF8]/40 transition-colors duration-300 flex flex-col justify-between group min-h-[200px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider">04 // Concepts</span>
+                <Palette className="w-5 h-5 text-white/20 group-hover:text-[#38BDF8] transition-colors" />
+              </div>
+              <div>
+                <h3 className="font-serif text-2xl font-light text-white mb-2">{designServices[0].title}</h3>
+                <p className="font-sans text-xs text-white/55 leading-relaxed">{designServices[0].desc}</p>
+              </div>
+            </div>
+
+            {/* Cell 5: 3D Rendering Preview */}
+            <div className="md:col-span-3 border-r border-t border-white/10 md:border-t-0 p-8 lg:p-12 hover:border-[#38BDF8]/40 transition-colors duration-300 flex flex-col justify-between group min-h-[200px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider">05 // 3D Mockups</span>
+                <Layers className="w-5 h-5 text-white/20 group-hover:text-[#38BDF8] transition-colors" />
+              </div>
+              <div>
+                <h3 className="font-serif text-2xl font-light text-white mb-2">{designServices[1].title}</h3>
+                <p className="font-sans text-xs text-white/55 leading-relaxed">{designServices[1].desc}</p>
+              </div>
+            </div>
+
+            {/* Cell 6: Production Dielines */}
+            <div className="md:col-span-3 border-t border-white/10 md:border-t-0 p-8 lg:p-12 hover:border-[#38BDF8]/40 transition-colors duration-300 flex flex-col justify-between group min-h-[200px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider">06 // Dielines</span>
+                <Sparkles className="w-5 h-5 text-white/20 group-hover:text-[#38BDF8] transition-colors" />
+              </div>
+              <div>
+                <h3 className="font-serif text-2xl font-light text-white mb-2">{designServices[2].title}</h3>
+                <p className="font-sans text-xs text-white/55 leading-relaxed">{designServices[2].desc}</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Interactive Delivery Road Timeline */}
-      <section className="py-32 px-6 lg:px-12 bg-black border-t border-white/5 relative overflow-hidden">
+      <section className="py-32 px-6 lg:px-12 bg-black relative overflow-hidden">
         <div className="max-w-[1400px] mx-auto">
           <ScrollReveal>
             <div className="text-left mb-24">
@@ -288,6 +285,41 @@ const Services = () => {
             </Button>
           </div>
 
+        </div>
+      </section>
+
+      {/* Manufacturing Section (No button inside, at the bottom) */}
+      <section className="py-24 px-6 lg:px-12 bg-[#050505] border-t border-white/5">
+        <div className="max-w-[1400px] mx-auto">
+          <ScrollReveal>
+            <div className="flex items-center gap-4 mb-12">
+              <Package className="w-5 h-5 text-[#38BDF8]" />
+              <h2 className="font-serif text-3xl font-light text-white">Manufacturing & Finishes</h2>
+            </div>
+          </ScrollReveal>
+          
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <ScrollReveal className="space-y-8">
+              <ul className="space-y-6">
+                {manufacturingFeatures.map((f, idx) => (
+                  <li key={idx} className="flex items-start gap-4 font-sans text-sm text-white/75 leading-relaxed">
+                    <Truck className="w-5 h-5 text-[#38BDF8] flex-shrink-0 mt-0.5" />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </ScrollReveal>
+            <ScrollReveal delay={200} direction="right">
+              <div className="aspect-[4/3] rounded-none overflow-hidden border border-white/10 shadow-2xl relative">
+                <img 
+                  src="/about/manufacturing.png" 
+                  alt="Packaging Manufacturing Process" 
+                  className="w-full h-full object-cover opacity-80"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              </div>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
