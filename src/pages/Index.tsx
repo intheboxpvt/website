@@ -26,8 +26,8 @@ const Index = () => {
         <AboutPreview />
         <PricingTiers />
         <SustainabilityPreview />
-        <ClientGallery />
         <ReelsHighlights />
+        <ClientGallery />
         <Footer />
         <WhatsAppButton />
       </main>

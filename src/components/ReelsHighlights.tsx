@@ -1,29 +1,52 @@
-import { Play } from "lucide-react";
+import { useState, useRef } from "react";
+import { Volume2, VolumeX } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
+const ReelCard = ({ videoUrl }: { videoUrl: string }) => {
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
+
+  return (
+    <div className="relative aspect-[9/16] w-full border border-white/10 hover:border-[#38BDF8]/40 transition-colors duration-500 bg-black overflow-hidden group">
+      <video
+        ref={videoRef}
+        src={videoUrl}
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-102 transition-transform duration-700 ease-out"
+      />
+      
+      {/* Visual shadow gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+
+      {/* Sound Toggle Control overlay */}
+      <button 
+        onClick={toggleMute}
+        className="absolute bottom-6 right-6 z-20 w-10 h-10 rounded-full bg-black/60 border border-white/10 hover:border-[#38BDF8]/40 flex items-center justify-center text-white hover:text-[#38BDF8] transition-colors duration-300 backdrop-blur-sm"
+        aria-label={isMuted ? "Unmute video" : "Mute video"}
+      >
+        {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+      </button>
+    </div>
+  );
+};
+
 export const ReelsHighlights = () => {
-  const reels = [
-    {
-      id: "1",
-      link: "https://www.instagram.com/reel/DShS7byEnwq/",
-      title: "Luxury Rigid Assembly",
-      subtitle: "Watch the seamless magnetic flap and corner alignment process.",
-      bgImage: "https://images.unsplash.com/photo-1512909006721-3d6018887383?w=500&q=80",
-    },
-    {
-      id: "2",
-      link: "https://www.instagram.com/reel/DSH7NmIjdWL/",
-      title: "Precision Foil Stamping",
-      subtitle: "Details of custom copper foil detailing under mechanical press plates.",
-      bgImage: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500&q=80",
-    },
-    {
-      id: "3",
-      link: "https://www.instagram.com/reel/DPvoZx6jQ5E/",
-      title: "Eco-Board Rigidity Test",
-      subtitle: "Demonstrating load-bearing capacity of our hybrid agri-waste board.",
-      bgImage: "https://images.unsplash.com/photo-1607344645866-009c320c5ab8?w=500&q=80",
-    },
+  const videoUrls = [
+    "https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c054ba208d98d02df2f73315a6b0c26b&profile_id=139&oauth2_token_id=57447761",
+    "https://player.vimeo.com/external/403788540.sd.mp4?s=dcbcd7d934f0d36746ef741496a9cf2996d9a103&profile_id=139&oauth2_token_id=57447761",
+    "https://player.vimeo.com/external/538902504.sd.mp4?s=9148d53d21c251da4a04d55b0a39f60bf5a2f52c&profile_id=139&oauth2_token_id=57447761"
   ];
 
   return (
@@ -40,45 +63,14 @@ export const ReelsHighlights = () => {
             InTheBox <span className="text-white/30 italic">In Action.</span>
           </h2>
           <p className="font-sans text-sm text-white/50 mt-4 max-w-md">
-            Go behind the scenes of our packaging manufacturing and custom design prototypes on Instagram.
+            Watch our actual rigid box manufacturing, prototype testing, and unboxing processes unfold.
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {reels.map((reel, idx) => (
-            <ScrollReveal key={reel.id} delay={idx * 150}>
-              <a 
-                href={reel.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block group relative aspect-[9/16] w-full border border-white/10 hover:border-[#38BDF8]/40 transition-colors duration-500 bg-black overflow-hidden"
-              >
-                {/* Background image */}
-                <img 
-                  src={reel.bgImage} 
-                  alt={reel.title}
-                  className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-                
-                {/* Visual shade gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
-
-                {/* Centered play icon trigger */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-16 h-16 rounded-full border border-white/20 bg-black/60 backdrop-blur-sm flex items-center justify-center text-white group-hover:text-black group-hover:bg-[#38BDF8] group-hover:border-[#38BDF8] transition-all duration-300 transform group-hover:scale-110">
-                    <Play className="w-5 h-5 fill-current ml-1" />
-                  </div>
-                </div>
-
-                {/* Content Overlay */}
-                <div className="absolute bottom-0 left-0 w-full p-8 text-left">
-                  <span className="font-mono text-[10px] text-[#38BDF8] uppercase tracking-widest block mb-2">Reel 0{idx + 1}</span>
-                  <h3 className="font-serif text-2xl text-white font-light leading-tight">{reel.title}</h3>
-                  <p className="font-sans text-xs text-white/50 mt-3 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    {reel.subtitle}
-                  </p>
-                </div>
-              </a>
+          {videoUrls.map((url, idx) => (
+            <ScrollReveal key={idx} delay={idx * 150}>
+              <ReelCard videoUrl={url} />
             </ScrollReveal>
           ))}
         </div>
