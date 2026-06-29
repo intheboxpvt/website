@@ -1,52 +1,10 @@
-import { useState, useRef } from "react";
-import { Volume2, VolumeX } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
-const ReelCard = ({ videoUrl }: { videoUrl: string }) => {
-  const [isMuted, setIsMuted] = useState(true);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const toggleMute = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-      setIsMuted(videoRef.current.muted);
-    }
-  };
-
-  return (
-    <div className="relative aspect-[9/16] w-full border border-white/10 hover:border-[#38BDF8]/40 transition-colors duration-500 bg-black overflow-hidden group">
-      <video
-        ref={videoRef}
-        src={videoUrl}
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-102 transition-transform duration-700 ease-out"
-      />
-      
-      {/* Visual shadow gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
-
-      {/* Sound Toggle Control overlay */}
-      <button 
-        onClick={toggleMute}
-        className="absolute bottom-6 right-6 z-20 w-10 h-10 rounded-full bg-black/60 border border-white/10 hover:border-[#38BDF8]/40 flex items-center justify-center text-white hover:text-[#38BDF8] transition-colors duration-300 backdrop-blur-sm"
-        aria-label={isMuted ? "Unmute video" : "Mute video"}
-      >
-        {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-      </button>
-    </div>
-  );
-};
-
 export const ReelsHighlights = () => {
-  const videoUrls = [
-    "/assets/hero-video.mp4",
-    "/assets/hero-video.mp4",
-    "/assets/hero-video.mp4"
+  const reels = [
+    { id: "1", embedUrl: "https://www.instagram.com/reel/DShS7byEnwq/embed/" },
+    { id: "2", embedUrl: "https://www.instagram.com/reel/DSH7NmIjdWL/embed/" },
+    { id: "3", embedUrl: "https://www.instagram.com/reel/DPvoZx6jQ5E/embed/" },
   ];
 
   return (
@@ -63,14 +21,24 @@ export const ReelsHighlights = () => {
             InTheBox <span className="text-white/30 italic">In Action.</span>
           </h2>
           <p className="font-sans text-sm text-white/50 mt-4 max-w-md">
-            Watch our actual rigid box manufacturing, prototype testing, and unboxing processes unfold.
+            Watch our actual rigid box manufacturing, prototype testing, and unboxing processes unfold on Instagram.
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {videoUrls.map((url, idx) => (
-            <ScrollReveal key={idx} delay={idx * 150}>
-              <ReelCard videoUrl={url} />
+          {reels.map((reel, idx) => (
+            <ScrollReveal key={reel.id} delay={idx * 150}>
+              <div className="relative aspect-[9/16] w-full border border-white/10 hover:border-[#38BDF8]/40 transition-colors duration-500 bg-black overflow-hidden group">
+                <iframe
+                  src={reel.embedUrl}
+                  className="absolute inset-0 w-full h-full"
+                  frameBorder="0"
+                  scrolling="no"
+                  allowTransparency={true}
+                  allow="encrypted-media"
+                  title={`InTheBox Reel ${idx + 1}`}
+                ></iframe>
+              </div>
             </ScrollReveal>
           ))}
         </div>
