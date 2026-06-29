@@ -1,17 +1,21 @@
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Award, Users, Factory, Heart, Leaf, Recycle, TreePine, Droplets, TrendingDown } from "lucide-react";
 import SEO from "@/components/SEO";
+import { AsciiArt } from "@/components/ui/ascii-art";
 
 const About = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   const teamMembers = [
     {
       name: "Liv Arpit",
-      role: "Founder & CEO",
+      role: "Founder and CEO",
       image: "/team/LivArpit.jpeg",
-      bio: "14+ years of industrial print and box fabrication engineering experience. Dedicated to zero-emissions logistics."
+      bio: "4+ years of industrial print and box fabrication engineering experience. Dedicated to zero emissions logistics."
     },
     {
       name: "Aashvi Chawla",
@@ -21,7 +25,7 @@ const About = () => {
     },
     {
       name: "Ishan Kumar",
-      role: "Co-founder, CMO",
+      role: "Co founder, CMO",
       image: "/team/Ishan.jpeg",
       bio: "Leads premium design studio partnerships, sustainability initiatives, and corporate client relations."
     }
@@ -35,36 +39,36 @@ const About = () => {
   ];
 
   const sustainabilityFeatures = [
-    { icon: Leaf, title: "Agri-Waste Hybrid Boards", desc: "Made from rice husk and wheat straw that would otherwise be burned, reducing air pollution in Punjab." },
+    { icon: Leaf, title: "Agri Waste Hybrid Boards", desc: "Made from rice husk and wheat straw that would otherwise be burned, reducing air pollution in Punjab." },
     { icon: Recycle, title: "100% Recyclable", desc: "All our packaging can be recycled through standard municipal systems across India." },
     { icon: TreePine, title: "Compostable Options", desc: "Select materials break down naturally within 90 days in commercial composting facilities." },
-    { icon: Droplets, title: "Water-Based Inks", desc: "Eco-friendly printing that's safe for the environment and completely non-toxic." },
+    { icon: Droplets, title: "Water Based Inks", desc: "Eco friendly printing that is safe for the environment and completely non toxic." },
   ];
 
   const impactStats = [
-    { value: "2,500+", label: "Tons of Agri-Waste Diverted", icon: TrendingDown },
+    { value: "2,500+", label: "Tons of Agri Waste Diverted", icon: TrendingDown },
     { value: "1,200+", label: "Farmers Supported", icon: Users },
-    { value: "100%", label: "Recyclable & Compostable", icon: Leaf },
+    { value: "100%", label: "Recyclable and Compostable", icon: Leaf },
   ];
 
   const lifecycleSteps = [
-    { step: "1", title: "Source", desc: "Agri-waste collected from local Punjab farmers" },
+    { step: "1", title: "Source", desc: "Agri waste collected from local Punjab farmers" },
     { step: "2", title: "Process", desc: "Transformed into premium hybrid boards" },
     { step: "3", title: "Create", desc: "Crafted into beautiful packaging" },
-    { step: "4", title: "Return", desc: "100% recyclable or compostable end-of-life" },
+    { step: "4", title: "Return", desc: "100% recyclable or compostable end of life" },
   ];
 
   return (
-    <main className="min-h-screen bg-[#050505] text-white">
+    <main className="min-h-screen bg-background text-foreground">
       <SEO 
         title="Our Story, Team & Sustainability | InTheBox Packaging"
         description="Meet the team behind InTheBox and explore our commitment to sustainable packaging. From rigid luxury boxes to agri-waste hybrid boards."
-        keywords="packaging team, inthebox story, packaging manufacturers india, luxury packaging team, sustainable packaging, eco-friendly boxes"
+        keywords="packaging team, inthebox story, packaging manufacturers india, luxury packaging team, sustainable packaging, eco friendly boxes"
       />
       <Navbar />
       
       {/* Page Header */}
-      <section className="pt-36 pb-8 px-6 lg:px-12 bg-black border-b border-white/5 relative overflow-hidden">
+      <section className="pt-36 pb-8 px-6 lg:px-12 bg-[#1d0a27] border-b border-white/5 relative overflow-hidden text-white">
         {/* Subtle Watermark logo inside Header */}
         <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
           <img 
@@ -90,96 +94,96 @@ const About = () => {
       </section>
 
       {/* Company Story */}
-      <section className="py-24 px-6 lg:px-12 bg-[#050505]">
+      <section className="py-24 px-6 lg:px-12 bg-background">
         <div className="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider block mb-4">Who We Are</span>
-            <h2 className="font-serif text-4xl font-light text-white mb-8">
+            <span className="font-mono text-xs text-accent uppercase tracking-wider block mb-4">Who We Are</span>
+            <h2 className="font-serif text-4xl font-light text-foreground mb-8">
               Engineering Premium Packaging Experiences
             </h2>
-            <div className="space-y-6 font-sans text-base text-white/60 leading-relaxed">
+            <div className="space-y-6 font-sans text-base text-foreground/75 leading-relaxed">
               <p>
-                Founded on a legacy of manufacturing excellence, InTheBox has evolved into a premier B2B packaging partner. We combine cutting-edge structural design with robust production capabilities to deliver packaging that not only protects but elevates your brand.
+                Founded on a legacy of manufacturing excellence, InTheBox has evolved into a premier B2B packaging partner. We combine cutting edge structural design with robust production capabilities to deliver packaging that not only protects but elevates your brand.
               </p>
               <p>
                 We understand that your packaging is the physical handshake between your product and your customer. By operating our own manufacturing infrastructure in Mohali, we maintain uncompromising control over quality, timelines, and material sourcing—ensuring every unit meets exacting standards.
               </p>
               <p>
-                From sustainable agri-waste innovations to luxury rigid boxes, our team of structural engineers, designers, and production specialists works to deliver unboxing experiences that drive customer retention.
+                From sustainable agri waste innovations to luxury rigid boxes, our team of structural engineers, designers, and production specialists works to deliver unboxing experiences that drive customer retention.
               </p>
             </div>
           </div>
           <div className="relative">
-            <div className="aspect-[4/3] rounded-none overflow-hidden border border-white/10 shadow-2xl">
+            <div className="aspect-[4/3] rounded-none overflow-hidden border border-border shadow-2xl">
               <img 
-                src="/about/who_we_are.png" 
+                src="/products/about_us_packaging.png" 
                 alt="InTheBox Team Studio"
-                className="w-full h-full object-cover opacity-80"
+                className="w-full h-full object-cover opacity-95"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
-            <div className="absolute -bottom-6 -right-6 bg-black border border-[#38BDF8]/20 rounded-none p-6 shadow-2xl z-10">
-              <p className="font-serif text-4xl font-bold text-[#38BDF8]">4+</p>
-              <p className="font-mono text-xs text-white/50 uppercase tracking-widest mt-1">Years of Experience</p>
+            <div className="absolute -bottom-6 -right-6 bg-card border border-accent/20 rounded-none p-6 shadow-2xl z-10">
+              <p className="font-serif text-4xl font-bold text-accent">4+</p>
+              <p className="font-mono text-xs text-foreground/50 uppercase tracking-widest mt-1">Years of Experience</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Values Section (Maze Timeline View) */}
-      <section className="py-24 px-6 lg:px-12 bg-black border-y border-white/5">
+      <section className="py-24 px-6 lg:px-12 bg-background border-y border-border">
         <div className="max-w-[1400px] mx-auto">
           <div className="text-left mb-16">
-            <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider">What We Stand For</span>
-            <h2 className="font-serif text-4xl font-light text-white mt-4">Our Core Values</h2>
+            <span className="font-mono text-xs text-accent uppercase tracking-wider">What We Stand For</span>
+            <h2 className="font-serif text-4xl font-light text-foreground mt-4">Our Core Values</h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-6 border border-white/10 bg-black divide-white/10 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-6 border border-border bg-card divide-y md:divide-y-0 divide-border relative z-10">
             {/* Cell 1: Quality First */}
-            <div className="md:col-span-3 border-r border-b border-white/10 p-8 lg:p-12 hover:border-[#38BDF8]/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+            <div className="md:col-span-3 border-r border-b border-border p-8 lg:p-12 hover:border-accent/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
               <div className="flex justify-between items-start">
-                <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider">01 // Quality First</span>
-                <Award className="w-5 h-5 text-white/20 group-hover:text-[#38BDF8] transition-colors" />
+                <span className="font-mono text-xs text-accent uppercase tracking-wider">01 // Quality First</span>
+                <Award className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-3xl font-light text-white mb-2">{coreValues[0].title}</h3>
-                <p className="font-sans text-sm text-white/55 leading-relaxed">{coreValues[0].desc}</p>
+                <h3 className="font-serif text-3xl font-light text-foreground mb-2">{coreValues[0].title}</h3>
+                <p className="font-sans text-sm text-foreground/60 leading-relaxed">{coreValues[0].desc}</p>
               </div>
             </div>
 
             {/* Cell 2: Client Focus */}
-            <div className="md:col-span-3 border-b border-white/10 p-8 lg:p-12 hover:border-[#38BDF8]/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+            <div className="md:col-span-3 border-b border-border p-8 lg:p-12 hover:border-accent/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
               <div className="flex justify-between items-start">
-                <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider">02 // Client Focus</span>
-                <Users className="w-5 h-5 text-white/20 group-hover:text-[#38BDF8] transition-colors" />
+                <span className="font-mono text-xs text-accent uppercase tracking-wider">02 // Client Focus</span>
+                <Users className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-3xl font-light text-white mb-2">{coreValues[1].title}</h3>
-                <p className="font-sans text-sm text-white/55 leading-relaxed">{coreValues[1].desc}</p>
+                <h3 className="font-serif text-3xl font-light text-foreground mb-2">{coreValues[1].title}</h3>
+                <p className="font-sans text-sm text-foreground/60 leading-relaxed">{coreValues[1].desc}</p>
               </div>
             </div>
 
             {/* Cell 3: Innovation */}
-            <div className="md:col-span-2 border-r border-white/10 p-8 lg:p-12 hover:border-[#38BDF8]/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+            <div className="md:col-span-2 border-r border-border p-8 lg:p-12 hover:border-accent/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
               <div className="flex justify-between items-start">
-                <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider">03 // Innovation</span>
-                <Factory className="w-5 h-5 text-white/20 group-hover:text-[#38BDF8] transition-colors" />
+                <span className="font-mono text-xs text-accent uppercase tracking-wider">03 // Innovation</span>
+                <Factory className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-3xl font-light text-white mb-2">{coreValues[2].title}</h3>
-                <p className="font-sans text-sm text-white/55 leading-relaxed">{coreValues[2].desc}</p>
+                <h3 className="font-serif text-3xl font-light text-foreground mb-2">{coreValues[2].title}</h3>
+                <p className="font-sans text-sm text-foreground/60 leading-relaxed">{coreValues[2].desc}</p>
               </div>
             </div>
 
             {/* Cell 4: Integrity */}
-            <div className="md:col-span-4 p-8 lg:p-12 hover:border-[#38BDF8]/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+            <div className="md:col-span-4 p-8 lg:p-12 hover:border-accent/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
               <div className="flex justify-between items-start">
-                <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider">04 // Integrity</span>
-                <Heart className="w-5 h-5 text-white/20 group-hover:text-[#38BDF8] transition-colors" />
+                <span className="font-mono text-xs text-accent uppercase tracking-wider">04 // Integrity</span>
+                <Heart className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-3xl font-light text-white mb-2">{coreValues[3].title}</h3>
-                <p className="font-sans text-sm text-white/55 leading-relaxed">{coreValues[3].desc}</p>
+                <h3 className="font-serif text-3xl font-light text-foreground mb-2">{coreValues[3].title}</h3>
+                <p className="font-sans text-sm text-foreground/60 leading-relaxed">{coreValues[3].desc}</p>
               </div>
             </div>
           </div>
@@ -187,50 +191,50 @@ const About = () => {
       </section>
 
       {/* Sustainability Section (Merged, Maze Timeline View) */}
-      <section className="py-24 px-6 lg:px-12 bg-[#050505]" id="sustainability">
+      <section className="py-24 px-6 lg:px-12 bg-background" id="sustainability">
         <div className="max-w-[1400px] mx-auto">
           <div className="text-left mb-16">
             <span className="font-mono text-xs text-emerald uppercase tracking-wider">Environmental Stewardship</span>
-            <h2 className="font-serif text-4xl font-light text-white mt-4">Packaging That Cares</h2>
-            <p className="font-sans text-base text-white/50 max-w-xl mt-4">
+            <h2 className="font-serif text-4xl font-light text-foreground mt-4">Packaging That Cares</h2>
+            <p className="font-sans text-base text-foreground/60 max-w-xl mt-4">
               Our commitment to sustainable packaging without compromising on luxury, structural integrity, or brand prestige.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-6 border border-white/10 bg-black divide-white/10 mb-20 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-6 border border-border bg-card divide-y md:divide-y-0 divide-border mb-20 relative z-10">
             {/* Cell 1: Agri-Waste Hybrid Boards */}
-            <div className="md:col-span-4 border-r border-b border-white/10 p-8 lg:p-12 hover:border-emerald/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+            <div className="md:col-span-4 border-r border-b border-border p-8 lg:p-12 hover:border-emerald/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
               <div className="flex justify-between items-start">
-                <span className="font-mono text-xs text-emerald uppercase tracking-wider">01 // Eco-Boards</span>
-                <Leaf className="w-5 h-5 text-white/20 group-hover:text-emerald transition-colors" />
+                <span className="font-mono text-xs text-emerald uppercase tracking-wider">01 // Eco Boards</span>
+                <Leaf className="w-5 h-5 text-foreground/20 group-hover:text-emerald transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-3xl font-light text-white mb-2">{sustainabilityFeatures[0].title}</h3>
-                <p className="font-sans text-sm text-white/55 leading-relaxed">{sustainabilityFeatures[0].desc}</p>
+                <h3 className="font-serif text-3xl font-light text-foreground mb-2">{sustainabilityFeatures[0].title}</h3>
+                <p className="font-sans text-sm text-foreground/60 leading-relaxed">{sustainabilityFeatures[0].desc}</p>
               </div>
             </div>
 
             {/* Cell 2: 100% Recyclable */}
-            <div className="md:col-span-2 border-b border-white/10 p-8 lg:p-12 hover:border-emerald/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+            <div className="md:col-span-2 border-b border-border p-8 lg:p-12 hover:border-emerald/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
               <div className="flex justify-between items-start">
                 <span className="font-mono text-xs text-emerald uppercase tracking-wider">02 // Recyclable</span>
-                <Recycle className="w-5 h-5 text-white/20 group-hover:text-emerald transition-colors" />
+                <Recycle className="w-5 h-5 text-foreground/20 group-hover:text-emerald transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-3xl font-light text-white mb-2">{sustainabilityFeatures[1].title}</h3>
-                <p className="font-sans text-sm text-white/55 leading-relaxed">{sustainabilityFeatures[1].desc}</p>
+                <h3 className="font-serif text-3xl font-light text-foreground mb-2">{sustainabilityFeatures[1].title}</h3>
+                <p className="font-sans text-sm text-foreground/60 leading-relaxed">{sustainabilityFeatures[1].desc}</p>
               </div>
             </div>
 
             {/* Cell 3: Compostable Options */}
-            <div className="md:col-span-3 border-r border-white/10 p-8 lg:p-12 hover:border-emerald/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+            <div className="md:col-span-3 border-r border-border p-8 lg:p-12 hover:border-emerald/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
               <div className="flex justify-between items-start">
                 <span className="font-mono text-xs text-emerald uppercase tracking-wider">03 // Compostable</span>
-                <TreePine className="w-5 h-5 text-white/20 group-hover:text-emerald transition-colors" />
+                <TreePine className="w-5 h-5 text-foreground/20 group-hover:text-emerald transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-3xl font-light text-white mb-2">{sustainabilityFeatures[2].title}</h3>
-                <p className="font-sans text-sm text-[#FFFFFF]/55 leading-relaxed">{sustainabilityFeatures[2].desc}</p>
+                <h3 className="font-serif text-3xl font-light text-foreground mb-2">{sustainabilityFeatures[2].title}</h3>
+                <p className="font-sans text-sm text-foreground/60 leading-relaxed">{sustainabilityFeatures[2].desc}</p>
               </div>
             </div>
 
@@ -238,30 +242,30 @@ const About = () => {
             <div className="md:col-span-3 p-8 lg:p-12 hover:border-emerald/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
               <div className="flex justify-between items-start">
                 <span className="font-mono text-xs text-emerald uppercase tracking-wider">04 // Water Inks</span>
-                <Droplets className="w-5 h-5 text-white/20 group-hover:text-emerald transition-colors" />
+                <Droplets className="w-5 h-5 text-foreground/20 group-hover:text-emerald transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-3xl font-light text-white mb-2">{sustainabilityFeatures[3].title}</h3>
-                <p className="font-sans text-sm text-white/55 leading-relaxed">{sustainabilityFeatures[3].desc}</p>
+                <h3 className="font-serif text-3xl font-light text-foreground mb-2">{sustainabilityFeatures[3].title}</h3>
+                <p className="font-sans text-sm text-foreground/60 leading-relaxed">{sustainabilityFeatures[3].desc}</p>
               </div>
             </div>
           </div>
 
           {/* Impact Stats */}
-          <div className="border-t border-white/10 pt-16 grid md:grid-cols-3 gap-8">
+          <div className="border-t border-border pt-16 grid md:grid-cols-3 gap-8">
             {impactStats.map((stat, i) => (
-              <div key={i} className="bg-black border border-white/10 p-8 rounded-none text-center">
+              <div key={i} className="bg-card border border-border p-8 rounded-none text-center">
                 <stat.icon className="w-6 h-6 text-emerald mx-auto mb-4" />
-                <p className="font-serif text-4xl md:text-5xl text-white font-light">{stat.value}</p>
-                <p className="font-mono text-xs text-white/40 mt-2 uppercase tracking-widest">{stat.label}</p>
+                <p className="font-serif text-4xl md:text-5xl text-foreground font-light">{stat.value}</p>
+                <p className="font-mono text-xs text-foreground/50 mt-2 uppercase tracking-widest">{stat.label}</p>
               </div>
             ))}
           </div>
 
-          <div className="mt-16 bg-black border border-white/10 p-8 lg:p-12 text-center rounded-none relative overflow-hidden">
+          <div className="mt-16 bg-card border border-border p-8 lg:p-12 text-center rounded-none relative overflow-hidden">
             <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-emerald/[0.02] rounded-full blur-3xl"></div>
-            <h3 className="font-serif text-3xl font-light text-white mb-6">Impact on Punjab Crop Burning</h3>
-            <p className="font-sans text-base text-white/60 max-w-3xl mx-auto leading-relaxed">
+            <h3 className="font-serif text-3xl font-light text-foreground mb-6">Impact on Punjab Crop Burning</h3>
+            <p className="font-sans text-base text-foreground/70 max-w-3xl mx-auto leading-relaxed">
               By using agri-waste hybrid boards made from rice husk and wheat straw, we help local farmers monetize crop residue instead of burning it. This directly combats the seasonal air pollution crisis across North India.
             </p>
           </div>
@@ -269,30 +273,44 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section className="py-24 px-6 lg:px-12 bg-black border-y border-white/5">
+      <section className="py-24 px-6 lg:px-12 bg-background border-y border-border">
         <div className="max-w-[1400px] mx-auto">
           <div className="text-left mb-16">
-            <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider">Meet Our Team</span>
-            <h2 className="font-serif text-4xl font-light text-white mt-4">The People Behind InTheBox</h2>
+            <span className="font-mono text-xs text-accent uppercase tracking-wider">Meet Our Team</span>
+            <h2 className="font-serif text-4xl font-light text-foreground mt-4">The People Behind InTheBox</h2>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
             {teamMembers.map((member, index) => (
-              <div key={index} className="group w-full relative">
-                <div className="relative aspect-square rounded-none overflow-hidden mb-6 border border-white/10">
-                  <img 
-                    src={member.image} 
-                    alt={member.name}
-                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 filter grayscale group-hover:grayscale-0"
-                  />
-                  <div className="absolute inset-0 bg-[#050505]/95 border border-[#38BDF8]/20 flex flex-col justify-end p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                    <p className="font-mono text-[10px] text-[#38BDF8] uppercase tracking-widest mb-1">{member.role}</p>
+              <div 
+                key={index} 
+                className="group w-full relative cursor-pointer"
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
+                <div className="relative aspect-square rounded-none overflow-hidden mb-6 border border-border">
+                  {hoveredIndex === index ? (
+                    <AsciiArt 
+                      src={member.image} 
+                      resolution={65} 
+                      color="#d5a037" 
+                      className="w-full h-full bg-[#050505] p-1 flex items-center justify-center transition-all duration-300"
+                    />
+                  ) : (
+                    <img 
+                      src={member.image} 
+                      alt={member.name}
+                      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 filter grayscale group-hover:grayscale-0"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/95 via-[#050505]/65 to-transparent border border-accent/20 flex flex-col justify-end p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                    <p className="font-mono text-[10px] text-accent uppercase tracking-widest mb-1">{member.role}</p>
                     <h4 className="font-serif text-2xl text-white mb-3">{member.name}</h4>
-                    <p className="font-sans text-xs text-white/70 leading-relaxed">{member.bio}</p>
+                    <p className="font-sans text-xs text-white/80 leading-relaxed">{member.bio}</p>
                   </div>
                 </div>
-                <h3 className="font-serif text-2xl font-light text-white">{member.name}</h3>
-                <p className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider mt-1">{member.role}</p>
+                <h3 className="font-serif text-2xl font-light text-foreground">{member.name}</h3>
+                <p className="font-mono text-xs text-accent uppercase tracking-wider mt-1">{member.role}</p>
               </div>
             ))}
           </div>
@@ -300,19 +318,19 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-6 lg:px-12 bg-[#050505] text-center relative overflow-hidden">
+      <section className="py-24 px-6 lg:px-12 bg-card border-t border-border text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] to-transparent"></div>
         <div className="max-w-4xl mx-auto relative z-10">
-          <h2 className="text-4xl md:text-5xl font-serif font-light text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-serif font-light text-foreground mb-6">
             Ready to Elevate Your Brand?
           </h2>
-          <p className="font-sans text-base text-white/55 mb-10 max-w-xl mx-auto">
+          <p className="font-sans text-base text-foreground/60 mb-10 max-w-xl mx-auto">
             Let us design custom, eco-friendly rigid packaging tailored to your specifications.
           </p>
           <Button 
             onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
             size="xl" 
-            className="group rounded-full bg-white hover:bg-white/90 text-black font-sans text-sm font-semibold py-6 transition-all duration-300"
+            className="group rounded-lg bg-accent hover:bg-accent/90 text-white font-sans text-sm font-semibold py-6 transition-all duration-300 shadow-md"
           >
             Start Your Project
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
