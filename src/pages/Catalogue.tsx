@@ -39,9 +39,9 @@ const Catalogue = () => {
       />
       <Navbar />
  
-      {/* Explore Our Collection Page Banner */}
-      <section className="pt-36 pb-12 px-6 lg:px-12 bg-[#1d0a27] border-b border-white/5 relative overflow-hidden text-white">
-        {/* Subtle Watermark logo */}
+      {/* Page Header */}
+      <section className="pt-24 pb-6 px-6 lg:px-12 bg-[#1d0a27] border-b border-white/5 relative overflow-hidden text-white">
+        {/* Subtle Watermark logo inside Header */}
         <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
           <img 
             src="/assets/logo.png" 
@@ -58,7 +58,7 @@ const Catalogue = () => {
                 Catalogue
               </span>
               <div className="flex items-center gap-4 flex-wrap">
-                <h1 className="text-4xl md:text-6xl font-sans font-bold tracking-tight leading-none text-white">
+                <h1 className="text-3xl md:text-4xl lg:text-[4.5rem] font-sans font-bold tracking-tight leading-none text-white">
                   Explore Our <span className="text-accent italic font-semibold">Collection.</span>
                 </h1>
                 

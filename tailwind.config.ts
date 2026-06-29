@@ -84,8 +84,8 @@ export default {
         },
       },
       fontFamily: {
-        serif: ["'Instrument Serif'", "Georgia", "serif"],
-        sans: ["'Instrument Sans'", "'Inter'", "sans-serif"],
+        serif: ["'ABCFavoritVariable'", "'Instrument Sans'", "'Inter'", "sans-serif"],
+        sans: ["'ABCFavoritVariable'", "'Instrument Sans'", "'Inter'", "sans-serif"],
         mono: ["'JetBrains Mono'", "monospace"],
       },
       borderRadius: {

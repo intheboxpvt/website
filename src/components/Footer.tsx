@@ -16,8 +16,18 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-black text-white border-t border-white/10">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 lg:py-20">
+    <footer className="bg-[#1d0a27] text-white border-t border-white/10 relative overflow-hidden">
+      {/* Full-width brand showcase image banner at the top of the footer */}
+      <div className="w-full h-[180px] md:h-[260px] overflow-hidden relative select-none border-b border-white/10">
+        <img 
+          src="/products/footer-image.png" 
+          alt="InTheBox Production Showcase" 
+          className="w-full h-full object-cover opacity-85 transition-transform duration-[2000ms] hover:scale-105" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1d0a27]/30 to-[#1d0a27]"></div>
+      </div>
+
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 lg:py-20 relative z-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-2">

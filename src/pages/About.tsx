@@ -68,7 +68,7 @@ const About = () => {
       <Navbar />
       
       {/* Page Header */}
-      <section className="pt-36 pb-8 px-6 lg:px-12 bg-[#1d0a27] border-b border-white/5 relative overflow-hidden text-white">
+      <section className="pt-24 pb-6 px-6 lg:px-12 bg-[#1d0a27] border-b border-white/5 relative overflow-hidden text-white">
         {/* Subtle Watermark logo inside Header */}
         <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
           <img 
@@ -77,17 +77,17 @@ const About = () => {
             className="w-full h-full object-contain filter invert brightness-0"
           />
         </div>
-
+ 
         <div className="max-w-[1400px] mx-auto relative z-10">
-          <span className="inline-flex items-center gap-3 text-xs font-mono text-white/50 mb-6">
+          <span className="inline-flex items-center gap-3 text-xs font-mono text-white/50 mb-4">
             <span className="w-12 h-px bg-white/20"></span>
             Our Story
           </span>
-          <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-sans font-bold tracking-tight leading-[0.9] text-white">
+          <h1 className="text-4xl md:text-5xl lg:text-[4.5rem] font-sans font-bold tracking-tight leading-[0.9] text-white">
             Engineering Premium<br/>
             <span className="text-accent italic font-semibold">Packaging Legacies.</span>
           </h1>
-          <p className="font-sans text-lg text-white/50 mt-8 max-w-xl">
+          <p className="font-sans text-base text-white/50 mt-4 max-w-xl">
             From structural engineers to production specialists, we work as an extension of your brand to scale your packaging operations seamlessly.
           </p>
         </div>

@@ -75,8 +75,8 @@ const Services = () => {
       />
       <Navbar />
       
-      {/* Page Header (Increased padding to avoid navbar cutting) */}
-      <section className="pt-36 pb-8 px-6 lg:px-12 bg-[#1d0a27] border-b border-white/5 relative overflow-hidden text-white">
+      {/* Page Header */}
+      <section className="pt-24 pb-6 px-6 lg:px-12 bg-[#1d0a27] border-b border-white/5 relative overflow-hidden text-white">
         {/* Subtle Watermark logo inside Header */}
         <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
           <img 
@@ -87,15 +87,15 @@ const Services = () => {
         </div>
 
         <div className="max-w-[1400px] mx-auto relative z-10">
-          <span className="inline-flex items-center gap-3 text-xs font-mono text-white/50 mb-6">
+          <span className="inline-flex items-center gap-3 text-xs font-mono text-white/50 mb-4">
             <span className="w-12 h-px bg-white/20"></span>
             Services and Process
           </span>
-          <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-sans font-bold tracking-tight leading-[0.9] text-white">
+          <h1 className="text-4xl md:text-5xl lg:text-[4.5rem] font-sans font-bold tracking-tight leading-[0.9] text-white">
             Complete<br/>
             <span className="text-accent italic font-semibold">Packaging Solutions.</span>
           </h1>
-          <p className="font-sans text-lg text-white/50 mt-8 max-w-xl">
+          <p className="font-sans text-base text-white/50 mt-4 max-w-xl">
             From initial consultation to final volume distribution, we operate the entire design to delivery lifecycle.
           </p>
         </div>
@@ -187,49 +187,14 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Manufacturing Section (Merged under Consultation Maze Grid) */}
-      <section className="py-24 px-6 lg:px-12 bg-[#1d0a27] text-white border-y border-white/5">
-        <div className="max-w-[1400px] mx-auto">
-          <ScrollReveal>
-            <div className="flex items-center gap-4 mb-12">
-              <Package className="w-5 h-5 text-accent" />
-              <h2 className="font-sans text-3xl font-bold text-white">Manufacturing and <span className="text-accent">Finishes</span></h2>
-            </div>
-          </ScrollReveal>
-          
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <ScrollReveal className="space-y-8">
-              <ul className="space-y-6">
-                {manufacturingFeatures.map((f, idx) => (
-                  <li key={idx} className="flex items-start gap-4 font-sans text-sm text-white/80 leading-relaxed">
-                    <Truck className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-            </ScrollReveal>
-            <ScrollReveal delay={200} direction="right">
-              <div className="aspect-[4/3] rounded-none overflow-hidden border border-white/10 shadow-2xl relative">
-                <img 
-                  src="/about/manufacturing.png" 
-                  alt="Packaging Manufacturing Process" 
-                  className="w-full h-full object-cover opacity-90"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1d0a27]/60 to-transparent"></div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
       {/* Process and Logistics Landscape Banner */}
-      <section className="w-full h-[320px] md:h-[480px] overflow-hidden relative select-none border-b border-white/10">
+      <section className="w-full h-[300px] md:h-[400px] overflow-hidden relative select-none">
         <img 
           src="/products/card2_image.jpeg" 
           alt="InTheBox Manufacturing Logistics" 
           className="w-full h-full object-cover opacity-90 transition-transform duration-1000 hover:scale-[1.02]" 
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050505]/30 to-[#050505]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-[#050505]"></div>
       </section>
 
       {/* Interactive Delivery Road Timeline */}
