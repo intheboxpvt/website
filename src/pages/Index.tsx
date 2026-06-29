@@ -5,6 +5,7 @@ import AboutPreview from "@/components/AboutPreview";
 import PricingTiers from "@/components/PricingTiers";
 import SustainabilityPreview from "@/components/SustainabilityPreview";
 import ClientGallery from "@/components/ClientGallery";
+import { ReelsHighlights } from "@/components/ReelsHighlights";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import SEO from "@/components/SEO";
@@ -13,7 +14,7 @@ import { SmoothScrollProvider } from "@/components/SmoothScroll";
 const Index = () => {
   return (
     <SmoothScrollProvider>
-      <main className="min-h-screen">
+      <main className="min-h-screen bg-[#050505]">
         <SEO 
           title="Premium Custom Packaging Solutions | InTheBox"
           description="Elevate your brand with InTheBox's premium custom packaging solutions. Sustainable, design-led boxes for startups and established brands."
@@ -26,6 +27,7 @@ const Index = () => {
         <PricingTiers />
         <SustainabilityPreview />
         <ClientGallery />
+        <ReelsHighlights />
         <Footer />
         <WhatsAppButton />
       </main>
