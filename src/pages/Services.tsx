@@ -1,12 +1,42 @@
+import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Palette, Layers, Package, Sparkles, Truck, Search, Lightbulb, Box, CheckCircle, Factory } from "lucide-react";
+import { MessageSquare, Palette, Layers, Package, Sparkles, Truck, Search, Lightbulb, Box, CheckCircle, Factory, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import SEO from "@/components/SEO";
 
 const Services = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [truckProgress, setTruckProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const sectionHeight = rect.height;
+      const sectionTop = rect.top;
+      const windowHeight = window.innerHeight;
+
+      // Start calculating when section top hits 70% of screen height
+      const start = windowHeight * 0.7;
+      // End when section bottom hits 30% of screen height
+      const end = -sectionHeight + windowHeight * 0.3;
+      const current = sectionTop;
+
+      let progress = 0;
+      if (current <= start) {
+        progress = ((start - current) / (start - end)) * 100;
+      }
+      setTruckProgress(Math.max(0, Math.min(100, progress)));
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const consultationServices = [
     { title: "Starter Session", desc: "1-hour discovery call to understand your brand and packaging needs." },
     { title: "Deep Dive Workshop", desc: "Half-day intensive session with full brand packaging audit." },
@@ -27,13 +57,13 @@ const Services = () => {
     "Integrated logistics with doorstep shipping pan-India",
   ];
 
-  const processSteps = [
-    { icon: Search, title: "Discover", desc: "We study your product dimensions, target weight, and shipping parameters." },
-    { icon: Lightbulb, title: "Concept", desc: "Our structural designers outline custom layout and closing options." },
-    { icon: Box, title: "Prototype", desc: "Fabricating physical mockups for fit, strength, and texture verification." },
-    { icon: CheckCircle, title: "Sign-off", desc: "Exacting specifications approval and volume pricing agreements." },
-    { icon: Factory, title: "Production", desc: "High-volume printing, folding, gluing, and quality inspection." },
-    { icon: Truck, title: "Logistics", desc: "Secure shipping and delivery direct to your warehouse hubs." },
+  const roadSteps = [
+    { percentage: 0, icon: Search, title: "Discover & Consult", desc: "We study your product dimensions, target weight, and shipping parameters to start your consultation." },
+    { percentage: 20, icon: Lightbulb, title: "Concept Blueprint", desc: "Our structural designers outline custom layout, opening parameters, and box dimensions." },
+    { percentage: 40, icon: Box, title: "Prototype Mockup", desc: "Fabricating physical sample boxes for real-world verification of paperboard weight and size fit." },
+    { percentage: 60, icon: CheckCircle, title: "Exacting Approval", desc: "Inspection of detailing, rigid closures, and final contract sign-off." },
+    { percentage: 80, icon: Factory, title: "Volume Fabrication", desc: "High-volume printing, spot finishes, folding, gluing, and strict quality control." },
+    { percentage: 100, icon: Truck, title: "Secure Delivery", desc: "Integrated logistics coordinates direct shipment to your corporate warehouses." },
   ];
 
   return (
@@ -46,7 +76,7 @@ const Services = () => {
       <Navbar />
       
       {/* Page Header */}
-      <section className="pt-40 pb-20 px-6 lg:px-12 bg-black border-b border-white/5 relative overflow-hidden">
+      <section className="pt-24 pb-8 px-6 lg:px-12 bg-black border-b border-white/5 relative overflow-hidden">
         {/* Subtle Watermark logo inside Header */}
         <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
           <img 
@@ -86,7 +116,7 @@ const Services = () => {
               <ScrollReveal key={s.title} delay={i * 100}>
                 <div className="bg-black border border-white/10 p-8 rounded-none hover:border-white/30 transition-all duration-300 h-full">
                   <h3 className="font-serif text-2xl font-light text-white mb-4">{s.title}</h3>
-                  <p className="font-sans text-sm text-white/50 leading-relaxed">{s.desc}</p>
+                  <p className="font-sans text-sm text-white/55 leading-relaxed">{s.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -110,7 +140,7 @@ const Services = () => {
                 <div className="bg-[#050505] border border-white/10 p-8 rounded-none hover:border-[#38BDF8]/40 transition-all duration-300 h-full">
                   <s.icon className="w-6 h-6 text-[#38BDF8] mb-6" />
                   <h3 className="font-serif text-2xl font-light text-white mb-4">{s.title}</h3>
-                  <p className="font-sans text-sm text-white/50 leading-relaxed">{s.desc}</p>
+                  <p className="font-sans text-sm text-white/55 leading-relaxed">{s.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -132,7 +162,7 @@ const Services = () => {
             <ScrollReveal className="space-y-8">
               <ul className="space-y-4">
                 {manufacturingFeatures.map((f, idx) => (
-                  <li key={idx} className="flex items-start gap-4 font-sans text-sm text-white/70">
+                  <li key={idx} className="flex items-start gap-4 font-sans text-sm text-white/75 leading-relaxed">
                     <Truck className="w-5 h-5 text-[#38BDF8] flex-shrink-0 mt-0.5" />
                     <span>{f}</span>
                   </li>
@@ -160,30 +190,104 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Process Map Section */}
-      <section className="py-24 px-6 lg:px-12 bg-black border-t border-white/5">
+      {/* Interactive Delivery Road Timeline */}
+      <section className="py-32 px-6 lg:px-12 bg-black border-t border-white/5 relative overflow-hidden">
         <div className="max-w-[1400px] mx-auto">
           <ScrollReveal>
-            <div className="text-left mb-16">
+            <div className="text-left mb-24">
               <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider">Our Pipeline</span>
-              <h2 className="font-serif text-4xl font-light text-white mt-4">From Concept to Creation</h2>
+              <h2 className="font-serif text-4xl font-light text-white mt-4">The Custom Road Map</h2>
+              <p className="font-sans text-sm text-white/50 max-w-sm mt-3">
+                Scroll to move the delivery truck along our checkpoints from setup to final shipment.
+              </p>
             </div>
           </ScrollReveal>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {processSteps.map((step, i) => (
-              <ScrollReveal key={step.title} delay={i * 100}>
-                <div className="relative bg-[#050505] border border-white/10 rounded-none p-8 h-full flex flex-col justify-between hover:border-white/30 transition-all duration-300">
-                  <div>
-                    <div className="absolute -top-3 -left-3 w-8 h-8 bg-[#38BDF8] rounded-full flex items-center justify-center font-mono font-bold text-black text-xs shadow-lg">{i + 1}</div>
-                    <step.icon className="w-6 h-6 text-[#38BDF8] mb-6 mt-2" />
-                    <h3 className="font-serif text-2xl font-light text-white mb-3">{step.title}</h3>
-                    <p className="font-sans text-sm text-white/50 leading-relaxed">{step.desc}</p>
+
+          {/* Road Segment Container */}
+          <div ref={containerRef} className="relative max-w-4xl mx-auto min-h-[900px] py-10">
+            
+            {/* The Road: dashed path line */}
+            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 -translate-x-1/2 w-0.5 border-l border-dashed border-white/20 z-0"></div>
+            
+            {/* The Active Path: colored overlay */}
+            <div 
+              className="absolute left-6 md:left-1/2 top-0 -translate-x-1/2 w-0.5 bg-[#38BDF8] z-0 transition-all duration-100 ease-out"
+              style={{ height: `${truckProgress}%` }}
+            ></div>
+
+            {/* Moving Truck Icon Node */}
+            <div 
+              className="absolute left-6 md:left-1/2 z-20 w-10 h-10 bg-[#38BDF8] border border-black rounded-full flex items-center justify-center text-black shadow-2xl transition-all duration-200"
+              style={{ 
+                top: `${truckProgress}%`, 
+                transform: `translate(-50%, -50%)`
+              }}
+            >
+              <Truck className="w-5 h-5 fill-current" />
+            </div>
+
+            {/* Checkpoints */}
+            <div className="relative space-y-24 md:space-y-36">
+              {roadSteps.map((step, idx) => {
+                const isPassed = truckProgress >= step.percentage;
+                const isEven = idx % 2 === 0;
+
+                return (
+                  <div key={idx} className="relative flex flex-col md:flex-row items-start md:items-center">
+                    
+                    {/* Roadmap Dot Node */}
+                    <div 
+                      className={`absolute left-6 md:left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full border z-10 transition-all duration-300 ${
+                        isPassed 
+                          ? "bg-[#38BDF8] border-[#38BDF8] scale-110 shadow-[0_0_8px_#38BDF8]" 
+                          : "bg-black border-white/30"
+                      }`}
+                      style={{ top: "12px" }}
+                    ></div>
+
+                    {/* Content Card (Left on Desktop, Right on Mobile) */}
+                    <div 
+                      className={`pl-16 md:pl-0 w-full md:w-[42%] transition-all duration-500 ${
+                        isEven 
+                          ? "md:mr-auto md:text-right md:pr-12" 
+                          : "md:ml-auto md:text-left md:pl-12"
+                      }`}
+                    >
+                      <div className={`p-6 border rounded-none bg-[#050505] transition-all duration-500 ${
+                        isPassed ? "border-[#38BDF8]/40" : "border-white/10"
+                      }`}>
+                        <div className={`flex items-center gap-3 mb-3 ${
+                          isEven ? "md:justify-end" : "md:justify-start"
+                        }`}>
+                          <step.icon className={`w-4 h-4 ${isPassed ? "text-[#38BDF8]" : "text-white/40"}`} />
+                          <span className="font-mono text-xs text-white/40">Step 0{idx + 1}</span>
+                        </div>
+                        <h3 className={`font-serif text-2xl font-light transition-colors duration-300 ${
+                          isPassed ? "text-[#38BDF8]" : "text-white"
+                        }`}>
+                          {step.title}
+                        </h3>
+                        <p className="font-sans text-xs text-white/50 leading-relaxed mt-3">
+                          {step.desc}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </ScrollReveal>
-            ))}
+                );
+              })}
+            </div>
+
           </div>
+
+          <div className="text-center mt-24">
+            <Button 
+              onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
+              className="rounded-full bg-white hover:bg-white/90 text-black font-sans text-sm font-semibold py-6 px-12 transition-all duration-300"
+            >
+              Start off with Consultation <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+          </div>
+
         </div>
       </section>
 
