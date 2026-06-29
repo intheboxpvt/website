@@ -146,7 +146,7 @@ export const ContactForm = () => {
 
       <Button 
         type="submit" 
-        className="w-full group rounded-lg bg-accent hover:bg-accent/90 text-white font-sans text-sm font-semibold py-6 transition-all duration-300 shadow-md" 
+        className="w-full btn-premium-gold py-5 text-sm" 
         disabled={status === "submitting" || status === "success"}
       >
         {status === "submitting" ? (
