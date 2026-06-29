@@ -64,7 +64,7 @@ const About = () => {
       <Navbar />
       
       {/* Page Header */}
-      <section className="pt-40 pb-20 px-6 lg:px-12 bg-black border-b border-white/5 relative overflow-hidden">
+      <section className="pt-28 pb-8 px-6 lg:px-12 bg-black border-b border-white/5 relative overflow-hidden">
         {/* Subtle Watermark logo inside Header */}
         <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
           <img 
@@ -134,31 +134,54 @@ const About = () => {
             <h2 className="font-serif text-4xl font-light text-white mt-4">Our Core Values</h2>
           </div>
           
-          <div className="relative border-l border-white/10 pl-8 space-y-16 py-8">
-            {coreValues.map((value, index) => (
-              <div key={index} className="relative group">
-                {/* Horizontal connector line */}
-                <div className="absolute -left-8 top-5 w-8 h-px bg-white/20 group-hover:bg-[#38BDF8] transition-colors duration-500"></div>
-                {/* Vertical grid timeline node */}
-                <div className="absolute -left-[39px] top-3.5 w-3.5 h-3.5 bg-black border border-white/40 rounded-full group-hover:border-[#38BDF8] group-hover:bg-[#38BDF8] transition-colors duration-500 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 bg-white/20 rounded-full group-hover:bg-black"></div>
-                </div>
-                
-                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-12 items-start">
-                  <div className="flex items-center gap-4 flex-shrink-0">
-                    <div className="w-10 h-10 bg-[#38BDF8]/10 border border-[#38BDF8]/20 flex items-center justify-center text-[#38BDF8]">
-                      <value.icon className="w-4 h-4" />
-                    </div>
-                    <span className="font-mono text-xs text-[#38BDF8] tracking-widest uppercase">0{index + 1} / {value.title}</span>
-                  </div>
-                  <div className="max-w-3xl">
-                    <p className="font-sans text-sm text-white/55 leading-relaxed group-hover:text-white transition-colors duration-300">
-                      {value.desc}
-                    </p>
-                  </div>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-6 border border-white/10 bg-black divide-white/10 relative z-10">
+            {/* Cell 1: Quality First */}
+            <div className="md:col-span-3 border-r border-b border-white/10 p-8 lg:p-12 hover:border-[#38BDF8]/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider">01 // Quality First</span>
+                <Award className="w-5 h-5 text-white/20 group-hover:text-[#38BDF8] transition-colors" />
               </div>
-            ))}
+              <div>
+                <h3 className="font-serif text-3xl font-light text-white mb-2">{coreValues[0].title}</h3>
+                <p className="font-sans text-sm text-white/55 leading-relaxed">{coreValues[0].desc}</p>
+              </div>
+            </div>
+
+            {/* Cell 2: Client Focus */}
+            <div className="md:col-span-3 border-b border-white/10 p-8 lg:p-12 hover:border-[#38BDF8]/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider">02 // Client Focus</span>
+                <Users className="w-5 h-5 text-white/20 group-hover:text-[#38BDF8] transition-colors" />
+              </div>
+              <div>
+                <h3 className="font-serif text-3xl font-light text-white mb-2">{coreValues[1].title}</h3>
+                <p className="font-sans text-sm text-white/55 leading-relaxed">{coreValues[1].desc}</p>
+              </div>
+            </div>
+
+            {/* Cell 3: Innovation */}
+            <div className="md:col-span-2 border-r border-white/10 p-8 lg:p-12 hover:border-[#38BDF8]/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider">03 // Innovation</span>
+                <Factory className="w-5 h-5 text-white/20 group-hover:text-[#38BDF8] transition-colors" />
+              </div>
+              <div>
+                <h3 className="font-serif text-3xl font-light text-white mb-2">{coreValues[2].title}</h3>
+                <p className="font-sans text-sm text-white/55 leading-relaxed">{coreValues[2].desc}</p>
+              </div>
+            </div>
+
+            {/* Cell 4: Integrity */}
+            <div className="md:col-span-4 p-8 lg:p-12 hover:border-[#38BDF8]/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-[#38BDF8] uppercase tracking-wider">04 // Integrity</span>
+                <Heart className="w-5 h-5 text-white/20 group-hover:text-[#38BDF8] transition-colors" />
+              </div>
+              <div>
+                <h3 className="font-serif text-3xl font-light text-white mb-2">{coreValues[3].title}</h3>
+                <p className="font-sans text-sm text-white/55 leading-relaxed">{coreValues[3].desc}</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -174,31 +197,54 @@ const About = () => {
             </p>
           </div>
           
-          <div className="relative border-l border-white/10 pl-8 space-y-16 py-8 mb-20">
-            {sustainabilityFeatures.map((f, index) => (
-              <div key={index} className="relative group">
-                {/* Horizontal connector line */}
-                <div className="absolute -left-8 top-5 w-8 h-px bg-white/20 group-hover:bg-emerald transition-colors duration-500"></div>
-                {/* Vertical grid timeline node */}
-                <div className="absolute -left-[39px] top-3.5 w-3.5 h-3.5 bg-black border border-white/40 rounded-full group-hover:border-emerald group-hover:bg-emerald transition-colors duration-500 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 bg-white/20 rounded-full group-hover:bg-black"></div>
-                </div>
-                
-                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-12 items-start">
-                  <div className="flex items-center gap-4 flex-shrink-0">
-                    <div className="w-10 h-10 bg-emerald/10 border border-emerald/20 flex items-center justify-center text-emerald">
-                      <f.icon className="w-4 h-4" />
-                    </div>
-                    <span className="font-mono text-xs text-emerald tracking-widest uppercase">0{index + 1} / {f.title}</span>
-                  </div>
-                  <div className="max-w-3xl">
-                    <p className="font-sans text-sm text-white/55 leading-relaxed group-hover:text-white transition-colors duration-300">
-                      {f.desc}
-                    </p>
-                  </div>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-6 border border-white/10 bg-black divide-white/10 mb-20 relative z-10">
+            {/* Cell 1: Agri-Waste Hybrid Boards */}
+            <div className="md:col-span-4 border-r border-b border-white/10 p-8 lg:p-12 hover:border-emerald/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-emerald uppercase tracking-wider">01 // Eco-Boards</span>
+                <Leaf className="w-5 h-5 text-white/20 group-hover:text-emerald transition-colors" />
               </div>
-            ))}
+              <div>
+                <h3 className="font-serif text-3xl font-light text-white mb-2">{sustainabilityFeatures[0].title}</h3>
+                <p className="font-sans text-sm text-white/55 leading-relaxed">{sustainabilityFeatures[0].desc}</p>
+              </div>
+            </div>
+
+            {/* Cell 2: 100% Recyclable */}
+            <div className="md:col-span-2 border-b border-white/10 p-8 lg:p-12 hover:border-emerald/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-emerald uppercase tracking-wider">02 // Recyclable</span>
+                <Recycle className="w-5 h-5 text-white/20 group-hover:text-emerald transition-colors" />
+              </div>
+              <div>
+                <h3 className="font-serif text-3xl font-light text-white mb-2">{sustainabilityFeatures[1].title}</h3>
+                <p className="font-sans text-sm text-white/55 leading-relaxed">{sustainabilityFeatures[1].desc}</p>
+              </div>
+            </div>
+
+            {/* Cell 3: Compostable Options */}
+            <div className="md:col-span-3 border-r border-white/10 p-8 lg:p-12 hover:border-emerald/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-emerald uppercase tracking-wider">03 // Compostable</span>
+                <TreePine className="w-5 h-5 text-white/20 group-hover:text-emerald transition-colors" />
+              </div>
+              <div>
+                <h3 className="font-serif text-3xl font-light text-white mb-2">{sustainabilityFeatures[2].title}</h3>
+                <p className="font-sans text-sm text-[#FFFFFF]/55 leading-relaxed">{sustainabilityFeatures[2].desc}</p>
+              </div>
+            </div>
+
+            {/* Cell 4: Water-Based Inks */}
+            <div className="md:col-span-3 p-8 lg:p-12 hover:border-emerald/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-emerald uppercase tracking-wider">04 // Water Inks</span>
+                <Droplets className="w-5 h-5 text-white/20 group-hover:text-emerald transition-colors" />
+              </div>
+              <div>
+                <h3 className="font-serif text-3xl font-light text-white mb-2">{sustainabilityFeatures[3].title}</h3>
+                <p className="font-sans text-sm text-white/55 leading-relaxed">{sustainabilityFeatures[3].desc}</p>
+              </div>
+            </div>
           </div>
 
           {/* Impact Stats */}
