@@ -58,8 +58,8 @@ const Catalogue = () => {
                 Catalogue
               </span>
               <div className="flex items-center gap-4 flex-wrap">
-                <h1 className="text-4xl md:text-6xl font-serif tracking-tight leading-none text-white">
-                  Explore Our <span className="text-white/30 italic">Collection.</span>
+                <h1 className="text-4xl md:text-6xl font-sans font-bold tracking-tight leading-none text-white">
+                  Explore Our <span className="text-accent italic font-semibold">Collection.</span>
                 </h1>
                 
                 {/* Collapsible hover download button */}
@@ -89,7 +89,7 @@ const Catalogue = () => {
         <div className="max-w-[1400px] mx-auto">
           
           <div className="mb-12">
-            <h2 className="font-serif text-3xl font-light text-foreground leading-tight">3D Virtual Customizer</h2>
+            <h2 className="font-sans text-3xl font-bold text-foreground leading-tight">3D Virtual <span className="text-accent">Customizer</span></h2>
             <p className="font-sans text-xs text-foreground/60 mt-2">
               Customize your brand name and interior message to preview your bespoke packaging structure in real-time.
             </p>
@@ -206,7 +206,7 @@ const Catalogue = () => {
                 </div>
                 <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
                   <div>
-                    <h3 className="font-serif text-2xl font-light text-foreground">{p.name}</h3>
+                    <h3 className="font-sans text-xl font-bold text-foreground">{p.name}</h3>
                     <p className="font-sans text-sm text-foreground/60 mt-3 leading-relaxed">{p.desc}</p>
                   </div>
                   <div className="mt-8 pt-4 border-t border-border flex flex-col gap-4">

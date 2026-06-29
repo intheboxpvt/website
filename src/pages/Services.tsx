@@ -91,9 +91,9 @@ const Services = () => {
             <span className="w-12 h-px bg-white/20"></span>
             Services and Process
           </span>
-          <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-serif tracking-tight leading-[0.9] text-white">
+          <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-sans font-bold tracking-tight leading-[0.9] text-white">
             Complete<br/>
-            <span className="text-white/30 italic">Packaging Solutions.</span>
+            <span className="text-accent italic font-semibold">Packaging Solutions.</span>
           </h1>
           <p className="font-sans text-lg text-white/50 mt-8 max-w-xl">
             From initial consultation to final volume distribution, we operate the entire design to delivery lifecycle.
@@ -107,7 +107,7 @@ const Services = () => {
           <ScrollReveal>
             <div className="flex items-center gap-4 mb-12">
               <Palette className="w-5 h-5 text-accent" />
-              <h2 className="font-serif text-3xl font-light text-foreground">Consultation & Structural Design Maze</h2>
+              <h2 className="font-sans text-3xl font-bold text-foreground">Consultation and Structural <span className="text-accent">Design Maze</span></h2>
             </div>
           </ScrollReveal>
           
@@ -119,7 +119,7 @@ const Services = () => {
                 <MessageSquare className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-2xl font-light text-foreground mb-2">{consultationServices[0].title}</h3>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{consultationServices[0].title}</h3>
                 <p className="font-sans text-xs text-foreground/60 leading-relaxed">{consultationServices[0].desc}</p>
               </div>
             </div>
@@ -131,7 +131,7 @@ const Services = () => {
                 <MessageSquare className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-2xl font-light text-foreground mb-2">{consultationServices[1].title}</h3>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{consultationServices[1].title}</h3>
                 <p className="font-sans text-xs text-foreground/60 leading-relaxed">{consultationServices[1].desc}</p>
               </div>
             </div>
@@ -143,7 +143,7 @@ const Services = () => {
                 <MessageSquare className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-2xl font-light text-foreground mb-2">{consultationServices[2].title}</h3>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{consultationServices[2].title}</h3>
                 <p className="font-sans text-xs text-foreground/60 leading-relaxed">{consultationServices[2].desc}</p>
               </div>
             </div>
@@ -155,7 +155,7 @@ const Services = () => {
                 <Palette className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-2xl font-light text-foreground mb-2">{designServices[0].title}</h3>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{designServices[0].title}</h3>
                 <p className="font-sans text-xs text-foreground/60 leading-relaxed">{designServices[0].desc}</p>
               </div>
             </div>
@@ -167,7 +167,7 @@ const Services = () => {
                 <Layers className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-2xl font-light text-foreground mb-2">{designServices[1].title}</h3>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{designServices[1].title}</h3>
                 <p className="font-sans text-xs text-foreground/60 leading-relaxed">{designServices[1].desc}</p>
               </div>
             </div>
@@ -179,7 +179,7 @@ const Services = () => {
                 <Sparkles className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-2xl font-light text-foreground mb-2">{designServices[2].title}</h3>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{designServices[2].title}</h3>
                 <p className="font-sans text-xs text-foreground/60 leading-relaxed">{designServices[2].desc}</p>
               </div>
             </div>
@@ -193,7 +193,7 @@ const Services = () => {
           <ScrollReveal>
             <div className="flex items-center gap-4 mb-12">
               <Package className="w-5 h-5 text-accent" />
-              <h2 className="font-serif text-3xl font-light text-white">Manufacturing and Finishes</h2>
+              <h2 className="font-sans text-3xl font-bold text-white">Manufacturing and <span className="text-accent">Finishes</span></h2>
             </div>
           </ScrollReveal>
           
@@ -238,7 +238,7 @@ const Services = () => {
           <ScrollReveal>
             <div className="text-left mb-24">
               <span className="font-mono text-xs text-accent uppercase tracking-wider">Our Pipeline</span>
-              <h2 className="font-serif text-4xl font-light text-white mt-4">The Custom Road Map</h2>
+              <h2 className="font-sans text-4xl font-bold text-white mt-4">The Custom <span className="text-accent">Road Map</span></h2>
               <p className="font-sans text-sm text-white/60 max-w-sm mt-3">
                 Scroll to move the delivery truck along our checkpoints from setup to final shipment.
               </p>
@@ -304,7 +304,7 @@ const Services = () => {
                           <step.icon className={`w-4 h-4 ${isPassed ? "text-accent" : "text-white/40"}`} />
                           <span className="font-mono text-xs text-white/40">Step 0{idx + 1}</span>
                         </div>
-                        <h3 className={`font-serif text-2xl font-light transition-colors duration-300 ${
+                        <h3 className={`font-sans text-xl font-bold transition-colors duration-300 ${
                           isPassed ? "text-accent" : "text-white"
                         }`}>
                           {step.title}

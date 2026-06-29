@@ -83,9 +83,9 @@ const About = () => {
             <span className="w-12 h-px bg-white/20"></span>
             Our Story
           </span>
-          <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-serif tracking-tight leading-[0.9] text-white">
+          <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-sans font-bold tracking-tight leading-[0.9] text-white">
             Engineering Premium<br/>
-            <span className="text-white/30 italic">Packaging Legacies.</span>
+            <span className="text-accent italic font-semibold">Packaging Legacies.</span>
           </h1>
           <p className="font-sans text-lg text-white/50 mt-8 max-w-xl">
             From structural engineers to production specialists, we work as an extension of your brand to scale your packaging operations seamlessly.
@@ -98,8 +98,8 @@ const About = () => {
         <div className="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <span className="font-mono text-xs text-accent uppercase tracking-wider block mb-4">Who We Are</span>
-            <h2 className="font-serif text-4xl font-light text-foreground mb-8">
-              Engineering Premium Packaging Experiences
+            <h2 className="font-sans text-4xl font-bold text-foreground mb-8">
+              Engineering Premium <span className="text-accent">Packaging Experiences</span>
             </h2>
             <div className="space-y-6 font-sans text-base text-foreground/75 leading-relaxed">
               <p>
@@ -123,7 +123,7 @@ const About = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
             <div className="absolute -bottom-6 -right-6 bg-card border border-accent/20 rounded-none p-6 shadow-2xl z-10">
-              <p className="font-serif text-4xl font-bold text-accent">4+</p>
+              <p className="font-sans text-4xl font-extrabold text-accent">4+</p>
               <p className="font-mono text-xs text-foreground/50 uppercase tracking-widest mt-1">Years of Experience</p>
             </div>
           </div>
@@ -135,7 +135,7 @@ const About = () => {
         <div className="max-w-[1400px] mx-auto">
           <div className="text-left mb-16">
             <span className="font-mono text-xs text-accent uppercase tracking-wider">What We Stand For</span>
-            <h2 className="font-serif text-4xl font-light text-foreground mt-4">Our Core Values</h2>
+            <h2 className="font-sans text-4xl font-bold text-foreground mt-4">Our Core <span className="text-accent">Values</span></h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-6 border border-border bg-card divide-y md:divide-y-0 divide-border relative z-10">
@@ -146,7 +146,7 @@ const About = () => {
                 <Award className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-3xl font-light text-foreground mb-2">{coreValues[0].title}</h3>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{coreValues[0].title}</h3>
                 <p className="font-sans text-sm text-foreground/60 leading-relaxed">{coreValues[0].desc}</p>
               </div>
             </div>
@@ -158,7 +158,7 @@ const About = () => {
                 <Users className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-3xl font-light text-foreground mb-2">{coreValues[1].title}</h3>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{coreValues[1].title}</h3>
                 <p className="font-sans text-sm text-foreground/60 leading-relaxed">{coreValues[1].desc}</p>
               </div>
             </div>
@@ -170,7 +170,7 @@ const About = () => {
                 <Factory className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-3xl font-light text-foreground mb-2">{coreValues[2].title}</h3>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{coreValues[2].title}</h3>
                 <p className="font-sans text-sm text-foreground/60 leading-relaxed">{coreValues[2].desc}</p>
               </div>
             </div>
@@ -182,7 +182,7 @@ const About = () => {
                 <Heart className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-3xl font-light text-foreground mb-2">{coreValues[3].title}</h3>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{coreValues[3].title}</h3>
                 <p className="font-sans text-sm text-foreground/60 leading-relaxed">{coreValues[3].desc}</p>
               </div>
             </div>
@@ -195,7 +195,7 @@ const About = () => {
         <div className="max-w-[1400px] mx-auto">
           <div className="text-left mb-16">
             <span className="font-mono text-xs text-emerald uppercase tracking-wider">Environmental Stewardship</span>
-            <h2 className="font-serif text-4xl font-light text-foreground mt-4">Packaging That Cares</h2>
+            <h2 className="font-sans text-4xl font-bold text-foreground mt-4">Packaging That <span className="text-emerald">Cares</span></h2>
             <p className="font-sans text-base text-foreground/60 max-w-xl mt-4">
               Our commitment to sustainable packaging without compromising on luxury, structural integrity, or brand prestige.
             </p>
@@ -209,7 +209,7 @@ const About = () => {
                 <Leaf className="w-5 h-5 text-foreground/20 group-hover:text-emerald transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-3xl font-light text-foreground mb-2">{sustainabilityFeatures[0].title}</h3>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{sustainabilityFeatures[0].title}</h3>
                 <p className="font-sans text-sm text-foreground/60 leading-relaxed">{sustainabilityFeatures[0].desc}</p>
               </div>
             </div>
@@ -221,7 +221,7 @@ const About = () => {
                 <Recycle className="w-5 h-5 text-foreground/20 group-hover:text-emerald transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-3xl font-light text-foreground mb-2">{sustainabilityFeatures[1].title}</h3>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{sustainabilityFeatures[1].title}</h3>
                 <p className="font-sans text-sm text-foreground/60 leading-relaxed">{sustainabilityFeatures[1].desc}</p>
               </div>
             </div>
@@ -233,7 +233,7 @@ const About = () => {
                 <TreePine className="w-5 h-5 text-foreground/20 group-hover:text-emerald transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-3xl font-light text-foreground mb-2">{sustainabilityFeatures[2].title}</h3>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{sustainabilityFeatures[2].title}</h3>
                 <p className="font-sans text-sm text-foreground/60 leading-relaxed">{sustainabilityFeatures[2].desc}</p>
               </div>
             </div>
@@ -245,7 +245,7 @@ const About = () => {
                 <Droplets className="w-5 h-5 text-foreground/20 group-hover:text-emerald transition-colors" />
               </div>
               <div>
-                <h3 className="font-serif text-3xl font-light text-foreground mb-2">{sustainabilityFeatures[3].title}</h3>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{sustainabilityFeatures[3].title}</h3>
                 <p className="font-sans text-sm text-foreground/60 leading-relaxed">{sustainabilityFeatures[3].desc}</p>
               </div>
             </div>
@@ -264,9 +264,9 @@ const About = () => {
 
           <div className="mt-16 bg-card border border-border p-8 lg:p-12 text-center rounded-none relative overflow-hidden">
             <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-emerald/[0.02] rounded-full blur-3xl"></div>
-            <h3 className="font-serif text-3xl font-light text-foreground mb-6">Impact on Punjab Crop Burning</h3>
+            <h3 className="font-sans text-3xl font-bold text-foreground mb-6">Impact on Punjab Crop Burning</h3>
             <p className="font-sans text-base text-foreground/70 max-w-3xl mx-auto leading-relaxed">
-              By using agri-waste hybrid boards made from rice husk and wheat straw, we help local farmers monetize crop residue instead of burning it. This directly combats the seasonal air pollution crisis across North India.
+              By using agri waste hybrid boards made from rice husk and wheat straw, we help local farmers monetize crop residue instead of burning it. This directly combats the seasonal air pollution crisis across North India.
             </p>
           </div>
         </div>
@@ -277,7 +277,7 @@ const About = () => {
         <div className="max-w-[1400px] mx-auto">
           <div className="text-left mb-16">
             <span className="font-mono text-xs text-accent uppercase tracking-wider">Meet Our Team</span>
-            <h2 className="font-serif text-4xl font-light text-foreground mt-4">The People Behind InTheBox</h2>
+            <h2 className="font-sans text-4xl font-bold text-foreground mt-4">The People Behind <span className="text-accent">InTheBox</span></h2>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -305,11 +305,11 @@ const About = () => {
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/95 via-[#050505]/65 to-transparent border border-accent/20 flex flex-col justify-end p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
                     <p className="font-mono text-[10px] text-accent uppercase tracking-widest mb-1">{member.role}</p>
-                    <h4 className="font-serif text-2xl text-white mb-3">{member.name}</h4>
+                    <h4 className="font-sans text-xl font-bold text-white mb-3">{member.name}</h4>
                     <p className="font-sans text-xs text-white/80 leading-relaxed">{member.bio}</p>
                   </div>
                 </div>
-                <h3 className="font-serif text-2xl font-light text-foreground">{member.name}</h3>
+                <h3 className="font-sans text-xl font-bold text-foreground">{member.name}</h3>
                 <p className="font-mono text-xs text-accent uppercase tracking-wider mt-1">{member.role}</p>
               </div>
             ))}
@@ -321,19 +321,18 @@ const About = () => {
       <section className="py-24 px-6 lg:px-12 bg-card border-t border-border text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] to-transparent"></div>
         <div className="max-w-4xl mx-auto relative z-10">
-          <h2 className="text-4xl md:text-5xl font-serif font-light text-foreground mb-6">
-            Ready to Elevate Your Brand?
+          <h2 className="text-4xl md:text-5xl font-sans font-bold text-foreground mb-6">
+            Ready to Elevate Your <span className="text-accent">Brand?</span>
           </h2>
           <p className="font-sans text-base text-foreground/60 mb-10 max-w-xl mx-auto">
-            Let us design custom, eco-friendly rigid packaging tailored to your specifications.
+            Let us design custom, eco friendly rigid packaging tailored to your specifications.
           </p>
           <Button 
             onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
-            size="xl" 
-            className="group rounded-lg bg-accent hover:bg-accent/90 text-white font-sans text-sm font-semibold py-6 transition-all duration-300 shadow-md"
+            className="group btn-premium-gold py-6 px-10 text-sm"
           >
             Start Your Project
-            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
           </Button>
         </div>
       </section>
