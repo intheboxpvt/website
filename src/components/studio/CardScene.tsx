@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { Suspense, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Environment, ContactShadows, PerspectiveCamera, Float, OrbitControls, Html, useProgress } from "@react-three/drei";

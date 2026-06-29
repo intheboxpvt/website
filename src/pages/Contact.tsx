@@ -52,57 +52,103 @@ const Contact = () => {
   };
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-[#050505] text-white">
       <SEO 
         title="Contact Us | Get a Quote for Custom Packaging"
         description="Get in touch with InTheBox for premium custom packaging solutions. located in Mohali. Call, email, or visit us to start your project."
         keywords="contact inthebox, packaging quote, packaging manufacturer contact, mohali packaging company client support"
       />
       <Navbar />
-      <section className="pt-32 pb-20 px-6 lg:px-12 bg-gradient-to-b from-light-purple/20 to-background">
-        <div className="max-w-7xl mx-auto text-center">
-          <span className="font-display text-sm tracking-widest uppercase text-accent font-medium">Contact</span>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary mt-4">Let's Create Together</h1>
-          <p className="font-display text-lg text-muted-foreground mt-6 max-w-2xl mx-auto font-normal">Ready to elevate your packaging? Get in touch with our team.</p>
+      
+      {/* Page Header */}
+      <section className="pt-40 pb-20 px-6 lg:px-12 bg-black border-b border-white/5">
+        <div className="max-w-[1400px] mx-auto">
+          <span className="inline-flex items-center gap-3 text-xs font-mono text-white/50 mb-6">
+            <span className="w-12 h-px bg-white/20"></span>
+            Contact
+          </span>
+          <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-serif tracking-tight leading-[0.9] text-white">
+            Let's Create<br/>
+            <span className="text-white/30 italic">Together.</span>
+          </h1>
+          <p className="font-sans text-lg text-white/50 mt-8 max-w-xl">
+            Ready to elevate your packaging? Get in touch with our team of custom design specialists.
+          </p>
         </div>
       </section>
 
-      <section className="section-padding">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12">
+      {/* Form Section */}
+      <section className="py-24 px-6 lg:px-12 bg-[#050505]">
+        <div className="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-12">
           <div>
-            <h2 className="font-display text-2xl font-semibold text-primary mb-8">Get in Touch</h2>
+            <h2 className="font-serif text-3xl font-light text-[#FFFFFF] mb-8">Get in Touch</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Honeypot field for spam prevention - hidden from real users */}
               <div className="hidden" aria-hidden="true">
                 <input type="text" name="botField" tabIndex={-1} value={form.botField} onChange={(e) => setForm({...form, botField: e.target.value})} />
               </div>
 
-              <input type="text" placeholder="Your Name" value={form.name} onChange={(e) => setForm({...form, name: e.target.value})} required className="w-full px-4 py-3 rounded-xl border border-border bg-card font-sans focus:outline-none focus:ring-2 focus:ring-gold-metallic/50" disabled={status === "submitting"} />
-              <input type="email" placeholder="Email Address" value={form.email} onChange={(e) => setForm({...form, email: e.target.value})} required className="w-full px-4 py-3 rounded-xl border border-border bg-card font-sans focus:outline-none focus:ring-2 focus:ring-gold-metallic/50" disabled={status === "submitting"} />
-              <input type="tel" placeholder="Phone Number" value={form.phone} onChange={(e) => setForm({...form, phone: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-border bg-card font-sans focus:outline-none focus:ring-2 focus:ring-gold-metallic/50" disabled={status === "submitting"} />
-              <textarea placeholder="Tell us about your project..." value={form.message} onChange={(e) => setForm({...form, message: e.target.value})} rows={4} required className="w-full px-4 py-3 rounded-xl border border-border bg-card font-sans focus:outline-none focus:ring-2 focus:ring-gold-metallic/50 resize-none" disabled={status === "submitting"}></textarea>
+              <input 
+                type="text" 
+                placeholder="Your Name" 
+                value={form.name} 
+                onChange={(e) => setForm({...form, name: e.target.value})} 
+                required 
+                className="w-full px-4 py-3 rounded-none border border-white/10 bg-white/5 text-[#FFFFFF] placeholder-[#A1A1AA]/50 font-sans focus:outline-none focus:border-white/40 transition-colors" 
+                disabled={status === "submitting"} 
+              />
+              <input 
+                type="email" 
+                placeholder="Email Address" 
+                value={form.email} 
+                onChange={(e) => setForm({...form, email: e.target.value})} 
+                required 
+                className="w-full px-4 py-3 rounded-none border border-white/10 bg-white/5 text-[#FFFFFF] placeholder-[#A1A1AA]/50 font-sans focus:outline-none focus:border-white/40 transition-colors" 
+                disabled={status === "submitting"} 
+              />
+              <input 
+                type="tel" 
+                placeholder="Phone Number" 
+                value={form.phone} 
+                onChange={(e) => setForm({...form, phone: e.target.value})} 
+                className="w-full px-4 py-3 rounded-none border border-white/10 bg-white/5 text-[#FFFFFF] placeholder-[#A1A1AA]/50 font-sans focus:outline-none focus:border-white/40 transition-colors" 
+                disabled={status === "submitting"} 
+              />
+              <textarea 
+                placeholder="Tell us about your project..." 
+                value={form.message} 
+                onChange={(e) => setForm({...form, message: e.target.value})} 
+                rows={4} 
+                required 
+                className="w-full px-4 py-3 rounded-none border border-white/10 bg-white/5 text-[#FFFFFF] placeholder-[#A1A1AA]/50 font-sans focus:outline-none focus:border-white/40 transition-colors resize-none" 
+                disabled={status === "submitting"}
+              ></textarea>
               
               {status === "success" && (
-                <div className="p-4 rounded-xl bg-emerald/10 border border-emerald/20 flex items-start gap-3">
+                <div className="p-4 rounded-none bg-emerald/10 border border-emerald/20 flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-emerald mt-0.5" />
                   <div>
-                    <p className="font-serif font-semibold text-emerald">Message Sent Successfully</p>
+                    <p className="font-sans font-semibold text-emerald">Message Sent Successfully</p>
                     <p className="text-sm font-sans text-emerald/80 mt-1">Thank you for reaching out. Our packaging specialists will contact you shortly.</p>
                   </div>
                 </div>
               )}
 
               {status === "error" && (
-                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-start gap-3">
+                <div className="p-4 rounded-none bg-red-500/10 border border-red-500/20 flex items-start gap-3">
                   <AlertCircle className="w-5 h-5 text-red-500 mt-0.5" />
                   <div>
-                    <p className="font-serif font-semibold text-red-500">Submission Failed</p>
+                    <p className="font-sans font-semibold text-red-500">Submission Failed</p>
                     <p className="text-sm font-sans text-red-500/80 mt-1">{errorMessage}</p>
                   </div>
                 </div>
               )}
 
-              <Button type="submit" variant="hero" size="lg" className="w-full group" disabled={status === "submitting" || status === "success"}>
+              <Button 
+                type="submit" 
+                className="w-full group rounded-full bg-white hover:bg-white/90 text-black font-sans text-sm font-semibold py-6 transition-all duration-300" 
+                disabled={status === "submitting" || status === "success"}
+              >
                 {status === "submitting" ? (
                   <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Sending...</>
                 ) : status === "success" ? (
@@ -115,23 +161,23 @@ const Contact = () => {
           </div>
 
           <div className="space-y-8">
-            <div className="card-elevated p-8">
-              <h3 className="font-display text-xl font-semibold text-primary mb-6">Contact Information</h3>
+            <div className="bg-black border border-white/10 p-8 rounded-none shadow-2xl">
+              <h3 className="font-serif text-2xl font-light text-[#FFFFFF] mb-6">Contact Information</h3>
               <div className="space-y-4">
-                <div className="flex items-center gap-4"><Phone className="w-5 h-5 text-accent" /><span className="font-display font-normal">+91 70877 78689</span></div>
-                <div className="flex items-center gap-4"><Mail className="w-5 h-5 text-accent" /><span className="font-display font-normal">founder@inthebox.co.in</span></div>
-                <div className="flex items-center gap-4"><MapPin className="w-5 h-5 text-accent" /><span className="font-display font-normal">Mohali, India</span></div>
+                <div className="flex items-center gap-4"><Phone className="w-4 h-4 text-white/50" /><span className="font-mono text-sm text-white/80">+91 70877 78689</span></div>
+                <div className="flex items-center gap-4"><Mail className="w-4 h-4 text-white/50" /><span className="font-mono text-sm text-white/80">founder@inthebox.co.in</span></div>
+                <div className="flex items-center gap-4"><MapPin className="w-4 h-4 text-white/50" /><span className="font-mono text-sm text-white/80">Mohali, India</span></div>
               </div>
             </div>
 
             <a href="https://wa.me/917087778689" target="_blank" rel="noopener noreferrer" className="block">
-              <Button variant="whatsapp" size="xl" className="w-full">
-                <MessageCircle className="w-5 h-5" />Chat on WhatsApp
+              <Button size="xl" className="w-full rounded-full bg-[#25D366] hover:bg-[#25D366]/90 text-white font-sans text-sm font-semibold py-6 transition-all duration-300">
+                <MessageCircle className="w-4 h-4 mr-2" />Chat on WhatsApp
               </Button>
             </a>
 
-            <div className="card-elevated overflow-hidden">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d109744.22675777876!2d76.6346359!3d30.7046486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fee906da6f81f%3A0x512998f16ce508d8!2sMohali%2C%20Punjab!5e0!3m2!1sen!2sin!4v1600000000000" width="100%" height="200" style={{border: 0}} allowFullScreen loading="lazy" className="rounded-xl"></iframe>
+            <div className="bg-black border border-white/10 overflow-hidden rounded-none shadow-2xl">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d109744.22675777876!2d76.6346359!3d30.7046486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fee906da6f81f%3A0x512998f16ce508d8!2sMohali%2C%20Punjab!5e0!3m2!1sen!2sin!4v1600000000000" width="100%" height="200" style={{border: 0}} allowFullScreen loading="lazy" className="opacity-70 hover:opacity-90 transition-opacity duration-300"></iframe>
             </div>
           </div>
         </div>

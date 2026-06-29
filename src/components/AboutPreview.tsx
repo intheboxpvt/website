@@ -5,51 +5,66 @@ import ScrollReveal from "./ScrollReveal";
 
 const AboutPreview = () => {
   return (
-    <section className="section-padding bg-light-purple/10 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-gold-metallic/5 to-royal-purple/5"></div>
+    <section className="section-padding bg-[#0B0B0B] relative overflow-hidden border-t border-white/5">
+      <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] to-transparent"></div>
       
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Image Side */}
-          <ScrollReveal direction="left">
-            <div className="relative group">
-              <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-elevated border border-royal-purple/10">
-                <img 
-                  src="/products/creating-stories.jpg" 
-                  alt="Every Box Tells a Story" 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              {/* Accent element */}
-              <div className="absolute -bottom-6 -right-6 w-full h-full border-2 border-gold-metallic/30 rounded-3xl -z-10 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2"></div>
-            </div>
-          </ScrollReveal>
+      <div className="max-w-[1400px] mx-auto relative z-10">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          
+          {/* Left Column: Heading and Manifesto text */}
+          <div className="lg:col-span-7">
+            <ScrollReveal>
+              <span className="inline-flex items-center gap-3 text-xs font-mono text-white/50 mb-6">
+                <span className="w-12 h-px bg-white/20"></span>
+                Our Story
+              </span>
+              <h2 className="text-5xl md:text-7xl lg:text-[6.5rem] font-serif tracking-tight leading-[0.9] text-white mb-8">
+                Every Box<br/>
+                <span className="text-white/30 italic">Tells a Story.</span>
+              </h2>
+            </ScrollReveal>
 
-          {/* Content Side */}
-          <ScrollReveal delay={200}>
-            <span className="font-sans text-sm tracking-widest uppercase text-gold-metallic font-medium">
-              Our Story
-            </span>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-royal-purple mt-4 mb-6">
-              Every Box Tells a Story
-            </h2>
-            <p className="font-sans text-lg text-aubergine/80 leading-relaxed mb-6">
-              InTheBox was born from a simple belief: packaging isn't just a container—it's the 
-              first physical touchpoint between your brand and your customer. It's a moment of 
-              anticipation, discovery, and delight.
-            </p>
-            <p className="font-sans text-aubergine/70 leading-relaxed mb-8">
-              We combine cinematic design sensibility with sustainable manufacturing to create 
-              packaging experiences that brands and their customers love. From startups to 
-              established brands, we partner with those who believe in the power of presentation.
-            </p>
-            <Link to="/about">
-              <Button variant="gold" size="lg" className="group">
-                Learn Our Story of InTheBox
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
-          </ScrollReveal>
+            <ScrollReveal delay={150}>
+              <div className="max-w-xl space-y-6">
+                <p className="font-sans text-lg text-white/80 leading-relaxed">
+                  InTheBox was born from a simple belief: packaging isn't just a container—it's the 
+                  first physical touchpoint between your brand and your customer. It's a moment of 
+                  anticipation, discovery, and delight.
+                </p>
+                <p className="font-sans text-white/50 text-base leading-relaxed mb-8">
+                  We combine cinematic design sensibility with sustainable manufacturing to create 
+                  packaging experiences that brands and their customers love. From startups to 
+                  established brands, we partner with those who believe in the power of presentation.
+                </p>
+                <div className="pt-4">
+                  <Link to="/about">
+                    <Button className="group bg-white hover:bg-white/90 text-black font-sans text-sm font-semibold px-8 py-6 rounded-full transition-all duration-300">
+                      Learn Our Story
+                      <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+
+          {/* Right Column: Sharp Cinematic Visual */}
+          <div className="lg:col-span-5 pt-8 lg:pt-20">
+            <ScrollReveal delay={300} direction="right">
+              <div className="relative group">
+                <div className="aspect-[4/5] rounded-none overflow-hidden shadow-2xl border border-white/10">
+                  <img 
+                    src="/products/creating-stories.jpg" 
+                    alt="Every Box Tells a Story" 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-70 group-hover:opacity-90"
+                  />
+                </div>
+                {/* Thin overlay outline */}
+                <div className="absolute inset-0 border border-white/20 pointer-events-none"></div>
+              </div>
+            </ScrollReveal>
+          </div>
+
         </div>
       </div>
     </section>
