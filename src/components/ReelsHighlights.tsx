@@ -44,9 +44,9 @@ const ReelCard = ({ videoUrl }: { videoUrl: string }) => {
 
 export const ReelsHighlights = () => {
   const videoUrls = [
-    "https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c054ba208d98d02df2f73315a6b0c26b&profile_id=139&oauth2_token_id=57447761",
-    "https://player.vimeo.com/external/403788540.sd.mp4?s=dcbcd7d934f0d36746ef741496a9cf2996d9a103&profile_id=139&oauth2_token_id=57447761",
-    "https://player.vimeo.com/external/538902504.sd.mp4?s=9148d53d21c251da4a04d55b0a39f60bf5a2f52c&profile_id=139&oauth2_token_id=57447761"
+    "/assets/hero-video.mp4",
+    "/assets/hero-video.mp4",
+    "/assets/hero-video.mp4"
   ];
 
   return (

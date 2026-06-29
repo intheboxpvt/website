@@ -64,7 +64,7 @@ const About = () => {
       <Navbar />
       
       {/* Page Header */}
-      <section className="pt-28 pb-8 px-6 lg:px-12 bg-black border-b border-white/5 relative overflow-hidden">
+      <section className="pt-36 pb-8 px-6 lg:px-12 bg-black border-b border-white/5 relative overflow-hidden">
         {/* Subtle Watermark logo inside Header */}
         <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
           <img 
