@@ -36,23 +36,19 @@ const Navbar = () => {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${
-        isDarkBg 
-          ? "bg-[#050505]/85 backdrop-blur-md border-white/8 shadow-2xl py-2" 
-          : "bg-transparent border-transparent py-4"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-black/5 shadow-sm py-1.5"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between h-20 lg:h-24">
-          {/* Logo - Inverted for dark canvas */}
+        <div className="flex items-center justify-between h-14 lg:h-16">
+          {/* Logo - Black Monochrome */}
           <Link to="/" className="flex items-center gap-3 group">
             <img 
               src="/assets/logo.png" 
               alt="InTheBox Logo" 
-              className="h-16 sm:h-[4.5rem] md:h-16 lg:h-20 w-auto max-w-none lg:max-w-[320px] object-contain brightness-0 invert"
+              className="h-10 sm:h-12 md:h-12 lg:h-14 w-auto max-w-none lg:max-w-[280px] object-contain brightness-0"
             />
           </Link>
-
+ 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-10">
             {navLinks.map((link) => (
@@ -61,13 +57,13 @@ const Navbar = () => {
                 to={link.href}
                 className={`font-sans text-sm font-medium tracking-tight transition-all duration-300 relative py-2 ${
                   isActive(link.href) 
-                    ? "text-white font-semibold" 
-                    : "text-white/70 hover:text-white"
+                    ? "text-[#1c0f24] font-semibold" 
+                    : "text-[#1c0f24]/60 hover:text-[#1c0f24]"
                 }`}
               >
                 {link.label}
                 {isActive(link.href) && (
-                  <span className="absolute -bottom-1 left-0 w-full h-px bg-white"></span>
+                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-accent"></span>
                 )}
               </Link>
             ))}
@@ -77,7 +73,7 @@ const Navbar = () => {
           <div className="hidden lg:block">
             <Button 
               onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
-              className="bg-white hover:bg-white/90 text-black font-sans text-xs font-semibold px-6 py-2.5 rounded-full transition-all duration-300"
+              className="btn-premium-gold text-xs px-5 py-2 min-h-0 h-9"
             >
               Get a Quote
             </Button>
@@ -85,7 +81,7 @@ const Navbar = () => {
  
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden text-[#FFFFFF] p-2 hover:bg-white/5 rounded-full transition-colors"
+            className="lg:hidden text-[#1c0f24] p-2 hover:bg-black/5 rounded-full transition-colors"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
@@ -95,12 +91,12 @@ const Navbar = () => {
  
         {/* Mobile Navigation Full-screen Overlay */}
         {isOpen && (
-          <div className="fixed inset-0 top-0 left-0 w-full h-screen bg-[#050505]/95 z-40 flex flex-col justify-center px-8 lg:hidden animate-fade-in">
+          <div className="fixed inset-0 top-0 left-0 w-full h-screen bg-[#1d0a27]/98 z-40 flex flex-col justify-center px-8 lg:hidden animate-fade-in">
             {/* Top Bar inside menu to allow close */}
             <div className="absolute top-6 right-6">
               <button 
                 onClick={() => setIsOpen(false)}
-                className="text-[#FFFFFF] p-2 hover:bg-white/5 rounded-full transition-colors"
+                className="text-white p-2 hover:bg-white/5 rounded-full transition-colors"
               >
                 <X size={32} />
               </button>
@@ -115,8 +111,8 @@ const Navbar = () => {
                   style={{ animationDelay: `${i * 100}ms` }}
                   className={`font-sans text-2xl tracking-wider uppercase transition-colors py-2 animate-fade-up ${
                     isActive(link.href) 
-                      ? "text-[#38BDF8] font-semibold" 
-                      : "text-[#A1A1AA] hover:text-[#FFFFFF]"
+                      ? "text-accent font-semibold" 
+                      : "text-white/70 hover:text-white"
                   }`}
                 >
                   {link.label}
@@ -125,7 +121,7 @@ const Navbar = () => {
               <div className="mt-8 mx-auto w-full max-w-xs animate-fade-up" style={{ animationDelay: '600ms' }}>
                 <Button 
                   onClick={() => { setIsOpen(false); window.dispatchEvent(new CustomEvent("open-quote-modal")); }}
-                  className="w-full bg-[#38BDF8] hover:bg-[#38BDF8]/90 text-black font-sans text-xs tracking-widest uppercase font-semibold py-6 rounded-full transition-all duration-300"
+                  className="w-full btn-premium-gold py-4 text-xs uppercase tracking-widest"
                 >
                   Get a Quote
                 </Button>

@@ -24,24 +24,24 @@ const ClientGallery = () => {
   ];
 
   return (
-    <section className="section-padding bg-[#050505] relative overflow-hidden border-t border-white/5">
+    <section className="section-padding bg-background relative overflow-hidden border-t border-border">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-white/[0.01] rounded-full blur-3xl"></div>
 
       <div className="max-w-[1400px] mx-auto relative z-10">
         <ScrollReveal>
           <div className="grid lg:grid-cols-12 gap-8 items-end mb-20 lg:mb-24">
             <div className="lg:col-span-7">
-              <span className="inline-flex items-center gap-3 text-xs font-mono text-white/50 mb-6">
-                <span className="w-12 h-px bg-white/20"></span>
+              <span className="inline-flex items-center gap-3 text-xs font-mono text-foreground/50 mb-6">
+                <span className="w-12 h-px bg-border"></span>
                 Client Stories
               </span>
-              <h2 className="text-5xl md:text-7xl lg:text-[6.5rem] font-serif tracking-tight leading-[0.9] text-white">
+              <h2 className="text-5xl md:text-7xl lg:text-[6.5rem] font-serif tracking-tight leading-[0.9] text-foreground">
                 Loved by<br/>
-                <span className="text-white/30 italic">Brands Like Yours.</span>
+                <span className="text-foreground/30 italic">Brands Like Yours.</span>
               </h2>
             </div>
             <div className="lg:col-span-5 lg:pb-4">
-              <p className="text-lg text-white/50 leading-relaxed font-sans">
+              <p className="text-lg text-foreground/60 leading-relaxed font-sans">
                 Hear what designers, product leads, and business founders say about working with our custom packaging studio.
               </p>
             </div>
@@ -51,29 +51,29 @@ const ClientGallery = () => {
         <div className="grid md:grid-cols-3 gap-4 lg:gap-6">
           {testimonials.map((testimonial, index) => (
             <ScrollReveal key={index} delay={index * 150}>
-              <div className="bg-black p-8 lg:p-12 rounded-none border border-white/10 hover:border-white/30 relative h-full flex flex-col justify-between transition-all duration-500">
+              <div className="bg-card p-8 lg:p-12 rounded-none border border-border hover:border-accent relative h-full flex flex-col justify-between transition-all duration-500 shadow-soft">
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="font-mono text-xs text-white/40">0{index + 1}</span>
-                    <Quote className="w-5 h-5 text-[#38BDF8]/20" />
+                    <span className="font-mono text-xs text-foreground/40">0{index + 1}</span>
+                    <Quote className="w-5 h-5 text-accent/20" />
                   </div>
                   
                   <div className="flex gap-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 text-[#38BDF8] fill-[#38BDF8]" />
+                      <Star key={i} className="w-3 h-3 text-accent fill-accent" />
                     ))}
                   </div>
                   
-                  <p className="font-sans text-[#FFFFFF]/85 text-base leading-relaxed mb-6 italic">
+                  <p className="font-sans text-foreground/85 text-base leading-relaxed mb-6 italic">
                     "{testimonial.quote}"
                   </p>
                 </div>
                 
-                <div className="border-t border-white/10 pt-4 mt-6">
-                  <p className="font-sans text-base font-semibold text-[#FFFFFF]">
+                <div className="border-t border-border pt-4 mt-6">
+                  <p className="font-sans text-base font-semibold text-foreground">
                     {testimonial.author}
                   </p>
-                  <p className="font-sans text-xs text-white/50 mt-1">
+                  <p className="font-sans text-xs text-foreground/50 mt-1">
                     {testimonial.role}
                   </p>
                 </div>

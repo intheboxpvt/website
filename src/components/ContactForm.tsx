@@ -81,7 +81,7 @@ export const ContactForm = () => {
           value={form.name} 
           onChange={(e) => setForm({...form, name: e.target.value})} 
           required 
-          className="w-full px-4 py-3 rounded-none border border-white/10 bg-white/5 text-[#FFFFFF] placeholder-[#A1A1AA]/30 font-sans focus:outline-none focus:border-[#38BDF8] transition-colors" 
+          className="w-full px-4 py-3 rounded-none border border-white/10 bg-white/5 text-[#FFFFFF] placeholder-[#A1A1AA]/30 font-sans focus:outline-none focus:border-accent transition-colors" 
           disabled={status === "submitting"} 
         />
       </div>
@@ -94,7 +94,7 @@ export const ContactForm = () => {
           value={form.email} 
           onChange={(e) => setForm({...form, email: e.target.value})} 
           required 
-          className="w-full px-4 py-3 rounded-none border border-white/10 bg-white/5 text-[#FFFFFF] placeholder-[#A1A1AA]/30 font-sans focus:outline-none focus:border-[#38BDF8] transition-colors" 
+          className="w-full px-4 py-3 rounded-none border border-white/10 bg-white/5 text-[#FFFFFF] placeholder-[#A1A1AA]/30 font-sans focus:outline-none focus:border-accent transition-colors" 
           disabled={status === "submitting"} 
         />
       </div>
@@ -106,7 +106,7 @@ export const ContactForm = () => {
           placeholder="e.g. +91 99999 99999" 
           value={form.phone} 
           onChange={(e) => setForm({...form, phone: e.target.value})} 
-          className="w-full px-4 py-3 rounded-none border border-white/10 bg-white/5 text-[#FFFFFF] placeholder-[#A1A1AA]/30 font-sans focus:outline-none focus:border-[#38BDF8] transition-colors" 
+          className="w-full px-4 py-3 rounded-none border border-white/10 bg-white/5 text-[#FFFFFF] placeholder-[#A1A1AA]/30 font-sans focus:outline-none focus:border-accent transition-colors" 
           disabled={status === "submitting"} 
         />
       </div>
@@ -119,7 +119,7 @@ export const ContactForm = () => {
           onChange={(e) => setForm({...form, message: e.target.value})} 
           rows={4} 
           required 
-          className="w-full px-4 py-3 rounded-none border border-white/10 bg-white/5 text-[#FFFFFF] placeholder-[#A1A1AA]/30 font-sans focus:outline-none focus:border-[#38BDF8] transition-colors resize-none" 
+          className="w-full px-4 py-3 rounded-none border border-white/10 bg-white/5 text-[#FFFFFF] placeholder-[#A1A1AA]/30 font-sans focus:outline-none focus:border-accent transition-colors resize-none" 
           disabled={status === "submitting"}
         ></textarea>
       </div>
@@ -146,7 +146,7 @@ export const ContactForm = () => {
 
       <Button 
         type="submit" 
-        className="w-full group rounded-full bg-white hover:bg-white/90 text-black font-sans text-sm font-semibold py-6 transition-all duration-300" 
+        className="w-full group rounded-lg bg-accent hover:bg-accent/90 text-white font-sans text-sm font-semibold py-6 transition-all duration-300 shadow-md" 
         disabled={status === "submitting" || status === "success"}
       >
         {status === "submitting" ? (

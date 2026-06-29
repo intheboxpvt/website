@@ -47,24 +47,24 @@ const PricingTiers = () => {
   ];
 
   return (
-    <section className="section-padding bg-[#050505] relative overflow-hidden border-t border-white/5">
+    <section className="section-padding bg-background relative overflow-hidden border-t border-border">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/[0.01] rounded-full blur-3xl"></div>
 
       <div className="max-w-[1400px] mx-auto relative z-10">
         <ScrollReveal>
           <div className="grid lg:grid-cols-12 gap-8 items-end mb-20 lg:mb-24">
             <div className="lg:col-span-7">
-              <span className="inline-flex items-center gap-3 text-xs font-mono text-white/50 mb-6">
-                <span className="w-12 h-px bg-white/20"></span>
+              <span className="inline-flex items-center gap-3 text-xs font-mono text-foreground/50 mb-6">
+                <span className="w-12 h-px bg-border"></span>
                 Packaging Tiers
               </span>
-              <h2 className="text-5xl md:text-7xl lg:text-[6.5rem] font-serif tracking-tight leading-[0.9] text-white">
+              <h2 className="text-5xl md:text-7xl lg:text-[6.5rem] font-serif tracking-tight leading-[0.9] text-foreground">
                 Find Your<br/>
-                <span className="text-white/30 italic">Perfect Fit.</span>
+                <span className="text-foreground/30 italic">Perfect Fit.</span>
               </h2>
             </div>
             <div className="lg:col-span-5 lg:pb-4">
-              <p className="text-lg text-white/50 leading-relaxed font-sans">
+              <p className="text-lg text-foreground/60 leading-relaxed font-sans">
                 Flexible options designed to grow with your brand, from first design launch to international retail market leader.
               </p>
             </div>
@@ -75,40 +75,40 @@ const PricingTiers = () => {
           {tiers.map((tier, index) => (
             <ScrollReveal key={tier.name} delay={index * 150}>
               <div
-                className={`relative rounded-none p-8 lg:p-12 transition-all duration-500 h-full flex flex-col justify-between bg-black border ${
+                className={`relative rounded-none p-8 lg:p-12 transition-all duration-500 h-full flex flex-col justify-between bg-card border ${
                   tier.popular
-                    ? "border-white/60 shadow-2xl z-10"
-                    : "border-white/10 shadow-lg hover:border-white/30"
+                    ? "border-accent shadow-gold z-10"
+                    : "border-border shadow-soft hover:border-accent/40"
                 }`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="font-mono text-xs text-white/40">0{index + 1}</span>
+                    <span className="font-mono text-xs text-foreground/40">0{index + 1}</span>
                     {tier.popular && (
-                      <span className="text-[#38BDF8] text-[10px] font-mono tracking-widest uppercase">
+                      <span className="text-accent text-[10px] font-mono tracking-widest uppercase">
                         Most Popular
                       </span>
                     )}
                   </div>
 
                   <div className="mb-6">
-                    <h3 className="font-serif text-3xl font-light text-[#FFFFFF]">
+                    <h3 className="font-serif text-3xl font-light text-foreground">
                       {tier.name}
                     </h3>
-                    <p className="font-mono text-xs text-[#38BDF8] tracking-wider uppercase mt-2">
+                    <p className="font-mono text-xs text-accent tracking-wider uppercase mt-2">
                       {tier.subtitle}
                     </p>
                   </div>
 
-                  <p className="font-sans text-sm text-white/60 mb-8 leading-relaxed">
+                  <p className="font-sans text-sm text-foreground/75 mb-8 leading-relaxed">
                     {tier.description}
                   </p>
 
                   <ul className="space-y-4 mb-8">
                     {tier.features.map((feature) => (
                       <li key={feature} className="flex items-start gap-3">
-                        <Check className="w-4 h-4 flex-shrink-0 text-white/40 mt-0.5" />
-                        <span className="font-sans text-sm text-[#FFFFFF]/85">
+                        <Check className="w-4 h-4 flex-shrink-0 text-accent/60 mt-0.5" />
+                        <span className="font-sans text-sm text-foreground/85">
                           {feature}
                         </span>
                       </li>
@@ -119,10 +119,10 @@ const PricingTiers = () => {
                 <Button
                   onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
                   size="lg"
-                  className={`w-full mt-auto group rounded-full font-sans text-xs tracking-widest uppercase font-semibold py-5 ${
+                  className={`w-full mt-auto group rounded-lg font-sans text-xs tracking-widest uppercase font-semibold py-5 transition-all duration-300 shadow-sm ${
                     tier.popular
-                      ? "bg-white hover:bg-white/90 text-black"
-                      : "bg-transparent border border-white/20 hover:border-white/50 text-[#FFFFFF]"
+                      ? "bg-accent hover:bg-accent/90 text-white shadow-md"
+                      : "bg-transparent border border-accent hover:bg-accent/10 text-accent"
                   }`}
                 >
                   Get Started

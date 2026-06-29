@@ -31,16 +31,16 @@ const Catalogue = () => {
   const filtered = filter === "all" ? products : products.filter(p => p.category === filter);
 
   return (
-    <main className="min-h-screen bg-[#050505] text-white">
+    <main className="min-h-screen bg-background text-foreground">
       <SEO 
         title="Product Catalogue | Custom Boxes & Packaging Solutions"
         description="Browse our extensive catalogue of custom packaging solutions. From rigid luxury boxes to eco-friendly kraft mailers, find the perfect fit for your brand."
         keywords="packaging catalogue, custom boxes, rigid boxes, kraft mailers, eco-friendly packaging, wholesale packaging"
       />
       <Navbar />
-
+ 
       {/* Explore Our Collection Page Banner */}
-      <section className="pt-36 pb-12 px-6 lg:px-12 bg-black border-b border-white/5 relative overflow-hidden">
+      <section className="pt-36 pb-12 px-6 lg:px-12 bg-[#1d0a27] border-b border-white/5 relative overflow-hidden text-white">
         {/* Subtle Watermark logo */}
         <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
           <img 
@@ -49,7 +49,7 @@ const Catalogue = () => {
             className="w-full h-full object-contain filter invert brightness-0"
           />
         </div>
-
+ 
         <div className="max-w-[1400px] mx-auto relative z-10">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
@@ -83,22 +83,22 @@ const Catalogue = () => {
           </div>
         </div>
       </section>
-
+ 
       {/* 3D Virtual Customizer Section */}
-      <section className="py-16 px-6 lg:px-12 bg-[#050505] border-b border-white/5 relative">
+      <section className="py-16 px-6 lg:px-12 bg-background border-b border-border relative">
         <div className="max-w-[1400px] mx-auto">
           
           <div className="mb-12">
-            <h2 className="font-serif text-3xl font-light text-white leading-tight">3D Virtual Customizer</h2>
-            <p className="font-sans text-xs text-white/50 mt-2">
+            <h2 className="font-serif text-3xl font-light text-foreground leading-tight">3D Virtual Customizer</h2>
+            <p className="font-sans text-xs text-foreground/60 mt-2">
               Customize your brand name and interior message to preview your bespoke packaging structure in real-time.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 items-stretch">
             
             {/* Left Column: 3D Visualizer Canvas */}
-            <div className="flex flex-col items-center justify-center bg-black border border-white/10 p-8 min-h-[380px] relative">
+            <div className="flex flex-col items-center justify-center bg-card border border-border p-8 h-[480px] relative">
               <FoldedCard3D 
                 frontImage="/products/premium_thank_you_card.png" 
                 insideImage="/products/thank_you_card_texture.png"
@@ -106,68 +106,68 @@ const Catalogue = () => {
                 insideText={insideText}
                 className="w-[240px] h-[165px] md:w-[320px] md:h-[220px]"
               />
-              <div className="mt-4 p-2 bg-[#38BDF8]/5 border border-[#38BDF8]/20 w-full text-center">
-                <p className="text-[10px] font-mono text-[#38BDF8] leading-relaxed animate-pulse">
+              <div className="mt-6 p-2 bg-accent/5 border border-accent/20 w-full text-center">
+                <p className="text-[10px] font-mono text-accent leading-relaxed animate-pulse">
                   // Interactive 3D structural mapping. Drag to rotate card.
                 </p>
               </div>
             </div>
-
+ 
             {/* Right Column: Customizer Controls */}
-            <div className="space-y-6 bg-black p-8 border border-white/10 flex flex-col justify-between h-full min-h-[380px]">
+            <div className="space-y-6 bg-card p-8 border border-border flex flex-col justify-between h-[480px]">
               <div className="space-y-5">
                 <div>
-                  <label className="block text-xs font-mono text-white/45 uppercase tracking-wider mb-2">Front Foil Branding Text</label>
+                  <label className="block text-xs font-mono text-foreground/60 uppercase tracking-wider mb-2">Front Foil Branding Text</label>
                   <input 
                     type="text" 
                     value={frontText} 
                     onChange={(e) => setFrontText(e.target.value)}
-                    className="w-full px-4 py-3 border border-white/10 bg-white/5 font-sans text-sm text-white focus:outline-none focus:border-[#38BDF8] transition-colors"
+                    className="w-full px-4 py-3 border border-border bg-background/50 font-sans text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
                     placeholder="Enter brand name..."
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-mono text-white/45 uppercase tracking-wider mb-2">Interior Message Body</label>
+                  <label className="block text-xs font-mono text-foreground/60 uppercase tracking-wider mb-2">Interior Message Body</label>
                   <textarea 
                     value={insideText} 
                     onChange={(e) => setInsideText(e.target.value)}
-                    className="w-full px-4 py-3 border border-white/10 bg-white/5 font-sans text-sm text-white focus:outline-none focus:border-[#38BDF8] transition-colors h-24 resize-none"
+                    className="w-full px-4 py-3 border border-border bg-background/50 font-sans text-sm text-foreground focus:outline-none focus:border-accent transition-colors h-20 resize-none"
                     placeholder="Type interior content..."
                   />
                 </div>
               </div>
-
-              <div className="border-t border-white/10 pt-6 space-y-4">
+ 
+              <div className="border-t border-border pt-5 space-y-4">
                 <div className="grid grid-cols-3 gap-4 text-left">
                   <div>
-                    <p className="text-[9px] font-mono text-white/40 uppercase tracking-widest">Base Board</p>
-                    <p className="text-xs font-sans text-white/80 font-semibold mt-1">300GSM Premium</p>
+                    <p className="text-[9px] font-mono text-foreground/50 uppercase tracking-widest">Base Board</p>
+                    <p className="text-xs font-sans text-foreground/90 font-semibold mt-1">300GSM Premium</p>
                   </div>
                   <div>
-                    <p className="text-[9px] font-mono text-white/40 uppercase tracking-widest">Imprint</p>
-                    <p className="text-xs font-sans text-white/80 font-semibold mt-1">Stamping Finish</p>
+                    <p className="text-[9px] font-mono text-foreground/50 uppercase tracking-widest">Imprint</p>
+                    <p className="text-xs font-sans text-foreground/90 font-semibold mt-1">Stamping Finish</p>
                   </div>
                   <div>
-                    <p className="text-[9px] font-mono text-white/40 uppercase tracking-widest">Start MOQ</p>
-                    <p className="text-xs font-sans text-white/80 font-semibold mt-1">100 Units</p>
+                    <p className="text-[9px] font-mono text-foreground/50 uppercase tracking-widest">Start MOQ</p>
+                    <p className="text-xs font-sans text-foreground/90 font-semibold mt-1">100 Units</p>
                   </div>
                 </div>
-
+ 
                 <Button 
                   onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
-                  className="w-full rounded-full bg-[#38BDF8] hover:bg-[#38BDF8]/90 text-black font-sans text-sm font-semibold py-5 transition-all duration-300"
+                  className="w-full btn-premium-gold py-5"
                 >
                   Request Mockup Quote
                 </Button>
               </div>
             </div>
-
+ 
           </div>
         </div>
       </section>
-
+ 
       {/* Catalog Grid Section */}
-      <section className="py-24 px-6 lg:px-12 bg-[#050505]">
+      <section className="py-24 px-6 lg:px-12 bg-background">
         <div className="max-w-[1400px] mx-auto">
           {/* Filters */}
           <div className="flex flex-wrap gap-2 justify-center mb-16">
@@ -175,23 +175,23 @@ const Catalogue = () => {
               <button 
                 key={cat} 
                 onClick={() => setFilter(cat)} 
-                className={`px-6 py-2 border rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+                className={`px-6 py-2 border-2 rounded-lg font-mono text-xs uppercase tracking-wider transition-all duration-300 shadow-sm ${
                   filter === cat 
-                    ? "bg-[#38BDF8] border-[#38BDF8] text-black font-semibold" 
-                    : "bg-black border-white/10 text-white/60 hover:text-white hover:border-white/30"
+                    ? "bg-[#1c0f24] border-[#1c0f24] text-white font-semibold" 
+                    : "bg-card border-border text-foreground/60 hover:text-accent hover:border-accent"
                 }`}
               >
                 {cat}
               </button>
             ))}
           </div>
-
+ 
           {/* Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filtered.map((p) => (
               <div 
                 key={p.name} 
-                className="bg-black border border-white/10 rounded-none overflow-hidden hover:border-white/30 group transition-all duration-500 flex flex-col justify-between"
+                className="bg-card border border-border rounded-none overflow-hidden hover:border-accent group transition-all duration-500 flex flex-col justify-between"
               >
                 <div className="aspect-[4/3] overflow-hidden bg-white/5 relative">
                   <img 
@@ -199,24 +199,24 @@ const Catalogue = () => {
                     alt={p.name}
                     className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-102"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent"></div>
-                  <span className="absolute bottom-4 left-4 font-mono text-[10px] uppercase text-[#38BDF8] tracking-widest bg-[#050505]/95 border border-[#38BDF8]/20 px-3 py-1">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                  <span className="absolute bottom-4 left-4 font-mono text-[10px] uppercase text-accent tracking-widest bg-background/95 border border-accent/20 px-3 py-1">
                     {p.category}
                   </span>
                 </div>
                 <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
                   <div>
-                    <h3 className="font-serif text-2xl font-light text-white">{p.name}</h3>
-                    <p className="font-sans text-sm text-white/50 mt-3 leading-relaxed">{p.desc}</p>
+                    <h3 className="font-serif text-2xl font-light text-foreground">{p.name}</h3>
+                    <p className="font-sans text-sm text-foreground/60 mt-3 leading-relaxed">{p.desc}</p>
                   </div>
-                  <div className="mt-8 pt-4 border-t border-white/5 flex flex-col gap-4">
+                  <div className="mt-8 pt-4 border-t border-border flex flex-col gap-4">
                     <div className="flex justify-between items-center text-xs font-mono">
-                      <span className="text-white/40 uppercase">Minimum Order</span>
-                      <span className="text-white font-medium">{p.moq} pcs</span>
+                      <span className="text-foreground/50 uppercase">Minimum Order</span>
+                      <span className="text-foreground font-medium">{p.moq} pcs</span>
                     </div>
                     <Button 
                       onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
-                      className="w-full rounded-full bg-white hover:bg-white/90 text-black font-sans text-xs font-semibold py-5 transition-all duration-300"
+                      className="w-full btn-premium-gold py-4 text-xs"
                     >
                       Request Prototype Sample
                     </Button>

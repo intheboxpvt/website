@@ -9,21 +9,21 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm rounded-lg",
+        default: "bg-accent text-white border border-[#1c0f24]/10 shadow-[0_0_0_3px_#d5a037_inset] hover:bg-accent/90 transform hover:-translate-y-0.5 transition duration-300 rounded-lg",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-lg",
-        outline: "border-2 border-primary/30 bg-transparent text-primary hover:bg-primary hover:text-primary-foreground rounded-lg",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-lg",
+        outline: "bg-transparent text-accent border border-accent shadow-[0_0_0_3px_#d5a037_inset] hover:bg-accent/10 transform hover:-translate-y-0.5 transition duration-300 rounded-lg",
+        secondary: "bg-card border border-border text-foreground hover:bg-accent/5 rounded-lg shadow-sm",
         ghost: "hover:bg-muted hover:text-foreground rounded-lg",
         link: "text-primary underline-offset-4 hover:underline",
         // Royal Premium variants
-        gold: "bg-gold-metallic text-royal-purple hover:bg-gold-dark hover:shadow-lg rounded-lg shadow-md font-semibold",
-        "gold-outline": "border-2 border-gold-metallic bg-transparent text-gold-metallic hover:bg-gold-metallic hover:text-royal-purple rounded-lg font-semibold",
-        hero: "bg-gold-metallic text-royal-purple hover:bg-gold-dark hover:shadow-lg transform hover:-translate-y-0.5 rounded-lg font-semibold shadow-md text-base",
-        "hero-outline": "border-2 border-gold-metallic/50 bg-transparent text-ivory hover:border-gold-metallic hover:text-gold-metallic rounded-lg font-semibold",
-        royal: "bg-royal-purple text-ivory hover:bg-deep-plum rounded-lg font-semibold shadow-md",
-        "royal-outline": "border-2 border-royal-purple bg-transparent text-royal-purple hover:bg-royal-purple hover:text-ivory rounded-lg font-semibold",
-        ivory: "bg-ivory text-royal-purple hover:bg-warm-ivory rounded-lg font-semibold shadow-md",
-        whatsapp: "bg-emerald text-ivory hover:bg-forest-green rounded-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5",
+        gold: "bg-accent text-white border border-[#1c0f24]/10 shadow-[0_0_0_3px_#d5a037_inset] hover:bg-accent/90 transform hover:-translate-y-0.5 transition duration-300 rounded-lg",
+        "gold-outline": "bg-transparent text-accent border border-accent shadow-[0_0_0_3px_#d5a037_inset] hover:bg-accent/10 transform hover:-translate-y-0.5 transition duration-300 rounded-lg",
+        hero: "bg-accent text-white border border-[#1c0f24]/10 shadow-[0_0_0_3px_#d5a037_inset] hover:bg-accent/90 transform hover:-translate-y-1 transition duration-300 rounded-lg font-semibold text-base",
+        "hero-outline": "bg-transparent text-white border border-white/20 shadow-[0_0_0_3px_#ffffff_inset] hover:bg-white/10 transform hover:-translate-y-1 transition duration-300 rounded-lg font-semibold",
+        royal: "bg-[#1d0a27] text-white border border-white/10 shadow-[0_0_0_3px_#1d0a27_inset] hover:bg-[#35124e] transform hover:-translate-y-0.5 transition duration-300 rounded-lg font-semibold",
+        "royal-outline": "border border-border bg-transparent text-foreground hover:border-accent rounded-lg font-semibold",
+        ivory: "bg-[#faf9f5] text-[#1c0f24] border border-[#1c0f24]/15 shadow-[0_0_0_3px_#faf9f5_inset] hover:bg-[#eae8e2] transform hover:-translate-y-0.5 transition duration-300 rounded-lg font-semibold",
+        whatsapp: "bg-emerald text-white hover:bg-emerald/90 rounded-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5",
       },
       size: {
         default: "h-11 px-7 py-2 text-sm",
