@@ -119,7 +119,7 @@ const Hero = () => {
             </span>
             <span className="block overflow-hidden relative py-1">
               <motion.span 
-                className="block text-[#C8A15A]"
+                className="block text-[#38BDF8]"
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.8, ease: easeTransition, delay: 0.4 }}
@@ -146,12 +146,14 @@ const Hero = () => {
             transition={{ duration: 0.8, ease: easeTransition, delay: 0.6 }}
             className="flex flex-wrap gap-4"
           >
-            <Link to="/contact">
-              <Button size="lg" className="group bg-white hover:bg-white/90 text-black font-sans text-sm font-medium px-8 py-6 rounded-full transition-all duration-300">
-                Get a Quote
-                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
+            <Button 
+              onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
+              size="lg" 
+              className="group bg-white hover:bg-white/90 text-black font-sans text-sm font-medium px-8 py-6 rounded-full transition-all duration-300"
+            >
+              Get a Quote
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+            </Button>
             <Link to="/catalogue">
               <Button variant="outline" size="lg" className="bg-transparent border border-white/20 hover:border-white/50 text-[#FFFFFF] font-sans text-sm font-medium px-8 py-6 rounded-full transition-all duration-300">
                 Explore Work

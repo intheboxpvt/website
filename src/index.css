@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    /* HSL Mappings for new Dark Cinematic palette */
+    /* HSL Mappings for new Dark Cinematic palette - Overriding gold to bright ice-cyan (#38BDF8) */
     --royal-purple: 0 0% 100%;       /* Heading titles / high contrast text */
     --aubergine: 0 0% 2%;            /* Background #050505 */
     --deep-plum: 0 0% 4%;            /* Background #0B0B0B */
@@ -16,9 +16,9 @@
     --ivory: 0 0% 2%;                /* pure black background */
     --off-white: 0 0% 2%;
     --warm-ivory: 0 0% 4%;           /* surface background */
-    --gold-metallic: 42 52% 57%;     /* #C8A15A warm gold */
-    --gold-light: 42 52% 70%;
-    --gold-dark: 42 52% 40%;
+    --gold-metallic: 199 95% 60%;     /* #38BDF8 ice-cyan */
+    --gold-light: 199 95% 75%;
+    --gold-dark: 199 95% 40%;
     --emerald: 160 50% 35%;
     --forest-green: 150 40% 30%;
     
@@ -41,7 +41,7 @@
     --muted: 240 5% 65%;
     --muted-foreground: 240 5% 65%;
 
-    --accent: 42 52% 57%;            /* Gold */
+    --accent: 199 95% 60%;            /* Accent ice-cyan */
     --accent-foreground: 0 0% 2%;
 
     --destructive: 0 84% 60%;
@@ -49,7 +49,7 @@
 
     --border: 0 0% 100% / 0.08;
     --input: 0 0% 100% / 0.08;
-    --ring: 42 52% 57%;
+    --ring: 199 95% 60%;
 
     --radius: 0.5rem;
 
@@ -59,20 +59,20 @@
     --color-card: #111111;
     --color-foreground: #FFFFFF;
     --color-muted: #A1A1AA;
-    --color-accent: #C8A15A;
+    --color-accent: #38BDF8;
     --color-accent-2: #5B4CFF;
     --color-border: rgba(255,255,255,0.08);
 
     /* Premium Shadows adjusted for dark mode */
     --shadow-soft: 0 4px 20px -4px rgba(0, 0, 0, 0.7);
     --shadow-elevated: 0 16px 48px -12px rgba(0, 0, 0, 0.9);
-    --shadow-gold: 0 8px 32px -8px rgba(200, 161, 90, 0.15);
+    --shadow-gold: 0 8px 32px -8px rgba(56, 189, 248, 0.15);
     --shadow-card: 0 8px 30px -10px rgba(0, 0, 0, 0.5);
 
     /* Gradients */
     --gradient-royal: linear-gradient(135deg, #050505 0%, #0B0B0B 50%, #111111 100%);
     --gradient-hero: linear-gradient(160deg, #050505 0%, #050505 40%, #0B0B0B 100%);
-    --gradient-gold: linear-gradient(135deg, #96733b 0%, #C8A15A 50%, #dfc086 100%);
+    --gradient-gold: linear-gradient(135deg, #0284c7 0%, #38bdf8 50%, #7dd3fc 100%);
     --gradient-ivory: linear-gradient(180deg, #050505 0%, #0B0B0B 100%);
 
     /* Sidebar */
@@ -83,7 +83,7 @@
     --sidebar-accent: 0 0% 7%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 0 0% 100% / 0.08;
-    --sidebar-ring: 42 52% 57%;
+    --sidebar-ring: 199 95% 60%;
   }
 
   .dark {
@@ -105,12 +105,12 @@
     --muted: 240 5% 65%;
     --muted-foreground: 240 5% 65%;
 
-    --accent: 42 52% 57%;
+    --accent: 199 95% 60%;
     --accent-foreground: 0 0% 2%;
 
     --border: 0 0% 100% / 0.08;
     --input: 0 0% 100% / 0.08;
-    --ring: 42 52% 57%;
+    --ring: 199 95% 60%;
   }
 }
 

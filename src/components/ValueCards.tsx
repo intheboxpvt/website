@@ -62,7 +62,7 @@ const ValueCards = () => {
                 </div>
                 
                 {/* Accent Icon at the bottom */}
-                <div className="mt-8 flex items-center justify-start text-[#C8A15A] opacity-40 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="mt-8 flex items-center justify-start text-[#38BDF8] opacity-40 group-hover:opacity-100 transition-opacity duration-300">
                   <value.icon className="w-5 h-5" />
                 </div>
               </div>

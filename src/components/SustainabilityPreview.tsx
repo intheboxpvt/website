@@ -9,7 +9,7 @@ const SustainabilityPreview = () => {
     <section className="section-padding bg-[#0B0B0B] relative overflow-hidden border-t border-white/5">
       {/* Background elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald/[0.02] rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#C8A15A]/[0.01] rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#38BDF8]/[0.01] rounded-full blur-3xl"></div>
 
       <div className="max-w-[1400px] mx-auto relative z-10">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
@@ -46,7 +46,7 @@ const SustainabilityPreview = () => {
                 </div>
               </div>
 
-              <Link to="/sustainability">
+              <Link to="/about">
                 <Button className="group bg-white hover:bg-white/90 text-black font-sans text-sm font-semibold px-8 py-6 rounded-full transition-all duration-300">
                   Learn More
                   <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />

@@ -7,8 +7,6 @@ const Footer = () => {
     { label: "About Us", href: "/about" },
     { label: "Catalogue", href: "/catalogue" },
     { label: "Services & Process", href: "/services" },
-    { label: "Sustainability", href: "/sustainability" },
-    { label: "Contact", href: "/contact" },
   ];
 
   const socialLinks = [
@@ -115,12 +113,15 @@ const Footer = () => {
             © {new Date().getFullYear()} InTheBox. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link to="/sustainability" className="font-mono text-xs text-white/40 hover:text-white transition-colors duration-300">
-              Sustainability SLA
+            <Link to="/about" className="font-mono text-xs text-white/40 hover:text-white transition-colors duration-300">
+              Sustainability
             </Link>
-            <Link to="/contact" className="font-mono text-xs text-white/40 hover:text-white transition-colors duration-300">
+            <button 
+              onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
+              className="font-mono text-xs text-white/40 hover:text-white transition-colors duration-300"
+            >
               Get Quote
-            </Link>
+            </button>
           </div>
         </div>
       </div>

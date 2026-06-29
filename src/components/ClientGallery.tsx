@@ -55,12 +55,12 @@ const ClientGallery = () => {
                 <div>
                   <div className="flex items-center justify-between mb-6">
                     <span className="font-mono text-xs text-white/40">0{index + 1}</span>
-                    <Quote className="w-5 h-5 text-[#C8A15A]/20" />
+                    <Quote className="w-5 h-5 text-[#38BDF8]/20" />
                   </div>
                   
                   <div className="flex gap-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 text-[#C8A15A] fill-[#C8A15A]" />
+                      <Star key={i} className="w-3 h-3 text-[#38BDF8] fill-[#38BDF8]" />
                     ))}
                   </div>
                   

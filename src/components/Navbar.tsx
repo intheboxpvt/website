@@ -13,8 +13,6 @@ const Navbar = () => {
     { label: "About Us", href: "/about" },
     { label: "Catalogue", href: "/catalogue" },
     { label: "Services & Process", href: "/services" },
-    { label: "Sustainability", href: "/sustainability" },
-    { label: "Contact", href: "/contact" },
   ];
 
   useEffect(() => {
@@ -77,13 +75,14 @@ const Navbar = () => {
  
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Link to="/contact">
-              <Button className="bg-white hover:bg-white/90 text-black font-sans text-xs font-semibold px-6 py-2.5 rounded-full transition-all duration-300">
-                Get a Quote
-              </Button>
-            </Link>
+            <Button 
+              onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
+              className="bg-white hover:bg-white/90 text-black font-sans text-xs font-semibold px-6 py-2.5 rounded-full transition-all duration-300"
+            >
+              Get a Quote
+            </Button>
           </div>
-
+ 
           {/* Mobile Menu Button */}
           <button
             className="lg:hidden text-[#FFFFFF] p-2 hover:bg-white/5 rounded-full transition-colors"
@@ -93,7 +92,7 @@ const Navbar = () => {
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-
+ 
         {/* Mobile Navigation Full-screen Overlay */}
         {isOpen && (
           <div className="fixed inset-0 top-0 left-0 w-full h-screen bg-[#050505]/95 z-40 flex flex-col justify-center px-8 lg:hidden animate-fade-in">
@@ -116,18 +115,21 @@ const Navbar = () => {
                   style={{ animationDelay: `${i * 100}ms` }}
                   className={`font-sans text-2xl tracking-wider uppercase transition-colors py-2 animate-fade-up ${
                     isActive(link.href) 
-                      ? "text-[#C8A15A] font-semibold" 
+                      ? "text-[#38BDF8] font-semibold" 
                       : "text-[#A1A1AA] hover:text-[#FFFFFF]"
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
-              <Link to="/contact" onClick={() => setIsOpen(false)} className="mt-8 mx-auto w-full max-w-xs animate-fade-up" style={{ animationDelay: '600ms' }}>
-                <Button variant="gold" size="lg" className="w-full bg-[#C8A15A] hover:bg-[#C8A15A]/90 text-[#050505] font-sans text-xs tracking-widest uppercase font-medium py-6">
+              <div className="mt-8 mx-auto w-full max-w-xs animate-fade-up" style={{ animationDelay: '600ms' }}>
+                <Button 
+                  onClick={() => { setIsOpen(false); window.dispatchEvent(new CustomEvent("open-quote-modal")); }}
+                  className="w-full bg-[#38BDF8] hover:bg-[#38BDF8]/90 text-black font-sans text-xs tracking-widest uppercase font-semibold py-6 rounded-full transition-all duration-300"
+                >
                   Get a Quote
                 </Button>
-              </Link>
+              </div>
             </div>
           </div>
         )}

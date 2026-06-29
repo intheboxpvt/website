@@ -85,7 +85,7 @@ const PricingTiers = () => {
                   <div className="flex items-center justify-between mb-6">
                     <span className="font-mono text-xs text-white/40">0{index + 1}</span>
                     {tier.popular && (
-                      <span className="text-[#C8A15A] text-[10px] font-mono tracking-widest uppercase">
+                      <span className="text-[#38BDF8] text-[10px] font-mono tracking-widest uppercase">
                         Most Popular
                       </span>
                     )}
@@ -95,7 +95,7 @@ const PricingTiers = () => {
                     <h3 className="font-serif text-3xl font-light text-[#FFFFFF]">
                       {tier.name}
                     </h3>
-                    <p className="font-mono text-xs text-[#C8A15A] tracking-wider uppercase mt-2">
+                    <p className="font-mono text-xs text-[#38BDF8] tracking-wider uppercase mt-2">
                       {tier.subtitle}
                     </p>
                   </div>
@@ -116,19 +116,18 @@ const PricingTiers = () => {
                   </ul>
                 </div>
 
-                <Link to="/contact" className="mt-auto">
-                  <Button
-                    size="lg"
-                    className={`w-full group rounded-full font-sans text-xs tracking-widest uppercase font-semibold py-5 ${
-                      tier.popular
-                        ? "bg-white hover:bg-white/90 text-black"
-                        : "bg-transparent border border-white/20 hover:border-white/50 text-[#FFFFFF]"
-                    }`}
-                  >
-                    Get Started
-                    <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </Link>
+                <Button
+                  onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
+                  size="lg"
+                  className={`w-full mt-auto group rounded-full font-sans text-xs tracking-widest uppercase font-semibold py-5 ${
+                    tier.popular
+                      ? "bg-white hover:bg-white/90 text-black"
+                      : "bg-transparent border border-white/20 hover:border-white/50 text-[#FFFFFF]"
+                  }`}
+                >
+                  Get Started
+                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                </Button>
               </div>
             </ScrollReveal>
           ))}
