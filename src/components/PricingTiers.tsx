@@ -72,65 +72,68 @@ const PricingTiers = () => {
         </ScrollReveal>
 
         <div className="grid md:grid-cols-3 gap-4 lg:gap-6">
-          {tiers.map((tier, index) => (
-            <ScrollReveal key={tier.name} delay={index * 150}>
-              <div
-                className={`relative rounded-none p-8 lg:p-12 transition-all duration-500 h-full flex flex-col justify-between bg-card border ${
-                  tier.popular
-                    ? "border-accent shadow-gold z-10"
-                    : "border-border shadow-soft hover:border-accent/40"
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="font-mono text-xs text-foreground/40">0{index + 1}</span>
-                    {tier.popular && (
-                      <span className="text-accent text-[10px] font-mono tracking-widest uppercase">
-                        Most Popular
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="mb-6">
-                    <h3 className="font-serif text-3xl font-light text-foreground">
-                      {tier.name}
-                    </h3>
-                    <p className="font-mono text-xs text-accent tracking-wider uppercase mt-2">
-                      {tier.subtitle}
-                    </p>
-                  </div>
-
-                  <p className="font-sans text-sm text-foreground/75 mb-8 leading-relaxed">
-                    {tier.description}
-                  </p>
-
-                  <ul className="space-y-4 mb-8">
-                    {tier.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-3">
-                        <Check className="w-4 h-4 flex-shrink-0 text-accent/60 mt-0.5" />
-                        <span className="font-sans text-sm text-foreground/85">
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <Button
-                  onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
-                  size="lg"
-                  className={`w-full mt-auto group rounded-lg font-sans text-xs tracking-widest uppercase font-semibold py-5 transition-all duration-300 shadow-sm ${
-                    tier.popular
-                      ? "bg-accent hover:bg-accent/90 text-white shadow-md"
-                      : "bg-transparent border border-accent hover:bg-accent/10 text-accent"
+          {tiers.map((tier, index) => {
+            const isPopular = tier.popular;
+            return (
+              <ScrollReveal key={tier.name} delay={index * 150}>
+                <div
+                  className={`relative rounded-none p-8 lg:p-12 transition-all duration-500 h-full flex flex-col justify-between border ${
+                    isPopular
+                      ? "bg-gradient-to-b from-[#1d0a27] to-[#35124e] text-white border-accent shadow-gold z-10"
+                      : "bg-card text-foreground border-border shadow-soft hover:border-accent/40"
                   }`}
                 >
-                  Get Started
-                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </div>
-            </ScrollReveal>
-          ))}
+                  <div>
+                    <div className="flex items-center justify-between mb-6">
+                      <span className={`font-mono text-xs ${isPopular ? "text-white/40" : "text-foreground/40"}`}>0{index + 1}</span>
+                      {isPopular && (
+                        <span className="text-accent text-[10px] font-mono tracking-widest uppercase">
+                          Most Popular
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="mb-6">
+                      <h3 className={`font-serif text-3xl font-light ${isPopular ? "text-white" : "text-foreground"}`}>
+                        {tier.name}
+                      </h3>
+                      <p className="font-mono text-xs text-accent tracking-wider uppercase mt-2">
+                        {tier.subtitle}
+                      </p>
+                    </div>
+
+                    <p className={`font-sans text-sm mb-8 leading-relaxed ${isPopular ? "text-white/80" : "text-foreground/75"}`}>
+                      {tier.description}
+                    </p>
+
+                    <ul className="space-y-4 mb-8">
+                      {tier.features.map((feature) => (
+                        <li key={feature} className="flex items-start gap-3">
+                          <Check className="w-4 h-4 flex-shrink-0 text-accent mt-0.5" />
+                          <span className={`font-sans text-sm ${isPopular ? "text-white/90" : "text-foreground/85"}`}>
+                            {feature}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <Button
+                    onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
+                    size="lg"
+                    className={`w-full mt-auto group rounded-lg font-sans text-xs tracking-widest uppercase font-semibold py-5 transition-all duration-300 shadow-sm ${
+                      isPopular
+                        ? "bg-accent hover:bg-accent/90 text-[#1c0f24] shadow-md border border-accent"
+                        : "bg-transparent border border-accent hover:bg-accent/10 text-accent"
+                    }`}
+                  >
+                    Get Started
+                    <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </div>
+              </ScrollReveal>
+            );
+          })}
         </div>
       </div>
     </section>

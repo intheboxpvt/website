@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import Services from "./pages/Services";
 import Catalogue from "./pages/Catalogue";
 import About from "./pages/About";
+import Sustainability from "./pages/Sustainability";
 import DesignStudio from "./pages/DesignStudio";
 import NotFound from "./pages/NotFound";
 import { QuoteDialog } from "./components/QuoteDialog";
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/services" element={<Services />} />
             <Route path="/catalogue" element={<Catalogue />} />
             <Route path="/about" element={<About />} />
+            <Route path="/sustainability" element={<Sustainability />} />
             <Route path="/studio" element={<DesignStudio />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

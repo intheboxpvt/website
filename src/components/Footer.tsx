@@ -123,7 +123,7 @@ const Footer = () => {
             © {new Date().getFullYear()} InTheBox. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link to="/about" className="font-mono text-xs text-white/40 hover:text-white transition-colors duration-300">
+            <Link to="/sustainability" className="font-mono text-xs text-white/40 hover:text-white transition-colors duration-300">
               Sustainability
             </Link>
             <button 

@@ -16,9 +16,9 @@
     --ivory: 45 30% 96%;
     --off-white: 40 20% 98%;
     --warm-ivory: 42 35% 93%;
-    --gold-metallic: 42 70% 50%;
-    --gold-light: 45 60% 60%;
-    --gold-dark: 40 75% 40%;
+    --gold-metallic: 45 95% 52%;
+    --gold-light: 48 95% 65%;
+    --gold-dark: 42 95% 40%;
     --emerald: 160 50% 35%;
     --forest-green: 150 40% 30%;
     
@@ -41,7 +41,7 @@
     --muted: 40 20% 92%;
     --muted-foreground: 270 25% 40%;
 
-    --accent: 42 70% 50%;
+    --accent: 45 95% 52%;
     --accent-foreground: 270 40% 15%;
 
     --destructive: 0 84% 60%;
@@ -49,7 +49,7 @@
 
     --border: 270 15% 85%;
     --input: 270 15% 85%;
-    --ring: 42 70% 50%;
+    --ring: 45 95% 52%;
 
     --radius: 0.5rem;
 
@@ -59,7 +59,7 @@
     --color-card: #ffffff;
     --color-foreground: #1c0f24;
     --color-muted: #6e5c7a;
-    --color-accent: #c5a85c;
+    --color-accent: #fbbf24;
     --color-accent-2: #4c1d95;
     --color-border: rgba(76, 29, 149, 0.15);
 
@@ -270,15 +270,15 @@
 
 @layer utilities {
   .font-serif {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: 'ABCFavoritVariable', 'Instrument Sans', 'Inter', sans-serif;
   }
 
   .font-sans {
-    font-family: 'Instrument Sans', 'Inter', sans-serif;
+    font-family: 'ABCFavoritVariable', 'Instrument Sans', 'Inter', sans-serif;
   }
 
   .font-mono {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'ABCFavoritVariable', 'Instrument Sans', 'Inter', sans-serif;
   }
 
   /* Custom animation delays */
@@ -350,35 +350,33 @@
   /* Premium Inset Button Classes */
   .btn-premium-gold {
     position: relative;
-    background-color: #d5a037 !important;
-    border: 2px solid #d5a037 !important;
+    background-color: #fbbf24 !important;
+    border: 2px solid #fbbf24 !important;
     color: #1c0f24 !important;
     font-weight: 700 !important;
     border-radius: 8px !important;
-    box-shadow: inset 0 0 0 3px #1c0f24 !important;
     transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
   .btn-premium-gold:hover {
     background-color: transparent !important;
-    color: #d5a037 !important;
-    box-shadow: inset 0 0 0 3px #d5a037 !important;
+    color: #fbbf24 !important;
+    box-shadow: inset 0 0 0 3px #fbbf24 !important;
     transform: translateY(-3px) !important;
   }
 
   .btn-premium-outline {
     position: relative;
     background-color: transparent !important;
-    border: 2px solid #d5a037 !important;
-    color: #d5a037 !important;
+    border: 2px solid #fbbf24 !important;
+    color: #fbbf24 !important;
     font-weight: 700 !important;
     border-radius: 8px !important;
-    box-shadow: inset 0 0 0 3px #d5a037 !important;
+    box-shadow: inset 0 0 0 3px #fbbf24 !important;
     transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
   .btn-premium-outline:hover {
-    background-color: #d5a037 !important;
+    background-color: #fbbf24 !important;
     color: #1c0f24 !important;
-    box-shadow: inset 0 0 0 3px #1c0f24 !important;
     transform: translateY(-3px) !important;
   }
 }
