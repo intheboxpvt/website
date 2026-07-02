@@ -9,6 +9,7 @@ export type BoxType =
   | 'drawer'           // slide-out drawer box
   | 'perfume'          // tall narrow tuck-end (perfume/cosmetics)
   | 'gift'             // wide shallow lid-base gift box
+  | 'bag'              // custom handle paper bag
 
 export type Material =
   | 'white_cardboard'  // coated white board 220–300gsm

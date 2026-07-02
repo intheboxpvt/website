@@ -9,6 +9,15 @@ import ITBLabel from "@/components/configurator/ui/ITBLabel";
 import ITBDivider from "@/components/configurator/ui/ITBDivider";
 import { useConfigStore } from "@/lib/configurator/store";
 
+// ConfigPanel input components
+import BoxTypeSelector from "@/components/configurator/BoxTypeSelector";
+import DimensionsInput from "@/components/configurator/DimensionsInput";
+import MaterialPicker from "@/components/configurator/MaterialPicker";
+import FinishPicker from "@/components/configurator/FinishPicker";
+import FoilSelect from "@/components/configurator/FoilSelect";
+import PrintingSelect from "@/components/configurator/PrintingSelect";
+import QuantityInput from "@/components/configurator/QuantityInput";
+
 // Dynamic import helper for Vite React SPA
 function dynamic<T extends React.ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>,
@@ -22,7 +31,7 @@ function dynamic<T extends React.ComponentType<any>>(
   );
 }
 
-// Dynamically import Viewer3D with SSR disabled analogue in Vite SPA
+// Dynamically import Viewer3D with SSR disabled
 const Viewer3D = dynamic(
   () => import("@/components/configurator/Viewer3D"),
   {
@@ -61,7 +70,7 @@ export const Customize = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[color:var(--itb-bg)] text-[color:var(--itb-fg)] font-body flex flex-col">
+    <div className="min-h-screen bg-[color:var(--itb-bg)] text-[color:var(--itb-fg)] font-body flex flex-col overflow-x-hidden">
       <SEO 
         title="Design Your Packaging | InTheBox Configurator"
         description="Visualize your custom packaging in 3D..."
@@ -126,10 +135,16 @@ export const Customize = () => {
         <div className="flex-1 flex flex-col md:flex-row">
           
           {/* Left Column: 3D Canvas Area */}
-          <div className="w-full md:w-[55%] bg-[color:var(--itb-bg)] md:sticky md:top-[calc(var(--itb-nav-h)+80px)] h-[calc(100vh-var(--itb-nav-h)-80px)] flex flex-col justify-between p-6 md:p-8 z-10">
-            {/* Center Canvas Placement */}
-            <div className="flex-1 flex items-center justify-center border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] overflow-hidden">
-              <Viewer3D />
+          <div className="w-full md:w-[55%] bg-[color:var(--itb-bg)] md:sticky md:top-[calc(var(--itb-nav-h)+80px)] h-[50vh] md:h-[calc(100vh-var(--itb-nav-h)-80px)] flex flex-col justify-between p-6 md:p-8 z-10">
+            {/* Center Canvas or Dieline Placeholder */}
+            <div className="flex-1 flex items-center justify-center border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] overflow-hidden bg-[#050505]">
+              {store.viewMode === "3d" ? (
+                <Viewer3D />
+              ) : (
+                <span className="font-mono text-xs text-[color:var(--itb-muted)] uppercase tracking-[0.2em] text-center px-4">
+                  Dieline view coming soon
+                </span>
+              )}
             </div>
 
             {/* Controls Rows */}
@@ -142,7 +157,7 @@ export const Customize = () => {
                     onClick={() => store.setViewMode("3d")}
                     className={`px-4 py-1.5 rounded-full text-[10px] font-mono uppercase tracking-wider transition-all duration-300 ${
                       store.viewMode === "3d" 
-                        ? "bg-[color:var(--itb-accent)] text-black font-bold" 
+                        ? "bg-[color:var(--itb-accent)] text-black font-bold animate-pulse-soft" 
                         : "text-[color:var(--itb-muted)] hover:text-[color:var(--itb-fg)]"
                     }`}
                   >
@@ -168,7 +183,7 @@ export const Customize = () => {
                   onClick={() => store.setIsRotating(!store.isRotating)}
                   className={`p-2 rounded-full border transition-all duration-300 ${
                     store.isRotating 
-                      ? "border-[color:var(--itb-accent)] text-[color:var(--itb-accent)] bg-[rgba(200,161,90,0.08)]" 
+                      ? "border-[color:var(--itb-accent)] text-[color:var(--itb-accent)] bg-[rgba(200,161,90,0.08)] ring-1 ring-[color:var(--itb-accent)]" 
                       : "border-[color:var(--itb-border)] text-[color:var(--itb-muted)] hover:text-[color:var(--itb-fg)] hover:border-[color:var(--itb-muted)]"
                   }`}
                   title="Toggle Auto Rotation"
@@ -188,7 +203,7 @@ export const Customize = () => {
                     max="100"
                     value={Math.round(store.lidOpenAmount * 100)}
                     onChange={(e) => store.setLidOpen(parseInt(e.target.value) / 100)}
-                    className="flex-1 accent-[color:var(--itb-accent)] bg-[color:var(--itb-surface)] h-1 rounded-lg appearance-none cursor-pointer border border-[color:var(--itb-border)]"
+                    className="flex-1 bg-[color:var(--itb-border)] h-[2px] rounded-lg appearance-none cursor-pointer accent-[color:var(--itb-accent)] [&::-webkit-slider-thumb]:w-[14px] [&::-webkit-slider-thumb]:h-[14px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[color:var(--itb-accent)] [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:w-[14px] [&::-moz-range-thumb]:h-[14px] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[color:var(--itb-accent)] [&::-moz-range-thumb]:border-none"
                   />
                   <span className="font-mono text-[9px] text-[color:var(--itb-muted)] uppercase tracking-wider">Open</span>
                 </div>
@@ -197,78 +212,64 @@ export const Customize = () => {
           </div>
 
           {/* Right Column: Configurator Panel */}
-          <div className="w-full md:w-[45%] bg-[color:var(--itb-surface)] border-t md:border-t-0 md:border-l border-[color:var(--itb-border)] p-6 md:p-8 flex flex-col justify-between z-10">
+          <div className="w-full md:w-[45%] bg-[color:var(--itb-surface)] border-t md:border-t-0 md:border-l border-[color:var(--itb-border)] p-6 md:p-8 flex flex-col justify-between z-10 h-auto md:h-[calc(100vh-var(--itb-nav-h)-80px)] md:overflow-y-auto">
             {/* Input Sections Scroll Area */}
             <div className="space-y-0">
               
               {/* BOX TYPE Section */}
               <div className="py-6">
                 <ITBLabel text="BOX TYPE" />
-                <p className="text-xs text-[color:var(--itb-muted)] font-sans mt-2">
-                  Select structural container template (hardcoded blueprints).
-                </p>
+                <BoxTypeSelector />
               </div>
               <ITBDivider className="my-0" />
 
               {/* DIMENSIONS Section */}
               <div className="py-6">
                 <ITBLabel text="DIMENSIONS" />
-                <p className="text-xs text-[color:var(--itb-muted)] font-sans mt-2">
-                  Input custom width, height, and depth parameters.
-                </p>
+                <DimensionsInput />
               </div>
               <ITBDivider className="my-0" />
 
               {/* MATERIAL Section */}
               <div className="py-6">
                 <ITBLabel text="MATERIAL" />
-                <p className="text-xs text-[color:var(--itb-muted)] font-sans mt-2">
-                  Choose premium board weights, kraft wrapping, or eco agri-waste options.
-                </p>
+                <MaterialPicker />
               </div>
               <ITBDivider className="my-0" />
 
               {/* FINISHING Section */}
               <div className="py-6">
                 <ITBLabel text="FINISHING" />
-                <p className="text-xs text-[color:var(--itb-muted)] font-sans mt-2">
-                  Apply soft touch matte laminations or gloss coatings.
-                </p>
+                <FinishPicker />
               </div>
               <ITBDivider className="my-0" />
 
               {/* FOIL STAMPING Section */}
               <div className="py-6">
                 <ITBLabel text="FOIL STAMPING" />
-                <p className="text-xs text-[color:var(--itb-muted)] font-sans mt-2">
-                  Enable gold, copper, silver, or black foil branding.
-                </p>
+                <FoilSelect />
               </div>
               <ITBDivider className="my-0" />
 
               {/* PRINTING SIDES Section */}
               <div className="py-6">
                 <ITBLabel text="PRINTING SIDES" />
-                <p className="text-xs text-[color:var(--itb-muted)] font-sans mt-2">
-                  Configure single or double-sided pattern prints.
-                </p>
+                <PrintingSelect />
               </div>
               <ITBDivider className="my-0" />
 
               {/* QUANTITY Section */}
               <div className="py-6">
                 <ITBLabel text="QUANTITY" />
-                <p className="text-xs text-[color:var(--itb-muted)] font-sans mt-2">
-                  Set batch production run quantities (Minimum Order applies).
-                </p>
+                <QuantityInput />
               </div>
               <ITBDivider className="my-0" />
 
               {/* YOUR LOGO Section */}
               <div className="py-6">
                 <ITBLabel text="YOUR LOGO" />
-                <p className="text-xs text-[color:var(--itb-muted)] font-sans mt-2">
-                  Upload vector files for hot stamping placement reviews.
+                <p className="text-xs text-[color:var(--itb-muted)] font-sans mt-2 italic text-left">
+                  (placeholder — built in Prompt 5)
                 </p>
               </div>
               <ITBDivider className="my-0" />
@@ -280,11 +281,13 @@ export const Customize = () => {
                 label="Save Custom Design" 
                 variant="outline" 
                 fullWidth 
+                onClick={() => console.log("Save Custom Design clicked:", store)}
               />
               <ITBButton 
-                label="Submit for Prototyping Quote" 
+                label="Request Quote →" 
                 variant="primary" 
                 fullWidth 
+                onClick={() => console.log("Request Quote clicked:", store)}
               />
             </div>
           </div>

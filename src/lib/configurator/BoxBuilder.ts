@@ -56,6 +56,17 @@ export function buildBoxGroup(input: BuildInput): THREE.Group {
     // Just a tube — no top/bottom
     addSleeveTube(group, l, w, h, t, mat)
 
+  } else if (type === 'bag') {
+    // Paper bag: box shell open at the top with a handles strap
+    addBoxShell(group, l, w, h, t, mat, 'bag')
+
+    const handleGeom = new THREE.TorusGeometry(l * 0.25, 0.08, 8, 24, Math.PI)
+    const handleMat = new THREE.MeshStandardMaterial({ color: '#333333', roughness: 1.0 })
+    const handleMesh = new THREE.Mesh(handleGeom, handleMat)
+    handleMesh.position.set(0, h, 0)
+    handleMesh.castShadow = true
+    group.add(handleMesh)
+
   } else {
     // straight_tuck, reverse_tuck, perfume, mailer — all basic tuck boxes
     addBoxShell(group, l, w, h, t, mat, 'body')
