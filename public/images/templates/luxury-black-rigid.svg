@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0b0b" />
+      <stop offset="100%" stop-color="#161616" />
+    </linearGradient>
+  </defs>
+  <rect width="240" height="180" fill="url(#bgGrad)"/>
+  <rect x="0.5" y="0.5" width="239" height="179" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  
+  <!-- Draw 3D Isometric Rigid Box (Lid and Base Separated slightly) -->
+  <!-- Base -->
+  <g transform="translate(0, 15)">
+    <path d="M70,95 L120,70 L170,95 L120,120 Z" fill="#181818" stroke="#333333" stroke-width="1.5"/>
+    <path d="M70,95 L70,115 L120,140 L120,120 Z" fill="#121212" stroke="#333333" stroke-width="1.5"/>
+    <path d="M120,120 L120,140 L170,115 L170,95 Z" fill="#1c1c1c" stroke="#333333" stroke-width="1.5"/>
+  </g>
+  <!-- Lid (hovering above with Gold Highlights) -->
+  <g transform="translate(0, -10)">
+    <path d="M70,75 L120,50 L170,75 L120,100 Z" fill="#222222" stroke="#C8A15A" stroke-width="1.5"/>
+    <path d="M70,75 L70,85 L120,110 L120,100 Z" fill="#1a1a1a" stroke="#C8A15A" stroke-width="1.5"/>
+    <path d="M120,100 L120,110 L170,85 L170,75 Z" fill="#282828" stroke="#C8A15A" stroke-width="1.5"/>
+    <!-- Gold Foil Accent Line -->
+    <path d="M120,55 L120,95" stroke="#C8A15A" stroke-width="1" stroke-dasharray="3,3"/>
+  </g>
+
+  <text x="120" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#C8A15A" text-anchor="middle" letter-spacing="1.5">
+    RIGID BOX · GOLD FOIL
+  </text>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0b0b" />
+      <stop offset="100%" stop-color="#161616" />
+    </linearGradient>
+  </defs>
+  <rect width="240" height="180" fill="url(#bgGrad)"/>
+  <rect x="0.5" y="0.5" width="239" height="179" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  
+  <!-- Draw 3D Isometric Mailer Box (Kraft Brown colors) -->
+  <g transform="translate(0, 10)">
+    <!-- Top Lid (Fully open angled up) -->
+    <path d="M70,80 L120,40 L120,10 L70,50 Z" fill="#b0854d" stroke="#5c4322" stroke-width="1.5"/>
+    <path d="M120,40 L170,80 L170,50 L120,10 Z" fill="#cca36a" stroke="#5c4322" stroke-width="1.5"/>
+    
+    <!-- Base Box -->
+    <path d="M70,80 L120,55 L170,80 L120,105 Z" fill="#b0854d" stroke="#5c4322" stroke-width="1.5"/>
+    <path d="M70,80 L70,105 L120,130 L120,105 Z" fill="#996e38" stroke="#5c4322" stroke-width="1.5"/>
+    <path d="M120,105 L120,130 L170,105 L170,80 Z" fill="#c2965d" stroke="#5c4322" stroke-width="1.5"/>
+  </g>
+
+  <text x="120" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#b0854d" text-anchor="middle" letter-spacing="1.5">
+    MAILER · NATURAL KRAFT
+  </text>
+</svg>

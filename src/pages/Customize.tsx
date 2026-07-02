@@ -1,13 +1,15 @@
-import React, { useState, Suspense } from "react";
+import React, { useState, Suspense, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { RotateCw, ChevronDown, ChevronUp } from "lucide-react";
+import { RotateCw, ChevronDown, ChevronUp, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import SEO from "@/components/SEO";
 import ITBButton from "@/components/configurator/ui/ITBButton";
 import ITBLabel from "@/components/configurator/ui/ITBLabel";
 import ITBDivider from "@/components/configurator/ui/ITBDivider";
 import { useConfigStore } from "@/lib/configurator/store";
+import TemplateGallery from "@/components/configurator/TemplateGallery";
+import { TEMPLATES } from "@/lib/configurator/templates";
 
 // ConfigPanel input components
 import BoxTypeSelector from "@/components/configurator/BoxTypeSelector";
@@ -56,8 +58,31 @@ export const Customize = () => {
   // State for mobile guide strip expand/collapse
   const [isGuideExpanded, setIsGuideExpanded] = useState(false);
 
+  // State for dismissible banner when coming from the product catalogue
+  const [showCatalogueBanner, setShowCatalogueBanner] = useState(
+    searchParams.get("source") === "catalogue"
+  );
+  const catalogueProductName = searchParams.get("name") || "";
+
   // Zustand Store variables
   const store = useConfigStore();
+
+  // Load configuration template dynamically if template query param is present
+  const templateId = searchParams.get("template");
+  React.useEffect(() => {
+    if (templateId) {
+      const found = TEMPLATES.find((t) => t.id === templateId);
+      if (found) {
+        store.setBoxType(found.config.boxType);
+        store.setDimensions(found.config.dimensions);
+        store.setMaterial(found.config.material);
+        store.setFinish(found.config.finish);
+        store.setFoilEffect(found.config.foilEffect);
+        store.setPrintingSide(found.config.printingSide);
+        store.setQuantity(found.config.quantity);
+      }
+    }
+  }, [templateId]);
 
   // Block Ctrl+S and Cmd+S save shortcuts
   React.useEffect(() => {
@@ -243,6 +268,23 @@ export const Customize = () => {
             {/* Input Sections Scroll Area */}
             <div className="space-y-0">
               
+              {showCatalogueBanner && catalogueProductName && (
+                <div className="mb-6 p-4 bg-[color:var(--itb-card)] border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] flex items-center justify-between text-[11px] text-[color:var(--itb-muted)] font-sans">
+                  <div className="flex-1 text-left leading-relaxed">
+                    <span className="text-[color:var(--itb-fg)] font-mono font-medium">Starting from:</span> {decodeURIComponent(catalogueProductName)}
+                    <span className="mx-2">·</span>
+                    <span>Switch box type anytime using the selector below.</span>
+                  </div>
+                  <button
+                    onClick={() => setShowCatalogueBanner(false)}
+                    className="text-[color:var(--itb-muted)] hover:text-[color:var(--itb-fg)] p-1 ml-4 flex-shrink-0"
+                    aria-label="Dismiss banner"
+                  >
+                    <X size={14} />
+                  </button>
+                </div>
+              )}
+
               {/* BOX TYPE Section */}
               <div className="py-6">
                 <ITBLabel text="BOX TYPE" />
@@ -329,32 +371,7 @@ export const Customize = () => {
         {/* ZONE C: TEMPLATES ROW */}
         <section className="w-full bg-[color:var(--itb-bg)] border-t border-[color:var(--itb-border)] py-12 px-6 lg:px-12">
           <div className="max-w-[1400px] mx-auto">
-            <h3 className="font-mono text-xs text-[color:var(--itb-accent)] uppercase tracking-[0.25em] mb-6">
-              Start from a template
-            </h3>
-            
-            {/* Horizontal Scrollable Row */}
-            <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-white/10">
-              {templates.map((tmpl) => (
-                <div 
-                  key={tmpl.id} 
-                  className="flex-shrink-0 w-72 bg-[color:var(--itb-surface)] border border-[color:var(--itb-border)] hover:border-[color:var(--itb-accent)] p-6 transition-all duration-300 group cursor-pointer"
-                >
-                  <div className="h-28 bg-[color:var(--itb-bg)] rounded-[var(--itb-radius)] border border-[color:var(--itb-border)] flex items-center justify-center mb-4 relative overflow-hidden">
-                    <span className="font-mono text-[10px] text-[color:var(--itb-muted)] uppercase tracking-wider z-10">
-                      Sample Geometry
-                    </span>
-                    <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.01] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-                  <h4 className="font-mono text-xs font-bold uppercase text-[color:var(--itb-fg)]">
-                    {tmpl.label}
-                  </h4>
-                  <p className="font-sans text-[11px] text-[color:var(--itb-muted)] mt-1.5">
-                    {tmpl.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <TemplateGallery />
           </div>
         </section>
 

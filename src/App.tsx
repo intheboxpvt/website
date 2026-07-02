@@ -13,6 +13,7 @@ import DesignStudio from "./pages/DesignStudio";
 import Customize from "./pages/Customize";
 import ConfiguratorDev from "./pages/ConfiguratorDev";
 import NotFound from "./pages/NotFound";
+import ProductDetail from "./pages/ProductDetail";
 import { QuoteDialog } from "./components/QuoteDialog";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/studio" element={<DesignStudio />} />
             <Route path="/customize" element={<Customize />} />
+            <Route path="/product/:preset" element={<ProductDetail />} />
             <Route path="/configurator-dev" element={<ConfiguratorDev />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

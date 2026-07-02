@@ -16,16 +16,16 @@ const Catalogue = () => {
   const categories = ["all", "rigid", "kraft", "luxury", "sustainable", "stationery"];
   
   const products = [
-    { name: "Premium Thank You Card", category: "stationery", moq: "100-500", desc: "Folded luxury cards with foil stamping." },
-    { name: "Classic Rigid Box", category: "rigid", moq: "100-500", desc: "Premium rigid boxes with magnetic closure." },
-    { name: "Kraft Mailer", category: "kraft", moq: "250-1000", desc: "Eco-friendly kraft mailers for shipping." },
-    { name: "Luxury Gift Box", category: "luxury", moq: "50-200", desc: "High-end gift boxes with ribbon closure." },
-    { name: "Eco Board Box", category: "sustainable", moq: "200-800", desc: "Agri-waste hybrid board packaging." },
-    { name: "Drawer Box", category: "rigid", moq: "100-400", desc: "Sliding drawer style rigid boxes." },
-    { name: "Kraft Paper Bag", category: "kraft", moq: "500-2000", desc: "Custom printed kraft bags." },
-    { name: "Corrugated Shipper", category: "kraft", moq: "500-2000", desc: "Durable custom shipping boxes." },
-    { name: "Cosmetic Glass Jar Box", category: "luxury", moq: "100-500", desc: "Premium retail boxes for cosmetics." },
-    { name: "Apparel Sleeve", category: "sustainable", moq: "200-1000", desc: "Eco-friendly sleeves for clothing packaging." },
+    { name: "Premium Thank You Card", category: "stationery", moq: "100-500", desc: "Folded luxury cards with foil stamping.", configuratorPreset: "straight_tuck" }, // Closest folding net style
+    { name: "Classic Rigid Box", category: "rigid", moq: "100-500", desc: "Premium rigid boxes with magnetic closure.", configuratorPreset: "rigid_lid_base" },
+    { name: "Kraft Mailer", category: "kraft", moq: "250-1000", desc: "Eco-friendly kraft mailers for shipping.", configuratorPreset: "mailer" },
+    { name: "Luxury Gift Box", category: "luxury", moq: "50-200", desc: "High-end gift boxes with ribbon closure.", configuratorPreset: "gift" },
+    { name: "Eco Board Box", category: "sustainable", moq: "200-800", desc: "Agri-waste hybrid board packaging.", configuratorPreset: "reverse_tuck" },
+    { name: "Drawer Box", category: "rigid", moq: "100-400", desc: "Sliding drawer style rigid boxes.", configuratorPreset: "drawer" },
+    { name: "Kraft Paper Bag", category: "kraft", moq: "500-2000", desc: "Custom printed kraft bags.", configuratorPreset: "straight_tuck" }, // Closest outline silhouette
+    { name: "Corrugated Shipper", category: "kraft", moq: "500-2000", desc: "Durable custom shipping boxes.", configuratorPreset: "mailer" },
+    { name: "Cosmetic Glass Jar Box", category: "luxury", moq: "100-500", desc: "Premium retail boxes for cosmetics.", configuratorPreset: "perfume" },
+    { name: "Apparel Sleeve", category: "sustainable", moq: "200-1000", desc: "Eco-friendly sleeves for clothing packaging.", configuratorPreset: "sleeve" },
   ];
 
   const filtered = filter === "all" ? products : products.filter(p => p.category === filter);
@@ -194,11 +194,13 @@ const Catalogue = () => {
                 className="bg-card border border-border rounded-none overflow-hidden hover:border-accent group transition-all duration-500 flex flex-col justify-between"
               >
                 <div className="aspect-[4/3] overflow-hidden bg-white/5 relative">
-                  <img 
-                    src={`/products/${p.name.toLowerCase().replace(/ /g, "_")}.png`} 
-                    alt={p.name}
-                    className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-102"
-                  />
+                  <Link to={`/product/${(p as any).configuratorPreset}`}>
+                    <img 
+                      src={`/products/${p.name.toLowerCase().replace(/ /g, "_")}.png`} 
+                      alt={p.name}
+                      className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-102"
+                    />
+                  </Link>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
                   <span className="absolute bottom-4 left-4 font-mono text-[10px] uppercase text-accent tracking-widest bg-background/95 border border-accent/20 px-3 py-1">
                     {p.category}
@@ -206,10 +208,12 @@ const Catalogue = () => {
                 </div>
                 <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
                   <div>
-                    <h3 className="font-sans text-xl font-bold text-foreground">{p.name}</h3>
+                    <Link to={`/product/${(p as any).configuratorPreset}`} className="hover:text-accent transition-colors">
+                      <h3 className="font-sans text-xl font-bold text-foreground">{p.name}</h3>
+                    </Link>
                     <p className="font-sans text-sm text-foreground/60 mt-3 leading-relaxed">{p.desc}</p>
                   </div>
-                  <div className="mt-8 pt-4 border-t border-border flex flex-col gap-4">
+                  <div className="mt-8 pt-4 border-t border-border flex flex-col gap-3">
                     <div className="flex justify-between items-center text-xs font-mono">
                       <span className="text-foreground/50 uppercase">Minimum Order</span>
                       <span className="text-foreground font-medium">{p.moq} pcs</span>
@@ -220,6 +224,12 @@ const Catalogue = () => {
                     >
                       Request Prototype Sample
                     </Button>
+                    <Link
+                      to={`/customize?preset=${(p as any).configuratorPreset}&source=catalogue&name=${encodeURIComponent(p.name)}`}
+                      className="w-full text-center py-2 text-xs font-mono tracking-wider text-[color:var(--itb-muted)] hover:text-[color:var(--itb-fg)] transition-all duration-300 hover:underline inline-block"
+                    >
+                      Customize in 3D →
+                    </Link>
                   </div>
                 </div>
               </div>
