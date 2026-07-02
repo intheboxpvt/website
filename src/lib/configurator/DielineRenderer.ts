@@ -17,7 +17,7 @@ export async function renderDieline(input: DielineInput): Promise<DielineOutput>
   const ctx = canvas.getContext('2d')!
 
   // Background
-  ctx.fillStyle = '#FFFFFF'
+  ctx.fillStyle = '#faf9f5'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 
   // Convert dimensions to mm for layout math

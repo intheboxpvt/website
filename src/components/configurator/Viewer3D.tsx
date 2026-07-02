@@ -2,7 +2,7 @@
 
 import React, { Suspense, useEffect, useRef } from "react";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
-import { OrbitControls, Environment } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { useConfigStore } from "@/lib/configurator/store";
 import { buildBoxGroup, disposeBoxGroup } from "@/lib/configurator/BoxBuilder";
@@ -203,6 +203,30 @@ function BoxScene() {
   return null;
 }
 
+const CameraController = () => {
+  const { camera } = useThree();
+
+  useEffect(() => {
+    const handleZoomIn = () => {
+      // Scale camera vector to move closer
+      camera.position.multiplyScalar(0.85);
+    };
+    const handleZoomOut = () => {
+      // Scale camera vector to move further
+      camera.position.multiplyScalar(1.15);
+    };
+
+    window.addEventListener("configurator-zoom-in", handleZoomIn);
+    window.addEventListener("configurator-zoom-out", handleZoomOut);
+    return () => {
+      window.removeEventListener("configurator-zoom-in", handleZoomIn);
+      window.removeEventListener("configurator-zoom-out", handleZoomOut);
+    };
+  }, [camera]);
+
+  return null;
+};
+
 export const Viewer3D = () => {
   const isRotating = useConfigStore((s) => s.isRotating);
   // Honour OS-level reduced motion: never auto-rotate when user prefers it
@@ -237,8 +261,9 @@ export const Viewer3D = () => {
         
         <pointLight position={[0, 8, 0]} intensity={0.6} />
         
+        <CameraController />
+        
         <Suspense fallback={null}>
-          <Environment preset="studio" />
           <BoxScene />
         </Suspense>
 

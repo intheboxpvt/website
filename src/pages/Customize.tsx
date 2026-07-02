@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { RotateCw, ChevronDown, ChevronUp, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import ITBButton from "@/components/configurator/ui/ITBButton";
 import ITBLabel from "@/components/configurator/ui/ITBLabel";
@@ -160,7 +161,7 @@ export const Customize = () => {
                       <span className="font-mono text-xs font-bold uppercase tracking-wider text-[color:var(--itb-fg)]">
                         {step.label}
                       </span>
-                      <span className="font-sans text-[10px] text-[color:var(--itb-muted)] whitespace-nowrap">
+                      <span className="font-sans text-[10px] text-[color:var(--itb-muted)] whitespace-normal leading-tight">
                         {step.desc}
                       </span>
                     </div>
@@ -183,6 +184,12 @@ export const Customize = () => {
           <div className="w-full md:w-[55%] bg-[color:var(--itb-bg)] md:sticky md:top-[calc(var(--itb-nav-h)+80px)] h-[50vh] md:h-[calc(100vh-var(--itb-nav-h)-80px)] flex flex-col justify-between p-6 md:p-8 z-10 configurator-viewer viewer-watermark">
             {/* Center Canvas with Dieline crossfade */}
             <div className="flex-1 border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] overflow-hidden bg-[color:var(--itb-bg)] relative">
+              {/* InTheBox Branding Badge Overlay */}
+              <div className="absolute top-4 left-4 z-20 bg-white/95 backdrop-blur-md px-3 py-1.5 border border-[color:var(--itb-border)] rounded-lg shadow-sm flex items-center gap-1.5 select-none pointer-events-none">
+                <img src="/assets/logo.png" alt="InTheBox" className="h-6 w-auto brightness-0" />
+                <span className="font-mono text-[9px] text-[#1c0f24]/50 uppercase tracking-widest font-bold border-l border-[color:var(--itb-border)] pl-1.5">3D Workspace</span>
+              </div>
+
               <div 
                 className={`absolute inset-0 transition-opacity duration-300 ease-in-out ${
                   store.viewMode === "3d" ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
@@ -242,6 +249,27 @@ export const Customize = () => {
                 >
                   <RotateCw size={14} className={store.isRotating ? "animate-spin" : ""} style={{ animationDuration: "8s" }} />
                 </button>
+              </div>
+
+              {/* Zoom controls */}
+              <div className="flex items-center gap-3">
+                <ITBLabel text="Zoom Space" className="w-24 flex-shrink-0" />
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => window.dispatchEvent(new CustomEvent("configurator-zoom-out"))}
+                    className="w-8 h-8 rounded-full border border-[color:var(--itb-border)] bg-[color:var(--itb-surface)] text-[color:var(--itb-fg)] hover:bg-[color:var(--itb-accent)] hover:text-white flex items-center justify-center font-bold font-mono text-sm transition-all duration-300 shadow-sm"
+                    title="Zoom Out"
+                  >
+                    -
+                  </button>
+                  <button
+                    onClick={() => window.dispatchEvent(new CustomEvent("configurator-zoom-in"))}
+                    className="w-8 h-8 rounded-full border border-[color:var(--itb-border)] bg-[color:var(--itb-surface)] text-[color:var(--itb-fg)] hover:bg-[color:var(--itb-accent)] hover:text-white flex items-center justify-center font-bold font-mono text-sm transition-all duration-300 shadow-sm"
+                    title="Zoom In"
+                  >
+                    +
+                  </button>
+                </div>
               </div>
 
               {/* Row 3: Open / Close Slider */}
@@ -380,6 +408,8 @@ export const Customize = () => {
             <TemplateGallery />
           </div>
         </section>
+
+        <Footer />
 
       </div>
     </div>

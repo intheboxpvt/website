@@ -401,18 +401,6 @@
   .viewer-watermark {
     position: relative;
   }
-  .viewer-watermark::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('/images/inthebox-logo.png');
-    background-size: 200px auto;
-    background-repeat: repeat;
-    opacity: 0.03;
-    pointer-events: none;
-    z-index: 10;
-    transform: rotate(-15deg) scale(1.3);
-  }
 
   @keyframes screenshotFlash {
     0%   { opacity: 1; }

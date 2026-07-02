@@ -1,26 +1,54 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Leaf, Recycle, TreePine, Droplets, TrendingDown, Users } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
+import { Leaf, Recycle, TreePine, Droplets, TrendingDown, Users, Search, Lightbulb, Box, CheckCircle, Factory, ArrowRight } from "lucide-react";
+import ScrollReveal from "@/components/ScrollReveal";
+import SEO from "@/components/SEO";
 
 const Sustainability = () => {
-  const [scrollY, setScrollY] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [leafProgress, setLeafProgress] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const sectionHeight = rect.height;
+      const sectionTop = rect.top;
+      const windowHeight = window.innerHeight;
+
+      // Start calculating when section top hits 70% of screen height
+      const start = windowHeight * 0.7;
+      // End when section bottom hits 30% of screen height
+      const end = -sectionHeight + windowHeight * 0.3;
+      const current = sectionTop;
+
+      let progress = 0;
+      if (current <= start) {
+        progress = ((start - current) / (start - end)) * 100;
+      }
+      setLeafProgress(Math.max(0, Math.min(100, progress)));
+    };
+
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const features = [
-    { icon: Leaf, title: "Agri-Waste Hybrid Boards", desc: "Made from rice husk and wheat straw that would otherwise be burned, reducing air pollution in Punjab." },
-    { icon: Recycle, title: "100% Recyclable", desc: "All our packaging can be recycled through standard municipal systems across India." },
-    { icon: TreePine, title: "Compostable Options", desc: "Select materials break down naturally within 90 days in commercial composting facilities." },
-    { icon: Droplets, title: "Water-Based Inks", desc: "Eco-friendly printing that's safe for the environment and completely non-toxic." },
+    { title: "Agri-Waste Hybrid Boards", desc: "Made from rice husk and wheat straw that would otherwise be burned, reducing air pollution in Punjab." },
+    { title: "100% Recyclable", desc: "All our packaging can be recycled through standard municipal systems across India." },
+    { title: "Compostable Options", desc: "Select materials break down naturally within 90 days in commercial composting facilities." },
+    { title: "Water-Based Inks", desc: "Eco-friendly printing that's safe for the environment and completely non-toxic." },
+  ];
+
+  const roadSteps = [
+    { percentage: 0, icon: Search, title: "1. Waste Collection", desc: "Agri-waste rice husks and wheat straws are collected directly from local Punjab farms, preventing seasonal field burning." },
+    { percentage: 33, icon: Lightbulb, title: "2. Clean Pulping", desc: "Raw fibers are processed with zero-formaldehyde organic binders in a carbon-neutral mill." },
+    { percentage: 66, icon: Box, title: "3. Premium Fabrication", desc: "The pulp is hot-pressed into high-density 300GSM structural boards, ready for folding and custom logo printing." },
+    { percentage: 100, icon: Recycle, title: "4. Circular End-of-Life", desc: "The finished boxes are 100% recyclable or break down naturally in commercial compost within 90 days." },
   ];
 
   const impactStats = [
@@ -30,146 +58,222 @@ const Sustainability = () => {
   ];
 
   return (
-    <main className="min-h-screen bg-background">
-      <SEO
+    <main className="min-h-screen bg-background text-foreground">
+      <SEO 
         title="Eco-Friendly & Sustainable Packaging | InTheBox"
-        description="Sustainable packaging solutions made from agri-waste. 100% recyclable, compostable, and carbon-negative options to reduce your environmental footprint."
+        description="Sustainable packaging solutions made from agri-waste. 100% recyclable, compostable, and carbon-negative options to reduce Punjab crop burning."
         keywords="sustainable packaging, eco-friendly boxes, biodegradable packaging, agri-waste packaging, green packaging india"
       />
       <Navbar />
-
-      {/* Hero Section */}
-      <section className="pt-32 lg:pt-36 pb-20 px-6 lg:px-12 relative overflow-hidden section-royal">
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 30% 40%, hsl(160 50% 35% / 0.3) 0%, transparent 50%), radial-gradient(circle at 70% 60%, hsl(42 70% 50% / 0.2) 0%, transparent 50%)",
-            transform: `translateY(${scrollY * 0.2}px)`,
-          }}
-        />
-        <div className="max-w-7xl mx-auto text-center relative z-10">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-12 h-[2px] bg-[hsl(var(--emerald))]" />
-            <span className="font-sans text-sm tracking-widest uppercase text-[hsl(var(--emerald))] font-semibold">
-              Sustainability
-            </span>
-            <div className="w-12 h-[2px] bg-[hsl(var(--emerald))]" />
-          </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl text-[hsl(var(--ivory))] mt-4">
-            Packaging That{" "}
-            <span className="text-[hsl(var(--emerald))]">Cares</span>
-          </h1>
-          <p className="font-sans text-lg text-[hsl(var(--ivory)/0.8)] mt-6 max-w-2xl mx-auto leading-relaxed">
-            Our commitment to sustainable packaging without compromising on luxury, quality, or brand experience.
-          </p>
+      
+      {/* Page Header */}
+      <section className="pt-24 pb-6 px-6 lg:px-12 bg-[#1d0a27] border-b border-white/5 relative overflow-hidden text-white">
+        {/* Subtle Watermark logo inside Header */}
+        <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
+          <img 
+            src="/assets/logo.png" 
+            alt="" 
+            className="w-full h-full object-contain filter invert brightness-0"
+          />
         </div>
-      </section>
 
-      {/* Features Section */}
-      <section className="section-padding section-ivory">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8">
-            {features.map((f) => (
-              <div key={f.title} className="card-royal p-8 hover-lift group border-l-4 eco-border">
-                <div className="w-14 h-14 eco-bg rounded-xl flex items-center justify-center mb-6 group-hover:bg-[hsl(var(--emerald)/0.2)] transition-colors">
-                  <f.icon className="w-7 h-7 eco-accent" />
-                </div>
-                <h3 className="text-xl text-[hsl(var(--royal-purple))] mb-3">{f.title}</h3>
-                <p className="font-sans text-[hsl(var(--soft-purple))] leading-relaxed">{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Impact Section */}
-      <section className="section-padding section-royal relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 20% 50%, hsl(160 50% 35% / 0.4) 0%, transparent 50%), radial-gradient(circle at 80% 50%, hsl(42 70% 50% / 0.3) 0%, transparent 50%)",
-            transform: `translateY(${scrollY * 0.1}px)`,
-          }}
-        />
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <span className="font-sans text-sm tracking-widest uppercase text-[hsl(var(--emerald))] font-semibold">
-            Our Impact
+        <div className="max-w-[1400px] mx-auto relative z-10">
+          <span className="inline-flex items-center gap-3 text-xs font-mono text-white/50 mb-4">
+            <span className="w-12 h-px bg-white/20"></span>
+            Sustainability & Impact
           </span>
-          <h2 className="text-3xl md:text-4xl text-[hsl(var(--ivory))] mt-4 mb-6">
-            Impact on Punjab Crop Burning
-          </h2>
-          <p className="font-sans text-lg text-[hsl(var(--ivory)/0.8)] leading-relaxed mb-12">
-            By using agri-waste hybrid boards made from rice husk and wheat straw, we help farmers
-            monetize crop residue instead of burning it — directly reducing the seasonal air
-            pollution crisis affecting millions across North India.
+          <h1 className="text-4xl md:text-5xl lg:text-[4.5rem] font-sans font-bold tracking-tight leading-[0.9] text-white">
+            Packaging That<br/>
+            <span className="text-accent italic font-semibold">Cares.</span>
+          </h1>
+          <p className="font-sans text-base text-white/50 mt-4 max-w-xl">
+            Our commitment to sustainable packaging without compromising on luxury, structural integrity, or brand prestige.
           </p>
-          <div className="grid sm:grid-cols-3 gap-8">
-            {impactStats.map((stat) => (
-              <div
-                key={stat.label}
-                className="text-center bg-[hsl(var(--ivory)/0.05)] backdrop-blur-sm rounded-xl p-8 border border-[hsl(var(--ivory)/0.1)]"
-              >
-                <stat.icon className="w-8 h-8 text-[hsl(var(--emerald))] mx-auto mb-4" />
-                <p className="font-sans text-4xl text-[hsl(var(--gold-metallic))] font-bold">{stat.value}</p>
-                <p className="font-sans text-sm text-[hsl(var(--ivory)/0.7)] mt-2">{stat.label}</p>
+        </div>
+      </section>
+
+      {/* Sustainability Maze Grid */}
+      <section className="py-24 px-6 lg:px-12 bg-background border-b border-border">
+        <div className="max-w-[1400px] mx-auto">
+          <ScrollReveal>
+            <div className="flex items-center gap-4 mb-12">
+              <Leaf className="w-5 h-5 text-emerald" />
+              <h2 className="font-sans text-3xl font-bold text-foreground">Eco-Friendly <span className="text-emerald">Material Maze</span></h2>
+            </div>
+          </ScrollReveal>
+          
+          <div className="grid grid-cols-1 md:grid-cols-6 border border-border bg-card divide-y md:divide-y-0 divide-border relative z-10">
+            {/* Cell 1: Agri-Waste Hybrid Boards */}
+            <div className="md:col-span-3 border-r border-b border-border p-8 lg:p-12 hover:border-emerald/40 transition-colors duration-300 flex flex-col justify-between group min-h-[200px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-emerald uppercase tracking-wider">01 // Eco Boards</span>
+                <Leaf className="w-5 h-5 text-foreground/20 group-hover:text-emerald transition-colors" />
               </div>
-            ))}
+              <div>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{features[0].title}</h3>
+                <p className="font-sans text-xs text-foreground/60 leading-relaxed">{features[0].desc}</p>
+              </div>
+            </div>
+
+            {/* Cell 2: 100% Recyclable */}
+            <div className="md:col-span-3 border-b border-border p-8 lg:p-12 hover:border-emerald/40 transition-colors duration-300 flex flex-col justify-between group min-h-[200px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-emerald uppercase tracking-wider">02 // Recyclable</span>
+                <Recycle className="w-5 h-5 text-foreground/20 group-hover:text-emerald transition-colors" />
+              </div>
+              <div>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{features[1].title}</h3>
+                <p className="font-sans text-xs text-foreground/60 leading-relaxed">{features[1].desc}</p>
+              </div>
+            </div>
+
+            {/* Cell 3: Compostable Options */}
+            <div className="md:col-span-2 border-r border-b md:border-b-0 border-border p-8 lg:p-12 hover:border-emerald/40 transition-colors duration-300 flex flex-col justify-between group min-h-[200px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-emerald uppercase tracking-wider">03 // Compostable</span>
+                <TreePine className="w-5 h-5 text-foreground/20 group-hover:text-emerald transition-colors" />
+              </div>
+              <div>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{features[2].title}</h3>
+                <p className="font-sans text-xs text-foreground/60 leading-relaxed">{features[2].desc}</p>
+              </div>
+            </div>
+
+            {/* Cell 4: Water-Based Inks */}
+            <div className="md:col-span-4 border-b md:border-b-0 border-border p-8 lg:p-12 hover:border-emerald/40 transition-colors duration-300 flex flex-col justify-between group min-h-[200px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-emerald uppercase tracking-wider">04 // Water Inks</span>
+                <Droplets className="w-5 h-5 text-foreground/20 group-hover:text-emerald transition-colors" />
+              </div>
+              <div>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{features[3].title}</h3>
+                <p className="font-sans text-xs text-foreground/60 leading-relaxed">{features[3].desc}</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Lifecycle Section */}
-      <section className="section-padding section-ivory">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="font-sans text-sm tracking-widest uppercase text-[hsl(var(--emerald))] font-semibold">
-              Full Cycle
-            </span>
-            <h2 className="text-3xl md:text-4xl text-[hsl(var(--royal-purple))] mt-4">
-              Sustainable Lifecycle
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-4 gap-6">
-            {[
-              { step: "1", title: "Source", desc: "Agri-waste collected from local Punjab farmers" },
-              { step: "2", title: "Process", desc: "Transformed into premium hybrid boards" },
-              { step: "3", title: "Create", desc: "Crafted into beautiful packaging" },
-              { step: "4", title: "Return", desc: "100% recyclable or compostable end-of-life" },
-            ].map((item, index) => (
-              <div key={item.step} className="relative">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-[hsl(var(--emerald)/0.15)] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-[hsl(var(--emerald))]">{item.step}</span>
+      {/* Process and Logistics Landscape Banner */}
+      <section className="w-full h-[300px] md:h-[400px] overflow-hidden relative select-none">
+        <img 
+          src="/products/packaging-1.jpg" 
+          alt="InTheBox Sustainable Forestry" 
+          className="w-full h-full object-cover opacity-90 transition-transform duration-1000 hover:scale-[1.02]" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-[#050505]"></div>
+      </section>
+
+      {/* Interactive Delivery Road Timeline */}
+      <section className="py-32 px-6 lg:px-12 bg-[#050505] text-white relative overflow-hidden border-b border-white/5">
+        <div className="max-w-[1400px] mx-auto">
+          <ScrollReveal>
+            <div className="text-left mb-24">
+              <span className="font-mono text-xs text-emerald uppercase tracking-wider">Circular Lifecycle</span>
+              <h2 className="font-sans text-4xl font-bold text-white mt-4">The Sustainable <span className="text-emerald">Lifecycle Pathway</span></h2>
+              <p className="font-sans text-sm text-white/60 max-w-sm mt-3">
+                Scroll to move the active leaf pointer along our checkpoints from organic waste harvest to standard return.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          {/* Road Segment Container */}
+          <div ref={containerRef} className="relative max-w-4xl mx-auto min-h-[700px] py-10">
+            
+            {/* The Road: dashed path line */}
+            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 -translate-x-1/2 w-0.5 border-l border-dashed border-white/10 z-0"></div>
+            
+            {/* The Active Path: colored overlay */}
+            <div 
+              className="absolute left-6 md:left-1/2 top-0 -translate-x-1/2 w-0.5 bg-emerald z-0 transition-all duration-100 ease-out"
+              style={{ height: `${leafProgress}%` }}
+            ></div>
+
+            {/* Moving Leaf Icon Node */}
+            <div 
+              className="absolute left-6 md:left-1/2 z-20 w-10 h-10 bg-emerald border border-white/20 rounded-full flex items-center justify-center text-[#1c0f24] shadow-2xl transition-all duration-200"
+              style={{ 
+                top: `${leafProgress}%`, 
+                transform: `translate(-50%, -50%)`
+              }}
+            >
+              <Leaf className="w-5 h-5 fill-current text-white" />
+            </div>
+
+            {/* Checkpoints */}
+            <div className="relative space-y-24 md:space-y-36">
+              {roadSteps.map((step, idx) => {
+                const isPassed = leafProgress >= step.percentage;
+                const isEven = idx % 2 === 0;
+
+                return (
+                  <div key={idx} className="relative flex flex-col md:flex-row items-start md:items-center">
+                    
+                    {/* Roadmap Dot Node */}
+                    <div 
+                      className={`absolute left-6 md:left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full border z-10 transition-all duration-300 ${
+                        isPassed 
+                          ? "bg-emerald border-emerald scale-110 shadow-gold" 
+                          : "bg-[#1d0a27] border-white/10"
+                      }`}
+                      style={{ top: "12px" }}
+                    ></div>
+
+                    {/* Content Card (Left on Desktop, Right on Mobile) */}
+                    <div 
+                      className={`pl-16 md:pl-0 w-full md:w-[42%] transition-all duration-500 ${
+                        isEven 
+                          ? "md:mr-auto md:text-right md:pr-12" 
+                          : "md:ml-auto md:text-left md:pl-12"
+                      }`}
+                    >
+                      <div className={`p-6 border rounded-none bg-[#1d0a27]/40 transition-all duration-500 ${
+                        isPassed ? "border-emerald/40" : "border-white/10"
+                      }`}>
+                        <div className={`flex items-center gap-3 mb-3 ${
+                          isEven ? "md:justify-end" : "md:justify-start"
+                        }`}>
+                          <step.icon className={`w-4 h-4 ${isPassed ? "text-emerald" : "text-white/40"}`} />
+                          <span className="font-mono text-xs text-white/40">Step 0{idx + 1}</span>
+                        </div>
+                        <h3 className={`font-sans text-xl font-bold transition-colors duration-300 ${
+                          isPassed ? "text-emerald" : "text-white"
+                        }`}>
+                          {step.title}
+                        </h3>
+                        <p className="font-sans text-xs text-white/60 leading-relaxed mt-3">
+                          {step.desc}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-xl text-[hsl(var(--royal-purple))] mb-2">{item.title}</h3>
-                  <p className="font-sans text-[hsl(var(--soft-purple))] text-sm">{item.desc}</p>
-                </div>
-                {index < 3 && (
-                  <div className="hidden md:block absolute top-8 right-0 w-full h-[2px] bg-gradient-to-r from-[hsl(var(--emerald)/0.5)] to-transparent translate-x-1/2" />
-                )}
-              </div>
-            ))}
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-br from-[hsl(var(--emerald)/0.08)] to-[hsl(var(--gold-metallic)/0.08)]">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl text-[hsl(var(--royal-purple))] mb-6">
-            Join the Sustainable Packaging Movement
-          </h2>
-          <p className="font-sans text-lg text-[hsl(var(--soft-purple))] mb-8 leading-relaxed">
-            Make your brand part of the solution while delivering a premium unboxing experience.
-          </p>
-          <Button
-            className="btn-premium-gold px-10 py-4 text-sm"
-            onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
-          >
-            Explore Sustainable Options
-          </Button>
+          <div className="border-t border-white/10 pt-20 mt-24 text-center">
+            <span className="font-mono text-xs text-emerald uppercase tracking-wider">Punjab Field Pollution Diverted</span>
+            <div className="grid md:grid-cols-3 gap-8 mt-10">
+              {impactStats.map((stat, i) => (
+                <div key={i} className="bg-card/5 border border-white/10 p-8 rounded-none text-center">
+                  <stat.icon className="w-8 h-8 text-emerald mx-auto mb-4" />
+                  <p className="font-sans text-4xl md:text-5xl text-white font-bold">{stat.value}</p>
+                  <p className="font-mono text-xs text-white/50 mt-2 uppercase tracking-widest">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="text-center mt-24">
+            <Button 
+              onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
+              className="btn-premium-gold py-6 px-12 text-sm"
+            >
+              Request Eco Mockup Quote <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+          </div>
+
         </div>
       </section>
 

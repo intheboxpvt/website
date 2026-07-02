@@ -42,15 +42,15 @@ export const TemplateGallery = () => {
         </p>
       </div>
 
-      {/* Horizontally scrollable container */}
-      <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent -mx-6 px-6 md:mx-0 md:px-0">
+      {/* Responsive grid of cards (no horizontal scrollbar) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {TEMPLATES.map((tmpl) => (
           <div
             key={tmpl.id}
-            className="flex-shrink-0 w-[260px] h-[330px] bg-[color:var(--itb-surface)] border border-[color:var(--itb-border)] hover:border-[rgba(200,161,90,0.4)] rounded-[var(--itb-radius)] overflow-hidden flex flex-col justify-between transition-all duration-300 group"
+            className="w-full h-[330px] bg-[color:var(--itb-surface)] border border-[color:var(--itb-border)] hover:border-[rgba(200,161,90,0.4)] rounded-[var(--itb-radius)] overflow-hidden flex flex-col justify-between transition-all duration-300 group shadow-sm"
           >
-            {/* Top 60% - Preview Image */}
-            <div className="h-[58%] w-full bg-black/40 overflow-hidden relative border-b border-[color:var(--itb-border)] flex items-center justify-center">
+            {/* Top 58% - Preview Image */}
+            <div className="h-[58%] w-full bg-black/5 overflow-hidden relative border-b border-[color:var(--itb-border)] flex items-center justify-center">
               <img
                 src={tmpl.previewImage}
                 alt={tmpl.name}
@@ -60,7 +60,7 @@ export const TemplateGallery = () => {
             </div>
 
             {/* Bottom 42% - Metadata & Action */}
-            <div className="h-[42%] p-4 flex flex-col justify-between bg-black/20 text-left">
+            <div className="h-[42%] p-4 flex flex-col justify-between bg-black/[0.02] text-left">
               <div className="space-y-1">
                 <h4 className="text-xs font-bold text-[color:var(--itb-fg)] truncate">
                   {tmpl.name}

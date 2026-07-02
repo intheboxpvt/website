@@ -1,1 +1,0 @@
-import{j as o}from"./react-core-B6xxz09R.js";import{l as r}from"./index-csot45yS.js";import"./store-CRiQvFme.js";import"./r3f-vendor-LR-xi1Qo.js";import"./three-vendor-DgUuzhYj.js";import"./state-vendor-Dqc3HKqx.js";const e=()=>o.jsx(r,{});export{e as ConfiguratorDev,e as default};

@@ -40,7 +40,7 @@ export const DielineView = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#050505",
+        background: "transparent",
       }}
       onContextMenu={(e) => e.preventDefault()} // Secure right-click prevention
     >

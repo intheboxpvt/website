@@ -32,7 +32,7 @@ export const ProductDetail = () => {
   const relevantTemplates = [...matchedTemplates, ...fallbackTemplates].slice(0, 3);
 
   return (
-    <main className="min-h-screen bg-[#050505] text-white flex flex-col justify-between">
+    <main className="min-h-screen bg-background text-foreground flex flex-col justify-between">
       <SEO 
         title={`${product.name} | Custom Packaging Detail`}
         description={product.desc}
@@ -44,15 +44,15 @@ export const ProductDetail = () => {
         {/* Product Meta Section */}
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Image */}
-          <div className="aspect-[4/3] rounded-lg overflow-hidden border border-white/10 bg-[#0B0B0B] relative">
+          <div className="aspect-[4/3] rounded-lg overflow-hidden border border-border bg-card relative shadow-sm">
             <img 
               src={`/products/${product.name.toLowerCase().replace(/ /g, "_")}.png`} 
               alt={product.name}
               className="w-full h-full object-cover select-none pointer-events-none opacity-90"
               onContextMenu={(e) => e.preventDefault()}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent"></div>
-            <span className="absolute bottom-6 left-6 font-mono text-[10px] uppercase text-[color:var(--itb-accent)] tracking-widest bg-black/90 border border-[color:var(--itb-accent)]/20 px-3 py-1 rounded">
+            <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent"></div>
+            <span className="absolute bottom-6 left-6 font-mono text-[10px] uppercase text-accent tracking-widest bg-card border border-accent/20 px-3 py-1 rounded">
               {product.category}
             </span>
           </div>
@@ -60,47 +60,47 @@ export const ProductDetail = () => {
           {/* Description */}
           <div className="space-y-6 text-left">
             <div>
-              <span className="text-xs font-mono text-[color:var(--itb-accent)] uppercase tracking-[0.2em]">Product Catalogue</span>
-              <h1 className="text-3xl md:text-5xl font-bold font-sans mt-2 tracking-tight">
+              <span className="text-xs font-mono text-accent uppercase tracking-[0.2em]">Product Catalogue</span>
+              <h1 className="text-3xl md:text-5xl font-bold font-sans mt-2 tracking-tight text-foreground">
                 {product.name}
               </h1>
             </div>
             
-            <p className="text-sm text-[color:var(--itb-muted)] leading-relaxed font-sans">
+            <p className="text-sm text-foreground/75 leading-relaxed font-sans">
               {product.longDesc}
             </p>
 
-            <div className="space-y-3 font-mono text-xs text-[color:var(--itb-muted)] border-t border-white/5 pt-6">
+            <div className="space-y-3 font-mono text-xs text-foreground/50 border-t border-border pt-6">
               <div className="flex justify-between items-center">
                 <span>Minimum Order (MOQ)</span>
-                <span className="text-white font-bold">{product.moq} units</span>
+                <span className="text-foreground font-bold">{product.moq} units</span>
               </div>
               <div className="flex justify-between items-center">
                 <span>Base Material Stock</span>
-                <span className="text-white font-bold">Customizable</span>
+                <span className="text-foreground font-bold">Customizable</span>
               </div>
               <div className="flex justify-between items-center">
                 <span>Structural Model Blueprint</span>
-                <span className="text-white font-bold uppercase">{preset}</span>
+                <span className="text-foreground font-bold uppercase">{preset}</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* 3D Visualizer Prominent CTA Block */}
-        <div className="border border-[color:var(--itb-border)] rounded-lg bg-[color:var(--itb-surface)] p-8 md:p-12 text-center max-w-[900px] mx-auto space-y-6 relative overflow-hidden">
+        <div className="border border-border rounded-lg bg-card p-8 md:p-12 text-center max-w-[900px] mx-auto space-y-6 relative overflow-hidden shadow-sm">
           {/* Subtle gold decoration */}
-          <div className="absolute -left-12 -top-12 w-24 h-24 rounded-full bg-[color:var(--itb-accent)]/10 blur-xl pointer-events-none" />
-          <div className="absolute -right-12 -bottom-12 w-32 h-32 rounded-full bg-[color:var(--itb-accent)]/10 blur-xl pointer-events-none" />
+          <div className="absolute -left-12 -top-12 w-24 h-24 rounded-full bg-accent/10 blur-xl pointer-events-none" />
+          <div className="absolute -right-12 -bottom-12 w-32 h-32 rounded-full bg-accent/10 blur-xl pointer-events-none" />
 
           <div className="max-w-xl mx-auto space-y-4">
-            <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full font-mono text-[9px] uppercase tracking-wider text-[color:var(--itb-accent)]">
+            <span className="inline-flex items-center gap-2 px-3 py-1 bg-background border border-border rounded-full font-mono text-[9px] uppercase tracking-wider text-accent font-semibold">
               <Sparkles size={10} /> Live 3D Previews
             </span>
-            <h2 className="text-2xl md:text-4xl font-bold font-sans tracking-tight uppercase" style={{ fontFamily: "var(--font-clash)" }}>
+            <h2 className="text-2xl md:text-4xl font-bold font-sans tracking-tight uppercase text-foreground" style={{ fontFamily: "var(--font-clash)" }}>
               Visualize this in 3D
             </h2>
-            <p className="text-xs text-[color:var(--itb-muted)] font-sans max-w-md mx-auto leading-relaxed">
+            <p className="text-xs text-foreground/60 font-sans max-w-md mx-auto leading-relaxed">
               Configure length, width, and height, apply textures, upload your company branding logo — then request a custom quote in minutes.
             </p>
           </div>
@@ -108,7 +108,7 @@ export const ProductDetail = () => {
           <div className="pt-2">
             <Link
               to={`/customize?preset=${preset}&source=catalogue&name=${encodeURIComponent(product.name)}`}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[color:var(--itb-accent)] hover:bg-[color:var(--itb-accent)]/90 text-black font-semibold rounded-[var(--itb-radius)] text-xs font-mono uppercase tracking-wider transition-all duration-300 shadow-lg hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent hover:bg-[#1c0f24] text-white hover:text-white font-semibold rounded-lg text-xs font-mono uppercase tracking-wider transition-all duration-300 shadow-lg hover:-translate-y-0.5"
             >
               Open 3D Configurator
               <ArrowRight size={14} />
@@ -117,12 +117,12 @@ export const ProductDetail = () => {
         </div>
 
         {/* Related Templates section */}
-        <div className="space-y-6 text-left border-t border-white/5 pt-12">
+        <div className="space-y-6 text-left border-t border-border pt-12">
           <div>
-            <h3 className="text-xl md:text-2xl font-bold uppercase tracking-wide text-white" style={{ fontFamily: "var(--font-clash)" }}>
+            <h3 className="text-xl md:text-2xl font-bold uppercase tracking-wide text-foreground" style={{ fontFamily: "var(--font-clash)" }}>
               Recommended Templates
             </h3>
-            <p className="text-xs text-[color:var(--itb-muted)] font-sans mt-1">
+            <p className="text-xs text-foreground/50 font-sans mt-1">
               Select one of our starting configurations to load the 3D visualizer instantly.
             </p>
           </div>
@@ -131,10 +131,10 @@ export const ProductDetail = () => {
             {relevantTemplates.map((tmpl) => (
               <div 
                 key={tmpl.id}
-                className="bg-[color:var(--itb-surface)] border border-[color:var(--itb-border)] hover:border-[rgba(200,161,90,0.3)] rounded-[var(--itb-radius)] overflow-hidden flex flex-col justify-between transition-all duration-300 group"
+                className="bg-card border border-border hover:border-accent hover:shadow-gold rounded-lg overflow-hidden flex flex-col justify-between transition-all duration-300 group"
               >
                 {/* SVG Preview */}
-                <div className="aspect-[4/3] bg-black/30 overflow-hidden relative flex items-center justify-center border-b border-[color:var(--itb-border)]">
+                <div className="aspect-[4/3] bg-black/5 overflow-hidden relative flex items-center justify-center border-b border-border">
                   <img 
                     src={tmpl.previewImage} 
                     alt={tmpl.name} 
@@ -143,21 +143,21 @@ export const ProductDetail = () => {
                 </div>
                 
                 {/* Text and actions */}
-                <div className="p-4 flex flex-col justify-between flex-grow">
+                <div className="p-4 flex flex-col justify-between flex-grow bg-black/[0.01]">
                   <div className="space-y-1">
-                    <h4 className="text-xs font-bold text-white truncate">{tmpl.name}</h4>
-                    <p className="text-[10px] text-[color:var(--itb-muted)] line-clamp-2 leading-relaxed">
+                    <h4 className="text-xs font-bold text-foreground truncate">{tmpl.name}</h4>
+                    <p className="text-[10px] text-foreground/50 line-clamp-2 leading-relaxed">
                       {tmpl.description}
                     </p>
                   </div>
                   
-                  <div className="pt-4 mt-2 border-t border-white/5 flex items-center justify-between">
-                    <span className="text-[9px] font-mono text-[color:var(--itb-accent)] uppercase">
+                  <div className="pt-4 mt-2 border-t border-border flex items-center justify-between">
+                    <span className="text-[9px] font-mono text-accent uppercase font-bold">
                       Preset: {tmpl.config.boxType}
                     </span>
                     <Link
                       to={`/customize?preset=${tmpl.config.boxType}&template=${tmpl.id}`}
-                      className="text-[10px] font-mono uppercase tracking-wider text-[color:var(--itb-accent)] hover:text-white transition-colors flex items-center gap-1"
+                      className="text-[10px] font-mono uppercase tracking-wider text-accent hover:text-foreground transition-colors flex items-center gap-1 font-bold"
                     >
                       Use Template
                       <ArrowRight size={10} />

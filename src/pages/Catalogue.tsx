@@ -103,18 +103,24 @@ const Catalogue = () => {
 
           <div className="grid lg:grid-cols-2 gap-8 items-stretch">
             
-            {/* Left Column: 3D Visualizer Canvas */}
-            <div className="flex flex-col items-center justify-center bg-card border border-border p-8 h-[480px] relative group/viewer">
+            {/* Left Column: 3D Visualizer Canvas - redesigned to be inviting with golden hover glow */}
+            <div className="flex flex-col items-center justify-center bg-card border-2 border-border hover:border-accent p-8 h-[480px] relative group/viewer shadow-md hover:shadow-gold transition-all duration-500 rounded-lg">
               
-              {/* Expand Button Overlay */}
+              {/* Expand Button Overlay - Prominent and Golden */}
               <Link 
                 to="/customize?preset=straight_tuck&source=catalogue"
-                className="absolute top-4 right-4 z-30 p-2.5 bg-card hover:bg-[#1c0f24] text-foreground hover:text-white border border-border hover:border-accent transition-all duration-300 rounded-lg shadow-sm flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider font-semibold"
+                className="absolute top-4 right-4 z-30 px-4 py-2 bg-accent hover:bg-[#1c0f24] text-white hover:text-white border border-accent hover:border-accent transition-all duration-300 rounded-lg shadow-md flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider font-bold animate-pulse-soft"
                 aria-label="Expand to full 3D customizer workspace"
               >
-                <Maximize2 className="w-3.5 h-3.5" />
-                <span>Expand Workspace</span>
+                <Maximize2 className="w-4 h-4" />
+                <span>Expand to 3D Studio</span>
               </Link>
+
+              {/* Verified Workspace Tag */}
+              <div className="absolute top-4 left-4 z-20 bg-background/90 backdrop-blur-sm px-3 py-1.5 border border-border rounded-lg shadow-sm flex items-center gap-1.5 select-none pointer-events-none">
+                <span className="w-2 h-2 rounded-full bg-emerald animate-ping"></span>
+                <span className="font-mono text-[9px] text-foreground font-bold uppercase tracking-wider">Interactive 3D</span>
+              </div>
 
               <FoldedCard3D 
                 frontImage="/products/premium_thank_you_card.png" 
@@ -125,21 +131,29 @@ const Catalogue = () => {
               />
               <div className="mt-6 p-2 bg-accent/5 border border-accent/20 w-full text-center">
                 <p className="text-[10px] font-mono text-accent leading-relaxed animate-pulse">
-                  // Interactive 3D structural mapping. Click to open/close card.
+                  // Drag to rotate in 3D. Click to open and read inside card.
                 </p>
               </div>
             </div>
  
-            {/* Right Column: Customizer Controls */}
-            <div className="space-y-6 bg-card p-8 border border-border flex flex-col justify-between h-[480px]">
-              <div className="space-y-5">
+            {/* Right Column: Customizer Controls - Redesigned with Invite Block */}
+            <div className="space-y-6 bg-card p-8 border border-border flex flex-col justify-between h-[480px] rounded-lg shadow-sm">
+              <div className="space-y-4">
+                {/* Expanding Invitation Callout */}
+                <div className="p-3.5 bg-accent/5 border border-accent/20 rounded-lg text-left">
+                  <p className="font-sans text-[11px] text-[#1c0f24] leading-relaxed">
+                    <strong className="font-semibold text-accent uppercase font-mono tracking-wider text-[10px] block mb-1">💡 Prototyping Workshop</strong>
+                    Want to custom-build mailers, rigid lids, or sleeves? Click <strong className="font-bold">"Expand to 3D Studio"</strong> on the viewer to open the full scale 3D workspace.
+                  </p>
+                </div>
+
                 <div>
                   <label className="block text-xs font-mono text-foreground/60 uppercase tracking-wider mb-2">Front Foil Branding Text</label>
                   <input 
                     type="text" 
                     value={frontText} 
                     onChange={(e) => setFrontText(e.target.value)}
-                    className="w-full px-4 py-3 border border-border bg-background/50 font-sans text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
+                    className="w-full px-4 py-3 border border-border bg-background/50 font-sans text-sm text-foreground focus:outline-none focus:border-accent transition-colors rounded-lg"
                     placeholder="Enter brand name..."
                   />
                 </div>
@@ -148,13 +162,13 @@ const Catalogue = () => {
                   <textarea 
                     value={insideText} 
                     onChange={(e) => setInsideText(e.target.value)}
-                    className="w-full px-4 py-3 border border-border bg-background/50 font-sans text-sm text-foreground focus:outline-none focus:border-accent transition-colors h-20 resize-none"
+                    className="w-full px-4 py-3 border border-border bg-background/50 font-sans text-sm text-foreground focus:outline-none focus:border-accent transition-colors h-16 resize-none rounded-lg"
                     placeholder="Type interior content..."
                   />
                 </div>
               </div>
  
-              <div className="border-t border-border pt-5 space-y-4">
+              <div className="border-t border-border pt-4 space-y-4">
                 <div className="grid grid-cols-3 gap-4 text-left">
                   <div>
                     <p className="text-[9px] font-mono text-foreground/50 uppercase tracking-widest">Base Board</p>
