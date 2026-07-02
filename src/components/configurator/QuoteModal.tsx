@@ -192,7 +192,15 @@ export const QuoteModal = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md overflow-y-auto">
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 overflow-y-auto"
+      style={{
+        // Fallback for browsers without backdrop-filter support (older Firefox, some Safari)
+        background: "rgba(5,5,5,0.96)",
+        WebkitBackdropFilter: "blur(8px)",
+        backdropFilter: "blur(8px)",
+      }}
+    >
       <div className="relative w-full max-w-[900px] bg-[color:var(--itb-surface)] border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] shadow-2xl overflow-hidden flex flex-col md:flex-row my-8">
         
         {/* Close Button */}
@@ -443,6 +451,7 @@ export const QuoteModal = () => {
                   />
                   <button
                     onClick={handleCopyLink}
+                    aria-label={copiedLink ? "Link copied to clipboard" : "Copy shareable link"}
                     className="p-2 border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] bg-[color:var(--itb-surface)] text-[color:var(--itb-muted)] hover:text-[color:var(--itb-accent)] hover:border-[color:var(--itb-accent)] transition-all duration-300 flex items-center justify-center gap-1.5 min-w-[100px]"
                   >
                     {copiedLink ? (

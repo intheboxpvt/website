@@ -228,7 +228,6 @@ export const Customize = () => {
                 </div>
               </div>
 
-              {/* Row 2: Auto-rotate toggle */}
               <div className="flex items-center gap-3">
                 <ITBLabel text="Auto Rotate" className="w-24 flex-shrink-0" />
                 <button
@@ -238,7 +237,8 @@ export const Customize = () => {
                       ? "border-[color:var(--itb-accent)] text-[color:var(--itb-accent)] bg-[rgba(200,161,90,0.08)] ring-1 ring-[color:var(--itb-accent)]" 
                       : "border-[color:var(--itb-border)] text-[color:var(--itb-muted)] hover:text-[color:var(--itb-fg)] hover:border-[color:var(--itb-muted)]"
                   }`}
-                  title="Toggle Auto Rotation"
+                  aria-label={store.isRotating ? "Stop auto rotation" : "Start auto rotation"}
+                  aria-pressed={store.isRotating}
                 >
                   <RotateCw size={14} className={store.isRotating ? "animate-spin" : ""} style={{ animationDuration: "8s" }} />
                 </button>
@@ -251,10 +251,13 @@ export const Customize = () => {
                   <span className="font-mono text-[9px] text-[color:var(--itb-muted)] uppercase tracking-wider">Close</span>
                   <input
                     type="range"
+                    id="lid-open-slider"
                     min="0"
                     max="100"
                     value={Math.round(store.lidOpenAmount * 100)}
                     onChange={(e) => store.setLidOpen(parseInt(e.target.value) / 100)}
+                    aria-label="Lid open amount"
+                    aria-valuetext={`${Math.round(store.lidOpenAmount * 100)}% open`}
                     className="flex-1 bg-[color:var(--itb-border)] h-[2px] rounded-lg appearance-none cursor-pointer accent-[color:var(--itb-accent)] [&::-webkit-slider-thumb]:w-[14px] [&::-webkit-slider-thumb]:h-[14px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[color:var(--itb-accent)] [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:w-[14px] [&::-moz-range-thumb]:h-[14px] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[color:var(--itb-accent)] [&::-moz-range-thumb]:border-none"
                   />
                   <span className="font-mono text-[9px] text-[color:var(--itb-muted)] uppercase tracking-wider">Open</span>
@@ -348,7 +351,10 @@ export const Customize = () => {
                 label="Save Custom Design" 
                 variant="outline" 
                 fullWidth 
-                onClick={() => console.log("Save Custom Design clicked:", store)}
+                onClick={() => {
+                  // Save design to localStorage via store action
+                  store.saveDesign?.();
+                }}
               />
               <ITBButton 
                 label="Request Quote →" 

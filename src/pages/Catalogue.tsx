@@ -15,7 +15,13 @@ const Catalogue = () => {
   
   const categories = ["all", "rigid", "kraft", "luxury", "sustainable", "stationery"];
   
-  const products = [
+  const products: Array<{
+    name: string;
+    category: string;
+    moq: string;
+    desc: string;
+    configuratorPreset: string;
+  }> = [
     { name: "Premium Thank You Card", category: "stationery", moq: "100-500", desc: "Folded luxury cards with foil stamping.", configuratorPreset: "straight_tuck" }, // Closest folding net style
     { name: "Classic Rigid Box", category: "rigid", moq: "100-500", desc: "Premium rigid boxes with magnetic closure.", configuratorPreset: "rigid_lid_base" },
     { name: "Kraft Mailer", category: "kraft", moq: "250-1000", desc: "Eco-friendly kraft mailers for shipping.", configuratorPreset: "mailer" },
@@ -194,7 +200,7 @@ const Catalogue = () => {
                 className="bg-card border border-border rounded-none overflow-hidden hover:border-accent group transition-all duration-500 flex flex-col justify-between"
               >
                 <div className="aspect-[4/3] overflow-hidden bg-white/5 relative">
-                  <Link to={`/product/${(p as any).configuratorPreset}`}>
+                  <Link to={`/product/${p.configuratorPreset}`}>
                     <img 
                       src={`/products/${p.name.toLowerCase().replace(/ /g, "_")}.png`} 
                       alt={p.name}
@@ -225,7 +231,8 @@ const Catalogue = () => {
                       Request Prototype Sample
                     </Button>
                     <Link
-                      to={`/customize?preset=${(p as any).configuratorPreset}&source=catalogue&name=${encodeURIComponent(p.name)}`}
+                      to={`/customize?preset=${p.configuratorPreset}&source=catalogue&name=${encodeURIComponent(p.name)}`}
+                      aria-label={`Customize ${p.name} in 3D configurator`}
                       className="w-full text-center py-2 text-xs font-mono tracking-wider text-[color:var(--itb-muted)] hover:text-[color:var(--itb-fg)] transition-all duration-300 hover:underline inline-block"
                     >
                       Customize in 3D →

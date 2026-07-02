@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Suspense, useState, useEffect, useRef } from "react";
+import React, { Suspense, useEffect, useRef } from "react";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
 import * as THREE from "three";
@@ -8,6 +8,7 @@ import { useConfigStore } from "@/lib/configurator/store";
 import { buildBoxGroup, disposeBoxGroup } from "@/lib/configurator/BoxBuilder";
 import { getMaterial } from "@/lib/configurator/MaterialSystem";
 import { bakeTexture } from "@/lib/configurator/TextureBaker";
+import { useReducedMotion } from "@/lib/hooks/useReducedMotion";
 
 // Helper to find specific face meshes
 export function findFace(group: THREE.Group, faceName: string): THREE.Mesh | null {
@@ -156,17 +157,24 @@ function BoxScene() {
     store.dimensions,
   ]);
 
-  // Animate lid folds and sliding groups frame-by-frame
+  const reducedMotion = useReducedMotion();
+
+  // Animate lid folds and sliding groups frame-by-frame.
+  // When prefers-reduced-motion is active, snap directly to target (no lerp).
   useFrame(({ gl }) => {
+    // Safe cast: gl.domElement is always an HTMLCanvasElement at runtime
     (window as any)._glCanvas = gl.domElement;
     const boxGroup = boxGroupRef.current;
     if (!boxGroup) return;
+
+    // lerp factor: 0.1 for smooth animation, 1 for instant snap
+    const lerpT = reducedMotion ? 1 : 0.1;
 
     boxGroup.traverse((obj) => {
       // 1. Animate tuck flap lid rotation
       if (obj instanceof THREE.Mesh && obj.userData.isLid) {
         const targetRot = -store.lidOpenAmount * Math.PI * 0.55;
-        obj.rotation.x = THREE.MathUtils.lerp(obj.rotation.x, targetRot, 0.1);
+        obj.rotation.x = THREE.MathUtils.lerp(obj.rotation.x, targetRot, lerpT);
       }
 
       // 2. Animate rigid box lid movement
@@ -177,7 +185,7 @@ function BoxScene() {
         })();
         const baseH = h * 0.65;
         const targetY = (baseH - 0.15) + store.lidOpenAmount * (h * 0.65 + 0.8);
-        obj.position.y = THREE.MathUtils.lerp(obj.position.y, targetY, 0.1);
+        obj.position.y = THREE.MathUtils.lerp(obj.position.y, targetY, lerpT);
       }
 
       // 3. Animate drawer tray sliding movement
@@ -187,7 +195,7 @@ function BoxScene() {
           return { l: dims.l / 10 };
         })();
         const targetX = store.lidOpenAmount * l * 0.85;
-        obj.position.x = THREE.MathUtils.lerp(obj.position.x, targetX, 0.1);
+        obj.position.x = THREE.MathUtils.lerp(obj.position.x, targetX, lerpT);
       }
     });
   });
@@ -197,6 +205,8 @@ function BoxScene() {
 
 export const Viewer3D = () => {
   const isRotating = useConfigStore((s) => s.isRotating);
+  // Honour OS-level reduced motion: never auto-rotate when user prefers it
+  const reducedMotion = useReducedMotion();
 
   return (
     <div className="w-full h-full relative" style={{ background: "#050505" }} onContextMenu={(e) => e.preventDefault()}>
@@ -245,7 +255,7 @@ export const Viewer3D = () => {
           enablePan={false}
           minDistance={4}
           maxDistance={35}
-          autoRotate={isRotating}
+          autoRotate={isRotating && !reducedMotion}
           autoRotateSpeed={0.5}
         />
       </Canvas>

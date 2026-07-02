@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useEffect, useState } from "react";
+import { useReducedMotion } from "@/lib/hooks/useReducedMotion";
 
 export const ScreenshotOverlay = () => {
   const [visible, setVisible] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -62,7 +64,9 @@ export const ScreenshotOverlay = () => {
         alignItems: "center",
         justifyContent: "center",
         pointerEvents: "none",
-        animation: "screenshotFlash 2.5s ease forwards",
+        // Skip the fade-flash animation when prefers-reduced-motion is active;
+        // the overlay still appears for IP-protection purposes.
+        animation: reducedMotion ? "none" : "screenshotFlash 2.5s ease forwards",
       }}
     >
       <img
@@ -78,3 +82,4 @@ export const ScreenshotOverlay = () => {
 };
 
 export default ScreenshotOverlay;
+
