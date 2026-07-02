@@ -13,6 +13,7 @@ const Navbar = () => {
     { label: "About Us", href: "/about" },
     { label: "Catalogue", href: "/catalogue" },
     { label: "Services & Process", href: "/services" },
+    { label: "Configurator", href: "/customize" },
   ];
 
   useEffect(() => {

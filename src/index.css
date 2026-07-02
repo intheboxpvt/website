@@ -84,6 +84,19 @@
     --sidebar-accent-foreground: 270 40% 15%;
     --sidebar-border: 270 15% 85%;
     --sidebar-ring: 42 70% 50%;
+
+    /* InTheBox Configurator Variables */
+    --itb-bg:       #050505;
+    --itb-surface:  #0B0B0B;
+    --itb-card:     #111111;
+    --itb-fg:       #FFFFFF;
+    --itb-muted:    #A1A1AA;
+    --itb-accent:   #C8A15A;
+    --itb-border:   rgba(255,255,255,0.08);
+    --itb-radius:   4px;
+    --itb-nav-h:    64px;
+    --font-clash:   'Instrument Sans', 'Inter', sans-serif;
+    --font-inter:   'Inter', sans-serif;
   }
 
   .dark {

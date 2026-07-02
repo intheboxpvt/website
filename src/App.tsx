@@ -10,6 +10,8 @@ import Services from "./pages/Services";
 import Catalogue from "./pages/Catalogue";
 import About from "./pages/About";
 import DesignStudio from "./pages/DesignStudio";
+import Customize from "./pages/Customize";
+import ConfiguratorDev from "./pages/ConfiguratorDev";
 import NotFound from "./pages/NotFound";
 import { QuoteDialog } from "./components/QuoteDialog";
 
@@ -30,6 +32,8 @@ const App = () => (
             <Route path="/catalogue" element={<Catalogue />} />
             <Route path="/about" element={<About />} />
             <Route path="/studio" element={<DesignStudio />} />
+            <Route path="/customize" element={<Customize />} />
+            <Route path="/configurator-dev" element={<ConfiguratorDev />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
