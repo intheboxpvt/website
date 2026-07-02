@@ -256,7 +256,7 @@ const About = () => {
             {impactStats.map((stat, i) => (
               <div key={i} className="bg-card border border-border p-8 rounded-none text-center">
                 <stat.icon className="w-6 h-6 text-emerald mx-auto mb-4" />
-                <p className="font-serif text-4xl md:text-5xl text-foreground font-light">{stat.value}</p>
+                <p className="font-sans text-4xl md:text-5xl text-foreground font-bold">{stat.value}</p>
                 <p className="font-mono text-xs text-foreground/50 mt-2 uppercase tracking-widest">{stat.label}</p>
               </div>
             ))}

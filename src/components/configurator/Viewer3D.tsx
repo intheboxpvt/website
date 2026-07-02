@@ -209,23 +209,23 @@ export const Viewer3D = () => {
   const reducedMotion = useReducedMotion();
 
   return (
-    <div className="w-full h-full relative" style={{ background: "#050505" }} onContextMenu={(e) => e.preventDefault()}>
+    <div className="w-full h-full relative bg-background" onContextMenu={(e) => e.preventDefault()}>
       <Canvas
         shadows
         camera={{ position: [8, 6, 12], fov: 35 }}
-        gl={{ antialias: true, alpha: false, preserveDrawingBuffer: true }}
+        gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }}
         onCreated={({ gl }) => {
           gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
           gl.shadowMap.enabled = true;
           gl.shadowMap.type = THREE.PCFSoftShadowMap;
         }}
-        style={{ width: "100%", height: "100%", background: "#050505" }}
+        style={{ width: "100%", height: "100%" }}
       >
-        <ambientLight intensity={0.35} />
+        <ambientLight intensity={0.75} />
         
         <directionalLight
           position={[6, 10, 6]}
-          intensity={1.3}
+          intensity={1.5}
           castShadow
           shadow-mapSize={[2048, 2048]}
         />

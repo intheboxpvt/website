@@ -20,6 +20,7 @@ const DesignStudio   = lazy(() => import("./pages/DesignStudio"));
 const Customize      = lazy(() => import("./pages/Customize"));
 const ProductDetail  = lazy(() => import("./pages/ProductDetail"));
 const ConfiguratorDev = lazy(() => import("./pages/ConfiguratorDev"));
+const Sustainability = lazy(() => import("./pages/Sustainability"));
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App = () => (
               <Route path="/services"          element={<Services />} />
               <Route path="/catalogue"         element={<Catalogue />} />
               <Route path="/about"             element={<About />} />
+              <Route path="/sustainability"    element={<Sustainability />} />
               <Route path="/studio"            element={<DesignStudio />} />
               <Route path="/customize"         element={<Customize />} />
               <Route path="/product/:preset"   element={<ProductDetail />} />

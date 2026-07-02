@@ -43,8 +43,8 @@ const Viewer3D = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="w-full h-full flex items-center justify-center bg-[#050505] text-[color:var(--itb-muted)] font-mono text-xs uppercase tracking-[0.2em]">
-        Loading viewer...
+      <div className="w-full h-full flex items-center justify-center bg-[color:var(--itb-bg)] text-[color:var(--itb-muted)] font-mono text-xs uppercase tracking-[0.2em]">
+        Loading 3D Workspace...
       </div>
     ),
   }
@@ -182,7 +182,7 @@ export const Customize = () => {
           {/* Left Column: 3D Canvas Area */}
           <div className="w-full md:w-[55%] bg-[color:var(--itb-bg)] md:sticky md:top-[calc(var(--itb-nav-h)+80px)] h-[50vh] md:h-[calc(100vh-var(--itb-nav-h)-80px)] flex flex-col justify-between p-6 md:p-8 z-10 configurator-viewer viewer-watermark">
             {/* Center Canvas with Dieline crossfade */}
-            <div className="flex-1 border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] overflow-hidden bg-[#050505] relative">
+            <div className="flex-1 border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] overflow-hidden bg-[color:var(--itb-bg)] relative">
               <div 
                 className={`absolute inset-0 transition-opacity duration-300 ease-in-out ${
                   store.viewMode === "3d" ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"

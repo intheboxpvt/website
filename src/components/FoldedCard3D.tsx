@@ -32,7 +32,7 @@ const FoldedCard3D = ({ frontImage, insideImage, frontText, insideText, classNam
             {/* Dynamic Text Overlay */}
             {frontText && (
               <div className="absolute inset-0 flex items-center justify-center p-6 text-center pointer-events-none">
-                <p className="font-serif text-2xl md:text-3xl text-gold-metallic drop-shadow-lg leading-tight uppercase tracking-widest font-bold">
+                <p className="font-sans text-2xl md:text-3xl text-gold-metallic drop-shadow-lg leading-tight uppercase tracking-widest font-bold">
                   {frontText}
                 </p>
               </div>

@@ -161,15 +161,15 @@ const Hero = () => {
         >
           <div className="flex items-start gap-12 lg:gap-24 flex-wrap">
             <div className="flex flex-col gap-2">
-              <span className="text-3xl lg:text-4xl font-serif text-white">{materialsCount}+</span>
+              <span className="text-3xl lg:text-4xl font-sans font-bold text-white">{materialsCount}+</span>
               <span className="text-xs text-white/50 font-mono tracking-tight leading-tight">premium materials available</span>
             </div>
             <div className="flex flex-col gap-2">
-              <span className="text-3xl lg:text-4xl font-serif text-white">{capacityCount}M+</span>
+              <span className="text-3xl lg:text-4xl font-sans font-bold text-white">{capacityCount}M+</span>
               <span className="text-xs text-white/50 font-mono tracking-tight leading-tight">monthly output capacity</span>
             </div>
             <div className="flex flex-col gap-2">
-              <span className="text-3xl lg:text-4xl font-serif text-white">{productionCount}%</span>
+              <span className="text-3xl lg:text-4xl font-sans font-bold text-white">{productionCount}%</span>
               <span className="text-xs text-white/50 font-mono tracking-tight leading-tight">in-house production SLA</span>
             </div>
           </div>

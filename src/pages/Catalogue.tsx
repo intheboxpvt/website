@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Download, ArrowRight } from "lucide-react";
+import { Download, ArrowRight, Maximize2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import FoldedCard3D from "@/components/FoldedCard3D";
 import SEO from "@/components/SEO";
@@ -45,8 +45,8 @@ const Catalogue = () => {
       />
       <Navbar />
  
-      {/* Page Header */}
-      <section className="pt-24 pb-6 px-6 lg:px-12 bg-[#1d0a27] border-b border-white/5 relative overflow-hidden text-white">
+      {/* Page Header — uses royal-purple gradient consistent with all other pages */}
+      <section className="pt-24 pb-6 px-6 lg:px-12 section-royal border-b border-white/5 relative overflow-hidden">
         {/* Subtle Watermark logo inside Header */}
         <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
           <img 
@@ -104,7 +104,18 @@ const Catalogue = () => {
           <div className="grid lg:grid-cols-2 gap-8 items-stretch">
             
             {/* Left Column: 3D Visualizer Canvas */}
-            <div className="flex flex-col items-center justify-center bg-card border border-border p-8 h-[480px] relative">
+            <div className="flex flex-col items-center justify-center bg-card border border-border p-8 h-[480px] relative group/viewer">
+              
+              {/* Expand Button Overlay */}
+              <Link 
+                to="/customize?preset=straight_tuck&source=catalogue"
+                className="absolute top-4 right-4 z-30 p-2.5 bg-card hover:bg-[#1c0f24] text-foreground hover:text-white border border-border hover:border-accent transition-all duration-300 rounded-lg shadow-sm flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider font-semibold"
+                aria-label="Expand to full 3D customizer workspace"
+              >
+                <Maximize2 className="w-3.5 h-3.5" />
+                <span>Expand Workspace</span>
+              </Link>
+
               <FoldedCard3D 
                 frontImage="/products/premium_thank_you_card.png" 
                 insideImage="/products/thank_you_card_texture.png"
@@ -114,7 +125,7 @@ const Catalogue = () => {
               />
               <div className="mt-6 p-2 bg-accent/5 border border-accent/20 w-full text-center">
                 <p className="text-[10px] font-mono text-accent leading-relaxed animate-pulse">
-                  // Interactive 3D structural mapping. Drag to rotate card.
+                  // Interactive 3D structural mapping. Click to open/close card.
                 </p>
               </div>
             </div>
@@ -233,7 +244,7 @@ const Catalogue = () => {
                     <Link
                       to={`/customize?preset=${p.configuratorPreset}&source=catalogue&name=${encodeURIComponent(p.name)}`}
                       aria-label={`Customize ${p.name} in 3D configurator`}
-                      className="w-full text-center py-2 text-xs font-mono tracking-wider text-[color:var(--itb-muted)] hover:text-[color:var(--itb-fg)] transition-all duration-300 hover:underline inline-block"
+                      className="w-full text-center py-2 text-xs font-mono tracking-wider text-foreground/40 hover:text-accent transition-all duration-300 hover:underline inline-block"
                     >
                       Customize in 3D →
                     </Link>

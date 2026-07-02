@@ -18,9 +18,9 @@ const AboutPreview = () => {
                 <span className="w-12 h-px bg-border"></span>
                 Our Story
               </span>
-              <h2 className="text-5xl md:text-7xl lg:text-[6.5rem] font-serif tracking-tight leading-[0.9] text-foreground mb-8">
+              <h2 className="text-5xl md:text-7xl lg:text-[6.5rem] font-sans font-bold tracking-tight leading-[0.9] text-foreground mb-8">
                 Every Box<br/>
-                <span className="text-foreground/30 italic">Tells a Story.</span>
+                <span className="text-foreground/30 italic font-semibold">Tells a Story.</span>
               </h2>
             </ScrollReveal>
  

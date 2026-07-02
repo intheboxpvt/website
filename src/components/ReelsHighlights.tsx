@@ -65,8 +65,8 @@ export const ReelsHighlights = () => {
             <span className="w-12 h-px bg-border"></span>
             Social Proof
           </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-light text-foreground leading-tight">
-            InTheBox <span className="text-foreground/30 italic">In Action.</span>
+          <h2 className="text-4xl md:text-5xl font-sans font-bold text-foreground leading-tight">
+            InTheBox <span className="text-foreground/30 italic font-semibold">In Action.</span>
           </h2>
           <p className="font-sans text-sm text-foreground/75 mt-4 max-w-md">
             Watch our actual rigid box manufacturing, prototype testing, and unboxing processes unfold on Instagram.
