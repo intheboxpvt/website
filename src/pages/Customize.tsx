@@ -19,6 +19,7 @@ import PrintingSelect from "@/components/configurator/PrintingSelect";
 import QuantityInput from "@/components/configurator/QuantityInput";
 import LogoUpload from "@/components/configurator/LogoUpload";
 import DielineView from "@/components/configurator/DielineView";
+import QuoteModal, { quoteData, captureViewerSnapshot } from "@/components/configurator/QuoteModal";
 
 // Dynamic import helper for Vite React SPA
 function dynamic<T extends React.ComponentType<any>>(
@@ -294,9 +295,15 @@ export const Customize = () => {
                 label="Request Quote →" 
                 variant="primary" 
                 fullWidth 
-                onClick={() => console.log("Request Quote clicked:", store)}
+                onClick={() => {
+                  const snapshot = captureViewerSnapshot();
+                  quoteData.snapshot = snapshot;
+                  store.setQuoteOpen(true);
+                }}
               />
             </div>
+            
+            <QuoteModal />
           </div>
         </div>
 

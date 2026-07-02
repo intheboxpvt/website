@@ -157,7 +157,8 @@ function BoxScene() {
   ]);
 
   // Animate lid folds and sliding groups frame-by-frame
-  useFrame(() => {
+  useFrame(({ gl }) => {
+    (window as any)._glCanvas = gl.domElement;
     const boxGroup = boxGroupRef.current;
     if (!boxGroup) return;
 
@@ -202,7 +203,7 @@ export const Viewer3D = () => {
       <Canvas
         shadows
         camera={{ position: [8, 6, 12], fov: 35 }}
-        gl={{ antialias: true, alpha: false }}
+        gl={{ antialias: true, alpha: false, preserveDrawingBuffer: true }}
         onCreated={({ gl }) => {
           gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
           gl.shadowMap.enabled = true;
