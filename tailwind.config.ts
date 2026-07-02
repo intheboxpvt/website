@@ -95,7 +95,7 @@ export default {
         body:    ['var(--font-inter)', 'sans-serif'],
         serif: ["'ABCFavoritVariable'", "'Instrument Sans'", "'Inter'", "sans-serif"],
         sans: ["'ABCFavoritVariable'", "'Instrument Sans'", "'Inter'", "sans-serif"],
-        mono: ["'JetBrains Mono'", "monospace"],
+        mono: ["'ABCFavoritVariable'", "'Instrument Sans'", "'Inter'", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -293,7 +293,7 @@ const About = () => {
                     <AsciiArt 
                       src={member.image} 
                       resolution={65} 
-                      color="#d5a037" 
+                      color="#fbbf24" 
                       className="w-full h-full bg-[#050505] p-1 flex items-center justify-center transition-all duration-300"
                     />
                   ) : (

@@ -13,7 +13,7 @@ interface AsciiArtProps {
 export const AsciiArt: React.FC<AsciiArtProps> = ({
   src,
   resolution = 65,
-  color = "#d5a037",
+  color = "#fbbf24",
   className = "",
 }) => {
   const [ascii, setAscii] = useState<string>("");
@@ -67,7 +67,7 @@ export const AsciiArt: React.FC<AsciiArtProps> = ({
       <canvas ref={canvasRef} className="hidden" />
       <pre 
         className="font-mono text-[7px] leading-[0.78] tracking-widest whitespace-pre"
-        style={{ color }}
+        style={{ color, fontFamily: "monospace, Courier New, Courier" }}
       >
         {ascii}
       </pre>
