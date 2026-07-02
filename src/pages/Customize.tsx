@@ -18,6 +18,7 @@ import FoilSelect from "@/components/configurator/FoilSelect";
 import PrintingSelect from "@/components/configurator/PrintingSelect";
 import QuantityInput from "@/components/configurator/QuantityInput";
 import LogoUpload from "@/components/configurator/LogoUpload";
+import DielineView from "@/components/configurator/DielineView";
 
 // Dynamic import helper for Vite React SPA
 function dynamic<T extends React.ComponentType<any>>(
@@ -137,15 +138,22 @@ export const Customize = () => {
           
           {/* Left Column: 3D Canvas Area */}
           <div className="w-full md:w-[55%] bg-[color:var(--itb-bg)] md:sticky md:top-[calc(var(--itb-nav-h)+80px)] h-[50vh] md:h-[calc(100vh-var(--itb-nav-h)-80px)] flex flex-col justify-between p-6 md:p-8 z-10">
-            {/* Center Canvas or Dieline Placeholder */}
-            <div className="flex-1 flex items-center justify-center border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] overflow-hidden bg-[#050505]">
-              {store.viewMode === "3d" ? (
+            {/* Center Canvas with Dieline crossfade */}
+            <div className="flex-1 border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] overflow-hidden bg-[#050505] relative">
+              <div 
+                className={`absolute inset-0 transition-opacity duration-300 ease-in-out ${
+                  store.viewMode === "3d" ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                }`}
+              >
                 <Viewer3D />
-              ) : (
-                <span className="font-mono text-xs text-[color:var(--itb-muted)] uppercase tracking-[0.2em] text-center px-4">
-                  Dieline view coming soon
-                </span>
-              )}
+              </div>
+              <div 
+                className={`absolute inset-0 transition-opacity duration-300 ease-in-out ${
+                  store.viewMode === "dieline" ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                }`}
+              >
+                <DielineView />
+              </div>
             </div>
 
             {/* Controls Rows */}
