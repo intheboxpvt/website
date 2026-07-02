@@ -17,6 +17,7 @@ import FinishPicker from "@/components/configurator/FinishPicker";
 import FoilSelect from "@/components/configurator/FoilSelect";
 import PrintingSelect from "@/components/configurator/PrintingSelect";
 import QuantityInput from "@/components/configurator/QuantityInput";
+import LogoUpload from "@/components/configurator/LogoUpload";
 
 // Dynamic import helper for Vite React SPA
 function dynamic<T extends React.ComponentType<any>>(
@@ -268,9 +269,7 @@ export const Customize = () => {
               {/* YOUR LOGO Section */}
               <div className="py-6">
                 <ITBLabel text="YOUR LOGO" />
-                <p className="text-xs text-[color:var(--itb-muted)] font-sans mt-2 italic text-left">
-                  (placeholder — built in Prompt 5)
-                </p>
+                <LogoUpload />
               </div>
               <ITBDivider className="my-0" />
             </div>

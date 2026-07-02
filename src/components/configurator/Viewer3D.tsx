@@ -7,6 +7,18 @@ import * as THREE from "three";
 import { useConfigStore } from "@/lib/configurator/store";
 import { buildBoxGroup, disposeBoxGroup } from "@/lib/configurator/BoxBuilder";
 import { getMaterial } from "@/lib/configurator/MaterialSystem";
+import { bakeTexture } from "@/lib/configurator/TextureBaker";
+
+// Helper to find specific face meshes
+export function findFace(group: THREE.Group, faceName: string): THREE.Mesh | null {
+  let found: THREE.Mesh | null = null;
+  group.traverse((obj) => {
+    if (obj instanceof THREE.Mesh && obj.userData.face === faceName) {
+      found = obj;
+    }
+  });
+  return found;
+}
 
 function BoxScene() {
   const store = useConfigStore();
@@ -53,6 +65,97 @@ function BoxScene() {
     scene,
   ]);
 
+  // Manage textures and apply to face meshes dynamically
+  useEffect(() => {
+    let active = true;
+    let logoTex: THREE.CanvasTexture | null = null;
+    let baseTex: THREE.CanvasTexture | null = null;
+
+    async function applyBakedTextures() {
+      // 1. Bake texture with logo
+      const lTex = await bakeTexture({
+        material: store.material,
+        logoDataUrl: store.logoDataUrl,
+        logoOpacity: store.logoOpacity,
+        watermarkSrc: "/images/inthebox-logo.png",
+      });
+
+      // 2. Bake plain texture (watermark only)
+      const bTex = await bakeTexture({
+        material: store.material,
+        logoDataUrl: null,
+        logoOpacity: 0,
+        watermarkSrc: "/images/inthebox-logo.png",
+      });
+
+      if (!active) {
+        lTex.dispose();
+        bTex.dispose();
+        return;
+      }
+
+      logoTex = lTex;
+      baseTex = bTex;
+
+      const group = boxGroupRef.current;
+      if (group) {
+        group.traverse((obj) => {
+          if (obj instanceof THREE.Mesh) {
+            const face = obj.userData.face ?? "";
+            
+            // Front & Back detection for sleeves, trays, or rigid components
+            const isFront = face === "front" || face.endsWith("_front");
+            const isBack = face === "back" || face.endsWith("_back");
+
+            if (obj.userData.isLid) {
+              // Apply base watermarked texture to the tuck lid
+              if (obj.material instanceof THREE.MeshStandardMaterial) {
+                obj.material.map = baseTex;
+                obj.material.needsUpdate = true;
+              }
+              return;
+            }
+
+            // Determine if logo goes on this face
+            const matchesFace =
+              (store.logoFace === "front" && isFront) ||
+              (store.logoFace === "back" && isBack);
+
+            // Double sided printing covers both faces
+            const matchesDoubleSide = store.printingSide === "both" && (isFront || isBack);
+
+            const shouldHaveLogo = matchesFace || matchesDoubleSide;
+
+            if (obj.material instanceof THREE.MeshStandardMaterial) {
+              obj.material.map = shouldHaveLogo ? logoTex : baseTex;
+              obj.material.needsUpdate = true;
+            }
+          }
+        });
+      }
+    }
+
+    // Delay texture bake slightly to allow new geometry group mounting
+    const timer = setTimeout(() => {
+      applyBakedTextures();
+    }, 50);
+
+    return () => {
+      active = false;
+      clearTimeout(timer);
+      if (logoTex) logoTex.dispose();
+      if (baseTex) baseTex.dispose();
+    };
+  }, [
+    store.logoDataUrl,
+    store.logoOpacity,
+    store.logoFace,
+    store.material,
+    store.printingSide,
+    store.boxType,
+    store.dimensions,
+  ]);
+
   // Animate lid folds and sliding groups frame-by-frame
   useFrame(() => {
     const boxGroup = boxGroupRef.current;
@@ -71,7 +174,6 @@ function BoxScene() {
           const dims = store.getDimensionsInMM();
           return { h: dims.h / 10 };
         })();
-        // Closed position: baseH - t = h * 0.65 - 0.15
         const baseH = h * 0.65;
         const targetY = (baseH - 0.15) + store.lidOpenAmount * (h * 0.65 + 0.8);
         obj.position.y = THREE.MathUtils.lerp(obj.position.y, targetY, 0.1);
