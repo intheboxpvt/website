@@ -199,7 +199,7 @@ export const Viewer3D = () => {
   const isRotating = useConfigStore((s) => s.isRotating);
 
   return (
-    <div className="w-full h-full relative" style={{ background: "#050505" }}>
+    <div className="w-full h-full relative" style={{ background: "#050505" }} onContextMenu={(e) => e.preventDefault()}>
       <Canvas
         shadows
         camera={{ position: [8, 6, 12], fov: 35 }}

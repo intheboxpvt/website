@@ -20,6 +20,7 @@ import QuantityInput from "@/components/configurator/QuantityInput";
 import LogoUpload from "@/components/configurator/LogoUpload";
 import DielineView from "@/components/configurator/DielineView";
 import QuoteModal, { quoteData, captureViewerSnapshot } from "@/components/configurator/QuoteModal";
+import ScreenshotOverlay from "@/components/configurator/ScreenshotOverlay";
 
 // Dynamic import helper for Vite React SPA
 function dynamic<T extends React.ComponentType<any>>(
@@ -57,6 +58,22 @@ export const Customize = () => {
 
   // Zustand Store variables
   const store = useConfigStore();
+
+  // Block Ctrl+S and Cmd+S save shortcuts
+  React.useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const isMac = navigator.platform.toUpperCase().includes("MAC");
+      const ctrl = isMac ? e.metaKey : e.ctrlKey;
+      if (ctrl && (e.key === "s" || e.key === "S")) {
+        e.preventDefault();
+      }
+      if (ctrl && e.shiftKey && (e.key === "s" || e.key === "S")) {
+        e.preventDefault();
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
 
   const steps = [
     { num: "01", label: "Choose Box", desc: "Select a container blueprint" },
@@ -138,7 +155,7 @@ export const Customize = () => {
         <div className="flex-1 flex flex-col md:flex-row">
           
           {/* Left Column: 3D Canvas Area */}
-          <div className="w-full md:w-[55%] bg-[color:var(--itb-bg)] md:sticky md:top-[calc(var(--itb-nav-h)+80px)] h-[50vh] md:h-[calc(100vh-var(--itb-nav-h)-80px)] flex flex-col justify-between p-6 md:p-8 z-10">
+          <div className="w-full md:w-[55%] bg-[color:var(--itb-bg)] md:sticky md:top-[calc(var(--itb-nav-h)+80px)] h-[50vh] md:h-[calc(100vh-var(--itb-nav-h)-80px)] flex flex-col justify-between p-6 md:p-8 z-10 configurator-viewer viewer-watermark">
             {/* Center Canvas with Dieline crossfade */}
             <div className="flex-1 border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] overflow-hidden bg-[#050505] relative">
               <div 
@@ -222,7 +239,7 @@ export const Customize = () => {
           </div>
 
           {/* Right Column: Configurator Panel */}
-          <div className="w-full md:w-[45%] bg-[color:var(--itb-surface)] border-t md:border-t-0 md:border-l border-[color:var(--itb-border)] p-6 md:p-8 flex flex-col justify-between z-10 h-auto md:h-[calc(100vh-var(--itb-nav-h)-80px)] md:overflow-y-auto">
+          <div className="w-full md:w-[45%] bg-[color:var(--itb-surface)] border-t md:border-t-0 md:border-l border-[color:var(--itb-border)] p-6 md:p-8 flex flex-col justify-between z-10 h-auto md:h-[calc(100vh-var(--itb-nav-h)-80px)] md:overflow-y-auto configurator-panel">
             {/* Input Sections Scroll Area */}
             <div className="space-y-0">
               
@@ -306,6 +323,8 @@ export const Customize = () => {
             <QuoteModal />
           </div>
         </div>
+
+        <ScreenshotOverlay />
 
         {/* ZONE C: TEMPLATES ROW */}
         <section className="w-full bg-[color:var(--itb-bg)] border-t border-[color:var(--itb-border)] py-12 px-6 lg:px-12">
