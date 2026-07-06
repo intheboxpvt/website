@@ -2,7 +2,6 @@ import React from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import SEO from "@/components/SEO";
 import { TEMPLATES } from "@/lib/configurator/templates";
 import { ArrowRight, Sparkles, CheckCircle, Package } from "lucide-react";
@@ -171,7 +170,6 @@ export const ProductDetail = () => {
 
       </div>
       <Footer />
-      <WhatsAppButton />
     </main>
   );
 };

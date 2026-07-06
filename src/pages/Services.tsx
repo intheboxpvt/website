@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { MessageSquare, Palette, Layers, Package, Sparkles, Truck, Search, Lightbulb, Box, CheckCircle, Factory, ArrowRight, Download } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -78,11 +77,11 @@ const Services = () => {
       {/* Page Header */}
       <section className="pt-24 pb-6 px-6 lg:px-12 bg-[#1d0a27] border-b border-white/5 relative overflow-hidden text-white">
         {/* Subtle Watermark logo inside Header */}
-        <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
+        <div className="absolute right-0 top-0 w-[380px] h-[380px] pointer-events-none opacity-[0.04] z-0 select-none">
           <img 
             src="/assets/logo.png" 
             alt="" 
-            className="w-full h-full object-contain filter invert brightness-0"
+            className="w-full h-full object-contain object-right-top filter invert brightness-0"
           />
         </div>
 
@@ -194,7 +193,7 @@ const Services = () => {
           alt="InTheBox Manufacturing Logistics" 
           className="w-full h-full object-cover opacity-90 transition-transform duration-1000 hover:scale-[1.02]" 
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-[#050505]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1d0a27] via-transparent to-[#050505]"></div>
       </section>
 
       {/* Interactive Delivery Road Timeline */}
@@ -289,7 +288,7 @@ const Services = () => {
           <div className="text-center mt-24">
             <Button 
               onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
-              className="btn-premium-gold py-6 px-12 text-sm"
+              className="btn-premium-gold py-6 px-8 sm:px-12 text-sm w-full sm:w-auto"
             >
               Start off with Consultation <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
@@ -299,7 +298,6 @@ const Services = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </main>
   );
 };

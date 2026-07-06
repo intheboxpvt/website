@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Award, Users, Factory, Heart } from "lucide-react";
 import SEO from "@/components/SEO";
@@ -46,11 +45,11 @@ const About = () => {
       {/* Page Header */}
       <section className="pt-24 pb-6 px-6 lg:px-12 section-royal border-b border-white/5 relative overflow-hidden text-white">
         {/* Subtle Watermark logo inside Header */}
-        <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
+        <div className="absolute right-0 top-0 w-[380px] h-[380px] pointer-events-none opacity-[0.04] z-0 select-none">
           <img
             src="/assets/logo.png"
             alt=""
-            className="w-full h-full object-contain filter invert brightness-0"
+            className="w-full h-full object-contain object-right-top filter invert brightness-0"
           />
         </div>
 
@@ -216,7 +215,6 @@ const About = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </main>
   );
 };

@@ -1,9 +1,8 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Download, ArrowRight, Maximize2 } from "lucide-react";
+import { ArrowRight, Maximize2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import FoldedCard3D from "@/components/FoldedCard3D";
 import SEO from "@/components/SEO";
@@ -48,11 +47,11 @@ const Catalogue = () => {
       {/* Page Header — uses royal-purple gradient consistent with all other pages */}
       <section className="pt-24 pb-6 px-6 lg:px-12 section-royal border-b border-white/5 relative overflow-hidden">
         {/* Subtle Watermark logo inside Header */}
-        <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
+        <div className="absolute right-0 top-0 w-[380px] h-[380px] pointer-events-none opacity-[0.04] z-0 select-none">
           <img 
             src="/assets/logo.png" 
             alt="" 
-            className="w-full h-full object-contain filter invert brightness-0"
+            className="w-full h-full object-contain object-right-top filter invert brightness-0"
           />
         </div>
  
@@ -63,24 +62,10 @@ const Catalogue = () => {
                 <span className="w-12 h-px bg-white/20"></span>
                 Catalogue
               </span>
-              <div className="flex items-center gap-4 flex-wrap">
+              <div>
                 <h1 className="text-3xl md:text-4xl lg:text-[4.5rem] font-sans font-bold tracking-tight leading-none text-white">
                   Explore Our <span className="text-accent italic font-semibold">Collection.</span>
                 </h1>
-                
-                {/* Collapsible hover download button */}
-                <a 
-                  href="/inthebox_catalogue.pdf" 
-                  download="InTheBox_Catalogue.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-white/10 hover:bg-white text-white hover:text-black transition-all duration-500 rounded-full p-3 group overflow-hidden max-w-[46px] hover:max-w-[240px] h-[46px] relative shadow-lg"
-                >
-                  <Download className="w-5 h-5 flex-shrink-0" />
-                  <span className="font-mono text-[10px] font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pr-1">
-                    Download PDF Catalogue
-                  </span>
-                </a>
               </div>
               <p className="font-sans text-sm text-white/50 mt-4 max-w-xl">
                 Browse our structural archive of rigid luxury boxes, eco-board containers, and corporate stationery.
@@ -271,7 +256,6 @@ const Catalogue = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </main>
   );
 };
