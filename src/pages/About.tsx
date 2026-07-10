@@ -1,15 +1,11 @@
-import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Award, Users, Factory, Heart, Leaf, Recycle, TreePine, Droplets, TrendingDown } from "lucide-react";
+import { ArrowRight, Award, Users, Factory, Heart } from "lucide-react";
 import SEO from "@/components/SEO";
-import { AsciiArt } from "@/components/ui/ascii-art";
 
 const About = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
   const teamMembers = [
     {
       name: "Liv Arpit",
@@ -36,26 +32,6 @@ const About = () => {
     { icon: Users, title: "Client Focus", desc: "Your success is our success. We listen, understand, and deliver" },
     { icon: Factory, title: "Innovation", desc: "Constantly evolving our techniques and sustainable practices" },
     { icon: Heart, title: "Integrity", desc: "Transparent pricing, honest timelines, and genuine partnerships" },
-  ];
-
-  const sustainabilityFeatures = [
-    { icon: Leaf, title: "Agri Waste Hybrid Boards", desc: "Made from rice husk and wheat straw that would otherwise be burned, reducing air pollution in Punjab." },
-    { icon: Recycle, title: "100% Recyclable", desc: "All our packaging can be recycled through standard municipal systems across India." },
-    { icon: TreePine, title: "Compostable Options", desc: "Select materials break down naturally within 90 days in commercial composting facilities." },
-    { icon: Droplets, title: "Water Based Inks", desc: "Eco friendly printing that is safe for the environment and completely non toxic." },
-  ];
-
-  const impactStats = [
-    { value: "2,500+", label: "Tons of Agri Waste Diverted", icon: TrendingDown },
-    { value: "1,200+", label: "Farmers Supported", icon: Users },
-    { value: "100%", label: "Recyclable and Compostable", icon: Leaf },
-  ];
-
-  const lifecycleSteps = [
-    { step: "1", title: "Source", desc: "Agri waste collected from local Punjab farmers" },
-    { step: "2", title: "Process", desc: "Transformed into premium hybrid boards" },
-    { step: "3", title: "Create", desc: "Crafted into beautiful packaging" },
-    { step: "4", title: "Return", desc: "100% recyclable or compostable end of life" },
   ];
 
   return (
@@ -190,8 +166,6 @@ const About = () => {
         </div>
       </section>
 
-
-
       {/* Team Section */}
       <section className="py-24 px-6 lg:px-12 bg-background border-y border-border">
         <div className="max-w-[1400px] mx-auto">
@@ -205,29 +179,13 @@ const About = () => {
               <div
                 key={index}
                 className="group w-full relative cursor-pointer"
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
               >
                 <div className="relative aspect-square rounded-none overflow-hidden mb-6 border border-border">
-                  {hoveredIndex === index ? (
-                    <AsciiArt
-                      src={member.image}
-                      resolution={65}
-                      color="#fbbf24"
-                      className="w-full h-full bg-[#050505] p-1 flex items-center justify-center transition-all duration-300"
-                    />
-                  ) : (
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 filter grayscale group-hover:grayscale-0"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/95 via-[#050505]/65 to-transparent border border-accent/20 flex flex-col justify-end p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                    <p className="font-mono text-[10px] text-accent uppercase tracking-widest mb-1">{member.role}</p>
-                    <h4 className="font-sans text-xl font-bold text-white mb-3">{member.name}</h4>
-                    <p className="font-sans text-xs text-white/80 leading-relaxed">{member.bio}</p>
-                  </div>
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover object-top transition-all duration-500 filter grayscale group-hover:grayscale-0 group-hover:scale-105"
+                  />
                 </div>
                 <h3 className="font-sans text-xl font-bold text-foreground">{member.name}</h3>
                 <p className="font-mono text-xs text-accent uppercase tracking-wider mt-1">{member.role}</p>
