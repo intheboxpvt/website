@@ -7,6 +7,7 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
   boxType:       'straight_tuck',
   dimensions:    { length: 100, width: 70, height: 30, unit: 'mm' },
   material:      'white_cardboard',
+  boxColor:      '#F5F0EB',
   finish:        'matte_lamination',
   foilEffect:    'none',
   printingSide:  'outside',
@@ -15,15 +16,19 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
   viewMode:      '3d',
   isRotating:    false,
   logoDataUrl:   null,
-  logoFace:      'front',
-  logoOpacity:   0.9,
+  logoFace:      'top',
+  logoX:         0.5,
+  logoY:         0.5,
+  logoScale:     0.6,
+  logoRotation:  0,
+  logoOpacity:   1.0,
   savedConfigId: null,
   quoteOpen:     false,
 
   setBoxType:      (t)    => set({ boxType: t }),
   setDimensions:   (d)    => set(s => ({ dimensions: { ...s.dimensions, ...d } })),
   setUnit:         (u)    => set(s => {
-    const factor = MM_PER[u] / MM_PER[s.dimensions.unit]
+    const factor = MM_PER[s.dimensions.unit] / MM_PER[u]
     return {
       dimensions: {
         length: Math.round(s.dimensions.length * factor * 100) / 100,
@@ -34,6 +39,7 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
     }
   }),
   setMaterial:     (m)    => set({ material: m }),
+  setBoxColor:     (c)    => set({ boxColor: c }),
   setFinish:       (f)    => set({ finish: f }),
   setFoilEffect:   (fe)   => set({ foilEffect: fe }),
   setPrintingSide: (ps)   => set({ printingSide: ps }),
@@ -43,6 +49,10 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
   setIsRotating:   (r)    => set({ isRotating: r }),
   setLogo:         (url)  => set({ logoDataUrl: url }),
   setLogoFace:     (f)    => set({ logoFace: f }),
+  setLogoX:        (x)    => set({ logoX: x }),
+  setLogoY:        (y)    => set({ logoY: y }),
+  setLogoScale:    (s)    => set({ logoScale: s }),
+  setLogoRotation: (deg)  => set({ logoRotation: deg }),
   setLogoOpacity:  (o)    => set({ logoOpacity: o }),
   setSavedConfigId:(id)   => set({ savedConfigId: id }),
   setQuoteOpen:    (open) => set({ quoteOpen: open }),
@@ -53,3 +63,4 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
     return { l: length * f, w: width * f, h: height * f }
   },
 }))
+
