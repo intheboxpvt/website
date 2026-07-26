@@ -245,8 +245,8 @@ export const Viewer3D = () => {
     <div className="w-full h-full relative bg-[#edf0f5] overflow-hidden" onContextMenu={(e) => e.preventDefault()}>
       
       {/* Background Watermark Logo — Consistent with Catalogue */}
-      <div className="absolute right-6 top-1/2 -translate-y-1/2 w-64 h-64 pointer-events-none opacity-[0.05] select-none z-0">
-        <img src="/images/inthebox-logo.png" alt="" className="w-full h-full object-contain filter grayscale" />
+      <div className="absolute right-6 top-1/2 -translate-y-1/2 w-64 h-64 pointer-events-none opacity-[0.04] select-none z-0">
+        <img src="/images/inthebox-logo.png" alt="" className="w-full h-full object-contain filter invert brightness-0" />
       </div>
 
       <Canvas
