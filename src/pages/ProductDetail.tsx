@@ -5,25 +5,13 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { TEMPLATES } from "@/lib/configurator/templates";
 import { ArrowRight, Sparkles, CheckCircle, Package } from "lucide-react";
-
-const PRODUCTS = [
-  { name: "Premium Thank You Card", category: "stationery", moq: "100-500", desc: "Folded luxury cards with foil stamping.", configuratorPreset: "straight_tuck", longDesc: "Crafted with premium weights and exquisite detail, our customized thank-you stationery is designed to elevate the unboxing experience. Ideal for boutique brands seeking premium foil accents." },
-  { name: "Classic Rigid Box", category: "rigid", moq: "100-500", desc: "Premium rigid boxes with magnetic closure.", configuratorPreset: "rigid_lid_base", longDesc: "Our flagship rigid gift containers feature thick greyboard lining, seamless paper wrap, and magnetic front lid flaps. Hand-finished to guarantee an unmatched premium presentation." },
-  { name: "Kraft Mailer", category: "kraft", moq: "250-1000", desc: "Eco-friendly kraft mailers for shipping.", configuratorPreset: "mailer", longDesc: "Sustainable E-commerce shippers made of recycled corrugated fiberboard. Resilient structural flaps protect your merchandise without requiring excess filler material." },
-  { name: "Luxury Gift Box", category: "luxury", moq: "50-200", desc: "High-end gift boxes with ribbon closure.", configuratorPreset: "gift", longDesc: "A elegant shallow box with high-grade gloss lamination, matching ribbon closures, and metallic corner reinforcements. Perfect for gourmet packaging and fashion accessories." },
-  { name: "Eco Board Box", category: "sustainable", moq: "200-800", desc: "Agri-waste hybrid board packaging.", configuratorPreset: "reverse_tuck", longDesc: "Engineered from organic agricultural residues, these hybrid board cartons minimize environmental footprints while preserving high tensile strength and print clarity." },
-  { name: "Drawer Box", category: "rigid", moq: "100-400", desc: "Sliding drawer style rigid boxes.", configuratorPreset: "drawer", longDesc: "A modern sliding sleeve design containing a thick card draw tray. Features ribbon pull tabs and custom fitted insert templates to secure premium products." },
-  { name: "Kraft Paper Bag", category: "kraft", moq: "500-2000", desc: "Custom printed kraft bags.", configuratorPreset: "straight_tuck", longDesc: "High-density kraft paper shopping carriers with twisted handles. Built with reinforced cardboard base plates for heavy-duty structural integrity." },
-  { name: "Corrugated Shipper", category: "kraft", moq: "500-2000", desc: "Durable custom shipping boxes.", configuratorPreset: "mailer", longDesc: "Heavy-duty double wall shipping cartons designed to protect cargo across bulk distribution routes. Customizable dimensions and strength ratings." },
-  { name: "Cosmetic Glass Jar Box", category: "luxury", moq: "100-500", desc: "Premium retail boxes for cosmetics.", configuratorPreset: "perfume", longDesc: "Tall, slender tuck-end folding packaging custom-tailored for perfume containers, skincare tubes, and retail cosmetics jars. Ideal for high-end boutique shelves." },
-  { name: "Apparel Sleeve", category: "sustainable", moq: "200-1000", desc: "Eco-friendly sleeves for clothing packaging.", configuratorPreset: "sleeve", longDesc: "A slide-on protective wrapper that wraps around folded apparel, textiles, or flat goods. Lightweight and fully recyclable." }
-];
+import { PRODUCTS } from "@/data/products";
 
 export const ProductDetail = () => {
   const { preset } = useParams<{ preset: string }>();
   
   // Find current product
-  const product = PRODUCTS.find((p) => p.configuratorPreset === preset) || PRODUCTS[1];
+  const product = PRODUCTS.find((p) => p.configuratorPreset === preset) || PRODUCTS[0];
 
   // Get 3 relevant templates (filter by active boxType, pad with others if needed)
   const matchedTemplates = TEMPLATES.filter((t) => t.config.boxType === preset);
@@ -45,7 +33,7 @@ export const ProductDetail = () => {
           {/* Image */}
           <div className="aspect-[4/3] rounded-lg overflow-hidden border border-border bg-card relative shadow-sm">
             <img 
-              src={`/products/${product.name.toLowerCase().replace(/ /g, "_")}.png`} 
+              src={product.image} 
               alt={product.name}
               className="w-full h-full object-cover select-none pointer-events-none opacity-90"
               onContextMenu={(e) => e.preventDefault()}

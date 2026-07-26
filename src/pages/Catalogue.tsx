@@ -1,257 +1,217 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight, Leaf, Sparkles, Box } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { ArrowRight, Maximize2 } from "lucide-react";
-import { Link } from "react-router-dom";
-import FoldedCard3D from "@/components/FoldedCard3D";
 import SEO from "@/components/SEO";
+import { PRODUCTS, Product } from "@/data/products";
+
+const CATEGORIES = [
+  { id: "All", label: "All Products" },
+  { id: "Boxes", label: "Boxes" },
+  { id: "Bags", label: "Bags" },
+  { id: "Printables", label: "Printables" },
+  { id: "Sustainability", label: "Sustainability", icon: Leaf },
+];
 
 const Catalogue = () => {
-  const [filter, setFilter] = useState("all");
-  const [frontText, setFrontText] = useState("Your Brand Here");
-  const [insideText, setInsideText] = useState("Tell your brand story and thank your customers in style. This interior space is yours to design.");
-  
-  const categories = ["all", "rigid", "kraft", "luxury", "sustainable", "stationery"];
-  
-  const products: Array<{
-    name: string;
-    category: string;
-    moq: string;
-    desc: string;
-    configuratorPreset: string;
-  }> = [
-    { name: "Premium Thank You Card", category: "stationery", moq: "100-500", desc: "Folded luxury cards with foil stamping.", configuratorPreset: "straight_tuck" }, // Closest folding net style
-    { name: "Classic Rigid Box", category: "rigid", moq: "100-500", desc: "Premium rigid boxes with magnetic closure.", configuratorPreset: "rigid_lid_base" },
-    { name: "Kraft Mailer", category: "kraft", moq: "250-1000", desc: "Eco-friendly kraft mailers for shipping.", configuratorPreset: "mailer" },
-    { name: "Luxury Gift Box", category: "luxury", moq: "50-200", desc: "High-end gift boxes with ribbon closure.", configuratorPreset: "gift" },
-    { name: "Eco Board Box", category: "sustainable", moq: "200-800", desc: "Agri-waste hybrid board packaging.", configuratorPreset: "reverse_tuck" },
-    { name: "Drawer Box", category: "rigid", moq: "100-400", desc: "Sliding drawer style rigid boxes.", configuratorPreset: "drawer" },
-    { name: "Kraft Paper Bag", category: "kraft", moq: "500-2000", desc: "Custom printed kraft bags.", configuratorPreset: "straight_tuck" }, // Closest outline silhouette
-    { name: "Corrugated Shipper", category: "kraft", moq: "500-2000", desc: "Durable custom shipping boxes.", configuratorPreset: "mailer" },
-    { name: "Cosmetic Glass Jar Box", category: "luxury", moq: "100-500", desc: "Premium retail boxes for cosmetics.", configuratorPreset: "perfume" },
-    { name: "Apparel Sleeve", category: "sustainable", moq: "200-1000", desc: "Eco-friendly sleeves for clothing packaging.", configuratorPreset: "sleeve" },
-  ];
+  const [activeCategory, setActiveCategory] = useState("All");
 
-  const filtered = filter === "all" ? products : products.filter(p => p.category === filter);
+  const filteredProducts = activeCategory === "All"
+    ? PRODUCTS
+    : activeCategory === "Sustainability"
+      ? PRODUCTS.filter((p) => p.category === "Sustainability" || p.isSustainable)
+      : PRODUCTS.filter((p) => p.category === activeCategory);
+
+  const scrollToGrid = () => {
+    document.getElementById("product-grid")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen bg-background text-foreground flex flex-col">
       <SEO 
-        title="Product Catalogue | Custom Boxes & Packaging Solutions"
-        description="Browse our extensive catalogue of custom packaging solutions. From rigid luxury boxes to eco-friendly kraft mailers, find the perfect fit for your brand."
+        title="Product Catalogue | Custom Packaging Solutions | InTheBox"
+        description="Browse our complete range of custom rigid boxes, eco-board containers, kraft mailers, bags, and corporate stationery. Get instant quotes and customize in 3D."
         keywords="packaging catalogue, custom boxes, rigid boxes, kraft mailers, eco-friendly packaging, wholesale packaging"
       />
       <Navbar />
- 
-      {/* Page Header — uses royal-purple gradient consistent with all other pages */}
-      <section className="pt-24 pb-6 px-6 lg:px-12 section-royal border-b border-white/5 relative overflow-hidden">
-        {/* Subtle Watermark logo inside Header */}
-        <div className="absolute right-0 top-0 w-[380px] h-[380px] pointer-events-none opacity-[0.04] z-0 select-none">
+
+      {/* Compact Page Header */}
+      <section className="pt-24 pb-10 px-6 lg:px-12 section-royal border-b border-white/10 relative overflow-hidden">
+        {/* Watermark logo background */}
+        <div className="absolute right-0 top-0 w-[320px] h-[320px] pointer-events-none opacity-[0.03] select-none">
           <img 
             src="/assets/logo.png" 
             alt="" 
-            className="w-full h-full object-contain object-right-top filter invert brightness-0"
+            className="w-full h-full object-contain filter invert brightness-0"
           />
         </div>
- 
+
         <div className="max-w-[1400px] mx-auto relative z-10">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div>
-              <span className="inline-flex items-center gap-3 text-xs font-mono text-white/50 mb-3">
-                <span className="w-12 h-px bg-white/20"></span>
-                Catalogue
-              </span>
-              <div>
-                <h1 className="text-3xl md:text-4xl lg:text-[4.5rem] font-sans font-bold tracking-tight leading-none text-white">
-                  Explore Our <span className="text-accent italic font-semibold">Collection.</span>
-                </h1>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="max-w-2xl space-y-3">
+              <div className="inline-flex items-center gap-2 text-xs font-mono text-white/50">
+                <span className="w-8 h-px bg-accent"></span>
+                <span>Catalogue & Archive</span>
               </div>
-              <p className="font-sans text-sm text-white/50 mt-4 max-w-xl">
-                Browse our structural archive of rigid luxury boxes, eco-board containers, and corporate stationery.
+              <h1 className="text-3xl md:text-5xl font-sans font-bold tracking-tight text-white leading-tight">
+                Explore Our Packaging <span className="text-accent italic">Collection</span>
+              </h1>
+              <p className="font-sans text-sm text-white/70 leading-relaxed">
+                Discover bespoke rigid boxes, eco-board shippers, shopping bags, and premium printables engineered for high-impact brand unboxing.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
- 
-      {/* 3D Virtual Customizer Section */}
-      <section className="py-16 px-6 lg:px-12 bg-background border-b border-border relative">
-        <div className="max-w-[1400px] mx-auto">
-          
-          <div className="mb-12">
-            <h2 className="font-sans text-3xl font-bold text-foreground leading-tight">3D Virtual <span className="text-accent">Customizer</span></h2>
-            <p className="font-sans text-xs text-foreground/60 mt-2">
-              Customize your brand name and interior message to preview your bespoke packaging structure in real-time.
-            </p>
-          </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 items-stretch">
-            
-            {/* Left Column: 3D Visualizer Canvas - redesigned to be inviting with golden hover glow */}
-            <div className="flex flex-col items-center justify-center bg-card border-2 border-border hover:border-accent p-8 h-[480px] relative group/viewer shadow-md hover:shadow-gold transition-all duration-500 rounded-lg">
-              
-              {/* Expand Button Overlay - Prominent and Golden */}
-              <Link 
-                to="/customize?preset=straight_tuck&source=catalogue"
-                className="absolute top-4 right-4 z-30 px-4 py-2 bg-accent hover:bg-[#1c0f24] text-white hover:text-white border border-accent hover:border-accent transition-all duration-300 rounded-lg shadow-md flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider font-bold animate-pulse-soft"
-                aria-label="Expand to full 3D customizer workspace"
+            {/* Header CTAs */}
+            <div className="flex items-center gap-3 flex-shrink-0">
+              <Button
+                onClick={scrollToGrid}
+                className="bg-accent hover:bg-accent/80 text-[#1d0a27] font-semibold text-xs font-mono uppercase tracking-wider px-5 py-3 rounded-lg shadow-md transition-all"
               >
-                <Maximize2 className="w-4 h-4" />
-                <span>Expand to 3D Studio</span>
+                Explore Products
+              </Button>
+              <Link
+                to="/customize"
+                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 text-white border border-white/20 text-xs font-mono uppercase tracking-wider px-5 py-3 rounded-lg transition-all"
+              >
+                <span>Open 3D Studio</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
-
-              {/* Verified Workspace Tag */}
-              <div className="absolute top-4 left-4 z-20 bg-background/90 backdrop-blur-sm px-3 py-1.5 border border-border rounded-lg shadow-sm flex items-center gap-1.5 select-none pointer-events-none">
-                <span className="w-2 h-2 rounded-full bg-emerald animate-ping"></span>
-                <span className="font-mono text-[9px] text-foreground font-bold uppercase tracking-wider">Interactive 3D</span>
-              </div>
-
-              <FoldedCard3D 
-                frontImage="/products/premium_thank_you_card.png" 
-                insideImage="/products/thank_you_card_texture.png"
-                frontText={frontText}
-                insideText={insideText}
-                className="w-[240px] h-[165px] md:w-[320px] md:h-[220px]"
-              />
-              <div className="mt-6 p-2 bg-accent/5 border border-accent/20 w-full text-center">
-                <p className="text-[10px] font-mono text-accent leading-relaxed animate-pulse">
-                  // Drag to rotate in 3D. Click to open and read inside card.
-                </p>
-              </div>
             </div>
- 
-            {/* Right Column: Customizer Controls - Redesigned with Invite Block */}
-            <div className="space-y-6 bg-card p-8 border border-border flex flex-col justify-between h-[480px] rounded-lg shadow-sm">
-              <div className="space-y-4">
-                {/* Expanding Invitation Callout */}
-                <div className="p-3.5 bg-accent/5 border border-accent/20 rounded-lg text-left">
-                  <p className="font-sans text-[11px] text-[#1c0f24] leading-relaxed">
-                    <strong className="font-semibold text-accent uppercase font-mono tracking-wider text-[10px] block mb-1">💡 Prototyping Workshop</strong>
-                    Want to custom-build mailers, rigid lids, or sleeves? Click <strong className="font-bold">"Expand to 3D Studio"</strong> on the viewer to open the full scale 3D workspace.
-                  </p>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-mono text-foreground/60 uppercase tracking-wider mb-2">Front Foil Branding Text</label>
-                  <input 
-                    type="text" 
-                    value={frontText} 
-                    onChange={(e) => setFrontText(e.target.value)}
-                    className="w-full px-4 py-3 border border-border bg-background/50 font-sans text-sm text-foreground focus:outline-none focus:border-accent transition-colors rounded-lg"
-                    placeholder="Enter brand name..."
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-mono text-foreground/60 uppercase tracking-wider mb-2">Interior Message Body</label>
-                  <textarea 
-                    value={insideText} 
-                    onChange={(e) => setInsideText(e.target.value)}
-                    className="w-full px-4 py-3 border border-border bg-background/50 font-sans text-sm text-foreground focus:outline-none focus:border-accent transition-colors h-16 resize-none rounded-lg"
-                    placeholder="Type interior content..."
-                  />
-                </div>
-              </div>
- 
-              <div className="border-t border-border pt-4 space-y-4">
-                <div className="grid grid-cols-3 gap-4 text-left">
-                  <div>
-                    <p className="text-[9px] font-mono text-foreground/50 uppercase tracking-widest">Base Board</p>
-                    <p className="text-xs font-sans text-foreground/90 font-semibold mt-1">300GSM Premium</p>
-                  </div>
-                  <div>
-                    <p className="text-[9px] font-mono text-foreground/50 uppercase tracking-widest">Imprint</p>
-                    <p className="text-xs font-sans text-foreground/90 font-semibold mt-1">Stamping Finish</p>
-                  </div>
-                  <div>
-                    <p className="text-[9px] font-mono text-foreground/50 uppercase tracking-widest">Start MOQ</p>
-                    <p className="text-xs font-sans text-foreground/90 font-semibold mt-1">100 Units</p>
-                  </div>
-                </div>
- 
-                <Button 
-                  onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
-                  className="w-full btn-premium-gold py-5"
-                >
-                  Request Mockup Quote
-                </Button>
-              </div>
-            </div>
- 
           </div>
         </div>
       </section>
- 
-      {/* Catalog Grid Section */}
-      <section className="py-24 px-6 lg:px-12 bg-background">
-        <div className="max-w-[1400px] mx-auto">
-          {/* Filters */}
-          <div className="flex flex-wrap gap-2 justify-center mb-16">
-            {categories.map((cat) => (
-              <button 
-                key={cat} 
-                onClick={() => setFilter(cat)} 
-                className={`px-6 py-2 border-2 rounded-lg font-mono text-xs uppercase tracking-wider transition-all duration-300 shadow-sm ${
-                  filter === cat 
-                    ? "bg-[#1c0f24] border-[#1c0f24] text-white font-semibold" 
-                    : "bg-card border-border text-foreground/60 hover:text-accent hover:border-accent"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+
+      {/* Main Discovery Section */}
+      <section id="product-grid" className="py-12 px-6 lg:px-12 bg-background flex-1">
+        <div className="max-w-[1400px] mx-auto space-y-8">
+          
+          {/* Category Filter Pills */}
+          <div className="flex flex-wrap items-center gap-2.5 justify-start border-b border-border pb-6">
+            {CATEGORIES.map((cat) => {
+              const Icon = cat.icon;
+              const isActive = activeCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-mono text-xs font-medium transition-all duration-200 ${
+                    isActive
+                      ? "bg-[#1c0f24] text-white border border-[#1c0f24] shadow-sm"
+                      : "bg-card text-foreground/70 border border-border hover:border-accent hover:text-accent"
+                  }`}
+                >
+                  {Icon && <Icon className={`w-3.5 h-3.5 ${isActive ? "text-emerald-400" : "text-emerald-500"}`} />}
+                  <span>{cat.label}</span>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${
+                    isActive ? "bg-white/20 text-white" : "bg-muted text-foreground/50"
+                  }`}>
+                    {cat.id === "All" 
+                      ? PRODUCTS.length 
+                      : cat.id === "Sustainability" 
+                        ? PRODUCTS.filter(p => p.category === "Sustainability" || p.isSustainable).length
+                        : PRODUCTS.filter(p => p.category === cat.id).length
+                    }
+                  </span>
+                </button>
+              );
+            })}
           </div>
- 
-          {/* Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filtered.map((p) => (
+
+          {/* Product Grid — 4 Columns on Desktop */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {filteredProducts.map((p: Product) => (
               <div 
-                key={p.name} 
-                className="bg-card border border-border rounded-none overflow-hidden hover:border-accent group transition-all duration-500 flex flex-col justify-between"
+                key={p.id}
+                className="bg-card border border-border rounded-xl overflow-hidden hover:border-accent/60 transition-all duration-300 flex flex-col justify-between group shadow-sm hover:shadow-md"
               >
-                <div className="aspect-[4/3] overflow-hidden bg-white/5 relative">
+                {/* Image Area */}
+                <div className="aspect-[4/3] overflow-hidden bg-muted/40 relative">
                   <Link to={`/product/${p.configuratorPreset}`}>
                     <img 
-                      src={`/products/${p.name.toLowerCase().replace(/ /g, "_")}.png`} 
+                      src={p.image} 
                       alt={p.name}
-                      className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-102"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
                     />
                   </Link>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                  <span className="absolute bottom-4 left-4 font-mono text-[10px] uppercase text-accent tracking-widest bg-background/95 border border-accent/20 px-3 py-1">
-                    {p.category}
-                  </span>
-                </div>
-                <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
-                  <div>
-                    <Link to={`/product/${(p as any).configuratorPreset}`} className="hover:text-accent transition-colors">
-                      <h3 className="font-sans text-xl font-bold text-foreground">{p.name}</h3>
-                    </Link>
-                    <p className="font-sans text-sm text-foreground/60 mt-3 leading-relaxed">{p.desc}</p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+                  
+                  {/* Category Badge */}
+                  <div className="absolute bottom-3 left-3 flex items-center gap-1.5 bg-background/90 backdrop-blur-sm border border-border px-2.5 py-1 rounded-md text-[10px] font-mono uppercase tracking-wider text-foreground">
+                    {p.isSustainable && <Leaf className="w-3 h-3 text-emerald-500" />}
+                    <span>{p.category}</span>
                   </div>
-                  <div className="mt-8 pt-4 border-t border-border flex flex-col gap-3">
-                    <div className="flex justify-between items-center text-xs font-mono">
-                      <span className="text-foreground/50 uppercase">Minimum Order</span>
-                      <span className="text-foreground font-medium">{p.moq} pcs</span>
-                    </div>
-                    <Button 
-                      onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
-                      className="w-full btn-premium-gold py-4 text-xs"
-                    >
-                      Request Prototype Sample
-                    </Button>
-                    <Link
-                      to={`/customize?preset=${p.configuratorPreset}&source=catalogue&name=${encodeURIComponent(p.name)}`}
-                      aria-label={`Customize ${p.name} in 3D configurator`}
-                      className="w-full text-center py-2 text-xs font-mono tracking-wider text-foreground/40 hover:text-accent transition-all duration-300 hover:underline inline-block"
-                    >
-                      Customize in 3D →
+                </div>
+
+                {/* Content Area */}
+                <div className="p-5 flex flex-col justify-between flex-1 space-y-4">
+                  <div className="space-y-2">
+                    <Link to={`/product/${p.configuratorPreset}`}>
+                      <h2 className="font-sans text-lg font-bold text-foreground group-hover:text-accent transition-colors leading-snug">
+                        {p.name}
+                      </h2>
                     </Link>
+                    <p className="font-sans text-xs text-foreground/60 line-clamp-2 leading-relaxed">
+                      {p.desc}
+                    </p>
+                  </div>
+
+                  {/* Details & Actions */}
+                  <div className="space-y-3 pt-3 border-t border-border">
+                    <div className="flex justify-between items-center text-[11px] font-mono">
+                      <span className="text-foreground/50 uppercase">Min Order</span>
+                      <span className="text-foreground font-semibold">{p.moq} pcs</span>
+                    </div>
+
+                    {/* CTAs */}
+                    <div className="grid grid-cols-2 gap-2 pt-1">
+                      <Link
+                        to={`/customize?preset=${p.configuratorPreset}&source=catalogue&name=${encodeURIComponent(p.name)}`}
+                        className="w-full py-2.5 px-3 bg-card hover:bg-accent text-foreground hover:text-[#1d0a27] border border-border hover:border-accent font-mono text-[11px] font-semibold uppercase tracking-wider rounded-lg transition-all text-center flex items-center justify-center gap-1"
+                      >
+                        <Box className="w-3 h-3" />
+                        <span>Customize</span>
+                      </Link>
+
+                      <Button
+                        onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
+                        className="w-full py-2.5 px-3 btn-premium-gold text-xs font-mono uppercase tracking-wider rounded-lg text-center"
+                      >
+                        Quote
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+
+          {/* 3D Studio Teaser Banner */}
+          <div className="mt-16 p-8 rounded-2xl bg-card border border-border flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden shadow-sm">
+            <div className="space-y-2 text-left max-w-xl">
+              <span className="inline-flex items-center gap-1.5 text-xs font-mono text-accent uppercase tracking-wider font-semibold">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>3D Packaging Workshop</span>
+              </span>
+              <h2 className="text-xl md:text-2xl font-bold font-sans text-foreground">
+                Want to custom-build mailers, rigid boxes, or sleeves?
+              </h2>
+              <p className="text-xs text-foreground/60 leading-relaxed font-sans">
+                Jump into our interactive 3D studio to adjust dimensions, materials, finishes, and upload your brand logo in real-time.
+              </p>
+            </div>
+
+            <Link
+              to="/customize"
+              className="inline-flex items-center gap-2 bg-[#1c0f24] hover:bg-accent text-white hover:text-[#1d0a27] font-mono text-xs font-semibold uppercase tracking-wider px-6 py-3.5 rounded-xl transition-all duration-300 shadow-md flex-shrink-0"
+            >
+              <span>Start from a Template</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
         </div>
       </section>
 
@@ -260,4 +220,4 @@ const Catalogue = () => {
   );
 };
 
-export default Catalogue;
+export default Catalogue;
