@@ -19,7 +19,7 @@ export const QuoteDialog = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="max-w-[550px] bg-[#050505] border border-white/10 p-6 md:p-8 rounded-none text-white max-h-[90vh] overflow-y-auto shadow-2xl">
+      <DialogContent className="max-w-[550px] bg-[#050505] border border-white/10 p-6 md:p-8 rounded-2xl text-white max-h-[90vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] shadow-2xl">
         <DialogHeader className="mb-6">
           <DialogTitle className="text-3xl font-sans font-bold text-white leading-tight">
             Get a Custom <span className="text-accent">Quote.</span>

@@ -37,12 +37,12 @@ const Catalogue = () => {
       />
       <Navbar />
 
-      {/* Compact Page Header */}
-      <section className="pt-24 pb-10 px-6 lg:px-12 section-royal border-b border-white/10 relative overflow-hidden">
+      {/* Page Header */}
+      <section className="pt-24 pb-10 px-6 lg:px-12 bg-[#1c0f24] border-b border-white/10 relative overflow-hidden text-white">
         {/* Watermark logo background */}
-        <div className="absolute right-0 top-0 w-[320px] h-[320px] pointer-events-none opacity-[0.03] select-none">
+        <div className="absolute right-6 top-1/2 -translate-y-1/2 w-[320px] h-[320px] pointer-events-none opacity-[0.04] select-none z-0">
           <img 
-            src="/assets/logo.png" 
+            src="/images/inthebox-logo.png" 
             alt="" 
             className="w-full h-full object-contain filter invert brightness-0"
           />
@@ -51,32 +51,31 @@ const Catalogue = () => {
         <div className="max-w-[1400px] mx-auto relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="max-w-2xl space-y-3">
-              <div className="inline-flex items-center gap-2 text-xs font-mono text-white/50">
+              <div className="inline-flex items-center gap-2 text-xs font-mono text-accent">
                 <span className="w-8 h-px bg-accent"></span>
-                <span>Catalogue & Archive</span>
+                <span className="uppercase tracking-widest font-semibold">Catalogue & Archive</span>
               </div>
               <h1 className="text-3xl md:text-5xl font-sans font-bold tracking-tight text-white leading-tight">
-                Explore Our Packaging <span className="text-accent italic">Collection</span>
+                Explore Our Packaging <span className="text-accent italic font-semibold">Collection</span>
               </h1>
-              <p className="font-sans text-sm text-white/70 leading-relaxed">
+              <p className="text-sm md:text-base text-white/70 font-sans leading-relaxed">
                 Discover bespoke rigid boxes, eco-board shippers, shopping bags, and premium printables engineered for high-impact brand unboxing.
               </p>
             </div>
-
-            {/* Header CTAs */}
-            <div className="flex items-center gap-3 flex-shrink-0">
+            <div className="flex items-center gap-3">
               <Button
                 onClick={scrollToGrid}
-                className="bg-accent hover:bg-accent/80 text-[#1d0a27] font-semibold text-xs font-mono uppercase tracking-wider px-5 py-3 rounded-lg shadow-md transition-all"
+                className="btn-premium-gold text-xs uppercase tracking-wider font-mono font-bold py-3 px-6"
               >
                 Explore Products
               </Button>
-              <Link
-                to="/customize"
-                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 text-white border border-white/20 text-xs font-mono uppercase tracking-wider px-5 py-3 rounded-lg transition-all"
-              >
-                <span>Open 3D Studio</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+              <Link to="/customize">
+                <Button
+                  variant="outline"
+                  className="border-white/20 text-white hover:bg-white/10 text-xs uppercase tracking-wider font-mono py-3 px-6"
+                >
+                  Open 3D Studio →
+                </Button>
               </Link>
             </div>
           </div>

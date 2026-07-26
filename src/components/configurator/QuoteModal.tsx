@@ -343,11 +343,16 @@ export const QuoteModal = () => {
                 </div>
 
                 <button
+                  type="button"
                   onClick={handleWhatsAppClick}
-                  className="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs uppercase font-bold tracking-wider transition-all flex items-center justify-center gap-2 shadow-xs"
+                  className="w-full py-3.5 px-4 rounded-xl text-white font-mono text-xs uppercase font-bold tracking-wider transition-all flex items-center justify-center gap-2.5 shadow-md hover:opacity-95 active:scale-[0.99] cursor-pointer"
+                  style={{
+                    backgroundColor: '#25D366',
+                    color: '#ffffff',
+                  }}
                 >
-                  <MessageCircle size={16} />
-                  Continue on WhatsApp →
+                  <MessageCircle size={18} className="text-white fill-white" />
+                  <span className="text-white font-bold">Continue on WhatsApp →</span>
                 </button>
               </div>
             </div>
@@ -369,11 +374,16 @@ export const QuoteModal = () => {
 
               {/* WhatsApp direct CTA */}
               <button
+                type="button"
                 onClick={handleWhatsAppClick}
-                className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs uppercase font-bold tracking-wider transition-all flex items-center justify-center gap-2 shadow-md"
+                className="w-full py-3.5 px-4 rounded-xl text-white font-mono text-xs uppercase font-bold tracking-wider transition-all flex items-center justify-center gap-2.5 shadow-md hover:opacity-95 active:scale-[0.99] cursor-pointer"
+                style={{
+                  backgroundColor: '#25D366',
+                  color: '#ffffff',
+                }}
               >
-                <MessageCircle size={18} />
-                Open WhatsApp with Design Specs →
+                <MessageCircle size={18} className="text-white fill-white" />
+                <span className="text-white font-bold">Open WhatsApp with Design Specs →</span>
               </button>
 
               {/* Share link box */}

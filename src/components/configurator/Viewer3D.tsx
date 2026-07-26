@@ -109,6 +109,7 @@ function BoxScene() {
         return;
       }
 
+      lTex.anisotropy = 16;
       logoTex = lTex;
 
       const group = boxGroupRef.current;

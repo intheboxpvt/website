@@ -17,7 +17,7 @@ export interface BakeInput {
   logoScale:     number      // 0.1 to 2.0 (0.6 default)
   logoRotation:  number      // degrees -180 to 180
   logoOpacity:   number      // 0 to 1
-  canvasSize?:   number      // default 1024
+  canvasSize?:   number      // default 2048 for high-definition rendering
 }
 
 // In-memory HTMLImageElement cache for zero-flicker synchronous redraws
@@ -40,11 +40,16 @@ function loadImage(src: string): Promise<HTMLImageElement> {
 }
 
 export async function bakeTexture(input: BakeInput): Promise<THREE.CanvasTexture> {
-  const size = input.canvasSize ?? 1024
+  // Use 2048x2048 high-definition resolution to guarantee crisp logo rendering
+  const size = input.canvasSize ?? 2048
   const canvas = document.createElement('canvas')
   canvas.width  = size
   canvas.height = size
   const ctx = canvas.getContext('2d')!
+
+  // Enable high quality image smoothing algorithms
+  ctx.imageSmoothingEnabled = true
+  ctx.imageSmoothingQuality = 'high'
 
   // 1. Fill canvas with box color (or material base color)
   const effectiveColor = input.boxColor || BASE_COLORS[input.material] || '#F5F0EB'
@@ -84,11 +89,15 @@ export async function bakeTexture(input: BakeInput): Promise<THREE.CanvasTexture
       ctx.drawImage(img, -dw / 2, -dh / 2, dw, dh)
       ctx.restore()
     } catch (e) {
-      // Silently fail if image fail to load
+      // Silently fail if image fails to load
     }
   }
 
   const texture = new THREE.CanvasTexture(canvas)
+  texture.generateMipmaps = true
+  texture.minFilter = THREE.LinearMipmapLinearFilter
+  texture.magFilter = THREE.LinearFilter
+  texture.anisotropy = 16 // 16x anisotropic filtering for razor-sharp logos at 3D perspective angles
   texture.needsUpdate = true
   return texture
 }
