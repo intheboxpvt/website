@@ -1,9 +1,16 @@
-import { BoxType, Dimensions, Unit } from './types'
+import { BoxType, Dimensions, LogoFace, Unit } from './types'
 
 interface DielineInput {
-  boxType:    BoxType
-  dimensions: Dimensions   // in whatever unit the user set
-  watermarkSrc: string
+  boxType:       BoxType
+  dimensions:    Dimensions   // in whatever unit the user set
+  watermarkSrc:  string
+  logoDataUrl?:  string | null
+  logoFace?:     LogoFace
+  logoX?:        number
+  logoY?:        number
+  logoScale?:    number
+  logoRotation?: number
+  logoOpacity?:  number
 }
 
 interface DielineOutput {
@@ -61,16 +68,21 @@ export async function renderDieline(input: DielineInput): Promise<DielineOutput>
     drawTuckEndNet(ctx, originX, originY, l, w, h)
   }
 
-  // 2. Draw annotations (measurement lines and labels)
+  // 2. Draw user artwork/logo on dieline net panel if uploaded
+  if (input.logoDataUrl) {
+    await drawDielineLogo(ctx, originX, originY, l, w, h, input)
+  }
+
+  // 3. Draw annotations (measurement lines and labels)
   drawAnnotations(ctx, originX, originY, l, w, h, input.dimensions, input.boxType)
 
-  // 3. Draw face labels ("FRONT", "BACK", etc.)
+  // 4. Draw face labels ("FRONT", "BACK", etc.)
   drawFaceLabels(ctx, originX, originY, l, w, h, input.boxType)
 
-  // 4. Tile InTheBox watermark diagonally across dieline
+  // 5. Tile InTheBox watermark diagonally across dieline
   await drawWatermarkTile(ctx, canvas.width, canvas.height, input.watermarkSrc)
 
-  // 5. Draw Footer disclaimer notice
+  // 6. Draw Footer disclaimer notice
   ctx.save()
   ctx.fillStyle = '#666666'
   ctx.font = '11px Inter, sans-serif'
@@ -83,6 +95,74 @@ export async function renderDieline(input: DielineInput): Promise<DielineOutput>
   ctx.restore()
 
   return { canvas }
+}
+
+async function drawDielineLogo(
+  ctx: CanvasRenderingContext2D,
+  ox: number,
+  oy: number,
+  l: number,
+  w: number,
+  h: number,
+  input: DielineInput
+) {
+  if (!input.logoDataUrl) return
+
+  let px = ox, py = oy, pw = l, ph = h
+
+  if (input.boxType === 'rigid_lid_base' || input.boxType === 'gift') {
+    const lidOY = oy - h * 1.1
+    const baseOY = oy + h * 0.8
+    if (input.logoFace === 'top') {
+      py = lidOY; pw = l * 1.04; ph = w * 1.04
+    } else {
+      py = baseOY + w/2 + (h * 0.65)/2; pw = l; ph = h * 0.65
+    }
+  } else if (input.boxType === 'mailer') {
+    if (input.logoFace === 'top') {
+      py = oy - w/2 - h - w/2; pw = l; ph = w
+    } else {
+      py = oy + w/2 + h/2; pw = l; ph = h
+    }
+  } else {
+    if (input.logoFace === 'top') {
+      py = oy - h/2 - w/2; pw = l; ph = w
+    } else {
+      py = oy; pw = l; ph = h
+    }
+  }
+
+  await new Promise<void>((resolve) => {
+    const img = new Image()
+    img.crossOrigin = 'anonymous'
+    img.onload = () => {
+      ctx.save()
+      const lx = input.logoX ?? 0.5
+      const ly = input.logoY ?? 0.5
+      const scale = input.logoScale ?? 0.6
+      const rot = input.logoRotation ?? 0
+      const opacity = input.logoOpacity ?? 1
+
+      const cx = px - pw/2 + lx * pw
+      const cy = py - ph/2 + ly * ph
+
+      const maxDim = Math.min(pw, ph) * scale
+      const aspect = img.width / img.height
+      let dw = maxDim, dh = maxDim / aspect
+      if (aspect < 1) {
+        dh = maxDim; dw = maxDim * aspect
+      }
+
+      ctx.translate(cx, cy)
+      if (rot !== 0) ctx.rotate((rot * Math.PI) / 180)
+      ctx.globalAlpha = opacity
+      ctx.drawImage(img, -dw / 2, -dh / 2, dw, dh)
+      ctx.restore()
+      resolve()
+    }
+    img.onerror = () => resolve()
+    img.src = input.logoDataUrl!
+  })
 }
 
 // Helper to draw dashed lines for folding margins

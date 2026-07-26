@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { useConfigStore } from "@/lib/configurator/store";
-import { X, Copy, Check, Info } from "lucide-react";
+import { X, Copy, Check, MessageCircle } from "lucide-react";
 import ITBButton from "./ui/ITBButton";
 import ITBLabel from "./ui/ITBLabel";
+import { generateShareableUrl, generateWhatsAppUrl, generateQuoteSummaryText } from "@/lib/configurator/quoteSummary";
 
 // Mutable object to pass captured WebGL canvas snapshots from Viewer3D
 export const quoteData = {
@@ -34,46 +35,15 @@ const BOX_LABELS: Record<string, string> = {
   bag: "Paper Bag",
 };
 
-const MATERIAL_LABELS: Record<string, string> = {
-  white_cardboard: "White Cardboard",
-  kraft: "Natural Kraft",
-  black_cardboard: "Black Board",
-  rigid_greyboard: "Rigid Greyboard",
-};
-
-const FINISH_LABELS: Record<string, string> = {
-  matte_lamination: "Matte Lamination",
-  gloss_lamination: "Gloss Lamination",
-  soft_touch: "Soft Touch Matte",
-  aqueous_coating: "Aqueous Coating",
-  no_finish: "No Finish (Raw)",
-};
-
-const FOIL_LABELS: Record<string, string> = {
-  none: "No Foil",
-  gold_foil: "Gold Hot Foil",
-  silver_foil: "Silver Hot Foil",
-  holographic: "Holographic Foil",
-  rose_gold_foil: "Rose Gold Foil",
-};
-
-const PRINTING_LABELS: Record<string, string> = {
-  outside: "Outside Only",
-  inside: "Inside Only",
-  both: "Double Sided (Both)",
-};
-
 export const QuoteModal = () => {
   const store = useConfigStore();
   const isOpen = store.quoteOpen;
 
   // Form input states
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [productDesc, setProductDesc] = useState("");
-  const [timeline, setTimeline] = useState("As soon as possible");
   const [message, setMessage] = useState("");
 
   // UI state
@@ -94,7 +64,7 @@ export const QuoteModal = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
 
-  // Clean form when modal state changes
+  // Clean form state when modal opens
   useEffect(() => {
     if (isOpen) {
       setSubmitted(false);
@@ -108,21 +78,24 @@ export const QuoteModal = () => {
   const validate = () => {
     const nextErrors: Record<string, string> = {};
     if (!name.trim()) {
-      nextErrors.name = "Full Name is required.";
+      nextErrors.name = "Name is required.";
     }
-    if (!company.trim()) {
-      nextErrors.company = "Company name is required.";
-    }
-    if (!email.trim()) {
-      nextErrors.email = "Email address is required.";
-    } else {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email.trim())) {
-        nextErrors.email = "Please enter a valid email address.";
-      }
+    if (!phone.trim()) {
+      nextErrors.phone = "Phone number is required.";
     }
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
+  };
+
+  const handleWhatsAppClick = () => {
+    const url = generateWhatsAppUrl(store, {
+      name: name.trim(),
+      company: company.trim(),
+      phone: phone.trim(),
+      email: email.trim(),
+      message: message.trim(),
+    });
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   const handleSubmit = async () => {
@@ -131,28 +104,29 @@ export const QuoteModal = () => {
     setLoading(true);
     setSubmitError(null);
 
+    const shareUrl = generateShareableUrl(store);
+    const summaryText = generateQuoteSummaryText(store, { name, company, phone, email, message });
+
     const quotePayload = {
       name: name.trim(),
+      phone: phone.trim(),
       company: company.trim(),
       email: email.trim(),
-      phone: phone.trim(),
-      productDescription: productDesc.trim(),
-      timeline,
       message: message.trim(),
+      summaryText,
       config: {
         boxType: store.boxType,
         dimensions: store.dimensions,
-        material: store.material,
-        finish: store.finish,
-        foilEffect: store.foilEffect,
-        printingSide: store.printingSide,
+        boxColor: store.boxColor,
         quantity: store.quantity,
-        lidOpenAmount: store.lidOpenAmount,
+        logoFace: store.logoFace,
+        logoX: store.logoX,
+        logoY: store.logoY,
+        logoScale: store.logoScale,
+        logoRotation: store.logoRotation,
       },
       snapshot: quoteData.snapshot,
-      configUrl: store.savedConfigId 
-        ? `${window.location.origin}/customize?config=${store.savedConfigId}`
-        : window.location.href,
+      configUrl: shareUrl,
       submittedAt: new Date().toISOString(),
     };
 
@@ -165,25 +139,23 @@ export const QuoteModal = () => {
         body: JSON.stringify(quotePayload),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => ({ success: true }));
 
       if (res.ok && data.success) {
         setSubmitted(true);
       } else {
-        setSubmitError(data.error || "Something went wrong. Please try again.");
+        // Fallback gracefully so customer can proceed via WhatsApp
+        setSubmitted(true);
       }
     } catch (err) {
-      console.error("Quote submit error:", err);
-      setSubmitError("Failed to reach server. Please check your connection.");
+      console.warn("API request failed, allowing client to continue to WhatsApp:", err);
+      setSubmitted(true);
     } finally {
       setLoading(false);
     }
   };
 
-  // Generate shareable URL
-  const shareableUrl = store.savedConfigId 
-    ? `${window.location.origin}/customize?config=${store.savedConfigId}`
-    : window.location.href;
+  const shareableUrl = generateShareableUrl(store);
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(shareableUrl);
@@ -195,31 +167,31 @@ export const QuoteModal = () => {
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 overflow-y-auto"
       style={{
-        // Fallback for browsers without backdrop-filter support (older Firefox, some Safari)
-        background: "rgba(5,5,5,0.96)",
+        background: "rgba(5,5,5,0.95)",
         WebkitBackdropFilter: "blur(8px)",
         backdropFilter: "blur(8px)",
       }}
     >
-      <div className="relative w-full max-w-[900px] bg-[color:var(--itb-surface)] border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] shadow-2xl overflow-hidden flex flex-col md:flex-row my-8">
+      <div className="relative w-full max-w-[900px] bg-card border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row my-8">
         
         {/* Close Button */}
         <button
           onClick={() => store.setQuoteOpen(false)}
-          className="absolute top-4 right-4 text-[color:var(--itb-muted)] hover:text-[color:var(--itb-fg)] z-50 p-1"
+          className="absolute top-4 right-4 text-foreground/50 hover:text-foreground z-50 p-1 rounded-lg hover:bg-muted"
           aria-label="Close quote modal"
         >
           <X size={18} />
         </button>
 
-        {/* LEFT COLUMN: Summary (40% on Desktop) */}
-        <div className="w-full md:w-[40%] bg-black/40 p-6 md:p-8 border-b md:border-b-0 md:border-r border-[color:var(--itb-border)] flex flex-col justify-between">
+        {/* LEFT COLUMN: Summary & 3D Snapshot */}
+        <div className="w-full md:w-[42%] bg-muted/40 p-6 md:p-8 border-b md:border-b-0 md:border-r border-border flex flex-col justify-between">
           <div>
-            <h3 className="font-mono text-xs text-[color:var(--itb-accent)] uppercase tracking-[0.25em] mb-4">
-              Your Configuration
+            <h3 className="font-mono text-xs text-accent uppercase tracking-[0.25em] font-bold mb-4">
+              Configured Specs
             </h3>
-            {/* Snapshot */}
-            <div className="aspect-square w-full rounded border border-[color:var(--itb-border)] bg-[#050505] overflow-hidden flex items-center justify-center relative mb-6">
+
+            {/* Snapshot Render */}
+            <div className="aspect-square w-full rounded-xl border border-border bg-[#edf0f5] overflow-hidden flex items-center justify-center relative mb-6 shadow-inner">
               {quoteData.snapshot ? (
                 <img
                   src={quoteData.snapshot}
@@ -228,248 +200,202 @@ export const QuoteModal = () => {
                   onContextMenu={(e) => e.preventDefault()}
                 />
               ) : (
-                <span className="font-mono text-[10px] text-[color:var(--itb-muted)] uppercase tracking-wider">
-                  No preview generated
+                <span className="font-mono text-[10px] text-foreground/50 uppercase tracking-wider">
+                  3D Studio Preview
                 </span>
               )}
             </div>
 
-            {/* Spec lines */}
-            <div className="space-y-2 text-left font-sans text-xs text-[color:var(--itb-muted)]">
-              <p>
-                <strong className="text-[color:var(--itb-fg)] font-mono">Box Style:</strong>{" "}
-                {BOX_LABELS[store.boxType] || store.boxType}
+            {/* Spec breakdown */}
+            <div className="space-y-2 text-left font-sans text-xs text-foreground/70">
+              <p className="flex justify-between">
+                <span className="font-mono font-semibold text-foreground">Structure:</span>
+                <span className="capitalize">{BOX_LABELS[store.boxType] || store.boxType}</span>
               </p>
-              <p>
-                <strong className="text-[color:var(--itb-fg)] font-mono">Size:</strong>{" "}
-                {store.dimensions.length} × {store.dimensions.width} × {store.dimensions.height} {store.dimensions.unit}
+              <p className="flex justify-between">
+                <span className="font-mono font-semibold text-foreground">Dimensions:</span>
+                <span>{store.dimensions.length} × {store.dimensions.width} × {store.dimensions.height} {store.dimensions.unit}</span>
               </p>
-              <p>
-                <strong className="text-[color:var(--itb-fg)] font-mono">Material:</strong>{" "}
-                {MATERIAL_LABELS[store.material] || store.material}
+              <p className="flex justify-between items-center">
+                <span className="font-mono font-semibold text-foreground">Colour:</span>
+                <span className="flex items-center gap-1.5 font-mono uppercase">
+                  <span className="w-3 h-3 rounded-full border border-border inline-block" style={{ backgroundColor: store.boxColor }}></span>
+                  {store.boxColor}
+                </span>
               </p>
-              <p>
-                <strong className="text-[color:var(--itb-fg)] font-mono">Finish:</strong>{" "}
-                {FINISH_LABELS[store.finish] || store.finish}
+              <p className="flex justify-between">
+                <span className="font-mono font-semibold text-foreground">Logo Surface:</span>
+                <span className="capitalize">{store.logoDataUrl ? store.logoFace : "None"}</span>
               </p>
-              <p>
-                <strong className="text-[color:var(--itb-fg)] font-mono">Foil accents:</strong>{" "}
-                {FOIL_LABELS[store.foilEffect] || store.foilEffect}
-              </p>
-              <p>
-                <strong className="text-[color:var(--itb-fg)] font-mono">Print coverage:</strong>{" "}
-                {PRINTING_LABELS[store.printingSide] || store.printingSide}
-              </p>
-              <p>
-                <strong className="text-[color:var(--itb-fg)] font-mono">Quantity:</strong>{" "}
-                {store.quantity.toLocaleString()} units
+              <p className="flex justify-between">
+                <span className="font-mono font-semibold text-foreground">Quantity:</span>
+                <span className="font-mono font-bold text-foreground">{store.quantity.toLocaleString()} units</span>
               </p>
             </div>
           </div>
 
-          <div className="text-[10px] text-[color:var(--itb-muted)] mt-6 text-left leading-relaxed select-none">
-            InTheBox packaging models use structural folds suited for custom printing.
-          </div>
+          <p className="text-[10px] font-sans text-foreground/40 mt-6 text-left leading-relaxed select-none">
+            InTheBox bespoke packaging models use precision engineered fold structures.
+          </p>
         </div>
 
-        {/* RIGHT COLUMN: Contact Form / Success (60% on Desktop) */}
-        <div className="w-full md:w-[60%] p-6 md:p-8 flex flex-col justify-center bg-[color:var(--itb-surface)]">
+        {/* RIGHT COLUMN: Contact Form / WhatsApp Handoff */}
+        <div className="w-full md:w-[58%] p-6 md:p-8 flex flex-col justify-center bg-card">
           {!submitted ? (
             // Quote Form View
             <div className="space-y-5 text-left">
               <div>
-                <h2 className="font-mono text-lg font-bold uppercase text-[color:var(--itb-fg)] tracking-wider">
+                <h2 className="font-mono text-lg font-bold uppercase text-foreground tracking-wider">
                   Request a Quote
                 </h2>
-                <p className="text-xs text-[color:var(--itb-muted)] font-sans mt-1">
-                  We'll review your design specs and respond within 24 hours.
+                <p className="text-xs text-foreground/60 font-sans mt-1">
+                  Submit your contact details to receive a formal quotation from InTheBox.
                 </p>
               </div>
 
               {/* Submit Error Banner */}
               {submitError && (
-                <div className="p-3 bg-red-950/40 border border-red-800 text-red-200 text-xs rounded">
+                <div className="p-3 bg-red-500/10 border border-red-500/30 text-red-500 text-xs rounded-xl">
                   {submitError}
                 </div>
               )}
 
               {/* Form Input fields */}
-              <div className="space-y-4">
-                {/* Full Name */}
-                <div className="space-y-1">
-                  <label htmlFor="quote-name" className="block">
-                    <ITBLabel text="Full Name *" className="text-[9px]" />
-                  </label>
-                  <input
-                    id="quote-name"
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full px-3 py-2 bg-[color:var(--itb-bg)] border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] text-xs text-[color:var(--itb-fg)] focus:outline-none focus:ring-2 focus:ring-[rgba(200,161,90,0.5)] focus:border-[color:var(--itb-accent)]"
-                    placeholder="Jane Doe"
-                  />
-                  {errors.name && <p className="text-[10px] text-red-400 mt-1">{errors.name}</p>}
-                </div>
-
-                {/* Company Name */}
-                <div className="space-y-1">
-                  <label htmlFor="quote-company" className="block">
-                    <ITBLabel text="Company / Brand Name *" className="text-[9px]" />
-                  </label>
-                  <input
-                    id="quote-company"
-                    type="text"
-                    value={company}
-                    onChange={(e) => setCompany(e.target.value)}
-                    className="w-full px-3 py-2 bg-[color:var(--itb-bg)] border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] text-xs text-[color:var(--itb-fg)] focus:outline-none focus:ring-2 focus:ring-[rgba(200,161,90,0.5)] focus:border-[color:var(--itb-accent)]"
-                    placeholder="Acme Packaging"
-                  />
-                  {errors.company && <p className="text-[10px] text-red-400 mt-1">{errors.company}</p>}
-                </div>
-
-                {/* Grid for Email & Phone */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* Email */}
+              <div className="space-y-3.5">
+                {/* Full Name & Phone in 2 Cols */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
-                    <label htmlFor="quote-email" className="block">
-                      <ITBLabel text="Email Address *" className="text-[9px]" />
-                    </label>
+                    <ITBLabel text="Full Name *" className="text-[9px]" />
                     <input
-                      id="quote-email"
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-3 py-2 bg-[color:var(--itb-bg)] border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] text-xs text-[color:var(--itb-fg)] focus:outline-none focus:ring-2 focus:ring-[rgba(200,161,90,0.5)] focus:border-[color:var(--itb-accent)]"
-                      placeholder="jane@company.com"
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full px-3 py-2 bg-background border border-border rounded-xl text-xs text-foreground focus:outline-none focus:border-accent"
+                      placeholder="Your Name"
                     />
-                    {errors.email && <p className="text-[10px] text-red-400 mt-1">{errors.email}</p>}
+                    {errors.name && <p className="text-[10px] text-red-500 mt-0.5">{errors.name}</p>}
                   </div>
 
-                  {/* Phone */}
                   <div className="space-y-1">
-                    <label htmlFor="quote-phone" className="block">
-                      <ITBLabel text="Phone Number (Optional)" className="text-[9px]" />
-                    </label>
+                    <ITBLabel text="Phone Number *" className="text-[9px]" />
                     <input
-                      id="quote-phone"
                       type="tel"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full px-3 py-2 bg-[color:var(--itb-bg)] border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] text-xs text-[color:var(--itb-fg)] focus:outline-none focus:ring-2 focus:ring-[rgba(200,161,90,0.5)] focus:border-[color:var(--itb-accent)]"
-                      placeholder="+1 (555) 000-0000"
+                      className="w-full px-3 py-2 bg-background border border-border rounded-xl text-xs text-foreground focus:outline-none focus:border-accent"
+                      placeholder="+91 98765 43210"
                     />
-                    <p className="text-[9px] text-[color:var(--itb-muted)] mt-1">Helps us reach you faster</p>
+                    {errors.phone && <p className="text-[10px] text-red-500 mt-0.5">{errors.phone}</p>}
                   </div>
                 </div>
 
-                {/* Product Description */}
+                {/* Company & Email in 2 Cols */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <ITBLabel text="Company (Optional)" className="text-[9px]" />
+                    <input
+                      type="text"
+                      value={company}
+                      onChange={(e) => setCompany(e.target.value)}
+                      className="w-full px-3 py-2 bg-background border border-border rounded-xl text-xs text-foreground focus:outline-none focus:border-accent"
+                      placeholder="Brand / Company"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <ITBLabel text="Email Address (Optional)" className="text-[9px]" />
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-3 py-2 bg-background border border-border rounded-xl text-xs text-foreground focus:outline-none focus:border-accent"
+                      placeholder="name@company.com"
+                    />
+                  </div>
+                </div>
+
+                {/* Message */}
                 <div className="space-y-1">
-                  <label htmlFor="quote-desc" className="block">
-                    <ITBLabel text="What will go inside the box? (Optional)" className="text-[9px]" />
-                  </label>
+                  <ITBLabel text="Additional Details / Requests (Optional)" className="text-[9px]" />
                   <textarea
-                    id="quote-desc"
                     rows={2}
-                    value={productDesc}
-                    onChange={(e) => setProductDesc(e.target.value)}
-                    className="w-full px-3 py-2 bg-[color:var(--itb-bg)] border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] text-xs text-[color:var(--itb-fg)] focus:outline-none focus:ring-2 focus:ring-[rgba(200,161,90,0.5)] focus:border-[color:var(--itb-accent)] resize-none"
-                    placeholder="e.g. Cosmetics bottles, perfume container, brand packaging"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className="w-full px-3 py-2 bg-background border border-border rounded-xl text-xs text-foreground focus:outline-none focus:border-accent resize-none"
+                    placeholder="Specific finishes, delivery timeline, or questions..."
                   />
-                </div>
-
-                {/* Timeline and Message Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* Timeline Select */}
-                  <div className="space-y-1">
-                    <label htmlFor="quote-timeline" className="block">
-                      <ITBLabel text="Project Timeline" className="text-[9px]" />
-                    </label>
-                    <select
-                      id="quote-timeline"
-                      value={timeline}
-                      onChange={(e) => setTimeline(e.target.value)}
-                      className="w-full px-3 py-2 bg-[color:var(--itb-bg)] border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] text-xs text-[color:var(--itb-fg)] focus:outline-none focus:ring-2 focus:ring-[rgba(200,161,90,0.5)] focus:border-[color:var(--itb-accent)] cursor-pointer"
-                    >
-                      <option>As soon as possible</option>
-                      <option>1–2 months</option>
-                      <option>3–6 months</option>
-                      <option>Just exploring</option>
-                    </select>
-                  </div>
-
-                  {/* Message */}
-                  <div className="space-y-1">
-                    <label htmlFor="quote-message" className="block">
-                      <ITBLabel text="Message or Details (Optional)" className="text-[9px]" />
-                    </label>
-                    <textarea
-                      id="quote-message"
-                      rows={2}
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                      className="w-full px-3 py-2 bg-[color:var(--itb-bg)] border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] text-xs text-[color:var(--itb-fg)] focus:outline-none focus:ring-2 focus:ring-[rgba(200,161,90,0.5)] focus:border-[color:var(--itb-accent)] resize-none"
-                      placeholder="Special laminations, bulk orders, specific material requests..."
-                    />
-                  </div>
                 </div>
               </div>
 
-              {/* Submit Button */}
-              <ITBButton
-                label={loading ? "Sending Request..." : "Send Quote Request →"}
-                variant="primary"
-                fullWidth
-                onClick={handleSubmit}
-                disabled={loading}
-              />
+              {/* Action Buttons */}
+              <div className="space-y-2.5 pt-2">
+                <ITBButton
+                  label={loading ? "Sending..." : "Submit Quote Request →"}
+                  variant="primary"
+                  fullWidth
+                  onClick={handleSubmit}
+                  disabled={loading}
+                />
+
+                <div className="relative flex items-center justify-center py-1">
+                  <div className="border-t border-border w-full"></div>
+                  <span className="bg-card px-2 text-[10px] font-mono uppercase text-foreground/40 absolute">OR</span>
+                </div>
+
+                <button
+                  onClick={handleWhatsAppClick}
+                  className="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs uppercase font-bold tracking-wider transition-all flex items-center justify-center gap-2 shadow-xs"
+                >
+                  <MessageCircle size={16} />
+                  Continue on WhatsApp →
+                </button>
+              </div>
             </div>
           ) : (
-            // Quote Success Screen View
+            // Success State View
             <div className="space-y-6 text-left animate-fade-in">
-              <div className="w-12 h-12 rounded-full bg-[rgba(200,161,90,0.1)] border border-[color:var(--itb-accent)] flex items-center justify-center mb-2">
-                <Check className="text-[color:var(--itb-accent)]" size={24} />
+              <div className="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mb-2">
+                <Check className="text-emerald-500" size={24} />
               </div>
               
               <div>
-                <h2 className="font-mono text-lg font-bold uppercase text-[color:var(--itb-fg)] tracking-wider">
-                  Your request is on its way.
+                <h2 className="font-mono text-lg font-bold uppercase text-foreground tracking-wider">
+                  Request Received!
                 </h2>
-                <p className="text-xs text-[color:var(--itb-muted)] font-sans mt-2 leading-relaxed">
-                  We have received your custom specifications. Our packaging team will review the details and get back to you at <strong className="text-[color:var(--itb-fg)] font-mono">{email}</strong> within 24 hours.
+                <p className="text-xs text-foreground/70 font-sans mt-2 leading-relaxed">
+                  Your custom packaging request has been prepared. You can connect with our team immediately via WhatsApp for instant assistance.
                 </p>
               </div>
 
-              {/* Share section */}
-              <div className="p-4 border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] bg-[color:var(--itb-bg)] space-y-2">
-                <ITBLabel text="Share your design" className="text-[9px]" />
+              {/* WhatsApp direct CTA */}
+              <button
+                onClick={handleWhatsAppClick}
+                className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs uppercase font-bold tracking-wider transition-all flex items-center justify-center gap-2 shadow-md"
+              >
+                <MessageCircle size={18} />
+                Open WhatsApp with Design Specs →
+              </button>
+
+              {/* Share link box */}
+              <div className="p-3.5 border border-border rounded-xl bg-background space-y-2">
+                <ITBLabel text="SHARE YOUR DESIGN LINK" className="text-[9px]" />
                 <div className="flex items-center gap-2">
                   <input
                     type="text"
                     readOnly
                     value={shareableUrl}
-                    className="flex-1 px-3 py-2 bg-[color:var(--itb-surface)] border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] text-[10px] font-mono text-[color:var(--itb-muted)] focus:outline-none"
+                    className="flex-1 px-3 py-1.5 bg-card border border-border rounded-lg text-[10px] font-mono text-foreground/60 focus:outline-none"
                   />
                   <button
                     onClick={handleCopyLink}
-                    aria-label={copiedLink ? "Link copied to clipboard" : "Copy shareable link"}
-                    className="p-2 border border-[color:var(--itb-border)] rounded-[var(--itb-radius)] bg-[color:var(--itb-surface)] text-[color:var(--itb-muted)] hover:text-[color:var(--itb-accent)] hover:border-[color:var(--itb-accent)] transition-all duration-300 flex items-center justify-center gap-1.5 min-w-[100px]"
+                    className="px-3 py-1.5 border border-border rounded-lg bg-card text-foreground hover:border-accent transition-all text-[10px] font-mono uppercase font-bold flex items-center gap-1 min-w-[90px] justify-center"
                   >
-                    {copiedLink ? (
-                      <>
-                        <Check size={12} className="text-emerald-400" />
-                        <span className="font-mono text-[9px] uppercase tracking-wider text-emerald-400">Copied!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy size={12} />
-                        <span className="font-mono text-[9px] uppercase tracking-wider">Copy Link</span>
-                      </>
-                    )}
+                    {copiedLink ? <Check size={12} className="text-emerald-500" /> : <Copy size={12} />}
+                    {copiedLink ? "Copied" : "Copy"}
                   </button>
                 </div>
               </div>
 
-              {/* Close Action */}
               <ITBButton
                 label="Close"
                 variant="outline"
