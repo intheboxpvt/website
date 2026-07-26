@@ -8,12 +8,35 @@ const BASE_COLORS: Record<Material, string> = {
   rigid_greyboard: '#8A8A8A',
 }
 
-interface BakeInput {
-  material:         Material
-  logoDataUrl:      string | null
-  logoOpacity:      number
-  watermarkSrc:     string   // path to InTheBox logo for watermark
-  canvasSize?:      number   // default 1024
+export interface BakeInput {
+  material:      Material
+  boxColor?:     string
+  logoDataUrl:   string | null
+  logoX:         number      // 0 to 1 (0.5 center)
+  logoY:         number      // 0 to 1 (0.5 center)
+  logoScale:     number      // 0.1 to 2.0 (0.6 default)
+  logoRotation:  number      // degrees -180 to 180
+  logoOpacity:   number      // 0 to 1
+  canvasSize?:   number      // default 1024
+}
+
+// In-memory HTMLImageElement cache for zero-flicker synchronous redraws
+const imageCache = new Map<string, HTMLImageElement>()
+
+function loadImage(src: string): Promise<HTMLImageElement> {
+  if (imageCache.has(src)) {
+    return Promise.resolve(imageCache.get(src)!)
+  }
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.crossOrigin = 'anonymous'
+    img.onload = () => {
+      imageCache.set(src, img)
+      resolve(img)
+    }
+    img.onerror = () => reject(new Error('Failed to load logo image'))
+    img.src = src
+  })
 }
 
 export async function bakeTexture(input: BakeInput): Promise<THREE.CanvasTexture> {
@@ -23,61 +46,47 @@ export async function bakeTexture(input: BakeInput): Promise<THREE.CanvasTexture
   canvas.height = size
   const ctx = canvas.getContext('2d')!
 
-  // 1. Fill base color
-  ctx.fillStyle = BASE_COLORS[input.material]
+  // 1. Fill canvas with box color (or material base color)
+  const effectiveColor = input.boxColor || BASE_COLORS[input.material] || '#F5F0EB'
+  ctx.fillStyle = effectiveColor
   ctx.fillRect(0, 0, size, size)
 
-  // 2. Draw client logo if provided
+  // 2. Render logo if provided
   if (input.logoDataUrl) {
-    await new Promise<void>(resolve => {
-      const img = new Image()
-      img.onload = () => {
-        // Constrain logo to 70% of canvas width, centered
-        const maxW = size * 0.70
-        const scale = Math.min(maxW / img.width, maxW / img.height)
-        const dw = img.width  * scale
-        const dh = img.height * scale
-        const dx = (size - dw) / 2
-        const dy = (size - dh) / 2
-        ctx.globalAlpha = input.logoOpacity
-        ctx.drawImage(img, dx, dy, dw, dh)
-        ctx.globalAlpha = 1.0
-        resolve()
-      }
-      img.onerror = () => resolve()  // resolve silently if logo load fails
-      img.src = input.logoDataUrl!
-    })
-  }
+    try {
+      const img = await loadImage(input.logoDataUrl)
 
-  // 3. Tile InTheBox watermark diagonally across entire face
-  //    This is baked at the pixel level — cannot be removed
-  //    from the scene via DevTools
-  await new Promise<void>(resolve => {
-    const wm = new Image()
-    wm.onload = () => {
-      ctx.save()
-      ctx.globalAlpha = 0.07  // 7% — visible but unobtrusive
-      // Rotate canvas 30° and tile
-      ctx.translate(size / 2, size / 2)
-      ctx.rotate(-Math.PI / 6)
-      ctx.translate(-size / 2, -size / 2)
-      const wmW = size * 0.28
-      const wmH = (wm.height / wm.width) * wmW
-      const cols = Math.ceil((size * 1.5) / (wmW * 1.4)) + 1
-      const rows = Math.ceil((size * 1.5) / (wmH * 2.2)) + 1
-      for (let r = -1; r < rows; r++) {
-        for (let c = -1; c < cols; c++) {
-          const x = c * wmW * 1.4 - size * 0.25
-          const y = r * wmH * 2.2 - size * 0.25
-          ctx.drawImage(wm, x, y, wmW, wmH)
-        }
+      // Calculate position (normalized 0..1 to canvas coordinates)
+      const cx = input.logoX * size
+      const cy = input.logoY * size
+
+      // Calculate size maintaining aspect ratio
+      const maxDim = size * input.logoScale
+      const aspect = img.width / img.height
+
+      let dw: number, dh: number
+      if (aspect >= 1) {
+        dw = maxDim
+        dh = maxDim / aspect
+      } else {
+        dh = maxDim
+        dw = maxDim * aspect
       }
+
+      ctx.save()
+      ctx.translate(cx, cy)
+
+      if (input.logoRotation !== 0) {
+        ctx.rotate((input.logoRotation * Math.PI) / 180)
+      }
+
+      ctx.globalAlpha = Math.max(0, Math.min(1, input.logoOpacity))
+      ctx.drawImage(img, -dw / 2, -dh / 2, dw, dh)
       ctx.restore()
-      resolve()
+    } catch (e) {
+      // Silently fail if image fail to load
     }
-    wm.onerror = () => resolve()  // silently skip if logo not found
-    wm.src = input.watermarkSrc
-  })
+  }
 
   const texture = new THREE.CanvasTexture(canvas)
   texture.needsUpdate = true

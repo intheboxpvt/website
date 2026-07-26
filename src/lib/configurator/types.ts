@@ -32,7 +32,7 @@ export type FoilEffect =
   | 'rose_gold_foil'
 
 export type PrintingSide = 'outside' | 'inside' | 'both'
-export type LogoFace = 'front' | 'back'
+export type LogoFace = 'top' | 'front' | 'back'
 export type ViewMode = '3d' | 'dieline'
 
 export interface Dimensions {
@@ -46,6 +46,7 @@ export interface ConfigState {
   boxType:       BoxType
   dimensions:    Dimensions
   material:      Material
+  boxColor:      string      // Hex color code (e.g. #FFFFFF, #C4975A, #1C1C1C, #1D0A27)
   finish:        Finish
   foilEffect:    FoilEffect
   printingSide:  PrintingSide
@@ -55,6 +56,10 @@ export interface ConfigState {
   isRotating:    boolean
   logoDataUrl:   string | null
   logoFace:      LogoFace
+  logoX:         number      // Normalized 0..1 (0.5 center)
+  logoY:         number      // Normalized 0..1 (0.5 center)
+  logoScale:     number      // Scale factor 0.1..2.0 (default 0.6)
+  logoRotation:  number      // Degrees -180..180
   logoOpacity:   number      // 0–1
   savedConfigId: string | null
   quoteOpen:     boolean
@@ -63,6 +68,7 @@ export interface ConfigState {
   setDimensions:    (d: Partial<Dimensions>)  => void
   setUnit:          (u: Unit)                 => void
   setMaterial:      (m: Material)             => void
+  setBoxColor:      (c: string)               => void
   setFinish:        (f: Finish)               => void
   setFoilEffect:    (fe: FoilEffect)          => void
   setPrintingSide:  (ps: PrintingSide)        => void
@@ -72,9 +78,14 @@ export interface ConfigState {
   setIsRotating:    (r: boolean)              => void
   setLogo:          (url: string | null)      => void
   setLogoFace:      (f: LogoFace)             => void
+  setLogoX:         (x: number)               => void
+  setLogoY:         (y: number)               => void
+  setLogoScale:     (s: number)               => void
+  setLogoRotation:  (deg: number)             => void
   setLogoOpacity:   (o: number)               => void
   setSavedConfigId: (id: string | null)       => void
   setQuoteOpen:     (open: boolean)           => void
   // computed
   getDimensionsInMM: () => { l: number; w: number; h: number }
 }
+
