@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import ScrollToTop from "./components/ScrollToTop";
+import ChatWidget from "./components/ChatWidget";
 
 // Light pages: statically imported (no three.js)
 import Index from "./pages/Index";
@@ -52,10 +53,13 @@ const App = () => (
               <Route path="*"                  element={<NotFound />} />
             </Routes>
           </Suspense>
+          {/* Global chat widget — shown on all pages */}
+          <ChatWidget />
         </BrowserRouter>
       </TooltipProvider>
     </HelmetProvider>
   </QueryClientProvider>
 );
 
-export default App;
+export default App;
+
