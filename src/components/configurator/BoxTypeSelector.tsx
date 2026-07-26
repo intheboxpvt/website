@@ -1,7 +1,6 @@
 import React from "react";
 import { useConfigStore } from "@/lib/configurator/store";
 import { BoxType } from "@/lib/configurator/types";
-import ITBLabel from "./ui/ITBLabel";
 
 interface BoxTypeCard {
   id: BoxType;
@@ -14,128 +13,77 @@ export const BoxTypeSelector = () => {
   const selectedType = useConfigStore((s) => s.boxType);
   const setBoxType = useConfigStore((s) => s.setBoxType);
 
-  const list: BoxTypeCard[] = [
-    {
-      id: "straight_tuck",
-      label: "Straight Tuck",
-      desc: "Tall carton with folding tabs",
-      svg: (
-        <svg viewBox="0 0 40 40" className="w-10 h-10 stroke-[var(--itb-accent)] fill-none" aria-hidden="true">
-          <rect x="12" y="11" width="16" height="20" rx="1" />
-          <path d="M12 11 l3.5 -4 h9 l3.5 4" />
-        </svg>
-      ),
-    },
-    {
-      id: "reverse_tuck",
-      label: "Reverse Tuck",
-      desc: "Carton with reversed flap folds",
-      svg: (
-        <svg viewBox="0 0 40 40" className="w-10 h-10 stroke-[var(--itb-accent)] fill-none" aria-hidden="true">
-          <rect x="12" y="9" width="16" height="20" rx="1" />
-          <path d="M12 29 l3.5 4 h9 l3.5 -4" />
-        </svg>
-      ),
-    },
+  const primaryStructures: BoxTypeCard[] = [
     {
       id: "rigid_lid_base",
       label: "Rigid Box",
-      desc: "Premium gift lid and base set",
+      desc: "Luxury 2-piece base and lid set",
       svg: (
-        <svg viewBox="0 0 40 40" className="w-10 h-10 stroke-[var(--itb-accent)] fill-none" aria-hidden="true">
-          <rect x="10" y="21" width="20" height="11" rx="1" />
-          <rect x="9" y="11" width="22" height="7" rx="1" />
+        <svg viewBox="0 0 40 40" className="w-9 h-9 stroke-current fill-none" aria-hidden="true">
+          <rect x="10" y="21" width="20" height="11" rx="1.5" strokeWidth="1.5" />
+          <rect x="9" y="11" width="22" height="7" rx="1.5" strokeWidth="1.5" />
         </svg>
       ),
     },
     {
       id: "mailer",
       label: "Mailer Box",
-      desc: "Shipping carton with front tabs",
+      desc: "E-commerce shipper with flap wings",
       svg: (
-        <svg viewBox="0 0 40 40" className="w-10 h-10 stroke-[var(--itb-accent)] fill-none" aria-hidden="true">
-          <rect x="6" y="14" width="28" height="16" rx="1" />
-          <path d="M6 14 l14 9.5 l14 -9.5" />
-        </svg>
-      ),
-    },
-    {
-      id: "sleeve",
-      label: "Outer Sleeve",
-      desc: "Open sliding sleeve overlay",
-      svg: (
-        <svg viewBox="0 0 40 40" className="w-10 h-10 stroke-[var(--itb-accent)] fill-none" aria-hidden="true">
-          <rect x="8" y="11" width="24" height="18" rx="1" />
-          <rect x="12" y="14" width="16" height="12" rx="0.5" strokeDasharray="2 2" />
+        <svg viewBox="0 0 40 40" className="w-9 h-9 stroke-current fill-none" aria-hidden="true">
+          <rect x="6" y="14" width="28" height="16" rx="1.5" strokeWidth="1.5" />
+          <path d="M6 14 l14 9.5 l14 -9.5" strokeWidth="1.5" />
         </svg>
       ),
     },
     {
       id: "drawer",
       label: "Drawer Box",
-      desc: "Slide-out tray inside sleeve",
+      desc: "Sliding tray inside protective sleeve",
       svg: (
-        <svg viewBox="0 0 40 40" className="w-10 h-10 stroke-[var(--itb-accent)] fill-none" aria-hidden="true">
-          <rect x="8" y="11" width="24" height="18" rx="1" />
-          <rect x="13" y="14" width="19" height="12" rx="0.5" />
+        <svg viewBox="0 0 40 40" className="w-9 h-9 stroke-current fill-none" aria-hidden="true">
+          <rect x="7" y="11" width="22" height="18" rx="1.5" strokeWidth="1.5" />
+          <rect x="13" y="14" width="20" height="12" rx="1" strokeWidth="1.5" strokeDasharray="3 2" />
         </svg>
       ),
     },
     {
-      id: "perfume",
-      label: "Perfume Box",
-      desc: "Narrow cosmetics tuck folding carton",
+      id: "straight_tuck",
+      label: "Tuck Carton",
+      desc: "Lightweight folding carton with tuck flap",
       svg: (
-        <svg viewBox="0 0 40 40" className="w-10 h-10 stroke-[var(--itb-accent)] fill-none" aria-hidden="true">
-          <rect x="15" y="9" width="10" height="25" rx="1" />
-          <path d="M15 9 l2 -4 h6 l2 4" />
-        </svg>
-      ),
-    },
-    {
-      id: "gift",
-      label: "Gift Box",
-      desc: "Shallow base & lid styling",
-      svg: (
-        <svg viewBox="0 0 40 40" className="w-10 h-10 stroke-[var(--itb-accent)] fill-none" aria-hidden="true">
-          <rect x="6" y="24" width="28" height="9" rx="1" />
-          <rect x="5" y="16" width="30" height="6" rx="1" />
-        </svg>
-      ),
-    },
-    {
-      id: "bag",
-      label: "Paper Bag",
-      desc: "Premium carrier bag with handle",
-      svg: (
-        <svg viewBox="0 0 40 40" className="w-10 h-10 stroke-[var(--itb-accent)] fill-none" aria-hidden="true">
-          <path d="M15 15 c0 -3, 10 -3, 10 0" />
-          <rect x="11" y="15" width="18" height="18" rx="1" />
+        <svg viewBox="0 0 40 40" className="w-9 h-9 stroke-current fill-none" aria-hidden="true">
+          <rect x="13" y="11" width="14" height="20" rx="1.5" strokeWidth="1.5" />
+          <path d="M13 11 l2.5 -4 h9 l2.5 4" strokeWidth="1.5" />
         </svg>
       ),
     },
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-3 mt-4">
-      {list.map((item) => {
-        const isSelected = selectedType === item.id;
+    <div className="grid grid-cols-2 gap-3 mt-3">
+      {primaryStructures.map((item) => {
+        // Match exact id or group equivalent types (e.g. reverse_tuck/perfume -> straight_tuck, gift -> rigid)
+        const isSelected = selectedType === item.id ||
+          (item.id === "straight_tuck" && (selectedType === "reverse_tuck" || selectedType === "perfume")) ||
+          (item.id === "rigid_lid_base" && selectedType === "gift");
+
         return (
           <button
             key={item.id}
             onClick={() => setBoxType(item.id)}
-            className={`flex flex-col items-start p-4 text-left rounded-[var(--itb-radius)] border transition-all duration-300 ${
+            className={`flex flex-col items-start p-3.5 text-left rounded-xl border transition-all duration-200 ${
               isSelected
-                ? "border-[color:var(--itb-accent)] bg-[rgba(200,161,90,0.06)] shadow-sm"
-                : "border-[color:var(--itb-border)] hover:bg-white/[0.04]"
+                ? "border-accent bg-accent/10 text-accent font-semibold shadow-sm"
+                : "border-border hover:border-accent/40 bg-card text-foreground/80 hover:text-foreground"
             }`}
-            aria-label={`${item.label} box type: ${item.desc}`}
+            aria-label={`${item.label} box structure`}
           >
-            <div className="mb-3">{item.svg}</div>
-            <div className="font-mono text-xs font-bold uppercase text-[color:var(--itb-fg)]">
+            <div className="mb-2.5 text-accent">{item.svg}</div>
+            <div className="font-mono text-xs font-bold uppercase tracking-wider">
               {item.label}
             </div>
-            <div className="font-sans text-[10px] text-[color:var(--itb-muted)] mt-1 leading-snug">
+            <div className="font-sans text-[10px] text-foreground/60 mt-1 leading-snug">
               {item.desc}
             </div>
           </button>
@@ -146,3 +94,4 @@ export const BoxTypeSelector = () => {
 };
 
 export default BoxTypeSelector;
+

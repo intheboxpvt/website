@@ -3,6 +3,7 @@ import { Material, Finish, FoilEffect } from './types'
 
 interface MatInput {
   material:   Material
+  boxColor?:  string
   finish:     Finish
   foilEffect: FoilEffect
   face:       string      // 'body_front', 'body_back', 'lid', etc.
@@ -25,11 +26,16 @@ const FINISH_PBR: Record<Finish, { roughness: number; metalness: number; envMapI
 }
 
 export function getMaterial(input: MatInput): THREE.Material {
-  const { material, finish, foilEffect, face, texture } = input
-  const baseColor = BASE_COLORS[material]
-  const pbr = FINISH_PBR[finish]
+  const { material, boxColor, finish, foilEffect, face, texture } = input
+  
+  // Use boxColor if provided; for Kraft material, use Kraft base unless custom color specified
+  let effectiveColor = boxColor || BASE_COLORS[material]
+  if (material === 'kraft' && (!boxColor || boxColor === '#F5F0EB' || boxColor === '#FFFFFF')) {
+    effectiveColor = BASE_COLORS.kraft
+  }
+  
+  const pbr = FINISH_PBR[finish] ?? FINISH_PBR.matte_lamination
 
-  // Foil effect is applied only on front/back of box bodies/sleeves/bases/trays, and tuck lids
   const isPrintFace = face === 'front' || face === 'back' || face.endsWith('_front') || face.endsWith('_back') || face === 'lid'
   
   if (foilEffect !== 'none' && isPrintFace) {
@@ -37,14 +43,15 @@ export function getMaterial(input: MatInput): THREE.Material {
   }
 
   const mat = new THREE.MeshStandardMaterial({
-    color:            new THREE.Color(baseColor),
-    roughness:        pbr.roughness,
+    color:            new THREE.Color(effectiveColor),
+    roughness:        material === 'kraft' ? 0.92 : pbr.roughness,
     metalness:        pbr.metalness,
     envMapIntensity:  pbr.envMapIntensity,
     map:              texture ?? null,
   })
   return mat
 }
+
 
 function getFoilMaterial(foil: FoilEffect): THREE.MeshPhysicalMaterial {
   const foilColors: Record<FoilEffect, string> = {
