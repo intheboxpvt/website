@@ -37,15 +37,15 @@ const Services = () => {
   }, []);
 
   const consultationServices = [
-    { title: "Starter Session", desc: "1-hour discovery call to understand your brand and packaging needs." },
-    { title: "Deep Dive Workshop", desc: "Half-day intensive session with full brand packaging audit." },
-    { title: "Advisory Pipeline", desc: "Ongoing structural design and material optimization support." },
+    { title: "Starter Session", desc: "1-hour discovery call to analyze your brand identity, product dimensions, unboxing vision, and custom material requirements." },
+    { title: "Deep Dive Workshop", desc: "Half-day intensive structural workshop featuring comprehensive packaging audits, board weight tests, and cost optimization strategy." },
+    { title: "Advisory Pipeline", desc: "Continuous structural engineering advisory covering sustainable paperboard upgrades, custom inserts, and press quality control." },
   ];
 
   const designServices = [
-    { icon: Palette, title: "Concept Development", desc: "Mood boards, raw sketches, and structural layout options aligned with your product identity." },
-    { icon: Layers, title: "3D Rendering Preview", desc: "High fidelity digital models and thickness representations before committing to manufacturing." },
-    { icon: Sparkles, title: "Production Dielines", desc: "Exact dielines ready for print presses and plate preparation." },
+    { icon: Palette, title: "Concept Development", desc: "Mood boards, raw CAD sketches, opening mechanism blueprints, and custom surface graphics designed to elevate product unboxing." },
+    { icon: Layers, title: "3D Rendering Preview", desc: "High-fidelity digital 3D prototypes with realistic studio lighting, true cardboard thickness representations, and finish previews." },
+    { icon: Sparkles, title: "Production Dielines", desc: "Millimeter-accurate vector dielines formatted with cut, crease, and bleed specifications ready for high-speed commercial printing presses." },
   ];
 
   const manufacturingFeatures = [
@@ -57,12 +57,12 @@ const Services = () => {
   ];
 
   const roadSteps = [
-    { percentage: 0, icon: Search, title: "Discover & Consult", desc: "We study your product dimensions, target weight, and shipping parameters to start your consultation." },
-    { percentage: 20, icon: Lightbulb, title: "Concept Blueprint", desc: "Our structural designers outline custom layout, opening parameters, and box dimensions." },
-    { percentage: 40, icon: Box, title: "Prototype Mockup", desc: "Fabricating physical sample boxes for real world verification of paperboard weight and size fit." },
-    { percentage: 60, icon: CheckCircle, title: "Exacting Approval", desc: "Inspection of detailing, rigid closures, and final contract sign off." },
-    { percentage: 80, icon: Factory, title: "Volume Fabrication", desc: "High volume printing, spot finishes, folding, gluing, and strict quality control." },
-    { percentage: 100, icon: Truck, title: "Secure Delivery", desc: "Integrated logistics coordinates direct shipment to your corporate warehouses." },
+    { percentage: 0, icon: Search, title: "Discover & Consult", desc: "We study your product weight, structural dimensions, transit protection needs, and brand aesthetic parameters to start your consultation." },
+    { percentage: 20, icon: Lightbulb, title: "Concept Blueprint", desc: "Our structural CAD engineers outline custom box geometry, locking tab mechanisms, lid closures, and board caliper specifications." },
+    { percentage: 40, icon: Box, title: "Prototype Mockup", desc: "Fabricating physical unprinted sample boxes for hands-on dimensional fit checks, paperboard rigidity testing, and real-world handling." },
+    { percentage: 60, icon: CheckCircle, title: "Exacting Approval", desc: "Rigorous inspection of magnetic closures, hot foil stamping alignment, surface texture quality, and final contract sign off." },
+    { percentage: 80, icon: Factory, title: "Volume Fabrication", desc: "Automated offset printing, spot UV application, die-cutting, folding, gluing, and stringent multi-point quality assurance checks." },
+    { percentage: 100, icon: Truck, title: "Secure Delivery", desc: "Integrated nationwide logistics coordinates direct freight shipment and inventory delivery directly to your regional warehouse facilities." },
   ];
 
   return (
@@ -94,8 +94,8 @@ const Services = () => {
             <h1 className="text-3xl md:text-5xl font-sans font-bold tracking-tight text-white leading-tight">
               Complete Packaging <span className="text-accent italic font-semibold">Solutions</span>
             </h1>
-            <p className="text-sm md:text-base text-white/70 font-sans leading-relaxed">
-              From initial consultation to final volume distribution, we operate the entire design to delivery lifecycle.
+            <p className="text-sm md:text-base text-white/70 font-sans leading-relaxed max-w-xl">
+              From initial structural prototyping to high-volume manufacturing and nationwide logistics, we operate the complete packaging lifecycle to elevate your unboxing experience.
             </p>
           </div>
         </div>
@@ -204,8 +204,8 @@ const Services = () => {
             <div className="text-left mb-24">
               <span className="font-mono text-xs text-accent uppercase tracking-wider">Our Pipeline</span>
               <h2 className="font-sans text-4xl font-bold text-white mt-4">The Custom <span className="text-accent">Road Map</span></h2>
-              <p className="font-sans text-sm text-white/60 max-w-sm mt-3">
-                Scroll to move the delivery truck along our checkpoints from setup to final shipment.
+              <p className="font-sans text-sm text-white/60 max-w-md mt-3 leading-relaxed">
+                Scroll down to track our delivery truck through each milestone checkpoint from initial structural setup to final nationwide warehouse distribution.
               </p>
             </div>
           </ScrollReveal>
