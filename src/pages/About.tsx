@@ -43,28 +43,29 @@ const About = () => {
       <Navbar />
 
       {/* Page Header */}
-      <section className="pt-24 pb-6 px-6 lg:px-12 section-royal border-b border-white/5 relative overflow-hidden text-white">
-        {/* Subtle Watermark logo inside Header */}
-        <div className="absolute right-0 top-0 w-[380px] h-[380px] pointer-events-none opacity-[0.04] z-0 select-none">
-          <img
-            src="/assets/logo.png"
-            alt=""
-            className="w-full h-full object-contain object-right-top filter invert brightness-0"
+      <section className="pt-24 pb-10 px-6 lg:px-12 bg-[#1c0f24] border-b border-white/10 relative overflow-hidden text-white">
+        {/* Watermark logo background */}
+        <div className="absolute right-6 top-1/2 -translate-y-1/2 w-[320px] h-[320px] pointer-events-none opacity-[0.04] select-none z-0">
+          <img 
+            src="/images/inthebox-logo.png" 
+            alt="" 
+            className="w-full h-full object-contain filter invert brightness-0"
           />
         </div>
 
         <div className="max-w-[1400px] mx-auto relative z-10">
-          <span className="inline-flex items-center gap-3 text-xs font-mono text-white/50 mb-4">
-            <span className="w-12 h-px bg-white/20"></span>
-            Our Story
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-[4.5rem] font-sans font-bold tracking-tight leading-[0.9] text-white">
-            Engineering Premium<br />
-            <span className="text-accent italic font-semibold">Packaging Legacies.</span>
-          </h1>
-          <p className="font-sans text-base text-white/50 mt-4 max-w-xl">
-            From structural engineers to production specialists, we work as an extension of your brand to scale your packaging operations seamlessly.
-          </p>
+          <div className="max-w-2xl space-y-3">
+            <div className="inline-flex items-center gap-2 text-xs font-mono text-accent">
+              <span className="w-8 h-px bg-accent"></span>
+              <span className="uppercase tracking-widest font-semibold">Our Story</span>
+            </div>
+            <h1 className="text-3xl md:text-5xl font-sans font-bold tracking-tight text-white leading-tight">
+              Engineering Premium <span className="text-accent italic font-semibold">Packaging Legacies</span>
+            </h1>
+            <p className="text-sm md:text-base text-white/70 font-sans leading-relaxed">
+              From structural engineers to production specialists, we work as an extension of your brand to scale your packaging operations seamlessly.
+            </p>
+          </div>
         </div>
       </section>
 
