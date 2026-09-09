@@ -14,6 +14,7 @@ const Navbar = () => {
     { label: "Sustainability", href: "/sustainability" },
     { label: "Catalogue", href: "/catalogue" },
     { label: "Services & Process", href: "/services" },
+    { label: "Sustainability", href: "/sustainability" },
   ];
 
   useEffect(() => {

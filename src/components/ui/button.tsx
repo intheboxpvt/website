@@ -9,17 +9,17 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-accent text-white border border-[#1c0f24]/10 shadow-[0_0_0_3px_#fbbf24_inset] hover:bg-accent/90 transform hover:-translate-y-0.5 transition duration-300 rounded-lg",
+        default: "bg-accent text-white border border-accent hover:bg-accent/90 transform hover:-translate-y-0.5 transition duration-300 rounded-lg",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-lg",
-        outline: "bg-transparent text-accent border border-accent shadow-[0_0_0_3px_#fbbf24_inset] hover:bg-accent/10 transform hover:-translate-y-0.5 transition duration-300 rounded-lg",
+        outline: "bg-transparent text-accent border border-accent hover:bg-accent/10 transform hover:-translate-y-0.5 transition duration-300 rounded-lg",
         secondary: "bg-card border border-border text-foreground hover:bg-accent/5 rounded-lg shadow-sm",
         ghost: "hover:bg-muted hover:text-foreground rounded-lg",
         link: "text-primary underline-offset-4 hover:underline",
         // Royal Premium variants
-        gold: "bg-accent text-white border border-[#1c0f24]/10 shadow-[0_0_0_3px_#fbbf24_inset] hover:bg-accent/90 transform hover:-translate-y-0.5 transition duration-300 rounded-lg",
-        "gold-outline": "bg-transparent text-accent border border-accent shadow-[0_0_0_3px_#fbbf24_inset] hover:bg-accent/10 transform hover:-translate-y-0.5 transition duration-300 rounded-lg",
-        hero: "bg-accent text-white border border-[#1c0f24]/10 shadow-[0_0_0_3px_#fbbf24_inset] hover:bg-accent/90 transform hover:-translate-y-1 transition duration-300 rounded-lg font-semibold text-base",
-        "hero-outline": "bg-transparent text-white border border-white/20 shadow-[0_0_0_3px_#ffffff_inset] hover:bg-white/10 transform hover:-translate-y-1 transition duration-300 rounded-lg font-semibold",
+        gold: "bg-accent text-white border border-accent hover:bg-accent/90 transform hover:-translate-y-0.5 transition duration-300 rounded-lg",
+        "gold-outline": "bg-transparent text-accent border border-accent hover:bg-accent/10 transform hover:-translate-y-0.5 transition duration-300 rounded-lg",
+        hero: "bg-accent text-white border border-accent hover:bg-accent/90 transform hover:-translate-y-1 transition duration-300 rounded-lg font-semibold text-base",
+        "hero-outline": "bg-transparent text-white border border-white/20 hover:bg-white/10 transform hover:-translate-y-1 transition duration-300 rounded-lg font-semibold",
         royal: "bg-[#1d0a27] text-white border border-white/10 shadow-[0_0_0_3px_#1d0a27_inset] hover:bg-[#35124e] transform hover:-translate-y-0.5 transition duration-300 rounded-lg font-semibold",
         "royal-outline": "border border-border bg-transparent text-foreground hover:border-accent rounded-lg font-semibold",
         ivory: "bg-[#faf9f5] text-[#1c0f24] border border-[#1c0f24]/15 shadow-[0_0_0_3px_#faf9f5_inset] hover:bg-[#eae8e2] transform hover:-translate-y-0.5 transition duration-300 rounded-lg font-semibold",

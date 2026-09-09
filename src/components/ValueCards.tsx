@@ -71,35 +71,44 @@ const ValueCards = () => {
 
         {/* Value Cards (No images inside cards, matching screenshot 4 footer grid) */}
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {values.map((value, index) => (
-            <ScrollReveal key={index} delay={index * 150}>
-              <div className="relative bg-card border border-border hover:border-accent p-8 lg:p-12 group h-full transition-all duration-500 flex flex-col justify-between shadow-soft hover:shadow-gold rounded-none overflow-hidden hover:-translate-y-1">
-                {/* Accent Top Line for contrast */}
-                <div className="absolute top-0 left-0 w-full h-[3px] bg-accent/20 group-hover:bg-accent transition-colors duration-500"></div>
+          {values.map((value, index) => {
+            const isMiddle = index === 1;
+            return (
+              <ScrollReveal key={index} delay={index * 150}>
+                <div
+                  className={`relative p-8 lg:p-12 group h-full transition-all duration-500 flex flex-col justify-between shadow-soft rounded-none overflow-hidden hover:-translate-y-1 border ${
+                    isMiddle
+                      ? "bg-[#1c0f24] text-white border-accent shadow-gold"
+                      : "bg-card text-foreground border-border hover:border-accent hover:shadow-gold"
+                  }`}
+                >
+                  {/* Accent Top Line for contrast */}
+                  <div className="absolute top-0 left-0 w-full h-[3px] bg-accent/20 group-hover:bg-accent transition-colors duration-500"></div>
 
-                {/* Shining sweep effect */}
-                <div className="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 -translate-x-full group-hover:animate-shine z-20 pointer-events-none"></div>
-                
-                <div>
-                  <span className="font-mono text-xs text-accent font-semibold block mb-8">{value.num}</span>
+                  {/* Shining sweep effect */}
+                  <div className="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 -translate-x-full group-hover:animate-shine z-20 pointer-events-none"></div>
                   
-                  {/* Content */}
-                  <h3 className="text-2xl lg:text-3xl font-serif text-foreground mb-4 group-hover:translate-x-2 transition-transform duration-500">
-                    {value.title}
-                  </h3>
-                  <p className="font-sans text-foreground/75 text-sm leading-relaxed mb-6">
-                    {value.description}
-                  </p>
-                </div>
+                  <div>
+                    <span className="font-mono text-xs text-accent font-semibold block mb-8">{value.num}</span>
+                    
+                    {/* Content */}
+                    <h3 className={`text-2xl lg:text-3xl font-sans font-bold mb-4 group-hover:translate-x-2 transition-transform duration-500 ${isMiddle ? "text-white" : "text-foreground"}`}>
+                      {value.title}
+                    </h3>
+                    <p className={`font-sans text-sm leading-relaxed mb-6 ${isMiddle ? "text-white/80" : "text-foreground/75"}`}>
+                      {value.description}
+                    </p>
+                  </div>
 
-                {/* Accent Icon at the bottom */}
-                <div className="flex items-center justify-between text-accent mt-8">
-                  <value.icon className="w-5 h-5" />
-                  <span className="font-mono text-[9px] uppercase tracking-wider text-foreground/40 group-hover:text-accent transition-colors">InTheBox Pvt Ltd</span>
+                  {/* Accent Icon at the bottom */}
+                  <div className="flex items-center justify-between text-accent mt-8">
+                    <value.icon className="w-5 h-5" />
+                    <span className={`font-mono text-[9px] uppercase tracking-wider group-hover:text-accent transition-colors ${isMiddle ? "text-white/40" : "text-foreground/40"}`}>InTheBox Pvt Ltd</span>
+                  </div>
                 </div>
-              </div>
-            </ScrollReveal>
-          ))}
+              </ScrollReveal>
+            );
+          })}
         </div>
       </div>
     </section>

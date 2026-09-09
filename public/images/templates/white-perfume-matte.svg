@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0b0b" />
+      <stop offset="100%" stop-color="#161616" />
+    </linearGradient>
+  </defs>
+  <rect width="240" height="180" fill="url(#bgGrad)"/>
+  <rect x="0.5" y="0.5" width="239" height="179" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  
+  <!-- Draw 3D Isometric Tall Perfume Box (White and Silver Highlights) -->
+  <g transform="translate(0, 5)">
+    <!-- Top Cap open slightly -->
+    <path d="M100,50 L120,40 L140,50 L120,60 Z" fill="#eeeeee" stroke="#94a3b8" stroke-width="1.5"/>
+    <path d="M100,50 L100,120 L120,130 L120,60 Z" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+    <path d="M120,60 L120,130 L140,120 L140,50 Z" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+    <!-- Silver Foil Foil lines -->
+    <path d="M110,65 L110,115" stroke="#cbd5e1" stroke-width="1"/>
+    <path d="M130,60 L130,110" stroke="#cbd5e1" stroke-width="1"/>
+  </g>
+
+  <text x="120" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#94a3b8" text-anchor="middle" letter-spacing="1.5">
+    TUCK END · SILVER FOIL
+  </text>
+</svg>

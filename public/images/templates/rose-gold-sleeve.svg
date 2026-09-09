@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0b0b" />
+      <stop offset="100%" stop-color="#161616" />
+    </linearGradient>
+    <linearGradient id="roseGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e0a899" />
+      <stop offset="100%" stop-color="#b87f73" />
+    </linearGradient>
+  </defs>
+  <rect width="240" height="180" fill="url(#bgGrad)"/>
+  <rect x="0.5" y="0.5" width="239" height="179" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  
+  <!-- Outer Sleeve sliding off base -->
+  <g transform="translate(0, 10)">
+    <!-- Base Tray (White) -->
+    <path d="M85,90 L135,65 L185,90 L135,115 Z" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <path d="M85,90 L85,110 L135,135 L135,115 Z" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1.5"/>
+    <path d="M135,115 L135,135 L185,110 L185,90 Z" fill="#cbd5e1" stroke="#cbd5e1" stroke-width="1.5"/>
+
+    <!-- Sleeve (Hovering / sliding off, Rose Gold Stroke) -->
+    <g transform="translate(-25, -15)">
+      <path d="M85,90 L135,65 L185,90 L135,115 Z" fill="#1e1b1a" stroke="url(#roseGold)" stroke-width="1.5"/>
+      <path d="M85,90 L85,110 L135,135 L135,115 Z" fill="#141211" stroke="url(#roseGold)" stroke-width="1.5"/>
+      <path d="M135,115 L135,135 L185,110 L185,90 Z" fill="#2d2827" stroke="url(#roseGold)" stroke-width="1.5"/>
+    </g>
+  </g>
+
+  <text x="120" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="url(#roseGold)" text-anchor="middle" letter-spacing="1.5">
+    SLEEVE · ROSE GOLD FOIL
+  </text>
+</svg>

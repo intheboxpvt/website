@@ -15,6 +15,13 @@ export default {
     },
     extend: {
       colors: {
+        "itb-bg": "#050505",
+        "itb-surface": "#0B0B0B",
+        "itb-card": "#111111",
+        "itb-fg": "#FFFFFF",
+        "itb-muted": "#A1A1AA",
+        "itb-accent": "#C8A15A",
+        "itb-border": "rgba(255,255,255,0.08)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -84,6 +91,8 @@ export default {
         },
       },
       fontFamily: {
+        display: ['var(--font-clash)', 'Inter', 'sans-serif'],
+        body:    ['var(--font-inter)', 'sans-serif'],
         serif: ["'ABCFavoritVariable'", "'Instrument Sans'", "'Inter'", "sans-serif"],
         sans: ["'ABCFavoritVariable'", "'Instrument Sans'", "'Inter'", "sans-serif"],
         mono: ["'ABCFavoritVariable'", "'Instrument Sans'", "'Inter'", "sans-serif"],

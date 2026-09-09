@@ -35,9 +35,9 @@ const ClientGallery = () => {
                 <span className="w-12 h-px bg-border"></span>
                 Client Stories
               </span>
-              <h2 className="text-5xl md:text-7xl lg:text-[6.5rem] font-serif tracking-tight leading-[0.9] text-foreground">
+              <h2 className="text-5xl md:text-7xl lg:text-[6.5rem] font-sans font-bold tracking-tight leading-[0.9] text-foreground">
                 Loved by<br/>
-                <span className="text-foreground/30 italic">Brands Like Yours.</span>
+                <span className="text-foreground/30 italic font-semibold">Brands Like Yours.</span>
               </h2>
             </div>
             <div className="lg:col-span-5 lg:pb-4">
@@ -49,37 +49,46 @@ const ClientGallery = () => {
         </ScrollReveal>
 
         <div className="grid md:grid-cols-3 gap-4 lg:gap-6">
-          {testimonials.map((testimonial, index) => (
-            <ScrollReveal key={index} delay={index * 150}>
-              <div className="bg-card p-8 lg:p-12 rounded-none border border-border hover:border-accent relative h-full flex flex-col justify-between transition-all duration-500 shadow-soft">
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="font-mono text-xs text-foreground/40">0{index + 1}</span>
-                    <Quote className="w-5 h-5 text-accent/20" />
+          {testimonials.map((testimonial, index) => {
+            const isMiddle = index === 1;
+            return (
+              <ScrollReveal key={index} delay={index * 150}>
+                <div
+                  className={`p-8 lg:p-12 rounded-none border relative h-full flex flex-col justify-between transition-all duration-500 shadow-soft ${
+                    isMiddle
+                      ? "bg-[#1c0f24] text-white border-accent shadow-gold z-10"
+                      : "bg-card text-foreground border-border hover:border-accent"
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-6">
+                      <span className={`font-mono text-xs ${isMiddle ? "text-white/40" : "text-foreground/40"}`}>0{index + 1}</span>
+                      <Quote className="w-5 h-5 text-accent/20" />
+                    </div>
+                    
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-3 h-3 text-accent fill-accent" />
+                      ))}
+                    </div>
+                    
+                    <p className={`font-sans text-base leading-relaxed mb-6 italic ${isMiddle ? "text-white/90" : "text-foreground/85"}`}>
+                      "{testimonial.quote}"
+                    </p>
                   </div>
                   
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 text-accent fill-accent" />
-                    ))}
+                  <div className={`border-t pt-4 mt-6 ${isMiddle ? "border-white/10" : "border-border"}`}>
+                    <p className={`font-sans text-base font-semibold ${isMiddle ? "text-white" : "text-foreground"}`}>
+                      {testimonial.author}
+                    </p>
+                    <p className={`font-sans text-xs mt-1 ${isMiddle ? "text-white/50" : "text-foreground/50"}`}>
+                      {testimonial.role}
+                    </p>
                   </div>
-                  
-                  <p className="font-sans text-foreground/85 text-base leading-relaxed mb-6 italic">
-                    "{testimonial.quote}"
-                  </p>
                 </div>
-                
-                <div className="border-t border-border pt-4 mt-6">
-                  <p className="font-sans text-base font-semibold text-foreground">
-                    {testimonial.author}
-                  </p>
-                  <p className="font-sans text-xs text-foreground/50 mt-1">
-                    {testimonial.role}
-                  </p>
-                </div>
-              </div>
-            </ScrollReveal>
-          ))}
+              </ScrollReveal>
+            );
+          })}
         </div>
       </div>
     </section>

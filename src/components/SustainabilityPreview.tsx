@@ -21,9 +21,9 @@ const SustainabilityPreview = () => {
                 <span className="w-12 h-px bg-emerald/30"></span>
                 Sustainability
               </span>
-              <h2 className="text-5xl md:text-7xl lg:text-[6.5rem] font-serif tracking-tight leading-[0.9] text-foreground mb-8">
+              <h2 className="text-5xl md:text-7xl lg:text-[6.5rem] font-sans font-bold tracking-tight leading-[0.9] text-foreground mb-8">
                 Packaging<br/>
-                <span className="text-foreground/30 italic">That Cares.</span>
+                <span className="text-foreground/30 italic font-semibold">That Cares.</span>
               </h2>
               <p className="font-sans text-lg text-foreground/80 leading-relaxed mb-8">
                 Our sustainability mode features agri-waste hybrid boards made from rice husk and 

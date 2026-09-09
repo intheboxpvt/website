@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Download, ArrowRight } from "lucide-react";
+import { Download, ArrowRight, Maximize2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import FoldedCard3D from "@/components/FoldedCard3D";
 import SEO from "@/components/SEO";
@@ -15,17 +15,23 @@ const Catalogue = () => {
   
   const categories = ["all", "rigid", "kraft", "luxury", "sustainable", "stationery"];
   
-  const products = [
-    { name: "Premium Thank You Card", category: "stationery", moq: "100-500", desc: "Folded luxury cards with foil stamping." },
-    { name: "Classic Rigid Box", category: "rigid", moq: "100-500", desc: "Premium rigid boxes with magnetic closure." },
-    { name: "Kraft Mailer", category: "kraft", moq: "250-1000", desc: "Eco-friendly kraft mailers for shipping." },
-    { name: "Luxury Gift Box", category: "luxury", moq: "50-200", desc: "High-end gift boxes with ribbon closure." },
-    { name: "Eco Board Box", category: "sustainable", moq: "200-800", desc: "Agri-waste hybrid board packaging." },
-    { name: "Drawer Box", category: "rigid", moq: "100-400", desc: "Sliding drawer style rigid boxes." },
-    { name: "Kraft Paper Bag", category: "kraft", moq: "500-2000", desc: "Custom printed kraft bags." },
-    { name: "Corrugated Shipper", category: "kraft", moq: "500-2000", desc: "Durable custom shipping boxes." },
-    { name: "Cosmetic Glass Jar Box", category: "luxury", moq: "100-500", desc: "Premium retail boxes for cosmetics." },
-    { name: "Apparel Sleeve", category: "sustainable", moq: "200-1000", desc: "Eco-friendly sleeves for clothing packaging." },
+  const products: Array<{
+    name: string;
+    category: string;
+    moq: string;
+    desc: string;
+    configuratorPreset: string;
+  }> = [
+    { name: "Premium Thank You Card", category: "stationery", moq: "100-500", desc: "Folded luxury cards with foil stamping.", configuratorPreset: "straight_tuck" }, // Closest folding net style
+    { name: "Classic Rigid Box", category: "rigid", moq: "100-500", desc: "Premium rigid boxes with magnetic closure.", configuratorPreset: "rigid_lid_base" },
+    { name: "Kraft Mailer", category: "kraft", moq: "250-1000", desc: "Eco-friendly kraft mailers for shipping.", configuratorPreset: "mailer" },
+    { name: "Luxury Gift Box", category: "luxury", moq: "50-200", desc: "High-end gift boxes with ribbon closure.", configuratorPreset: "gift" },
+    { name: "Eco Board Box", category: "sustainable", moq: "200-800", desc: "Agri-waste hybrid board packaging.", configuratorPreset: "reverse_tuck" },
+    { name: "Drawer Box", category: "rigid", moq: "100-400", desc: "Sliding drawer style rigid boxes.", configuratorPreset: "drawer" },
+    { name: "Kraft Paper Bag", category: "kraft", moq: "500-2000", desc: "Custom printed kraft bags.", configuratorPreset: "straight_tuck" }, // Closest outline silhouette
+    { name: "Corrugated Shipper", category: "kraft", moq: "500-2000", desc: "Durable custom shipping boxes.", configuratorPreset: "mailer" },
+    { name: "Cosmetic Glass Jar Box", category: "luxury", moq: "100-500", desc: "Premium retail boxes for cosmetics.", configuratorPreset: "perfume" },
+    { name: "Apparel Sleeve", category: "sustainable", moq: "200-1000", desc: "Eco-friendly sleeves for clothing packaging.", configuratorPreset: "sleeve" },
   ];
 
   const filtered = filter === "all" ? products : products.filter(p => p.category === filter);
@@ -39,8 +45,8 @@ const Catalogue = () => {
       />
       <Navbar />
  
-      {/* Page Header */}
-      <section className="pt-24 pb-6 px-6 lg:px-12 bg-[#1d0a27] border-b border-white/5 relative overflow-hidden text-white">
+      {/* Page Header — uses royal-purple gradient consistent with all other pages */}
+      <section className="pt-24 pb-6 px-6 lg:px-12 section-royal border-b border-white/5 relative overflow-hidden">
         {/* Subtle Watermark logo inside Header */}
         <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
           <img 
@@ -97,8 +103,25 @@ const Catalogue = () => {
 
           <div className="grid lg:grid-cols-2 gap-8 items-stretch">
             
-            {/* Left Column: 3D Visualizer Canvas */}
-            <div className="flex flex-col items-center justify-center bg-card border border-border p-8 h-[480px] relative">
+            {/* Left Column: 3D Visualizer Canvas - redesigned to be inviting with golden hover glow */}
+            <div className="flex flex-col items-center justify-center bg-card border-2 border-border hover:border-accent p-8 h-[480px] relative group/viewer shadow-md hover:shadow-gold transition-all duration-500 rounded-lg">
+              
+              {/* Expand Button Overlay - Prominent and Golden */}
+              <Link 
+                to="/customize?preset=straight_tuck&source=catalogue"
+                className="absolute top-4 right-4 z-30 px-4 py-2 bg-accent hover:bg-[#1c0f24] text-white hover:text-white border border-accent hover:border-accent transition-all duration-300 rounded-lg shadow-md flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider font-bold animate-pulse-soft"
+                aria-label="Expand to full 3D customizer workspace"
+              >
+                <Maximize2 className="w-4 h-4" />
+                <span>Expand to 3D Studio</span>
+              </Link>
+
+              {/* Verified Workspace Tag */}
+              <div className="absolute top-4 left-4 z-20 bg-background/90 backdrop-blur-sm px-3 py-1.5 border border-border rounded-lg shadow-sm flex items-center gap-1.5 select-none pointer-events-none">
+                <span className="w-2 h-2 rounded-full bg-emerald animate-ping"></span>
+                <span className="font-mono text-[9px] text-foreground font-bold uppercase tracking-wider">Interactive 3D</span>
+              </div>
+
               <FoldedCard3D 
                 frontImage="/products/premium_thank_you_card.png" 
                 insideImage="/products/thank_you_card_texture.png"
@@ -108,21 +131,29 @@ const Catalogue = () => {
               />
               <div className="mt-6 p-2 bg-accent/5 border border-accent/20 w-full text-center">
                 <p className="text-[10px] font-mono text-accent leading-relaxed animate-pulse">
-                  // Interactive 3D structural mapping. Drag to rotate card.
+                  // Drag to rotate in 3D. Click to open and read inside card.
                 </p>
               </div>
             </div>
  
-            {/* Right Column: Customizer Controls */}
-            <div className="space-y-6 bg-card p-8 border border-border flex flex-col justify-between h-[480px]">
-              <div className="space-y-5">
+            {/* Right Column: Customizer Controls - Redesigned with Invite Block */}
+            <div className="space-y-6 bg-card p-8 border border-border flex flex-col justify-between h-[480px] rounded-lg shadow-sm">
+              <div className="space-y-4">
+                {/* Expanding Invitation Callout */}
+                <div className="p-3.5 bg-accent/5 border border-accent/20 rounded-lg text-left">
+                  <p className="font-sans text-[11px] text-[#1c0f24] leading-relaxed">
+                    <strong className="font-semibold text-accent uppercase font-mono tracking-wider text-[10px] block mb-1">💡 Prototyping Workshop</strong>
+                    Want to custom-build mailers, rigid lids, or sleeves? Click <strong className="font-bold">"Expand to 3D Studio"</strong> on the viewer to open the full scale 3D workspace.
+                  </p>
+                </div>
+
                 <div>
                   <label className="block text-xs font-mono text-foreground/60 uppercase tracking-wider mb-2">Front Foil Branding Text</label>
                   <input 
                     type="text" 
                     value={frontText} 
                     onChange={(e) => setFrontText(e.target.value)}
-                    className="w-full px-4 py-3 border border-border bg-background/50 font-sans text-sm text-foreground focus:outline-none focus:border-accent transition-colors"
+                    className="w-full px-4 py-3 border border-border bg-background/50 font-sans text-sm text-foreground focus:outline-none focus:border-accent transition-colors rounded-lg"
                     placeholder="Enter brand name..."
                   />
                 </div>
@@ -131,13 +162,13 @@ const Catalogue = () => {
                   <textarea 
                     value={insideText} 
                     onChange={(e) => setInsideText(e.target.value)}
-                    className="w-full px-4 py-3 border border-border bg-background/50 font-sans text-sm text-foreground focus:outline-none focus:border-accent transition-colors h-20 resize-none"
+                    className="w-full px-4 py-3 border border-border bg-background/50 font-sans text-sm text-foreground focus:outline-none focus:border-accent transition-colors h-16 resize-none rounded-lg"
                     placeholder="Type interior content..."
                   />
                 </div>
               </div>
  
-              <div className="border-t border-border pt-5 space-y-4">
+              <div className="border-t border-border pt-4 space-y-4">
                 <div className="grid grid-cols-3 gap-4 text-left">
                   <div>
                     <p className="text-[9px] font-mono text-foreground/50 uppercase tracking-widest">Base Board</p>
@@ -194,11 +225,13 @@ const Catalogue = () => {
                 className="bg-card border border-border rounded-none overflow-hidden hover:border-accent group transition-all duration-500 flex flex-col justify-between"
               >
                 <div className="aspect-[4/3] overflow-hidden bg-white/5 relative">
-                  <img 
-                    src={`/products/${p.name.toLowerCase().replace(/ /g, "_")}.png`} 
-                    alt={p.name}
-                    className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-102"
-                  />
+                  <Link to={`/product/${p.configuratorPreset}`}>
+                    <img 
+                      src={`/products/${p.name.toLowerCase().replace(/ /g, "_")}.png`} 
+                      alt={p.name}
+                      className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-102"
+                    />
+                  </Link>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
                   <span className="absolute bottom-4 left-4 font-mono text-[10px] uppercase text-accent tracking-widest bg-background/95 border border-accent/20 px-3 py-1">
                     {p.category}
@@ -206,10 +239,12 @@ const Catalogue = () => {
                 </div>
                 <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
                   <div>
-                    <h3 className="font-sans text-xl font-bold text-foreground">{p.name}</h3>
+                    <Link to={`/product/${(p as any).configuratorPreset}`} className="hover:text-accent transition-colors">
+                      <h3 className="font-sans text-xl font-bold text-foreground">{p.name}</h3>
+                    </Link>
                     <p className="font-sans text-sm text-foreground/60 mt-3 leading-relaxed">{p.desc}</p>
                   </div>
-                  <div className="mt-8 pt-4 border-t border-border flex flex-col gap-4">
+                  <div className="mt-8 pt-4 border-t border-border flex flex-col gap-3">
                     <div className="flex justify-between items-center text-xs font-mono">
                       <span className="text-foreground/50 uppercase">Minimum Order</span>
                       <span className="text-foreground font-medium">{p.moq} pcs</span>
@@ -220,6 +255,13 @@ const Catalogue = () => {
                     >
                       Request Prototype Sample
                     </Button>
+                    <Link
+                      to={`/customize?preset=${p.configuratorPreset}&source=catalogue&name=${encodeURIComponent(p.name)}`}
+                      aria-label={`Customize ${p.name} in 3D configurator`}
+                      className="w-full text-center py-2 text-xs font-mono tracking-wider text-foreground/40 hover:text-accent transition-all duration-300 hover:underline inline-block"
+                    >
+                      Customize in 3D →
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -32,7 +32,7 @@ const FoldedCard3D = ({ frontImage, insideImage, frontText, insideText, classNam
             {/* Dynamic Text Overlay */}
             {frontText && (
               <div className="absolute inset-0 flex items-center justify-center p-6 text-center pointer-events-none">
-                <p className="font-serif text-2xl md:text-3xl text-gold-metallic drop-shadow-lg leading-tight uppercase tracking-widest font-bold">
+                <p className="font-sans text-2xl md:text-3xl text-gold-metallic drop-shadow-lg leading-tight uppercase tracking-widest font-bold">
                   {frontText}
                 </p>
               </div>
@@ -59,11 +59,11 @@ const FoldedCard3D = ({ frontImage, insideImage, frontText, insideText, classNam
         {/* Inside Left Page (Optional, but let's keep it simple for now) */}
       </div>
 
-      {/* Control Hint */}
-      <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <p className="text-xs font-sans text-soft-purple uppercase tracking-widest font-medium">
-          Click to {isOpen ? "Close" : "Open"} 3D View
-        </p>
+      {/* Control Hint - beautifully positioned inline beneath the card */}
+      <div className="mt-8 flex justify-center">
+        <span className="px-3.5 py-1 bg-accent/10 border border-accent/20 text-accent font-mono text-[9px] uppercase tracking-wider font-bold rounded-full">
+          Click Card to {isOpen ? "Fold / Close" : "Unfold / Open"}
+        </span>
       </div>
     </div>
   );
