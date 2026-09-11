@@ -8,26 +8,29 @@ import { HelmetProvider } from "react-helmet-async";
 import ScrollToTop from "./components/ScrollToTop";
 import ChatWidget from "./components/ChatWidget";
 
-// Light pages: statically imported (no three.js)
+// Core content pages: statically imported so page navigation is instant with zero black flash
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import About from "./pages/About";
+import Catalogue from "./pages/Catalogue";
+import Sustainability from "./pages/Sustainability";
+import ProductDetail from "./pages/ProductDetail";
 import NotFound from "./pages/NotFound";
 import { QuoteDialog } from "./components/QuoteDialog";
 
-// Heavy pages: lazily imported so three.js / r3f never land on initial bundle
-const Catalogue      = lazy(() => import("./pages/Catalogue"));
+// 3D heavy pages: lazily imported so three.js loads on demand for the configurators
 const DesignStudio   = lazy(() => import("./pages/DesignStudio"));
 const Customize      = lazy(() => import("./pages/Customize"));
-const ProductDetail  = lazy(() => import("./pages/ProductDetail"));
 const ConfiguratorDev = lazy(() => import("./pages/ConfiguratorDev"));
-const Sustainability = lazy(() => import("./pages/Sustainability"));
 
 const queryClient = new QueryClient();
 
-// Minimal full-screen skeleton shown while lazy chunks are loading
+// Elegant branded loader shown only when loading 3D Studio routes
 const PageShell = () => (
-  <div style={{ minHeight: "100vh", background: "#050505" }} aria-busy="true" aria-label="Loading page" />
+  <div className="min-h-screen bg-[#1d0a27] flex flex-col items-center justify-center text-white space-y-4" aria-busy="true" aria-label="Loading 3D Studio">
+    <div className="w-8 h-8 border-2 border-[#D4AF37]/30 border-t-[#D4AF37] rounded-full animate-spin" />
+    <span className="font-mono text-xs uppercase tracking-widest text-white/50">Loading 3D Studio...</span>
+  </div>
 );
 
 const App = () => (

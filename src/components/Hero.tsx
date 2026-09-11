@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -5,14 +6,33 @@ import { motion } from "framer-motion";
 
 // NOTE: hero footage is a v1 placeholder (720p/10s, non-seamless loop, generic boxes). Swap source files here when final cinematic footage (branded packaging, ideally 4K, true seamless loop) is delivered. No other code changes required.
 const Hero = () => {
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current && videoRef.current.readyState >= 3) {
+      setVideoLoaded(true);
+    }
+  }, []);
+
   // Easing constant matching expo-out feel
   const easeTransition = [0.16, 1, 0.3, 1] as const;
 
   return (
     <section className="relative min-h-screen flex items-center justify-start overflow-hidden bg-[#1d0a27] text-[#FFFFFF] px-6 lg:px-12 pt-20">
       {/* Background Cinematic Video Container */}
-      <div className="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none">
+      <div className="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none bg-[#1d0a27]">
         <div className="absolute inset-0 bg-[#35124e]/30 z-10"></div>
+        
+        {/* Instant crisp poster image layer — prevents any initial black flash while video buffers */}
+        <img 
+          src="/products/landing-page.jpg" 
+          alt="" 
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 z-[1] ${
+            videoLoaded ? "opacity-0" : "opacity-90"
+          }`}
+        />
+
         {/* Subtle slow zoom animation on video */}
         <motion.div
           className="w-full h-full"
@@ -20,13 +40,18 @@ const Hero = () => {
           transition={{ duration: 25, ease: "linear", repeat: Infinity, repeatType: "reverse" }}
         >
           <video
+            ref={videoRef}
             autoPlay
             muted
             loop
             playsInline
             preload="auto"
             poster="/products/landing-page.jpg"
-            className="w-full h-full object-cover opacity-90"
+            onLoadedData={() => setVideoLoaded(true)}
+            onPlaying={() => setVideoLoaded(true)}
+            className={`w-full h-full object-cover transition-opacity duration-1000 ${
+              videoLoaded ? "opacity-90" : "opacity-0"
+            }`}
           >
             <source src="/assets/hero-video.mp4" type="video/mp4" />
           </video>

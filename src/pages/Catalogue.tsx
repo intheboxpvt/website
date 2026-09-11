@@ -134,6 +134,12 @@ const Catalogue = () => {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                       decoding="async"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        if (!target.src.includes("landing-page.jpg")) {
+                          target.src = "/products/landing-page.jpg";
+                        }
+                      }}
                     />
                   </Link>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
