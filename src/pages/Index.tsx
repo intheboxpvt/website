@@ -8,7 +8,6 @@ import SustainabilityPreview from "@/components/SustainabilityPreview";
 import ClientGallery from "@/components/ClientGallery";
 import { ReelsHighlights } from "@/components/ReelsHighlights";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import SEO from "@/components/SEO";
 import { SmoothScrollProvider } from "@/components/SmoothScroll";
  
@@ -31,7 +30,6 @@ const Index = () => {
         <ReelsHighlights />
         <ClientGallery />
         <Footer />
-        <WhatsAppButton />
       </main>
     </SmoothScrollProvider>
   );

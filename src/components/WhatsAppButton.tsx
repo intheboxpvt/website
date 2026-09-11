@@ -9,7 +9,7 @@ const WhatsAppButton = () => {
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 group flex items-center gap-3 bg-[#1d0a27]/95 border border-white/10 hover:border-accent/40 px-4 py-3 rounded-full shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 group flex items-center gap-0 sm:gap-3 bg-[#1d0a27]/95 border border-white/10 hover:border-accent/40 p-3 sm:px-4 sm:py-3 rounded-full shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5"
       aria-label="Chat with us on WhatsApp"
     >
       <div className="relative flex items-center justify-center">
@@ -22,7 +22,8 @@ const WhatsAppButton = () => {
         </div>
       </div>
       
-      <span className="font-mono text-[10px] uppercase tracking-widest text-white/50 group-hover:text-white transition-colors duration-300 pr-1">
+      {/* Label — hidden on mobile, shown sm+ */}
+      <span className="hidden sm:block font-mono text-[10px] uppercase tracking-widest text-white/50 group-hover:text-white transition-colors duration-300 pr-1">
         Chat
       </span>
     </a>

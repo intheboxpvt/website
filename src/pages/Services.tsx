@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { MessageSquare, Palette, Layers, Package, Sparkles, Truck, Search, Lightbulb, Box, CheckCircle, Factory, ArrowRight, Download } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -38,15 +37,15 @@ const Services = () => {
   }, []);
 
   const consultationServices = [
-    { title: "Starter Session", desc: "1-hour discovery call to understand your brand and packaging needs." },
-    { title: "Deep Dive Workshop", desc: "Half-day intensive session with full brand packaging audit." },
-    { title: "Advisory Pipeline", desc: "Ongoing structural design and material optimization support." },
+    { title: "Starter Session", desc: "1-hour discovery call to analyze your brand identity, product dimensions, unboxing vision, and custom material requirements." },
+    { title: "Deep Dive Workshop", desc: "Half-day intensive structural workshop featuring comprehensive packaging audits, board weight tests, and cost optimization strategy." },
+    { title: "Advisory Pipeline", desc: "Continuous structural engineering advisory covering sustainable paperboard upgrades, custom inserts, and press quality control." },
   ];
 
   const designServices = [
-    { icon: Palette, title: "Concept Development", desc: "Mood boards, raw sketches, and structural layout options aligned with your product identity." },
-    { icon: Layers, title: "3D Rendering Preview", desc: "High fidelity digital models and thickness representations before committing to manufacturing." },
-    { icon: Sparkles, title: "Production Dielines", desc: "Exact dielines ready for print presses and plate preparation." },
+    { icon: Palette, title: "Concept Development", desc: "Mood boards, raw CAD sketches, opening mechanism blueprints, and custom surface graphics designed to elevate product unboxing." },
+    { icon: Layers, title: "3D Rendering Preview", desc: "High-fidelity digital 3D prototypes with realistic studio lighting, true cardboard thickness representations, and finish previews." },
+    { icon: Sparkles, title: "Production Dielines", desc: "Millimeter-accurate vector dielines formatted with cut, crease, and bleed specifications ready for high-speed commercial printing presses." },
   ];
 
   const manufacturingFeatures = [
@@ -58,12 +57,12 @@ const Services = () => {
   ];
 
   const roadSteps = [
-    { percentage: 0, icon: Search, title: "Discover & Consult", desc: "We study your product dimensions, target weight, and shipping parameters to start your consultation." },
-    { percentage: 20, icon: Lightbulb, title: "Concept Blueprint", desc: "Our structural designers outline custom layout, opening parameters, and box dimensions." },
-    { percentage: 40, icon: Box, title: "Prototype Mockup", desc: "Fabricating physical sample boxes for real world verification of paperboard weight and size fit." },
-    { percentage: 60, icon: CheckCircle, title: "Exacting Approval", desc: "Inspection of detailing, rigid closures, and final contract sign off." },
-    { percentage: 80, icon: Factory, title: "Volume Fabrication", desc: "High volume printing, spot finishes, folding, gluing, and strict quality control." },
-    { percentage: 100, icon: Truck, title: "Secure Delivery", desc: "Integrated logistics coordinates direct shipment to your corporate warehouses." },
+    { percentage: 0, icon: Search, title: "Discover & Consult", desc: "We study your product weight, structural dimensions, transit protection needs, and brand aesthetic parameters to start your consultation." },
+    { percentage: 20, icon: Lightbulb, title: "Concept Blueprint", desc: "Our structural CAD engineers outline custom box geometry, locking tab mechanisms, lid closures, and board caliper specifications." },
+    { percentage: 40, icon: Box, title: "Prototype Mockup", desc: "Fabricating physical unprinted sample boxes for hands-on dimensional fit checks, paperboard rigidity testing, and real-world handling." },
+    { percentage: 60, icon: CheckCircle, title: "Exacting Approval", desc: "Rigorous inspection of magnetic closures, hot foil stamping alignment, surface texture quality, and final contract sign off." },
+    { percentage: 80, icon: Factory, title: "Volume Fabrication", desc: "Automated offset printing, spot UV application, die-cutting, folding, gluing, and stringent multi-point quality assurance checks." },
+    { percentage: 100, icon: Truck, title: "Secure Delivery", desc: "Integrated nationwide logistics coordinates direct freight shipment and inventory delivery directly to your regional warehouse facilities." },
   ];
 
   return (
@@ -76,28 +75,29 @@ const Services = () => {
       <Navbar />
       
       {/* Page Header */}
-      <section className="pt-24 pb-6 px-6 lg:px-12 bg-[#1d0a27] border-b border-white/5 relative overflow-hidden text-white">
-        {/* Subtle Watermark logo inside Header */}
-        <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
+      <section className="pt-24 pb-10 px-6 lg:px-12 bg-[#1c0f24] border-b border-white/10 relative overflow-hidden text-white">
+        {/* Watermark logo background */}
+        <div className="absolute right-6 top-1/2 -translate-y-1/2 w-[320px] h-[320px] pointer-events-none opacity-[0.04] select-none z-0">
           <img 
-            src="/assets/logo.png" 
+            src="/images/inthebox-logo.png" 
             alt="" 
             className="w-full h-full object-contain filter invert brightness-0"
           />
         </div>
 
         <div className="max-w-[1400px] mx-auto relative z-10">
-          <span className="inline-flex items-center gap-3 text-xs font-mono text-white/50 mb-4">
-            <span className="w-12 h-px bg-white/20"></span>
-            Services and Process
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-[4.5rem] font-sans font-bold tracking-tight leading-[0.9] text-white">
-            Complete<br/>
-            <span className="text-accent italic font-semibold">Packaging Solutions.</span>
-          </h1>
-          <p className="font-sans text-base text-white/50 mt-4 max-w-xl">
-            From initial consultation to final volume distribution, we operate the entire design to delivery lifecycle.
-          </p>
+          <div className="max-w-2xl space-y-3">
+            <div className="inline-flex items-center gap-2 text-xs font-mono text-accent">
+              <span className="w-8 h-px bg-accent"></span>
+              <span className="uppercase tracking-widest font-semibold">Services & Process</span>
+            </div>
+            <h1 className="text-3xl md:text-5xl font-sans font-bold tracking-tight text-white leading-tight">
+              Complete Packaging <span className="text-accent italic font-semibold">Solutions</span>
+            </h1>
+            <p className="text-sm md:text-base text-white/70 font-sans leading-relaxed max-w-xl">
+              From initial structural prototyping to high-volume manufacturing and nationwide logistics, we operate the complete packaging lifecycle to elevate your unboxing experience.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -194,7 +194,7 @@ const Services = () => {
           alt="InTheBox Manufacturing Logistics" 
           className="w-full h-full object-cover opacity-90 transition-transform duration-1000 hover:scale-[1.02]" 
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-[#050505]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1d0a27] via-transparent to-[#050505]"></div>
       </section>
 
       {/* Interactive Delivery Road Timeline */}
@@ -204,8 +204,8 @@ const Services = () => {
             <div className="text-left mb-24">
               <span className="font-mono text-xs text-accent uppercase tracking-wider">Our Pipeline</span>
               <h2 className="font-sans text-4xl font-bold text-white mt-4">The Custom <span className="text-accent">Road Map</span></h2>
-              <p className="font-sans text-sm text-white/60 max-w-sm mt-3">
-                Scroll to move the delivery truck along our checkpoints from setup to final shipment.
+              <p className="font-sans text-sm text-white/60 max-w-md mt-3 leading-relaxed">
+                Scroll down to track our delivery truck through each milestone checkpoint from initial structural setup to final nationwide warehouse distribution.
               </p>
             </div>
           </ScrollReveal>
@@ -289,7 +289,7 @@ const Services = () => {
           <div className="text-center mt-24">
             <Button 
               onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
-              className="btn-premium-gold py-6 px-12 text-sm"
+              className="btn-premium-gold py-6 px-8 sm:px-12 text-sm w-full sm:w-auto"
             >
               Start off with Consultation <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
@@ -299,7 +299,6 @@ const Services = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </main>
   );
 };

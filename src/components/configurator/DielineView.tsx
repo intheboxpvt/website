@@ -15,6 +15,13 @@ export const DielineView = () => {
       boxType:      store.boxType,
       dimensions:   store.dimensions,
       watermarkSrc: "/images/inthebox-logo.png",
+      logoDataUrl:  store.logoDataUrl,
+      logoFace:     store.logoFace,
+      logoX:        store.logoX,
+      logoY:        store.logoY,
+      logoScale:    store.logoScale,
+      logoRotation: store.logoRotation,
+      logoOpacity:  store.logoOpacity,
     }).then(({ canvas }) => {
       if (!active) return;
       const target = canvasRef.current;
@@ -29,7 +36,17 @@ export const DielineView = () => {
     return () => {
       active = false;
     };
-  }, [store.boxType, store.dimensions]);
+  }, [
+    store.boxType,
+    store.dimensions,
+    store.logoDataUrl,
+    store.logoFace,
+    store.logoX,
+    store.logoY,
+    store.logoScale,
+    store.logoRotation,
+    store.logoOpacity,
+  ]);
 
   return (
     <div

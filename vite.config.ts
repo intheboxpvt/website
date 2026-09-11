@@ -55,30 +55,6 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          // React core — always needed, load immediately
-          if (id.includes("node_modules/react/") ||
-              id.includes("node_modules/react-dom/") ||
-              id.includes("node_modules/react-router-dom/") ||
-              id.includes("node_modules/scheduler/")) {
-            return "react-core";
-          }
-          // Three.js geometry/maths — only needed on /customize and /studio
-          if (id.includes("node_modules/three/")) {
-            return "three-vendor";
-          }
-          // React-Three-Fiber and Drei — only needed on /customize and /studio
-          if (id.includes("node_modules/@react-three/")) {
-            return "r3f-vendor";
-          }
-          // State management — tiny, shared across configurator components
-          if (id.includes("node_modules/zustand/")) {
-            return "state-vendor";
-          }
-        },
-      },
-    },
+    chunkSizeWarningLimit: 1200,
   },
 }));

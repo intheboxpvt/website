@@ -8,6 +8,7 @@ import { useConfigStore } from "@/lib/configurator/store";
 import { buildBoxGroup, disposeBoxGroup } from "@/lib/configurator/BoxBuilder";
 import { getMaterial } from "@/lib/configurator/MaterialSystem";
 import { bakeTexture } from "@/lib/configurator/TextureBaker";
+import { isTargetMeshFace } from "@/lib/configurator/surfaceMapper";
 import { useReducedMotion } from "@/lib/hooks/useReducedMotion";
 
 // Helper to find specific face meshes
@@ -26,7 +27,7 @@ function BoxScene() {
   const { scene } = useThree();
   const boxGroupRef = useRef<THREE.Group | null>(null);
 
-  // Rebuild box when type, dimensions, material, finish, or foilEffect change
+  // Rebuild box when type, dimensions, material, boxColor, finish, or foilEffect change
   useEffect(() => {
     const { l, w, h } = store.getDimensionsInMM();
     const newGroup = buildBoxGroup({
@@ -38,9 +39,10 @@ function BoxScene() {
 
     // Apply materials to each mesh in the generated group
     newGroup.traverse((obj) => {
-      if (obj instanceof THREE.Mesh && obj.userData.isLid !== true) {
+      if (obj instanceof THREE.Mesh) {
         obj.material = getMaterial({
           material: store.material,
+          boxColor: store.boxColor,
           finish: store.finish,
           foilEffect: store.foilEffect,
           face: obj.userData.face ?? "body",
@@ -61,6 +63,7 @@ function BoxScene() {
     store.boxType,
     store.dimensions,
     store.material,
+    store.boxColor,
     store.finish,
     store.foilEffect,
     scene,
@@ -70,65 +73,65 @@ function BoxScene() {
   useEffect(() => {
     let active = true;
     let logoTex: THREE.CanvasTexture | null = null;
-    let baseTex: THREE.CanvasTexture | null = null;
 
     async function applyBakedTextures() {
-      // 1. Bake texture with logo
+      if (!store.logoDataUrl) {
+        const group = boxGroupRef.current;
+        if (group) {
+          group.traverse((obj) => {
+            if (obj instanceof THREE.Mesh && obj.material instanceof THREE.MeshStandardMaterial) {
+              if (obj.material.map) {
+                obj.material.map.dispose();
+                obj.material.map = null;
+              }
+              obj.material.color = new THREE.Color(store.boxColor || '#F5F0EB');
+              obj.material.needsUpdate = true;
+            }
+          });
+        }
+        return;
+      }
+
+      // Bake texture with logo at current position/scale/rotation/opacity
       const lTex = await bakeTexture({
         material: store.material,
+        boxColor: store.boxColor,
         logoDataUrl: store.logoDataUrl,
+        logoX: store.logoX,
+        logoY: store.logoY,
+        logoScale: store.logoScale,
+        logoRotation: store.logoRotation,
         logoOpacity: store.logoOpacity,
-        watermarkSrc: "/images/inthebox-logo.png",
-      });
-
-      // 2. Bake plain texture (watermark only)
-      const bTex = await bakeTexture({
-        material: store.material,
-        logoDataUrl: null,
-        logoOpacity: 0,
-        watermarkSrc: "/images/inthebox-logo.png",
       });
 
       if (!active) {
         lTex.dispose();
-        bTex.dispose();
         return;
       }
 
+      lTex.anisotropy = 16;
       logoTex = lTex;
-      baseTex = bTex;
 
       const group = boxGroupRef.current;
       if (group) {
         group.traverse((obj) => {
-          if (obj instanceof THREE.Mesh) {
+          if (obj instanceof THREE.Mesh && obj.material instanceof THREE.MeshStandardMaterial) {
             const face = obj.userData.face ?? "";
-            
-            // Front & Back detection for sleeves, trays, or rigid components
-            const isFront = face === "front" || face.endsWith("_front");
-            const isBack = face === "back" || face.endsWith("_back");
+            const isTarget = isTargetMeshFace(store.boxType, store.logoFace, face);
 
-            if (obj.userData.isLid) {
-              // Apply base watermarked texture to the tuck lid
-              if (obj.material instanceof THREE.MeshStandardMaterial) {
-                obj.material.map = baseTex;
-                obj.material.needsUpdate = true;
+            if (isTarget) {
+              if (obj.material.map && obj.material.map !== logoTex) {
+                obj.material.map.dispose();
               }
-              return;
-            }
-
-            // Determine if logo goes on this face
-            const matchesFace =
-              (store.logoFace === "front" && isFront) ||
-              (store.logoFace === "back" && isBack);
-
-            // Double sided printing covers both faces
-            const matchesDoubleSide = store.printingSide === "both" && (isFront || isBack);
-
-            const shouldHaveLogo = matchesFace || matchesDoubleSide;
-
-            if (obj.material instanceof THREE.MeshStandardMaterial) {
-              obj.material.map = shouldHaveLogo ? logoTex : baseTex;
+              obj.material.map = logoTex;
+              obj.material.color = new THREE.Color("#FFFFFF"); // Let texture colors show accurately
+              obj.material.needsUpdate = true;
+            } else {
+              if (obj.material.map) {
+                obj.material.map.dispose();
+                obj.material.map = null;
+              }
+              obj.material.color = new THREE.Color(store.boxColor || '#F5F0EB');
               obj.material.needsUpdate = true;
             }
           }
@@ -136,23 +139,25 @@ function BoxScene() {
       }
     }
 
-    // Delay texture bake slightly to allow new geometry group mounting
     const timer = setTimeout(() => {
       applyBakedTextures();
-    }, 50);
+    }, 20);
 
     return () => {
       active = false;
       clearTimeout(timer);
       if (logoTex) logoTex.dispose();
-      if (baseTex) baseTex.dispose();
     };
   }, [
     store.logoDataUrl,
-    store.logoOpacity,
     store.logoFace,
+    store.logoX,
+    store.logoY,
+    store.logoScale,
+    store.logoRotation,
+    store.logoOpacity,
     store.material,
-    store.printingSide,
+    store.boxColor,
     store.boxType,
     store.dimensions,
   ]);
@@ -160,24 +165,19 @@ function BoxScene() {
   const reducedMotion = useReducedMotion();
 
   // Animate lid folds and sliding groups frame-by-frame.
-  // When prefers-reduced-motion is active, snap directly to target (no lerp).
   useFrame(({ gl }) => {
-    // Safe cast: gl.domElement is always an HTMLCanvasElement at runtime
     (window as any)._glCanvas = gl.domElement;
     const boxGroup = boxGroupRef.current;
     if (!boxGroup) return;
 
-    // lerp factor: 0.1 for smooth animation, 1 for instant snap
     const lerpT = reducedMotion ? 1 : 0.1;
 
     boxGroup.traverse((obj) => {
-      // 1. Animate tuck flap lid rotation
       if (obj instanceof THREE.Mesh && obj.userData.isLid) {
         const targetRot = -store.lidOpenAmount * Math.PI * 0.55;
         obj.rotation.x = THREE.MathUtils.lerp(obj.rotation.x, targetRot, lerpT);
       }
 
-      // 2. Animate rigid box lid movement
       if (obj instanceof THREE.Group && obj.name === "lid_group") {
         const { h } = (() => {
           const dims = store.getDimensionsInMM();
@@ -188,7 +188,6 @@ function BoxScene() {
         obj.position.y = THREE.MathUtils.lerp(obj.position.y, targetY, lerpT);
       }
 
-      // 3. Animate drawer tray sliding movement
       if (obj instanceof THREE.Group && obj.name === "tray_group") {
         const { l } = (() => {
           const dims = store.getDimensionsInMM();
@@ -205,14 +204,25 @@ function BoxScene() {
 
 const CameraController = () => {
   const { camera } = useThree();
+  const store = useConfigStore();
+
+  useEffect(() => {
+    const { l, w, h } = store.getDimensionsInMM();
+    const maxDim = Math.max(l, w, h) / 10;
+    const baseDist = Math.max(14, maxDim * 2.2 + store.lidOpenAmount * 3.5);
+    
+    // Scale camera distance dynamically so opening/enlarging box never clips or goes out of boundary
+    const dir = camera.position.clone().normalize();
+    if (dir.length() === 0) dir.set(0.6, 0.45, 0.8).normalize();
+    camera.position.copy(dir.multiplyScalar(baseDist));
+    camera.updateProjectionMatrix();
+  }, [store.dimensions, store.lidOpenAmount, camera]);
 
   useEffect(() => {
     const handleZoomIn = () => {
-      // Scale camera vector to move closer
       camera.position.multiplyScalar(0.85);
     };
     const handleZoomOut = () => {
-      // Scale camera vector to move further
       camera.position.multiplyScalar(1.15);
     };
 
@@ -229,14 +239,19 @@ const CameraController = () => {
 
 export const Viewer3D = () => {
   const isRotating = useConfigStore((s) => s.isRotating);
-  // Honour OS-level reduced motion: never auto-rotate when user prefers it
   const reducedMotion = useReducedMotion();
 
   return (
-    <div className="w-full h-full relative bg-background" onContextMenu={(e) => e.preventDefault()}>
+    <div className="w-full h-full relative bg-[#edf0f5] overflow-hidden" onContextMenu={(e) => e.preventDefault()}>
+      
+      {/* Background Watermark Logo — Consistent with Catalogue */}
+      <div className="absolute right-6 top-1/2 -translate-y-1/2 w-64 h-64 pointer-events-none opacity-[0.04] select-none z-0">
+        <img src="/images/inthebox-logo.png" alt="" className="w-full h-full object-contain filter invert brightness-0" />
+      </div>
+
       <Canvas
         shadows
-        camera={{ position: [8, 6, 12], fov: 35 }}
+        camera={{ position: [10, 7.5, 14], fov: 35 }}
         gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }}
         onCreated={({ gl }) => {
           gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -245,21 +260,22 @@ export const Viewer3D = () => {
         }}
         style={{ width: "100%", height: "100%" }}
       >
-        <ambientLight intensity={0.75} />
+        {/* Soft Studio Lighting */}
+        <ambientLight intensity={0.85} />
         
         <directionalLight
-          position={[6, 10, 6]}
-          intensity={1.5}
+          position={[8, 12, 8]}
+          intensity={1.4}
           castShadow
           shadow-mapSize={[2048, 2048]}
         />
         
         <directionalLight
-          position={[-4, 3, -4]}
-          intensity={0.25}
+          position={[-6, 4, -6]}
+          intensity={0.35}
         />
         
-        <pointLight position={[0, 8, 0]} intensity={0.6} />
+        <hemisphereLight intensity={0.4} color="#ffffff" groundColor="#d4d4d4" />
         
         <CameraController />
         
@@ -267,13 +283,14 @@ export const Viewer3D = () => {
           <BoxScene />
         </Suspense>
 
+        {/* Contact Shadow Ground Plane */}
         <mesh
           rotation={[-Math.PI / 2, 0, 0]}
           position={[0, -0.01, 0]}
           receiveShadow
         >
-          <planeGeometry args={[40, 40]} />
-          <shadowMaterial opacity={0.25} />
+          <planeGeometry args={[50, 50]} />
+          <shadowMaterial opacity={0.18} />
         </mesh>
 
         <OrbitControls
@@ -289,3 +306,4 @@ export const Viewer3D = () => {
 };
 
 export default Viewer3D;
+

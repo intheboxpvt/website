@@ -1,4 +1,4 @@
-import{g as ka}from"./r3f-vendor-LR-xi1Qo.js";function Xc(e,t){for(var n=0;n<t.length;n++){const r=t[n];if(typeof r!="string"&&!Array.isArray(r)){for(const l in r)if(l!=="default"&&!(l in e)){const i=Object.getOwnPropertyDescriptor(r,l);i&&Object.defineProperty(e,l,i.get?i:{enumerable:!0,get:()=>r[l]})}}}return Object.freeze(Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}))}var Sa={exports:{}},vl={},Ea={exports:{}},M={};/**
+import{g as ka}from"./r3f-vendor-D1x4VbXF.js";function Xc(e,t){for(var n=0;n<t.length;n++){const r=t[n];if(typeof r!="string"&&!Array.isArray(r)){for(const l in r)if(l!=="default"&&!(l in e)){const i=Object.getOwnPropertyDescriptor(r,l);i&&Object.defineProperty(e,l,i.get?i:{enumerable:!0,get:()=>r[l]})}}}return Object.freeze(Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}))}var Sa={exports:{}},vl={},Ea={exports:{}},M={};/**
  * @license React
  * react.production.min.js
  *

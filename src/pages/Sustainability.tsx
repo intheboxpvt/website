@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { Leaf, Recycle, TreePine, Droplets, TrendingDown, Users, Search, Lightbulb, Box, CheckCircle, Factory, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -67,28 +66,29 @@ const Sustainability = () => {
       <Navbar />
       
       {/* Page Header */}
-      <section className="pt-24 pb-6 px-6 lg:px-12 bg-[#1d0a27] border-b border-white/5 relative overflow-hidden text-white">
-        {/* Subtle Watermark logo inside Header */}
-        <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
+      <section className="pt-24 pb-10 px-6 lg:px-12 bg-[#1c0f24] border-b border-white/10 relative overflow-hidden text-white">
+        {/* Watermark logo background */}
+        <div className="absolute right-6 top-1/2 -translate-y-1/2 w-[320px] h-[320px] pointer-events-none opacity-[0.04] select-none z-0">
           <img 
-            src="/assets/logo.png" 
+            src="/images/inthebox-logo.png" 
             alt="" 
             className="w-full h-full object-contain filter invert brightness-0"
           />
         </div>
 
         <div className="max-w-[1400px] mx-auto relative z-10">
-          <span className="inline-flex items-center gap-3 text-xs font-mono text-white/50 mb-4">
-            <span className="w-12 h-px bg-white/20"></span>
-            Sustainability & Impact
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-[4.5rem] font-sans font-bold tracking-tight leading-[0.9] text-white">
-            Packaging That<br/>
-            <span className="text-accent italic font-semibold">Cares.</span>
-          </h1>
-          <p className="font-sans text-base text-white/50 mt-4 max-w-xl">
-            Our commitment to sustainable packaging without compromising on luxury, structural integrity, or brand prestige.
-          </p>
+          <div className="max-w-2xl space-y-3">
+            <div className="inline-flex items-center gap-2 text-xs font-mono text-accent">
+              <span className="w-8 h-px bg-accent"></span>
+              <span className="uppercase tracking-widest font-semibold">Sustainability & Impact</span>
+            </div>
+            <h1 className="text-3xl md:text-5xl font-sans font-bold tracking-tight text-white leading-tight">
+              Sustainable Packaging <span className="text-accent italic font-semibold">Solutions</span>
+            </h1>
+            <p className="text-sm md:text-base text-white/70 font-sans leading-relaxed">
+              Our commitment to eco-friendly packaging without compromising on luxury, structural integrity, or brand prestige.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -161,7 +161,7 @@ const Sustainability = () => {
           alt="InTheBox Sustainable Forestry" 
           className="w-full h-full object-cover opacity-90 transition-transform duration-1000 hover:scale-[1.02]" 
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-[#050505]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1d0a27] via-transparent to-[#050505]"></div>
       </section>
 
       {/* Interactive Delivery Road Timeline */}
@@ -268,7 +268,7 @@ const Sustainability = () => {
           <div className="text-center mt-24">
             <Button 
               onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
-              className="btn-premium-gold py-6 px-12 text-sm"
+              className="btn-premium-gold py-6 px-8 sm:px-12 text-sm w-full sm:w-auto"
             >
               Request Eco Mockup Quote <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
@@ -278,7 +278,6 @@ const Sustainability = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </main>
   );
 };

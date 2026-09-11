@@ -46,8 +46,8 @@ const SustainabilityPreview = () => {
                 </div>
               </div>
  
-               <Link to="/sustainability">
-                <Button className="group btn-premium-gold px-8 py-6 text-sm">
+               <Link to="/sustainability" className="block sm:inline-block w-full sm:w-auto">
+                <Button className="group btn-premium-gold px-8 py-6 text-sm w-full sm:w-auto">
                   Learn More
                   <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                 </Button>

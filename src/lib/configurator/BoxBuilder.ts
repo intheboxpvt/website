@@ -34,12 +34,12 @@ export function buildBoxGroup(input: BuildInput): THREE.Group {
     const lid = new THREE.Group()
     lid.name = 'lid_group'
     // Lid is slightly wider to fit over the base
-    addBoxShell(lid, l + t*2, w + t*2, lidH, t, mat, 'lid')
-    lid.position.y = baseH - t  // sits on base
+    addBoxShell(lid, l + t*2.2, w + t*2.2, lidH, t, mat, 'lid')
+    lid.position.y = baseH - t
     group.add(lid)
 
   } else if (type === 'drawer') {
-    // Outer sleeve (open on one side) + inner tray
+    // Outer sleeve (open on front face) + inner tray
     const sleeve = new THREE.Group()
     sleeve.name = 'sleeve_group'
     addDrawerSleeve(sleeve, l, w, h, t, mat)
@@ -47,17 +47,20 @@ export function buildBoxGroup(input: BuildInput): THREE.Group {
 
     const tray = new THREE.Group()
     tray.name = 'tray_group'
-    // Tray is slightly smaller to slide inside the sleeve
-    addBoxShell(tray, l - t*2, w - t*2, h - t, t, mat, 'tray')
+    addBoxShell(tray, l - t*2.5, w - t*2.5, h - t*1.5, t, mat, 'tray')
     tray.position.x = 0
     group.add(tray)
+
+  } else if (type === 'mailer') {
+    // E-commerce Mailer: body shell + hinged lid with side wings
+    addMailerStructure(group, l, w, h, t, mat)
 
   } else if (type === 'sleeve') {
     // Just a tube — no top/bottom
     addSleeveTube(group, l, w, h, t, mat)
 
   } else if (type === 'bag') {
-    // Paper bag: box shell open at the top with a handles strap
+    // Paper bag: box shell open at top with handles
     addBoxShell(group, l, w, h, t, mat, 'bag')
 
     const handleGeom = new THREE.TorusGeometry(l * 0.25, 0.08, 8, 24, Math.PI)
@@ -68,10 +71,11 @@ export function buildBoxGroup(input: BuildInput): THREE.Group {
     group.add(handleMesh)
 
   } else {
-    // straight_tuck, reverse_tuck, perfume, mailer — all basic tuck boxes
-    addBoxShell(group, l, w, h, t, mat, 'body')
-    addTuckLid(group, l, w, t, mat, h)
+    // straight_tuck, reverse_tuck, perfume — thin folding tuck cartons
+    addBoxShell(group, l, w, h, t * 0.7, mat, 'body')
+    addTuckLid(group, l, w, t * 0.7, mat, h)
   }
+
 
   // Center group at origin with bottom at Y=0
   group.position.y = 0
@@ -258,6 +262,42 @@ export function addSleeveTube(
   group.add(rightMesh)
 }
 
+export function addMailerStructure(
+  group: THREE.Group,
+  l: number,
+  w: number,
+  h: number,
+  t: number,
+  mat: THREE.Material
+): void {
+  // Main body shell
+  addBoxShell(group, l, w, h, t, mat, 'body')
+
+  // Top hinged lid attached at back edge
+  const lidGeom = new THREE.BoxGeometry(l, t, w)
+  lidGeom.translate(0, 0, w / 2)
+  const lidMesh = new THREE.Mesh(lidGeom, mat.clone())
+  lidMesh.position.set(0, h - t / 2, -w / 2)
+  lidMesh.name = 'lid'
+  lidMesh.userData = { face: 'lid', isLid: true }
+  lidMesh.castShadow = true
+  lidMesh.receiveShadow = true
+
+  // Left & Right side wings on lid
+  const wingGeom = new THREE.BoxGeometry(t, h * 0.7, w * 0.95)
+  const leftWing = new THREE.Mesh(wingGeom, mat.clone())
+  leftWing.position.set(-l / 2 + t / 2, -h * 0.35, w / 2)
+  leftWing.userData = { face: 'wing_left' }
+  lidMesh.add(leftWing)
+
+  const rightWing = new THREE.Mesh(wingGeom, mat.clone())
+  rightWing.position.set(l / 2 - t / 2, -h * 0.35, w / 2)
+  rightWing.userData = { face: 'wing_right' };
+  lidMesh.add(rightWing)
+
+  group.add(lidMesh)
+}
+
 export function disposeBoxGroup(group: THREE.Group): void {
   group.traverse(obj => {
     if (obj instanceof THREE.Mesh) {
@@ -270,3 +310,4 @@ export function disposeBoxGroup(group: THREE.Group): void {
     }
   })
 }
+

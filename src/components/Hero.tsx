@@ -120,18 +120,18 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: easeTransition, delay: 0.6 }}
-            className="flex flex-wrap gap-4"
+            className="flex flex-col sm:flex-row gap-4"
           >
             <Button
               onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
               size="lg"
-              className="group btn-premium-gold px-8 py-6 text-sm"
+              className="group btn-premium-gold px-8 py-6 text-sm w-full sm:w-auto"
             >
               Get a Quote
               <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Link to="/catalogue">
-              <Button size="lg" className="btn-premium-outline px-8 py-6 text-sm">
+            <Link to="/catalogue" className="w-full sm:w-auto">
+              <Button size="lg" className="btn-premium-outline px-8 py-6 text-sm w-full">
                 View Catalogue
               </Button>
             </Link>
