@@ -11,27 +11,37 @@ const Sustainability = () => {
   const [leafProgress, setLeafProgress] = useState(0);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const sectionHeight = rect.height;
-      const sectionTop = rect.top;
-      const windowHeight = window.innerHeight;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (!containerRef.current) {
+            ticking = false;
+            return;
+          }
+          const rect = containerRef.current.getBoundingClientRect();
+          const sectionHeight = rect.height;
+          const sectionTop = rect.top;
+          const windowHeight = window.innerHeight;
 
-      // Start calculating when section top hits 70% of screen height
-      const start = windowHeight * 0.7;
-      // End when section bottom hits 30% of screen height
-      const end = -sectionHeight + windowHeight * 0.3;
-      const current = sectionTop;
+          // Start calculating when section top hits 70% of screen height
+          const start = windowHeight * 0.7;
+          // End when section bottom hits 30% of screen height
+          const end = -sectionHeight + windowHeight * 0.3;
+          const current = sectionTop;
 
-      let progress = 0;
-      if (current <= start) {
-        progress = ((start - current) / (start - end)) * 100;
+          let progress = 0;
+          if (current <= start) {
+            progress = ((start - current) / (start - end)) * 100;
+          }
+          setLeafProgress(Math.max(0, Math.min(100, progress)));
+          ticking = false;
+        });
+        ticking = true;
       }
-      setLeafProgress(Math.max(0, Math.min(100, progress)));
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
