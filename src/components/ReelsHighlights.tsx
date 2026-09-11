@@ -94,6 +94,7 @@ const ReelCard = ({
           className="w-full h-full object-cover"
           loop
           playsInline
+          preload="none"
           muted={isMuted}
         />
 
