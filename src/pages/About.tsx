@@ -3,222 +3,192 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Award, Users, Factory, Heart } from "lucide-react";
-import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
 
 const About = () => {
   const teamMembers = [
     {
       name: "Liv Arpit",
-      role: "Founder & CEO",
+      role: "Founder and CEO",
       image: "/team/LivArpit.jpeg",
-      // bio: "Transforming ideas into reality"
+      bio: "4+ years of industrial print and box fabrication engineering experience. Dedicated to zero emissions logistics."
     },
     {
       name: "Aashvi Chawla",
       role: "MD, COO",
       image: "/team/AashviChalwa.jpeg",
-      // bio: "Visionary leader driving innovation"
+      bio: "Oversees all structural prototype testing and manufacturing operations at the Mohali plant."
     },
     {
       name: "Ishan Kumar",
-      role: "Co-founder, CMO",
+      role: "Co founder, CMO",
       image: "/team/Ishan.jpeg",
-      // bio: "Crafting digital excellence"
+      bio: "Leads premium design studio partnerships, sustainability initiatives, and corporate client relations."
     }
   ];
 
-  const testimonials = [
-    {
-      quote: "InTheBox’s agri-waste hybrid boards elevated our unboxing experience while helping us reduce our carbon footprint by 30%. Their prototyping speed and manufacturing reliability are unmatched.",
-      author: "Sarah Jenkins",
-      company: "Supply Chain Director, Eleva Wellness",
-      image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop&crop=face"
-    },
-    {
-      quote: "Scaling from 500 to 10,000 units was seamless. InTheBox provided end-to-end support—from structural engineering to final delivery—maintaining exacting quality standards across every batch.",
-      author: "David Chen",
-      company: "Head of Operations, Aura Cosmetics",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face"
-    },
-    {
-      quote: "Their technical expertise in premium finishes and low-MOQ flexibility allowed us to launch our flagship collection flawlessly. They are true manufacturing partners, not just vendors.",
-      author: "Emily Roberts",
-      company: "Founder, Lumière Home",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face"
-    },
+  const coreValues = [
+    { icon: Award, title: "Quality First", desc: "Premium materials and meticulous craftsmanship in every piece" },
+    { icon: Users, title: "Client Focus", desc: "Your success is our success. We listen, understand, and deliver" },
+    { icon: Factory, title: "Innovation", desc: "Constantly evolving our techniques and sustainable practices" },
+    { icon: Heart, title: "Integrity", desc: "Transparent pricing, honest timelines, and genuine partnerships" },
   ];
 
   return (
-    <main className="min-h-screen bg-background">
-      <SEO 
-        title="Our Story & Team | InTheBox Packaging"
-        description="Meet the team behind InTheBox. We have been crafting premium, sustainable packaging solutions since 2010. Born from passion, built on excellence."
-        keywords="packaging team, inthebox story, packaging manufacturers india, luxury packaging team"
+    <main className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Our Story, Team & Sustainability | InTheBox Packaging"
+        description="Meet the team behind InTheBox and explore our commitment to sustainable packaging. From rigid luxury boxes to agri-waste hybrid boards."
+        keywords="packaging team, inthebox story, packaging manufacturers india, luxury packaging team, sustainable packaging, eco friendly boxes"
       />
       <Navbar />
-      
-      {/* Hero Section */}
-      <section className="pt-32 lg:pt-36 pb-20 section-royal">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="max-w-3xl">
-            <div className="flex items-center gap-3 mb-6 opacity-0 animate-fade-up" style={{ animationDelay: "0.1s" }}>
-              <div className="w-12 h-[2px] bg-gold-metallic"></div>
-              <span className="font-sans text-sm tracking-widest uppercase text-gold-light font-semibold">
-                Our Story
-              </span>
-            </div>
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-ivory mb-6 opacity-0 animate-fade-up" style={{ animationDelay: "0.2s" }}>
-              Crafting Premium Packaging Since 2010
-            </h1>
-            <p className="font-sans text-xl text-ivory/80 leading-relaxed opacity-0 animate-fade-up" style={{ animationDelay: "0.3s" }}>
-              From a small workshop to industry leaders, we have been helping brands create 
-              unforgettable first impressions through exceptional packaging solutions.
-            </p>
-          </div>
+
+      {/* Page Header */}
+      <section className="pt-24 pb-6 px-6 lg:px-12 section-royal border-b border-white/5 relative overflow-hidden text-white">
+        {/* Subtle Watermark logo inside Header */}
+        <div className="absolute -right-20 -top-20 w-[600px] h-[600px] pointer-events-none opacity-[0.015] z-0 select-none">
+          <img
+            src="/assets/logo.png"
+            alt=""
+            className="w-full h-full object-contain filter invert brightness-0"
+          />
+        </div>
+
+        <div className="max-w-[1400px] mx-auto relative z-10">
+          <span className="inline-flex items-center gap-3 text-xs font-mono text-white/50 mb-4">
+            <span className="w-12 h-px bg-white/20"></span>
+            Our Story
+          </span>
+          <h1 className="text-4xl md:text-5xl lg:text-[4.5rem] font-sans font-bold tracking-tight leading-[0.9] text-white">
+            Engineering Premium<br />
+            <span className="text-accent italic font-semibold">Packaging Legacies.</span>
+          </h1>
+          <p className="font-sans text-base text-white/50 mt-4 max-w-xl">
+            From structural engineers to production specialists, we work as an extension of your brand to scale your packaging operations seamlessly.
+          </p>
         </div>
       </section>
 
       {/* Company Story */}
-      <section className="py-20 md:py-28 section-ivory">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="font-serif text-3xl md:text-4xl text-royal-purple mb-8">
-                Engineering Premium Packaging Experiences
-              </h2>
-              <div className="space-y-6 font-sans text-lg text-soft-purple leading-relaxed">
-                <p>
-                  Founded on a legacy of manufacturing excellence, InTheBox has evolved into a premier B2B packaging partner. We combine cutting-edge structural design with robust production capabilities to deliver packaging that not only protects but elevates your brand.
-                </p>
-                <p>
-                  We understand that your packaging is the physical handshake between your product and your customer. By operating our own manufacturing infrastructure, we maintain uncompromising control over quality, timelines, and material sourcing—ensuring every unit meets exacting standards.
-                </p>
-                <p>
-                  From sustainable agri-waste innovations to luxury rigid boxes, our team of structural engineers, designers, and production specialists works as an extension of your brand to scale your packaging operations seamlessly.
-                </p>
-              </div>
+      <section className="py-24 px-6 lg:px-12 bg-background">
+        <div className="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <span className="font-mono text-xs text-accent uppercase tracking-wider block mb-4">Who We Are</span>
+            <h2 className="font-sans text-4xl font-bold text-foreground mb-8">
+              Engineering Premium <span className="text-accent">Packaging Experiences</span>
+            </h2>
+            <div className="space-y-6 font-sans text-base text-foreground/75 leading-relaxed">
+              <p>
+                Founded on a legacy of manufacturing excellence, InTheBox has evolved into a premier B2B packaging partner. We combine cutting edge structural design with robust production capabilities to deliver packaging that not only protects but elevates your brand.
+              </p>
+              <p>
+                We understand that your packaging is the physical handshake between your product and your customer. By operating our own manufacturing infrastructure in Mohali, we maintain uncompromising control over quality, timelines, and material sourcing—ensuring every unit meets exacting standards.
+              </p>
+              <p>
+                From sustainable agri waste innovations to luxury rigid boxes, our team of structural engineers, designers, and production specialists works to deliver unboxing experiences that drive customer retention.
+              </p>
             </div>
-            <div className="relative">
-              <div className="aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
-                <img 
-                  src="/about/who_we_are.png" 
-                  alt="InTheBox Team Studio"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-royal-purple/40 to-transparent"></div>
-              </div>
-              <div className="absolute -bottom-6 -right-6 bg-gold-metallic rounded-xl p-6 shadow-lg z-10">
-                <p className="font-serif text-3xl font-bold text-royal-purple">14+</p>
-                <p className="font-sans text-royal-purple/80">Years of Experience</p>
-              </div>
+          </div>
+          <div className="relative">
+            <div className="aspect-[4/3] rounded-none overflow-hidden border border-border shadow-2xl">
+              <img
+                src="/products/about_us_packaging.png"
+                alt="InTheBox Team Studio"
+                className="w-full h-full object-cover opacity-95"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            </div>
+            <div className="absolute -bottom-6 -right-6 bg-card border border-accent/20 rounded-none p-6 shadow-2xl z-10 text-center min-w-[160px]">
+              <p className="font-sans text-3xl font-extrabold text-accent">Design & Craft</p>
+              <p className="font-mono text-[10px] text-foreground/60 uppercase tracking-widest mt-1">In-House Production Team</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Values */}
-      <section className="py-20 md:py-28 bg-background">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <span className="font-sans text-sm tracking-widest uppercase text-gold-metallic font-semibold">
-              What We Stand For
-            </span>
-            <h2 className="font-serif text-3xl md:text-4xl text-royal-purple mt-4 mb-4">
-              Our Core Values
-            </h2>
-            <p className="font-sans text-xl text-soft-purple max-w-2xl mx-auto">
-              The principles that guide every decision we make
-            </p>
+      {/* Values Section (Maze Timeline View) */}
+      <section className="py-24 px-6 lg:px-12 bg-background border-y border-border">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="text-left mb-16">
+            <span className="font-mono text-xs text-accent uppercase tracking-wider">What We Stand For</span>
+            <h2 className="font-sans text-4xl font-bold text-foreground mt-4">Our Core <span className="text-accent">Values</span></h2>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: Award, title: "Quality First", desc: "Premium materials and meticulous craftsmanship in every piece" },
-              { icon: Users, title: "Client Focus", desc: "Your success is our success. We listen, understand, and deliver" },
-              { icon: Factory, title: "Innovation", desc: "Constantly evolving our techniques and sustainable practices" },
-              { icon: Heart, title: "Integrity", desc: "Transparent pricing, honest timelines, and genuine partnerships" },
-            ].map((value, index) => (
-              <div key={index} className="card-royal p-8 hover-lift">
-                <div className="w-14 h-14 bg-gold-metallic/10 rounded-xl flex items-center justify-center mb-6">
-                  <value.icon className="w-7 h-7 text-gold-metallic" />
-                </div>
-                <h3 className="font-serif text-xl text-royal-purple mb-3">{value.title}</h3>
-                <p className="font-sans text-soft-purple">{value.desc}</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-6 border border-border bg-card divide-y md:divide-y-0 divide-border relative z-10">
+            {/* Cell 1: Quality First */}
+            <div className="md:col-span-3 border-r border-b border-border p-8 lg:p-12 hover:border-accent/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-accent uppercase tracking-wider">01 // Quality First</span>
+                <Award className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
               </div>
-            ))}
+              <div>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{coreValues[0].title}</h3>
+                <p className="font-sans text-sm text-foreground/60 leading-relaxed">{coreValues[0].desc}</p>
+              </div>
+            </div>
+
+            {/* Cell 2: Client Focus */}
+            <div className="md:col-span-3 border-b border-border p-8 lg:p-12 hover:border-accent/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-accent uppercase tracking-wider">02 // Client Focus</span>
+                <Users className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
+              </div>
+              <div>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{coreValues[1].title}</h3>
+                <p className="font-sans text-sm text-foreground/60 leading-relaxed">{coreValues[1].desc}</p>
+              </div>
+            </div>
+
+            {/* Cell 3: Innovation */}
+            <div className="md:col-span-2 border-r border-border p-8 lg:p-12 hover:border-accent/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-accent uppercase tracking-wider">03 // Innovation</span>
+                <Factory className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
+              </div>
+              <div>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{coreValues[2].title}</h3>
+                <p className="font-sans text-sm text-foreground/60 leading-relaxed">{coreValues[2].desc}</p>
+              </div>
+            </div>
+
+            {/* Cell 4: Integrity */}
+            <div className="md:col-span-4 p-8 lg:p-12 hover:border-accent/40 transition-colors duration-300 flex flex-col justify-between group min-h-[220px]">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs text-accent uppercase tracking-wider">04 // Integrity</span>
+                <Heart className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
+              </div>
+              <div>
+                <h3 className="font-sans text-xl font-bold text-foreground mb-2">{coreValues[3].title}</h3>
+                <p className="font-sans text-sm text-foreground/60 leading-relaxed">{coreValues[3].desc}</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Team Section */}
-      <section className="py-20 md:py-28 section-ivory">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <span className="font-sans text-sm tracking-widest uppercase text-gold-metallic font-semibold">
-              The People Behind InTheBox
-            </span>
-            <h2 className="font-serif text-3xl md:text-4xl text-royal-purple mt-4 mb-4">
-              Meet Our Team
-            </h2>
-            <p className="font-sans text-xl text-soft-purple max-w-2xl mx-auto">
-              The passionate people behind every exceptional package
-            </p>
+      <section className="py-24 px-6 lg:px-12 bg-background border-y border-border">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="text-left mb-16">
+            <span className="font-mono text-xs text-accent uppercase tracking-wider">Meet Our Team</span>
+            <h2 className="font-sans text-4xl font-bold text-foreground mt-4">The People Behind <span className="text-accent">InTheBox</span></h2>
           </div>
-          <div className="flex flex-wrap justify-center gap-8">
-            {teamMembers.map((member, index) => (
-              <div key={index} className="group w-full max-w-xs">
-                <div className="relative aspect-square rounded-xl overflow-hidden mb-6">
-                  <img 
-                    src={member.image} 
-                    alt={member.name}
-                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-royal-purple/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-                <h3 className="font-serif text-xl text-royal-purple">{member.name}</h3>
-                <p className="font-sans text-gold-metallic font-medium">{member.role}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Testimonials */}
-      <section className="py-20 md:py-28 bg-background">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <span className="font-sans text-sm tracking-widest uppercase text-gold-metallic font-semibold">
-              Client Success Stories
-            </span>
-            <h2 className="font-serif text-3xl md:text-4xl text-royal-purple mt-4 mb-4">
-              What Our Clients Say
-            </h2>
-            <p className="font-sans text-xl text-soft-purple max-w-2xl mx-auto">
-              Success stories from brands we have partnered with
-            </p>
-          </div>
           <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="card-royal p-8 hover-lift">
-                <div className="mb-6">
-                  <svg className="w-10 h-10 text-gold-metallic/40" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                  </svg>
-                </div>
-                <p className="font-sans text-lg text-royal-purple leading-relaxed mb-6">
-                  {testimonial.quote}
-                </p>
-                <div className="flex items-center gap-4">
-                  <img 
-                    src={testimonial.image} 
-                    alt={testimonial.author}
-                    className="w-12 h-12 rounded-full object-cover"
+            {teamMembers.map((member, index) => (
+              <div
+                key={index}
+                className="group w-full relative cursor-pointer"
+              >
+                <div className="relative aspect-square rounded-none overflow-hidden mb-6 border border-border">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover object-top transition-all duration-500 filter grayscale group-hover:grayscale-0 group-hover:scale-105"
                   />
-                  <div>
-                    <p className="font-sans font-semibold text-royal-purple">{testimonial.author}</p>
-                    <p className="font-sans text-sm text-soft-purple">{testimonial.company}</p>
-                  </div>
                 </div>
+                <h3 className="font-sans text-xl font-bold text-foreground">{member.name}</h3>
+                <p className="font-mono text-xs text-accent uppercase tracking-wider mt-1">{member.role}</p>
               </div>
             ))}
           </div>
@@ -226,20 +196,22 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 md:py-28 section-royal">
-        <div className="max-w-4xl mx-auto px-6 lg:px-12 text-center">
-          <h2 className="font-serif text-3xl md:text-4xl text-ivory mb-6">
-            Ready to Elevate Your Brand?
+      <section className="py-24 px-6 lg:px-12 bg-card border-t border-border text-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] to-transparent"></div>
+        <div className="max-w-4xl mx-auto relative z-10">
+          <h2 className="text-4xl md:text-5xl font-sans font-bold text-foreground mb-6">
+            Ready to Elevate Your <span className="text-accent">Brand?</span>
           </h2>
-          <p className="font-sans text-xl text-ivory/80 mb-10 max-w-2xl mx-auto">
-            Let us create packaging that tells your story and delights your customers
+          <p className="font-sans text-base text-foreground/60 mb-10 max-w-xl mx-auto">
+            Let us design custom, eco friendly rigid packaging tailored to your specifications.
           </p>
-          <Link to="/contact">
-            <Button variant="hero" size="xl" className="group">
-              Start Your Project
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </Link>
+          <Button
+            onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
+            className="group btn-premium-gold py-6 px-10 text-sm"
+          >
+            Start Your Project
+            <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+          </Button>
         </div>
       </section>
 

@@ -24,48 +24,71 @@ const ClientGallery = () => {
   ];
 
   return (
-    <section className="section-padding bg-ivory relative overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-gold-metallic/5 rounded-full blur-3xl"></div>
+    <section className="section-padding bg-background relative overflow-hidden border-t border-border">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-white/[0.01] rounded-full blur-3xl"></div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-[1400px] mx-auto relative z-10">
         <ScrollReveal>
-          <div className="text-center mb-16">
-            <span className="font-sans text-sm tracking-widest uppercase text-gold-metallic font-medium">
-              Client Stories
-            </span>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-royal-purple mt-4">
-              Loved by Brands Like Yours
-            </h2>
+          <div className="grid lg:grid-cols-12 gap-8 items-end mb-20 lg:mb-24">
+            <div className="lg:col-span-7">
+              <span className="inline-flex items-center gap-3 text-xs font-mono text-foreground/50 mb-6">
+                <span className="w-12 h-px bg-border"></span>
+                Client Stories
+              </span>
+              <h2 className="text-5xl md:text-7xl lg:text-[6.5rem] font-sans font-bold tracking-tight leading-[0.9] text-foreground">
+                Loved by<br/>
+                <span className="text-foreground/30 italic font-semibold">Brands Like Yours.</span>
+              </h2>
+            </div>
+            <div className="lg:col-span-5 lg:pb-4">
+              <p className="text-lg text-foreground/60 leading-relaxed font-sans">
+                Hear what designers, product leads, and business founders say about working with our custom packaging studio.
+              </p>
+            </div>
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <ScrollReveal key={index} delay={index * 150}>
-              <div className="bg-white p-8 rounded-2xl shadow-lg border border-royal-purple/10 hover:shadow-xl transition-shadow relative h-full">
-                <Quote className="w-10 h-10 text-gold-metallic/30 absolute top-6 right-6" />
-                
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-gold-metallic fill-gold-metallic" />
-                  ))}
+        <div className="grid md:grid-cols-3 gap-4 lg:gap-6">
+          {testimonials.map((testimonial, index) => {
+            const isMiddle = index === 1;
+            return (
+              <ScrollReveal key={index} delay={index * 150}>
+                <div
+                  className={`p-8 lg:p-12 rounded-none border relative h-full flex flex-col justify-between transition-all duration-500 shadow-soft ${
+                    isMiddle
+                      ? "bg-[#1c0f24] text-white border-accent shadow-gold z-10"
+                      : "bg-card text-foreground border-border hover:border-accent"
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-6">
+                      <span className={`font-mono text-xs ${isMiddle ? "text-white/40" : "text-foreground/40"}`}>0{index + 1}</span>
+                      <Quote className="w-5 h-5 text-accent/20" />
+                    </div>
+                    
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-3 h-3 text-accent fill-accent" />
+                      ))}
+                    </div>
+                    
+                    <p className={`font-sans text-base leading-relaxed mb-6 italic ${isMiddle ? "text-white/90" : "text-foreground/85"}`}>
+                      "{testimonial.quote}"
+                    </p>
+                  </div>
+                  
+                  <div className={`border-t pt-4 mt-6 ${isMiddle ? "border-white/10" : "border-border"}`}>
+                    <p className={`font-sans text-base font-semibold ${isMiddle ? "text-white" : "text-foreground"}`}>
+                      {testimonial.author}
+                    </p>
+                    <p className={`font-sans text-xs mt-1 ${isMiddle ? "text-white/50" : "text-foreground/50"}`}>
+                      {testimonial.role}
+                    </p>
+                  </div>
                 </div>
-                
-                <p className="font-sans text-aubergine leading-relaxed mb-6">
-                  "{testimonial.quote}"
-                </p>
-                
-                <div className="border-t border-royal-purple/10 pt-4">
-                  <p className="font-serif text-lg font-semibold text-royal-purple">
-                    {testimonial.author}
-                  </p>
-                  <p className="font-sans text-sm text-aubergine/60">
-                    {testimonial.role}
-                  </p>
-                </div>
-              </div>
-            </ScrollReveal>
-          ))}
+              </ScrollReveal>
+            );
+          })}
         </div>
       </div>
     </section>

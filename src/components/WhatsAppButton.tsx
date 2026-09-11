@@ -9,29 +9,22 @@ const WhatsAppButton = () => {
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 group"
+      className="fixed bottom-6 right-6 z-50 group flex items-center gap-3 bg-[#1d0a27]/95 border border-white/10 hover:border-accent/40 px-4 py-3 rounded-full shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5"
       aria-label="Chat with us on WhatsApp"
     >
-      <div className="relative">
-        {/* Gold ring */}
-        <div className="absolute -inset-1 bg-gradient-to-br from-gold-metallic to-gold-dark rounded-full opacity-70 group-hover:opacity-100 transition-opacity"></div>
-        
+      <div className="relative flex items-center justify-center">
         {/* Pulse ring */}
-        <div className="absolute inset-0 bg-emerald rounded-full animate-ping opacity-20"></div>
+        <div className="absolute inset-0 bg-accent rounded-full animate-ping opacity-20"></div>
         
-        {/* Button */}
-        <div className="relative flex items-center justify-center w-14 h-14 bg-gradient-to-br from-emerald to-forest-green rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">
-          <MessageCircle className="w-6 h-6 text-ivory" fill="currentColor" />
-        </div>
-
-        {/* Tooltip */}
-        <div className="absolute bottom-full right-0 mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-          <div className="bg-royal-purple text-ivory text-xs font-sans font-medium px-3 py-2 rounded-lg whitespace-nowrap shadow-lg">
-            Chat with us!
-            <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-royal-purple"></div>
-          </div>
+        {/* Icon */}
+        <div className="relative flex items-center justify-center w-8 h-8 rounded-full bg-white/5 text-white group-hover:text-accent transition-colors duration-300">
+          <MessageCircle className="w-4 h-4" />
         </div>
       </div>
+      
+      <span className="font-mono text-[10px] uppercase tracking-widest text-white/50 group-hover:text-white transition-colors duration-300 pr-1">
+        Chat
+      </span>
     </a>
   );
 };

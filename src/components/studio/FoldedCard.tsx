@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
@@ -51,7 +52,7 @@ const FoldedCard = ({ settings }: FoldedCardProps) => {
       let line = "";
       let y = 300;
       for (let n = 0; n < words.length; n++) {
-        let testLine = line + words[n] + " ";
+        const testLine = line + words[n] + " ";
         if (ctx.measureText(testLine).width > 400 && n > 0) {
           ctx.fillText(line, 768, y);
           line = words[n] + " ";

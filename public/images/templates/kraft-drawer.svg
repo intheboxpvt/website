@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0b0b" />
+      <stop offset="100%" stop-color="#161616" />
+    </linearGradient>
+  </defs>
+  <rect width="240" height="180" fill="url(#bgGrad)"/>
+  <rect x="0.5" y="0.5" width="239" height="179" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  
+  <!-- Sliding Drawer Box -->
+  <g transform="translate(0, 15)">
+    <!-- Outer sleeve (Dark Kraft) -->
+    <path d="M60,85 L105,65 L150,85 L105,105 Z" fill="#9f7642" stroke="#5a3d16" stroke-width="1.5"/>
+    <path d="M60,85 L60,110 L105,130 L105,105 Z" fill="#886131" stroke="#5a3d16" stroke-width="1.5"/>
+    
+    <!-- Drawer tray sliding out (Light Kraft) -->
+    <path d="M105,105 L150,85 L180,98 L135,118 Z" fill="#c69d65" stroke="#5a3d16" stroke-width="1.5"/>
+    <path d="M135,118 L180,98 L180,115 L135,135 Z" fill="#cca36a" stroke="#5a3d16" stroke-width="1.5"/>
+    <path d="M105,105 L105,120 L135,135 L135,118 Z" fill="#b0854d" stroke="#5a3d16" stroke-width="1.5"/>
+  </g>
+
+  <text x="120" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="600" fill="#c69d65" text-anchor="middle" letter-spacing="1.5">
+    DRAWER BOX · RAW SURFACE
+  </text>
+</svg>

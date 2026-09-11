@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -14,6 +15,13 @@ export default {
     },
     extend: {
       colors: {
+        "itb-bg": "#050505",
+        "itb-surface": "#0B0B0B",
+        "itb-card": "#111111",
+        "itb-fg": "#FFFFFF",
+        "itb-muted": "#A1A1AA",
+        "itb-accent": "#C8A15A",
+        "itb-border": "rgba(255,255,255,0.08)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -39,6 +47,7 @@ export default {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
+        "accent-2": "var(--color-accent-2)",
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
@@ -47,6 +56,14 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // CSS variables mappings for canvas/SVG use
+        "color-background": "var(--color-background)",
+        "color-surface": "var(--color-surface)",
+        "color-card": "var(--color-card)",
+        "color-foreground": "var(--color-foreground)",
+        "color-muted": "var(--color-muted)",
+        "color-accent": "var(--color-accent)",
+        "color-border": "var(--color-border)",
         // Royal Brand Colors
         "royal-purple": "hsl(var(--royal-purple))",
         "aubergine": "hsl(var(--aubergine))",
@@ -74,8 +91,11 @@ export default {
         },
       },
       fontFamily: {
-        serif: ["'ABCFavoritVariable'", "Roboto", "Arial", "sans-serif", "serif"],
-        sans: ["'ABCFavoritVariable'", "Roboto", "Arial", "sans-serif", "serif"],
+        display: ['var(--font-clash)', 'Inter', 'sans-serif'],
+        body:    ['var(--font-inter)', 'sans-serif'],
+        serif: ["'ABCFavoritVariable'", "'Instrument Sans'", "'Inter'", "sans-serif"],
+        sans: ["'ABCFavoritVariable'", "'Instrument Sans'", "'Inter'", "sans-serif"],
+        mono: ["'ABCFavoritVariable'", "'Instrument Sans'", "'Inter'", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -138,5 +158,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;

@@ -8,7 +8,6 @@ const Footer = () => {
     { label: "Catalogue", href: "/catalogue" },
     { label: "Services & Process", href: "/services" },
     { label: "Sustainability", href: "/sustainability" },
-    { label: "Contact", href: "/contact" },
   ];
 
   const socialLinks = [
@@ -18,11 +17,18 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="footer-royal text-ivory">
-      {/* Gold divider line */}
-      <div className="h-1 bg-gradient-to-r from-transparent via-gold-metallic to-transparent"></div>
-      
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 lg:py-20">
+    <footer className="bg-card text-foreground border-t border-border relative overflow-hidden">
+      {/* Full-width brand showcase image banner at the top of the footer */}
+      <div className="w-full h-[180px] md:h-[260px] overflow-hidden relative select-none border-b border-border">
+        <img 
+          src="/products/footer-image.png" 
+          alt="InTheBox Production Showcase" 
+          className="w-full h-full object-cover opacity-85 transition-transform duration-[2000ms] hover:scale-105" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/10 to-background"></div>
+      </div>
+
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 lg:py-20 relative z-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-2">
@@ -30,15 +36,15 @@ const Footer = () => {
               <img 
                 src="/assets/logo.png" 
                 alt="InTheBox Logo" 
-                className="h-24 w-auto brightness-0 invert"
+                className="h-16 w-auto brightness-0"
               />
             </Link>
             
-            <p className="font-sans text-ivory/80 leading-relaxed max-w-md mb-8">
+            <p className="font-sans text-sm text-foreground/70 leading-relaxed max-w-md mb-8">
               Premium custom packaging solutions that help brands stand out, 
               sell more, and create memorable unboxing experiences.
             </p>
-
+ 
             {/* Social Links */}
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => (
@@ -46,17 +52,17 @@ const Footer = () => {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-lg bg-ivory/10 flex items-center justify-center text-ivory/80 hover:bg-gold-metallic hover:text-royal-purple transition-all duration-300"
+                  className="w-10 h-10 rounded-full bg-background border border-border flex items-center justify-center text-foreground hover:bg-[#1c0f24] hover:text-white transition-all duration-300 shadow-sm"
                 >
-                  <social.icon className="w-5 h-5" />
+                  <social.icon className="w-4 h-4" />
                 </a>
               ))}
             </div>
           </div>
-
+ 
           {/* Quick Links */}
           <div>
-            <h3 className="font-sans text-sm tracking-widest uppercase text-gold-metallic mb-6 font-semibold">
+            <h3 className="font-mono text-xs tracking-wider uppercase text-foreground/40 mb-6">
               Quick Links
             </h3>
             <ul className="space-y-4">
@@ -64,7 +70,7 @@ const Footer = () => {
                 <li key={link.label}>
                   <Link
                     to={link.href}
-                    className="font-sans text-ivory/80 hover:text-gold-metallic transition-colors"
+                    className="font-sans text-sm text-foreground/75 hover:text-accent transition-colors duration-300"
                   >
                     {link.label}
                   </Link>
@@ -72,10 +78,10 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-
+ 
           {/* Contact Info */}
           <div>
-            <h3 className="font-sans text-sm tracking-widest uppercase text-gold-metallic mb-6 font-semibold">
+            <h3 className="font-mono text-xs tracking-wider uppercase text-foreground/40 mb-6">
               Contact Us
             </h3>
             <ul className="space-y-4">
@@ -84,51 +90,54 @@ const Footer = () => {
                   href="https://maps.google.com/?q=Mohali,+India"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-3 font-sans text-ivory/80 hover:text-gold-metallic transition-colors"
+                  className="flex items-start gap-3 font-sans text-sm text-foreground/75 hover:text-accent transition-colors duration-300"
                 >
-                  <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5 text-gold-metallic" />
+                  <MapPin className="w-4 h-4 flex-shrink-0 mt-1 text-foreground/40" />
                   <span>Mohali, India</span>
                 </a>
               </li>
               <li>
                 <a
                   href="tel:+917087778689"
-                  className="flex items-center gap-3 font-sans text-ivory/80 hover:text-gold-metallic transition-colors"
+                  className="flex items-center gap-3 font-sans text-sm text-foreground/75 hover:text-accent transition-colors duration-300"
                 >
-                  <Phone className="w-5 h-5 text-gold-metallic" />
+                  <Phone className="w-4 h-4 text-foreground/40" />
                   <span>+91 70877 78689</span>
                 </a>
               </li>
               <li>
                 <a
                   href="mailto:founder@inthebox.co.in"
-                  className="flex items-center gap-3 font-sans text-ivory/80 hover:text-gold-metallic transition-colors"
+                  className="flex items-center gap-3 font-sans text-sm text-foreground/75 hover:text-accent transition-colors duration-300"
                 >
-                  <Mail className="w-5 h-5 text-gold-metallic" />
+                  <Mail className="w-4 h-4 text-foreground/40" />
                   <span>founder@inthebox.co.in</span>
                 </a>
               </li>
             </ul>
           </div>
         </div>
-
+ 
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-ivory/20 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="font-sans text-sm text-ivory/60">
+        <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="font-mono text-xs text-foreground/40">
             © {new Date().getFullYear()} InTheBox. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="font-sans text-sm text-ivory/60 hover:text-gold-metallic transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="font-sans text-sm text-ivory/60 hover:text-gold-metallic transition-colors">
-              Terms of Service
-            </a>
+            <Link to="/sustainability" className="font-mono text-xs text-foreground/40 hover:text-accent transition-colors duration-300">
+              Sustainability
+            </Link>
+            <button 
+              onClick={() => window.dispatchEvent(new CustomEvent("open-quote-modal"))}
+              className="font-mono text-xs text-foreground/40 hover:text-accent transition-colors duration-300"
+            >
+              Get Quote
+            </button>
           </div>
         </div>
       </div>
     </footer>
   );
 };
-
+ 
 export default Footer;
