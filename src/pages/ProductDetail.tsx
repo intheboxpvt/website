@@ -34,6 +34,13 @@ export const ProductDetail = () => {
               src={product.image} 
               alt={product.name}
               className="w-full h-full object-cover select-none pointer-events-none opacity-90"
+              decoding="async"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                if (!target.src.includes("landing-page.jpg")) {
+                  target.src = "/products/landing-page.jpg";
+                }
+              }}
               onContextMenu={(e) => e.preventDefault()}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent"></div>
